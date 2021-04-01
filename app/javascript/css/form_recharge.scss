@@ -201,9 +201,10 @@ input:focus ~ .barra::before {
 }
 
 @media screen and (max-width: 500px) {
+  /*
   form {
     width: 80%;
-  }
+  }*/
 }
 
 .badge-movistar {
@@ -233,6 +234,35 @@ input:focus ~ .barra::before {
 .badge-simpletv {
   color: #fff;
   background-color: var(--simpletv);
+}
+
+.badge-movistar:hover {
+  color: #fff;
+  background-color: var(--movistar_hover);
+}
+
+.badge-digitel:hover {
+    color: #fff;
+    background-color: var(--digitel_hover);
+  }
+
+.badge-movilnet:hover {
+  color: #fff;
+  background-color: var(--movilnet_hover);
+}
+
+.badge-cantv:hover {
+  color: #fff;
+  background-color: var(--cantv_hover);
+}
+
+.badge-inter:hover {
+  color: #fff;
+  background-color: var(--inter_hover);
+}
+.badge-simpletv:hover {
+  color: #fff;
+  background-color: var(--simpletv_hover);
 }
 
 .btn-standar {

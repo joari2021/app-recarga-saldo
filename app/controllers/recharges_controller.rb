@@ -1,9 +1,11 @@
 class RechargesController < ApplicationController
   before_action :set_recharge, only: %i[ show edit update destroy ]
+  before_action :set_variables_recharge, only: %I[index new]
 
   # GET /recharges or /recharges.json
   def index
-    @recharges = Recharge.all
+    #@recharges = Recharge.all
+    
   end
 
   # GET /recharges/1 or /recharges/1.json
@@ -13,13 +15,6 @@ class RechargesController < ApplicationController
   # GET /recharges/new
   def new
     @recharge = Recharge.new
-    @params_movistar = RechargeParam.find_by(operadora:"movistar")
-    @params_digitel = RechargeParam.find_by(operadora:"digitel")
-    @params_movilnet = RechargeParam.find_by(operadora:"movilnet")
-    @params_cantv = RechargeParam.find_by(operadora:"cantv")
-    @params_movistar_tv = RechargeParam.find_by(operadora:"movistar_tv")
-    @params_inter = RechargeParam.find_by(operadora:"inter")
-    @params_simple_tv = RechargeParam.find_by(operadora:"simple_tv")
   end
 
   # GET /recharges/1/edit
@@ -32,11 +27,11 @@ class RechargesController < ApplicationController
 
     respond_to do |format|
       if @recharge.save
-        format.html { redirect_to @recharge, notice: "Recharge was successfully created." }
-        format.json { render :show, status: :created, location: @recharge }
+        format.json {head :no_content}
+        format.js
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @recharge.errors, status: :unprocessable_entity }
+        format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
+        format.js { render :new }
       end
     end
   end
@@ -69,8 +64,18 @@ class RechargesController < ApplicationController
       @recharge = Recharge.find(params[:id])
     end
 
+    def set_variables_recharge
+      @params_movistar = RechargeParam.find_by(operadora:"movistar")
+      @params_digitel = RechargeParam.find_by(operadora:"digitel")
+      @params_movilnet = RechargeParam.find_by(operadora:"movilnet")
+      @params_cantv = RechargeParam.find_by(operadora:"cantv")
+      @params_movistar_tv = RechargeParam.find_by(operadora:"movistar_tv")
+      @params_inter = RechargeParam.find_by(operadora:"inter")
+      @params_simple_tv = RechargeParam.find_by(operadora:"simple_tv")
+    end
+
     # Only allow a list of trusted parameters through.
     def recharge_params
-      params.require(:recharge).permit(:amount, :operator, :phone, :cod_area)
+      params.require(:recharge).permit(:amount, :operator, :type_payment, :phone, :cod_area)
     end
 end

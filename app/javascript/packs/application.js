@@ -23,4 +23,5 @@ import "@fortawesome/fontawesome-free/css/all"
 
 //CODIGOS JS
 import "bootstrap"
+import swal from 'sweetalert'
 import "channels/script_login_and_register"

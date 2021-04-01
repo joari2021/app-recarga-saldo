@@ -1,0 +1,12 @@
+$("#close").trigger("click");
+
+if(operation === "recarga"){
+    title = "Recarga Enviada!"
+    text = "Puede verificar el estado de la recarga en la opción Historial ubicada en el menú lateral izquierdo"
+}
+swal({
+  title: title,
+  text: text,
+  icon: "success",
+  button: "Cerrar",
+});

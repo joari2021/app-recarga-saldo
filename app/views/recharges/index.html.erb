@@ -1,31 +1,434 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Recharges</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Amount</th>
-      <th>Operator</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @recharges.each do |recharge| %>
-      <tr>
-        <td><%= recharge.amount %></td>
-        <td><%= recharge.operator %></td>
-        <td><%= recharge.user_id %></td>
-        <td><%= link_to 'Show', recharge %></td>
-        <td><%= link_to 'Edit', edit_recharge_path(recharge) %></td>
-        <td><%= link_to 'Destroy', recharge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<!-- Content Row -->
+<div class="row">
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <%= link_to new_recharge_path, { remote: true, id: "movistar", onclick: "set_operadora(this)"}  do %>
+      <div class="card border-left-movistar shadow h-100 py-2 cont-oper" style="max-width:250px">
+        <div class="card-body contenedor-img">
+          <%= image_tag("sistema_recargas/movistar.png", class:"img-operadora", width:"100%", height:"70px") %>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+  
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <%= link_to new_recharge_path, { remote: true, id: "digitel", onclick: "set_operadora(this)"}  do %>
+      <div class="card border-left-digitel shadow h-100 py-2 cont-oper" style="max-width:250px">
+        <div class="card-body contenedor-img">
+          <%= image_tag("sistema_recargas/digitel.jpeg", class:"img-operadora", width:"100%", height:"70px") %>
+        </div>
+      </div>
+    <%end%>
+  </div>
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <%= link_to new_recharge_path, { remote: true, id: "movilnet", onclick: "set_operadora(this)"}  do %>
+      <div class="card border-left-movilnet shadow h-100 py-2 cont-oper" style="max-width:250px">
+        <div class="card-body contenedor-img">
+          <%= image_tag("sistema_recargas/movilnet.png", class:"img-operadora", width:"100%", height:"70px") %>
+        </div>
+      </div>
+    <%end%>
+  </div>
+  <div class="col-xl-3 col-md-6 mb-4">
+    <%= link_to new_recharge_path, { remote: true, id: "cantv", onclick: "set_operadora(this)"}  do %>
+      <div class="card border-left-cantv shadow h-100 py-2 cont-oper" style="max-width:250px">
+        <div class="card-body contenedor-img">
+          <%= image_tag("sistema_recargas/cantv.png", class:"img-operadora", width:"100%", height:"70px") %>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
+<!-- Content Row -->
+<div class="row">
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <%= link_to new_recharge_path, { remote: true, id: "movistar_tv", onclick: "set_operadora(this)"}  do %>
+      <div class="card border-left-movistar shadow h-100 py-2 cont-oper" style="max-width:250px">
+        <div class="card-body contenedor-img">
+          <%= image_tag("sistema_recargas/movistar_tv.png", class:"img-operadora", width:"100%", height:"70px") %>
+        </div>
+      </div>
+    <%end%>
+  </div>
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <%= link_to new_recharge_path, { remote: true, id: "inter", onclick: "set_operadora(this)"}  do %>
+      <div class="card border-left-inter shadow h-100 py-2 cont-oper" style="max-width:250px">
+        <div class="card-body contenedor-img">
+          <%= image_tag("sistema_recargas/inter.jpeg", class:"img-operadora", width:"100%", height:"70px") %>
+        </div>
+      </div>
+    <%end%>
+  </div>
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <%= link_to new_recharge_path, { remote: true, id: "simple_tv", onclick: "set_operadora(this)"}  do %>
+      <div class="card border-left-simpletv shadow h-100 py-2 cont-oper" style="max-width:250px">
+        <div class="card-body contenedor-img">
+          <%= image_tag("sistema_recargas/simple_tv.jpeg", class:"img-operadora", width:"100%", height:"70px") %>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
 
-<br>
+<div class="modal_original">
+  <div class="modal_original-wrap modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title_modal"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="far fa-times-circle close_modal" id="close"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!---TIPO DE PAGO-->
+        <div class="row" id="caja_type_pago" style="display:none;">
+          <div class="col-6 mb-4">
+            <div class="card-options" data-pago="pre-pago" style="width:200px">
+              <div class="card-body card-body-content">
+                Prepago
+              </div>
+            </div>
+          </div>
+          <div class="col-6 mb-4">
+            <div class="card-options" data-pago="post-pago" style="width:200px">
+              <div class="card-body card-body-content">
+                Postpago
+              </div>
+            </div>
+          </div>
+        </div>
 
-<%= link_to 'New Recharge', new_recharge_path %>
+        <!--FORMULARIO-->
+        <div class="row" id="caja_form" style="display:none;">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="text-center w-100 mt-3">
+    <h3 class="">Consultas de Saldo</h3>
+  </div>
+</div>
+<!--PLUGIN PARA SONIDO DE NOTIFICACIONES-->
+<script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
+
+<script>
+  console.log("<%=new_recharge_path%>");
+
+  divs_operadoras = document.querySelectorAll(".cont-oper")
+  card_options = document.querySelectorAll(".card-options")
+  card_bodys = document.querySelectorAll(".card-body-content")
+  labels = document.getElementsByTagName("label")
+  span_barra = document.querySelectorAll(".barra")
+  btn_recarga = document.getElementById("btn_recarga")
+  close_modal = document.querySelector("#close")
+  
+  formulario = document.getElementById("form")
+  input_operadora = document.querySelector("#recharge_operator")
+  input_type_pago = document.querySelector("#recharge_type_payment")
+  input_cod_area = document.querySelector("#recharge_cod_area")
+  input_number_phone = document.querySelector("#recharge_phone")
+  input_monto = document.querySelector("#recharge_amount")
+  
+  title_modal = document.getElementById("title_modal")
+  
+  show_div_cod_area = false
+  operation = ""
+  operadora_val = ""
+  //CODIGOS DE AREA
+  cod_area = []
+  cod_area_movistar = ["0414","0424"]
+  cod_area_movilnet = ["0416","0426"]
+  cod_area_digitel = ["0412"]
+  cod_area_tlf_fija = ["0212","0234","0235","0238","0239","0240","0241","0242","0243","0244","0245","0246","0247","0248","0249","0251","0252","0253","0254","0255","0256","0257","0258","0259","0261","0262","0263","0264","0265","0266","0267","0268","0269","0270","0271","0272","0273","0274","0275","0276","0277","0278","0279","0281","0282","0283","0284","0285","0286","0287","0288","0289","0291","0292","0293","0294","0295"]
+  /*
+  if(typeof refresh === "undefined"){
+      refresh = setInterval(refrescarNotificaciones, 15000);
+      $.ajaxSetup({ cache: false });
+  }
+  
+  function refrescarNotificaciones() {
+    //$('#sound').trigger('click');
+    $.playSound("http://localhost:3000/sounds/iphone-notificacion.mp3")
+  }*/
+  
+  function set_operadora(div_operadora) {
+    operadora_val = div_operadora.id;
+  }
+  
+  $("#close").click(function(){
+      $('.modal_original').removeClass('show');
+      $('.modal_original-wrap').removeClass('show');
+      $(caja_form).fadeOut(400)
+      $(caja_type_pago).fadeOut(400);
+  
+      input_operadora.value = ""
+      input_type_pago.value = ""
+      input_cod_area.value = ""
+      input_number_phone.value = ""
+      input_monto.value = ""
+
+  });
+  
+  function edit_modal(border,label,barra,close,btn) {
+    for (let i = 0; i < card_options.length; i++) {
+      const element = card_options[i];
+      element.className = "card card-options shadow h-100 py-2 " + border
+    }
+  
+    for (let i = 0; i < labels.length; i++) {
+      const element = labels[i];
+      element.className = label
+    }
+  
+    for (let i = 0; i < span_barra.length; i++) {
+      const element = span_barra[i];
+      element.className = "barra " + barra
+    }
+  
+    close_modal.className = "far fa-times-circle close_modal " + close
+    btn_recarga.className = "btn-standar btn--left " + btn
+  }
+
+  function set_max_length(limit) {
+    input_number_phone.setAttribute("maxlength",limit)
+  }
+
+  
+  
+  //FUNCIONES ################################
+  function show_cod_area() {
+    $("#cont-option-list").fadeTo(600,1);
+  }
+  
+  function ocultar_cod_area() {
+    $("#cont-option-list").fadeOut(200);
+  }
+  
+  function show_montos() {
+    $("#div_montos").fadeTo(600,1);
+  }
+  
+  function ocultar_montos() {
+    $("#div_montos").fadeOut(200);
+  }
+  
+  function push_cod(e,badge) {
+    e.preventDefault()
+    input_cod_area.value = badge.innerText
+    $("#cont-option-list").fadeOut(200);
+  }
+  
+  function push_monto(e,badge) {
+    e.preventDefault()
+    input_monto.value = badge.innerText
+    $("#div_montos").fadeOut(200);
+  }
+  
+  function format_monto_entero(monto) {
+    monto = monto.toString()
+    valor = monto.replace(/\D/g, "");
+    //valor = valor.replace(/([0-9])([0-9]{2})$/, "$1,$2");
+    valor = valor.replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+    return valor
+  }
+
+  function format_integer(number) {
+    valor = number.toString()
+    valor = valor.replace(/\D/g, "");
+    valor = parseInt(valor,10)
+    return valor
+  }
+  
+  function format_input_monto_entero(monto) {
+    valor = monto.value.toString()
+  
+    valor = valor.replace(/\D/g, "");
+    //valor = valor.replace(/([0-9])([0-9]{2})$/, "$1,$2");
+    valor = valor.replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+    monto.value = valor
+  }
+
+  function format_number(number) {
+    valor = number.value.toString()
+    valor = valor.replace(/\D/g, "");
+    number.value = valor
+  }
+  
+  function show_form(input_type_pago,cod_area,badge,monto_min,monto_max,multiplos) {
+  
+    if(show_div_cod_area){
+  
+      caja_cod_area.innerHTML = ""
+  
+      for (let i = 0; i < cod_area.length; i++) {
+        const element = cod_area[i];
+        enlace = document.createElement("a")
+        enlace.setAttribute("href","#")
+        enlace.classList.add("badge",badge)
+        enlace.style.margin = "5px"
+        enlace.setAttribute("onclick","push_cod(event,this)")
+        enlace.innerHTML = element
+  
+        caja_cod_area.appendChild(enlace)
+  
+        if((i+1) % 5 === 0){
+          br = document.createElement("br")
+          caja_cod_area.appendChild(br)
+        }
+  
+      }
+
+      $("#input_cod_area").fadeTo(200,1);
+  
+    }else{
+  
+      $("#input_cod_area").css({"display":"none"})
+  
+    }
+    
+    if (operation === "recarga") {
+      
+      div_montos.innerHTML = ""
+      let i = 1;
+      for (let m = monto_min; m <= monto_max; m+=multiplos) {
+    
+        const monto = m;
+        enlace = document.createElement("a")
+        enlace.setAttribute("href","#")
+        enlace.classList.add("badge",badge)
+        enlace.style.margin = "5px"
+        enlace.setAttribute("onclick","push_monto(event,this)")
+        enlace.innerHTML = format_monto_entero(monto)
+    
+        div_montos.appendChild(enlace)
+    
+        if(i % 3 === 0){
+          br = document.createElement("br")
+          div_montos.appendChild(br)
+        }
+
+        i++
+      }
+      $("#input_monto").removeClass("d-none")
+    } else {
+      $("#input_monto").addClass("d-none")
+    }
+    
+  
+    $(caja_type_pago).css({"display":"none"})
+    $(caja_form).fadeIn(600);
+  }
+  
+  //FIN DE FUNCIONES ################################################
+  
+  
+  for (let i = 0; i < card_options.length; i++) {
+    card_options[i].addEventListener("click",function(event) {
+      switch (input_operadora.value) {
+        case "movistar":
+          type_pago = $(this).data("pago")
+          input_type_pago.value = type_pago
+  
+          cod_area = [...cod_area_movistar,...cod_area_tlf_fija]
+  
+          monto_min = <%=@params_movistar.amount_min%>
+          <%if current_user.balance.balance >= @params_movistar.amount_max%>
+            monto_max = <%=@params_movistar.amount_max%>
+          <%else%>
+            monto_max = <%=current_user.balance.balance%>
+          <%end%>
+  
+          multiplos = <%=@params_movistar.multiplos_amount_permit%>
+          if(input_type_pago.value === "pre-pago"){
+            show_div_cod_area = true
+            operation = "recarga"
+            set_max_length(7)
+          }else{
+            show_div_cod_area = false
+            operation = "consulta"
+            set_max_length(10)
+          }
+          show_form(input_type_pago.value, cod_area,"badge-movistar",monto_min,monto_max,multiplos)
+          break;
+  
+        case "digitel":
+          type_pago = $(this).data("pago")
+          input_type_pago.value = type_pago
+  
+          cod_area = [...cod_area_digitel,...cod_area_tlf_fija]
+  
+          monto_min = <%=@params_digitel.amount_min%>
+          <%if current_user.balance.balance >= @params_digitel.amount_max%>
+            monto_max = <%=@params_digitel.amount_max%>
+          <%else%>
+            monto_max = <%=current_user.balance.balance%>
+          <%end%>
+  
+          multiplos = <%=@params_digitel.multiplos_amount_permit%>
+          show_div_cod_area = true
+
+          if(input_type_pago.value === "pre-pago"){
+            operation = "recarga"
+          }else{
+            operation = "consulta"
+          }
+
+          show_form(input_type_pago.value, cod_area,"badge-digitel",monto_min,monto_max,multiplos)
+          break;
+  
+        case "inter":
+          type_pago = $(this).data("pago")
+          input_type_pago.value = type_pago
+  
+          cod_area = []
+  
+          monto_min = <%=@params_inter.amount_min%>
+          <%if current_user.balance.balance >= @params_inter.amount_max%>
+            monto_max = <%=@params_inter.amount_max%>
+          <%else%>
+            monto_max = <%=current_user.balance.balance%>
+          <%end%>
+  
+          multiplos = <%=@params_inter.multiplos_amount_permit%>
+          show_div_cod_area = false
+
+          if(input_type_pago.value === "pre-pago"){
+            operation = "recarga"
+          }else{
+            operation = "consulta"
+          }
+          show_form(input_type_pago.value, cod_area,"badge-inter",monto_min,monto_max,multiplos)
+          break;
+  
+        default:
+          break;
+      }
+    })
+  
+  }
+  
+  const inputs = document.querySelectorAll( '.fake_placeholder input' );
+  
+  inputs.forEach( input => {
+    //cuando entramos en el input
+    input.onfocus = ( ) => {
+      //al elemento anterior (el span) le agregamos la clase que la reubica en top
+      input.previousElementSibling.classList.add( 'reubicar' );
+    }
+  
+    //cuando salimos del input
+    input.onblur = ( ) => {
+      //si no hay texto, le quitamos la clase reubicar,
+      //para que se superponga con el input
+      if( input.value.trim( ).length == 0 )
+      input.previousElementSibling.classList.remove( 'reubicar' );
+    }
+  });
+</script>

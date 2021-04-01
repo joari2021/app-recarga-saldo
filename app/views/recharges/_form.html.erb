@@ -1,585 +1,115 @@
-<!-- Content Row -->
-<div class="row">
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-movistar shadow h-100 py-2 cont-oper" data-operadora="movistar" style="max-width:250px">
-      <div class="card-body contenedor-img">
-        <%= image_tag("sistema_recargas/movistar.png", class:"img-operadora", width:"100%", height:"70px") %>
-      </div>
+<%= form_for @recharge, {remote: true}  do |form| %>
+  <div class="form">
+    <div class="grupo" id="input_cod_area">
+      <%= form.text_field :cod_area, oninput: "format_number(this)", onfocus: "show_cod_area()", onblur: "ocultar_cod_area()", maxlength: "4" %><span class="barra"></span>
+      <%= form.label :cod_area, "Cod. Área", for: "", class: "" %>
+      <span class="badge badge-pill badge-danger" id="msj_error_cod_area" style="display:none;">El código de área es inválido.</span>
+      <div id="cont-option-list" style="display:none"><!--Los codigos de area se insertan con javascript--></div>
     </div>
-  </div>
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-digitel shadow h-100 py-2 cont-oper" data-operadora="digitel" style="max-width:250px">
-      <div class="card-body contenedor-img">
-        <%= image_tag("sistema_recargas/digitel.jpeg", class:"img-operadora", width:"100%", height:"70px") %>
-      </div>
+    <div class="grupo">
+      <%= form.text_field :phone, :oninput => "format_number(this)" %><span class="barra"></span>
+      <%= form.label :phone, "Número", for:"", class: "" %>
+      <span class="badge badge-pill badge-danger" id="msj_error_number_phone" style="display:none;">El número debe contener <span id="digit_lenght"></span> dígitos</span>
     </div>
-  </div>
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-movilnet shadow h-100 py-2 cont-oper" data-operadora="movilnet" style="max-width:250px">
-      <div class="card-body contenedor-img">
-        <%= image_tag("sistema_recargas/movilnet.png", class:"img-operadora", width:"100%", height:"70px") %>
-      </div>
+    <div class="grupo" id="input_monto">
+      <%= form.text_field :amount, oninput:"format_input_monto_entero(this)", onfocus: "show_montos()", onblur: "ocultar_montos()" %><span class="barra"></span>
+      <%= form.label :amount, "Monto", for: "", class: "" %>
+      <span class="badge badge-pill badge-danger" id="msj_error_monto" style="display:none;">El monto es inválido.</span>
+      <div id="div_montos" style="display:none"><!--Los codigos de area se insertan con javascript--></div>
     </div>
-  </div>
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-cantv shadow h-100 py-2 cont-oper" data-operadora="cantv" style="max-width:250px">
-      <div class="card-body contenedor-img">
-        <%= image_tag("sistema_recargas/cantv.png", class:"img-operadora", width:"100%", height:"70px") %>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Content Row -->
-<div class="row">
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-movistar shadow h-100 py-2 cont-oper" data-operadora="movistar_tv" style="max-width:250px">
-      <div class="card-body contenedor-img">
-        <%= image_tag("sistema_recargas/movistar_tv.png", class:"img-operadora", width:"100%", height:"70px") %>
-      </div>
-    </div>
-  </div>
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-inter shadow h-100 py-2 cont-oper" data-operadora="inter" style="max-width:250px">
-      <div class="card-body contenedor-img">
-        <%= image_tag("sistema_recargas/inter.jpeg", class:"img-operadora", width:"100%", height:"70px") %>
-      </div>
-    </div>
-  </div>
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <div class="card border-left-simpletv shadow h-100 py-2 cont-oper" data-operadora="simple_tv" style="max-width:250px">
-      <div class="card-body contenedor-img">
-        <%= image_tag("sistema_recargas/simple_tv.jpeg", class:"img-operadora", width:"100%", height:"70px") %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal_original">
-  <div class="modal_original-wrap modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="title_modal"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <i class="far fa-times-circle close_modal" id="close"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!---TIPO DE PAGO-->
-        <div class="row" id="caja_type_pago" style="display:none;">
-          <div class="col-6 mb-4">
-            <div class="card-options" data-pago="pre-pago" style="width:200px">
-              <div class="card-body card-body-content">
-                Prepago
-              </div>
-            </div>
-          </div>
-          <div class="col-6 mb-4">
-            <div class="card-options" data-pago="post-pago" style="width:200px">
-              <div class="card-body card-body-content">
-                Postpago
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--FORMULARIO DE RECARGA-->
-        <div class="row" id="caja_form" style="display:none;">
-          <div class="col-12">
-            <!-- #################### FORMULARIO DE RECARGAS ########################-->
-            <%= form_with(model: recharge,:html => {:class => "", :id => "form_recharge"}) do |form| %>
-              <div class="form">
-                <% if recharge.errors.any? %>
-                  <div id="error_explanation">
-                    <h2><%= pluralize(recharge.errors.count, "error") %> prohibited this recharge from being saved:</h2>
-                    <ul>
-                      <% recharge.errors.each do |error| %>
-                        <li><%= error.full_message %></li>
-                      <% end %>
-                    </ul>
-                  </div>
-                <% end %>
-                <div class="grupo" id="input_cod_area">
-                  <%= form.text_field :cod_area, :required => "required", oninput: "format_number(this)", onfocus: "show_cod_area()", onblur: "ocultar_cod_area()", maxlength: "4" %><span class="barra"></span>
-                  <%= form.label :cod_area, "Cod. Área", for: "", class: "" %>
-                  <div id="cont-option-list" style="display:none"><!--Los codigos de area se insertan con javascript--></div>
-                </div>
-                <div class="grupo">
-                  <%= form.text_field :phone, :required => "required", :oninput => "format_number(this)" %><span class="barra"></span>
-                  <%= form.label :phone, "Número", for:"", class: "" %>
-                </div>
-                <div class="grupo" id="input_monto">
-                  <%= form.text_field :amount, :required => "required", oninput:"format_input_monto_entero(this)", onfocus: "show_montos()", onblur: "ocultar_montos()" %><span class="barra"></span>
-                  <%= form.label :amount, "Monto", for: "", class: "" %>
-                  <div id="div_montos" style="display:none"><!--Los codigos de area se insertan con javascript--></div>
-                </div>
 
-                <%= form.text_field :operator, type:"hidden" %>
-                <%= form.text_field :type_payment, type:"hidden" %>
-                <div class="actions">
-                  <button type="submit" class="" id="btn_recarga">Recargar</button>
-                </div>
-              </div>
-            <% end %>
-            
-          </div>
-        </div>
-      </div>
+    <%= form.text_field :operator, type:"hidden" %>
+    <%= form.text_field :type_payment, type:"hidden" %>
+    <div class="actions">
+      <button type="button" class="" id="btn_recarga">Recargar</button>
+      <%=form.submit "Recargar", class: "d-none", id: "btn_submit"%>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="text-center w-100 mt-3">
-    <h3 class="">Consultas de Saldo</h3>
-  </div>
-</div>
-<!--PLUGIN PARA SONIDO DE NOTIFICACIONES-->
-<script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
-<button onclick='$.playSound("http://localhost:3000/sounds/iphone-notificacion.mp3")' class="d-none" id="sound"></button>
+<% end %>
+
 <script>
-  divs_operadoras = document.querySelectorAll(".cont-oper")
-  card_options = document.querySelectorAll(".card-options")
-  card_bodys = document.querySelectorAll(".card-body-content")
-  labels = document.getElementsByTagName("label")
-  span_barra = document.querySelectorAll(".barra")
-  btn_recarga = document.getElementById("btn_recarga")
-  close_modal = document.querySelector("#close")
-  
-  input_operadora = document.querySelector("#recharge_operator")
-  input_type_pago = document.querySelector("#recharge_type_payment")
-  input_cod_area = document.querySelector("#recharge_cod_area")
-  input_number_phone = document.querySelector("#recharge_phone")
-  input_monto = document.querySelector("#recharge_amount")
-  
-  caja_type_pago = document.getElementById("caja_type_pago")
-  caja_form = document.getElementById("caja_form")
-  caja_cod_area = document.getElementById("cont-option-list")
-  div_montos = document.getElementById("div_montos")
-  
-  title_modal = document.getElementById("title_modal")
-  
-  show_div_cod_area = false
-  operation = ""
-  /*
-  if(typeof refresh === "undefined"){
-      refresh = setInterval(refrescarNotificaciones, 10000);
-      $.ajaxSetup({ cache: false });
-  }
-  
-  function refrescarNotificaciones() {
-    $('#sound').trigger('click');
-  }*/
-  
-  
-  $("#close").click(function(){
-      $('.modal_original').removeClass('show');
-      $('.modal_original-wrap').removeClass('show');
-      $(caja_form).fadeOut(400)
-      $(caja_type_pago).fadeOut(400);
-  
-      input_operadora.value = ""
-      input_type_pago.value = ""
-      input_cod_area.value = ""
-      input_number_phone.value = ""
-      input_monto.value = ""
+  formulario = document.getElementById("new_recharge")
 
-  });
-  
-  function edit_modal(border,label,barra,close,btn) {
-    for (let i = 0; i < card_options.length; i++) {
-      const element = card_options[i];
-      element.className = "card card-options shadow h-100 py-2 " + border
-    }
-  
-    for (let i = 0; i < labels.length; i++) {
-      const element = labels[i];
-      element.className = label
-    }
-  
-    for (let i = 0; i < span_barra.length; i++) {
-      const element = span_barra[i];
-      element.className = "barra " + barra
-    }
-  
-    close_modal.className = "far fa-times-circle close_modal " + close
-    btn_recarga.className = "btn-standar btn--left " + btn
+  function change_name_params(modelo) {
+    input_cod_area.setAttribute("name",modelo + "[cod_area]")
+    input_number_phone.setAttribute("name",modelo + "[phone]")
+    input_monto.setAttribute("name",modelo + "[amount]")
+    input_operadora.setAttribute("name",modelo + "[operator]")
+    input_type_pago.setAttribute("name",modelo + "[type_payment]")
   }
 
-  function set_max_length(limit) {
-    input_number_phone.setAttribute("maxlength",limit)
-  }
-
-  btn_recarga.addEventListener("click", function () {
+  $("#btn_recarga").click(function() {
     validate_form = true
-    if (input_cod_area.value.length != 4){
-      validate_form = false
+    if (operation === "recarga") {
+        //VALIDACION DE CODIGO DE AREA
+        if (show_div_cod_area){
+            if (cod_area.indexOf(input_cod_area.value) === -1){
+            validate_form = false
+            $("#msj_error_cod_area").fadeIn(600)
+          }
+        }
+        
+        //VALIDACION DE NUMERO
+        digit_limit = input_number_phone.maxLength
+       
+        if (input_number_phone.value.length != digit_limit){
+          validate_form = false
+          document.getElementById("digit_lenght").innerText = digit_limit
+          $("#msj_error_number_phone").fadeIn(600)
+        }
+
+        //VALIDACION DE MONTO
+        valor = format_integer(input_monto.value)
+        monto_valid = false
+
+        for (let i = monto_min; i <= monto_max; i+=multiplos) {
+          if(i === valor){
+            monto_valid = true
+            break
+          }
+        }
+
+        if (monto_valid === false) {
+          validate_form = false
+          $("#msj_error_monto").fadeIn(600)
+        }
+
+        //VALIDACION DEL FORMULARIO
+        if (validate_form) {
+          formulario.setAttribute("action","/recharges")
+          change_name_params("recharge")
+          $("#btn_submit").trigger("click")
+        } else {
+          return
+        }
+    } else {
+      //VALIDACION DE CODIGO DE AREA
+      if (show_div_cod_area){
+          if (cod_area.indexOf(input_cod_area.value) === -1){
+          validate_form = false
+          $("#msj_error_cod_area").fadeIn(600)
+        }
+      }
+      
+      //VALIDACION DE NUMERO
+      digit_limit = input_number_phone.maxLength
+      
+      if (input_number_phone.value.length != digit_limit){
+        validate_form = false
+        document.getElementById("digit_lenght").innerText = digit_limit
+        $("#msj_error_number_phone").fadeIn(600)
+      }
+
+      //VALIDACION DEL FORMULARIO
+      if (validate_form) {
+        formulario.setAttribute("action","/balace_inquiries")
+        change_name_params("balace_inquiry")
+        $("#btn_submit").trigger("click")
+        
+      } else {
+        return
+      }
     }
     
   })
-
-  $(divs_operadoras).click(function(event) {
-    let operadora_val = $(this).data("operadora");
-    input_operadora.value = operadora_val
-  
-    switch (operadora_val) {
-  
-      case "movistar":
-        title_modal.innerHTML = '<%=image_tag("sistema_recargas/movistar.png", width:"100px", height:"30px")%>'
-        edit_modal("border-left-movistar","label-movistar","barra-movistar","close_movistar","btn-movistar")
-        $("#caja_type_pago").fadeTo(600,1)
-        break;
-  
-      case "digitel":
-        title_modal.innerHTML = '<%=image_tag("sistema_recargas/digitel.jpeg", width:"100px", height:"30px")%>'
-        edit_modal("border-left-digitel","label-digitel","barra-digitel","close_digitel","btn-digitel")
-        $("#caja_type_pago").fadeTo(600,1)
-        set_max_length(7)
-        break;
-  
-      case "movilnet":
-        title_modal.innerHTML = '<%=image_tag("sistema_recargas/movilnet.png", width:"100px", height:"30px")%>'
-        edit_modal("border-left-movilnet","label-movilnet","barra-movilnet","close_movilnet","btn-movilnet")
-        $("#caja_form").fadeIn(600)
-  
-        type_pago = "pre-pago"
-        input_type_pago.value = type_pago
-  
-        cod_area = cod_area_movilnet
-  
-        monto_min = <%=@params_movilnet.amount_min%>
-        <%if current_user.balance.balance >= @params_movilnet.amount_max%>
-          monto_max = <%=@params_movilnet.amount_max%>
-        <%else%>
-          monto_max = <%=current_user.balance.balance%>
-        <%end%>
-  
-        multiplos = <%=@params_movilnet.multiplos_amount_permit%>
-  
-        show_div_cod_area = true
-        operation = "recarga"
-        set_max_length(7)
-
-        show_form(input_type_pago.value, cod_area,"badge-movilnet",monto_min,monto_max,multiplos)
-        break;
-  
-      case "cantv":
-        title_modal.innerHTML = '<%=image_tag("sistema_recargas/cantv.png", width:"100px", height:"30px")%>'
-        edit_modal("border-left-cantv","label-cantv","barra-cantv","close_cantv","btn-cantv")
-        $("#caja_form").fadeTo(600,1)
-  
-        type_pago = "post-pago"
-        input_type_pago.value = type_pago
-  
-        cod_area = cod_area_tlf_fija
-  
-        monto_min = <%=@params_cantv.amount_min%>
-        <%if current_user.balance.balance >= @params_cantv.amount_max%>
-          monto_max = <%=@params_cantv.amount_max%>
-        <%else%>
-          monto_max = <%=current_user.balance.balance%>
-        <%end%>
-  
-        multiplos = <%=@params_cantv.multiplos_amount_permit%>
-  
-        show_div_cod_area = true
-        operation = "recarga"
-        set_max_length(7)
-
-        show_form(input_type_pago.value, cod_area,"badge-cantv",monto_min,monto_max,multiplos)
-        break;
-  
-      case "movistar_tv":
-        title_modal.innerHTML = '<%=image_tag("sistema_recargas/movistar_tv.png", width:"100px", height:"30px")%>'
-        edit_modal("border-left-movistar","label-movistar","barra-movistar","close_movistar","btn-movistar")
-        $("#caja_form").fadeTo(600,1)
-  
-        type_pago = "pre-pago"
-        input_type_pago.value = type_pago
-  
-        cod_area = []
-  
-        monto_min = <%=@params_movistar_tv.amount_min%>
-        <%if current_user.balance.balance >= @params_movistar_tv.amount_max%>
-          monto_max = <%=@params_movistar_tv.amount_max%>
-        <%else%>
-          monto_max = <%=current_user.balance.balance%>
-        <%end%>
-  
-        multiplos = <%=@params_movistar_tv.multiplos_amount_permit%>
-  
-        show_div_cod_area = false
-        operation = "recarga"
-        set_max_length(8)
-
-        show_form(input_type_pago.value, cod_area,"badge-movistar",monto_min,monto_max,multiplos)
-        break;
-  
-      case "inter":
-        title_modal.innerHTML = '<%=image_tag("sistema_recargas/inter.jpeg", width:"100px", height:"30px")%>'
-        edit_modal("border-left-inter","label-inter","barra-inter","close_inter","btn-inter")
-        $("#caja_type_pago").fadeTo(600,1)
-        set_max_length(10)
-        break;
-  
-      case "simple_tv":
-        title_modal.innerHTML = '<%=image_tag("sistema_recargas/simple_tv.jpeg", width:"100px", height:"30px")%>'
-        edit_modal("border-left-simpletv","label-simpletv","barra-simpletv","close_simpletv","btn-simpletv")
-        $("#caja_form").fadeTo(600,1)
-  
-        type_pago = "pre-pago"
-        input_type_pago.value = type_pago
-  
-        cod_area = []
-  
-        monto_min = <%=@params_simple_tv.amount_min%>
-        <%if current_user.balance.balance >= @params_simple_tv.amount_max%>
-          monto_max = <%=@params_simple_tv.amount_max%>
-        <%else%>
-          monto_max = <%=current_user.balance.balance%>
-        <%end%>
-  
-        multiplos = <%=@params_simple_tv.multiplos_amount_permit%>
-  
-        show_div_cod_area = false
-        operation = "recarga"
-        set_max_length(12)
-        show_form(input_type_pago.value, cod_area,"badge-simpletv",monto_min,monto_max,multiplos)
-        break;
-  
-      default:
-        break;
-    }
-  
-    $('.modal_original').addClass('show');
-    $('.modal_original-wrap').addClass('show');
-  });
-  
-  //FUNCIONES ################################
-  function show_cod_area() {
-    $("#cont-option-list").fadeTo(600,1);
-  }
-  
-  function ocultar_cod_area() {
-    $("#cont-option-list").fadeOut(200);
-  }
-  
-  function show_montos() {
-    $("#div_montos").fadeTo(600,1);
-  }
-  
-  function ocultar_montos() {
-    $("#div_montos").fadeOut(200);
-  }
-  
-  function push_cod(e,badge) {
-    e.preventDefault()
-    input_cod_area.value = badge.innerText
-    $("#cont-option-list").fadeOut(200);
-  }
-  
-  function push_monto(e,badge) {
-    e.preventDefault()
-    input_monto.value = badge.innerText
-    $("#div_montos").fadeOut(200);
-  }
-  
-  function format_monto_entero(monto) {
-    monto = monto.toString()
-    valor = monto.replace(/\D/g, "");
-    //valor = valor.replace(/([0-9])([0-9]{2})$/, "$1,$2");
-    valor = valor.replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-    return valor
-  }
-  
-  function format_input_monto_entero(monto) {
-    valor = monto.value.toString()
-  
-    valor = valor.replace(/\D/g, "");
-    //valor = valor.replace(/([0-9])([0-9]{2})$/, "$1,$2");
-    valor = valor.replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
-    monto.value = valor
-  }
-
-  function format_number(number) {
-    valor = number.value.toString()
-    valor = valor.replace(/\D/g, "");
-    number.value = valor
-  }
-  
-  function show_form(input_type_pago,cod_area,badge,monto_min,monto_max,multiplos) {
-  
-    if(show_div_cod_area){
-  
-      caja_cod_area.innerHTML = ""
-  
-      for (let i = 0; i < cod_area.length; i++) {
-        const element = cod_area[i];
-        enlace = document.createElement("a")
-        enlace.setAttribute("href","#")
-        enlace.classList.add("badge",badge)
-        enlace.style.margin = "5px"
-        enlace.setAttribute("onclick","push_cod(event,this)")
-        enlace.innerHTML = element
-  
-        caja_cod_area.appendChild(enlace)
-  
-        if((i+1) % 5 === 0){
-          br = document.createElement("br")
-          caja_cod_area.appendChild(br)
-        }
-  
-      }
-      $("#input_cod_area").fadeTo(200,1);
-  
-    }else{
-  
-      $("#input_cod_area").css({"display":"none"})
-  
-    }
-    
-    if (operation === "recarga") {
-      
-      div_montos.innerHTML = ""
-      let i = 1;
-      for (let m = monto_min; m <= monto_max; m+=multiplos) {
-    
-        const monto = m;
-        enlace = document.createElement("a")
-        enlace.setAttribute("href","#")
-        enlace.classList.add("badge",badge)
-        enlace.style.margin = "5px"
-        enlace.setAttribute("onclick","push_monto(event,this)")
-        enlace.innerHTML = format_monto_entero(monto)
-    
-        div_montos.appendChild(enlace)
-    
-        if(i % 3 === 0){
-          br = document.createElement("br")
-          div_montos.appendChild(br)
-        }
-        i++
-      }
-      $("#input_monto").removeClass("d-none")
-    } else {
-      $("#input_monto").addClass("d-none")
-    }
-    
-  
-    $(caja_type_pago).css({"display":"none"})
-    $(caja_form).fadeIn(600);
-  }
-  
-  //FIN DE FUNCIONES ################################################
-  
-  //CODIGOS DE AREA
-  cod_area_movistar = ["0414","0424"]
-  cod_area_movilnet = ["0416","0426"]
-  cod_area_digitel = ["0412"]
-  cod_area_tlf_fija = ["0212","0234","0235","0238","0239","0240","0241","0242","0243","0244","0245","0246","0247","0248","0249","0251","0252","0253","0254","0255","0256","0257","0258","0259","0261","0262","0263","0264","0265","0266","0267","0268","0269","0270","0271","0272","0273","0274","0275","0276","0277","0278","0279","0281","0282","0283","0284","0285","0286","0287","0288","0289","0291","0292","0293","0294","0295"]
-  
-  for (let i = 0; i < card_options.length; i++) {
-    card_options[i].addEventListener("click",function(event) {
-      switch (input_operadora.value) {
-        case "movistar":
-          type_pago = $(this).data("pago")
-          input_type_pago.value = type_pago
-  
-          cod_area = [...cod_area_movistar,...cod_area_tlf_fija]
-  
-          monto_min = <%=@params_movistar.amount_min%>
-          <%if current_user.balance.balance >= @params_movistar.amount_max%>
-            monto_max = <%=@params_movistar.amount_max%>
-          <%else%>
-            monto_max = <%=current_user.balance.balance%>
-          <%end%>
-  
-          multiplos = <%=@params_movistar.multiplos_amount_permit%>
-          if(input_type_pago.value === "pre-pago"){
-            show_div_cod_area = true
-            operation = "recarga"
-            set_max_length(7)
-          }else{
-            show_div_cod_area = false
-            operation = "consulta"
-            set_max_length(10)
-          }
-          show_form(input_type_pago.value, cod_area,"badge-movistar",monto_min,monto_max,multiplos)
-          break;
-  
-        case "digitel":
-          type_pago = $(this).data("pago")
-          input_type_pago.value = type_pago
-  
-          cod_area = [...cod_area_digitel,...cod_area_tlf_fija]
-  
-          monto_min = <%=@params_digitel.amount_min%>
-          <%if current_user.balance.balance >= @params_digitel.amount_max%>
-            monto_max = <%=@params_digitel.amount_max%>
-          <%else%>
-            monto_max = <%=current_user.balance.balance%>
-          <%end%>
-  
-          multiplos = <%=@params_digitel.multiplos_amount_permit%>
-          show_div_cod_area = true
-
-          if(input_type_pago.value === "pre-pago"){
-            operation = "recarga"
-          }else{
-            operation = "consulta"
-          }
-
-          show_form(input_type_pago.value, cod_area,"badge-digitel",monto_min,monto_max,multiplos)
-          break;
-  
-        case "inter":
-          type_pago = $(this).data("pago")
-          input_type_pago.value = type_pago
-  
-          cod_area = []
-  
-          monto_min = <%=@params_inter.amount_min%>
-          <%if current_user.balance.balance >= @params_inter.amount_max%>
-            monto_max = <%=@params_inter.amount_max%>
-          <%else%>
-            monto_max = <%=current_user.balance.balance%>
-          <%end%>
-  
-          multiplos = <%=@params_inter.multiplos_amount_permit%>
-          show_div_cod_area = false
-
-          if(input_type_pago.value === "pre-pago"){
-            operation = "recarga"
-          }else{
-            operation = "consulta"
-          }
-          show_form(input_type_pago.value, cod_area,"badge-inter",monto_min,monto_max,multiplos)
-          break;
-  
-        default:
-          break;
-      }
-    })
-  
-  }
-  
-  const inputs = document.querySelectorAll( '.fake_placeholder input' );
-  
-  inputs.forEach( input => {
-    //cuando entramos en el input
-    input.onfocus = ( ) => {
-      //al elemento anterior (el span) le agregamos la clase que la reubica en top
-      input.previousElementSibling.classList.add( 'reubicar' );
-    }
-  
-    //cuando salimos del input
-    input.onblur = ( ) => {
-      //si no hay texto, le quitamos la clase reubicar,
-      //para que se superponga con el input
-      if( input.value.trim( ).length == 0 )
-      input.previousElementSibling.classList.remove( 'reubicar' );
-    }
-  });
 </script>

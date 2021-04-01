@@ -21,6 +21,7 @@ class BalaceInquiriesController < ApplicationController
 
   # POST /balace_inquiries or /balace_inquiries.json
   def create
+=begin
     @balace_inquiry = BalaceInquiry.new(balace_inquiry_params)
 
     respond_to do |format|
@@ -30,6 +31,19 @@ class BalaceInquiriesController < ApplicationController
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @balace_inquiry.errors, status: :unprocessable_entity }
+      end
+    end
+=end
+
+    @balace_inquiry = current_user.balace_inquiries.create(balace_inquiry_params)
+
+    respond_to do |format|
+      if @balace_inquiry.save
+        format.json {head :no_content}
+        format.js
+      else
+        format.json { render json: @balace_inquiry.errors.full_messages, status: :unprocessable_entity }
+        format.js { render :new }
       end
     end
   end

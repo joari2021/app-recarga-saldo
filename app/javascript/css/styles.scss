@@ -8,6 +8,13 @@
   --cantv: #020094;
   --inter: #006fba;
   --simpletv: #1fb2e7;
+
+  --movistar_hover: #017ac0;
+  --digitel_hover: #dc3545;
+  --movilnet_hover: #d16009;
+  --cantv_hover: #1e1aee;
+  --inter_hover: #025b97;
+  --simpletv_hover: #0f8cba;
 }
 
 //CAJAS DE LAS OPERADORAS ##############################################
@@ -63,3 +70,7 @@
 }
 //FIN DE CAJAS DE LAS OPERADORAS #######################################
 
+//SweetAlert ###########################################################
+.swal-text{
+  text-align: center;
+}
