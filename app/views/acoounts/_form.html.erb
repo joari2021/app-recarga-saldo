@@ -1,0 +1,47 @@
+<%= form_with(model: acoount) do |form| %>
+  <% if acoount.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(acoount.errors.count, "error") %> prohibited this acoount from being saved:</h2>
+
+      <ul>
+        <% acoount.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :bank %>
+    <%= form.text_field :bank %>
+  </div>
+
+  <div class="field">
+    <%= form.label :document %>
+    <%= form.number_field :document %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type_document %>
+    <%= form.text_field :type_document %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number_account %>
+    <%= form.text_field :number_account %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

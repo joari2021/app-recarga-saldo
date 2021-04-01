@@ -1,0 +1,37 @@
+<%= form_with(model: recharge_param) do |form| %>
+  <% if recharge_param.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(recharge_param.errors.count, "error") %> prohibited this recharge_param from being saved:</h2>
+
+      <ul>
+        <% recharge_param.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :operadora %>
+    <%= form.text_field :operadora %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount_min %>
+    <%= form.number_field :amount_min %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount_max %>
+    <%= form.number_field :amount_max %>
+  </div>
+
+  <div class="field">
+    <%= form.label :multiplos_amount_permit %>
+    <%= form.text_field :multiplos_amount_permit %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

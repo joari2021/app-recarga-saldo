@@ -1,0 +1,306 @@
+//MODAL DE FORMULARIOS ###############################################
+.modal_original {
+  background: rgba(48, 48, 48, 0.5);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  z-index: 9999;
+}
+
+.modal_original-wrap {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  max-width: 950px;
+  transform: scale(0.6);
+  opacity: 0;
+  transition: 0.3s ease all;
+}
+
+.modal_original.show {
+  visibility: visible;
+}
+
+.modal_original-wrap.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.close_modal {
+  position: absolute;
+  right: 25px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.close_movistar {
+  color: var(--movistar) !important;
+}
+
+.close_digitel {
+  color: var(--digitel) !important;
+}
+
+.close_movilnet {
+  color: var(--movilnet) !important;
+}
+
+.close_cantv {
+  color: var(--cantv) !important;
+}
+
+.close_inter {
+  color: var(--inter) !important;
+}
+.close_simpletv {
+  color: var(--simpletv) !important;
+}
+//FIN MODAL FORMULARIOS ##############################################
+
+//ELEMENTOS DEL FORMULARIO ##########################################
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.title-h1 {
+  text-align: center;
+  font-weight: 700;
+}
+
+form {
+  background: #fff;
+  padding: 40px 0;
+  box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+
+.form {
+  width: 100%;
+  margin: auto;
+}
+
+form .grupo {
+  position: relative;
+  margin: 30px;
+}
+
+input {
+  background: none;
+  color: #c6c6c6;
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--colorTextos);
+}
+
+input:focus {
+  outline: none;
+  color: #5e5d5d;
+}
+
+label {
+  color: var(--colorTextos);
+  font-size: 16px;
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  transition: 0.5s ease all;
+  pointer-events: none;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+  top: -14px;
+  font-size: 12px;
+}
+
+input:focus ~ .label-movistar,
+input:valid ~ .label-movistar {
+  color: var(--movistar);
+}
+
+input:focus ~ .label-digitel,
+input:valid ~ .label-digitel {
+  color: var(--digitel);
+}
+
+input:focus ~ .label-movilnet,
+input:valid ~ .label-movilnet {
+  color: var(--movilnet);
+}
+
+input:focus ~ .label-cantv,
+input:valid ~ .label-cantv {
+  color: var(--cantv);
+}
+
+input:focus ~ .label-inter,
+input:valid ~ .label-inter {
+  color: var(--inter);
+}
+
+input:focus ~ .label-simpletv,
+input:valid ~ .label-simpletv {
+  color: var(--movistar);
+}
+
+.barra {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.barra::before {
+  content: "";
+  height: 2px;
+  width: 0%;
+  bottom: 0;
+  position: absolute;
+  //background: linear-gradient(to right, #B06AB3, #4568DC);
+  transition: 0.3s ease width;
+  left: 0;
+}
+
+.barra-movistar::before {
+  background: var(--movistar);
+}
+
+.barra-digitel::before {
+    background: var(--digitel);
+  }
+
+.barra-movilnet::before {
+  background: var(--movilnet);
+}
+
+.barra-cantv::before {
+  background: var(--cantv);
+}
+
+.barra-inter::before {
+  background: var(--inter);
+}
+
+.barra-simpletv::before {
+  background: var(--simpletv);
+}
+
+input:focus ~ .barra::before {
+  width: 100%;
+}
+
+@media screen and (max-width: 500px) {
+  form {
+    width: 80%;
+  }
+}
+
+.badge-movistar {
+  color: #fff;
+  background-color: var(--movistar);
+}
+
+.badge-digitel {
+    color: #fff;
+    background-color: var(--digitel);
+  }
+
+.badge-movilnet {
+  color: #fff;
+  background-color: var(--movilnet);
+}
+
+.badge-cantv {
+  color: #fff;
+  background-color: var(--cantv);
+}
+
+.badge-inter {
+  color: #fff;
+  background-color: var(--inter);
+}
+.badge-simpletv {
+  color: #fff;
+  background-color: var(--simpletv);
+}
+
+.btn-standar {
+  border: none;
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  height: 40px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white !important;
+  padding: 0.5rem 2.5rem;
+  border-radius: 5rem;
+  text-transform: uppercase;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  font-weight: bold;
+}
+
+.btn-movistar:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: var(--movistar);
+}
+
+.btn-digitel:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background-color: var(--digitel);
+  }
+
+.btn-movilnet:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: var(--movilnet);
+}
+.btn-cantv:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: var(--cantv);
+}
+.btn-inter:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: var(--inter);
+}
+.btn-simpletv:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: var(--simpletv);
+}
+
+.btn--left:before {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  transition: width 0.25s linear;
+}
+.btn--left:hover:before {
+  width: 100%;
+}
+//FIN ELEMENTOS DEL FORMULARIO ########################################

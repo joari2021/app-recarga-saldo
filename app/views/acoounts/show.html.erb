@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Bank:</strong>
+  <%= @acoount.bank %>
+</p>
+
+<p>
+  <strong>Document:</strong>
+  <%= @acoount.document %>
+</p>
+
+<p>
+  <strong>Type document:</strong>
+  <%= @acoount.type_document %>
+</p>
+
+<p>
+  <strong>Number account:</strong>
+  <%= @acoount.number_account %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @acoount.phone %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @acoount.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_acoount_path(@acoount) %> |
+<%= link_to 'Back', acoounts_path %>

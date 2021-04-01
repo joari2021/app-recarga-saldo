@@ -1,0 +1,22 @@
+<div class="contenedor__login-register">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name),:html => {:class => "formulario__login"}) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <h2>Iniciar Sesión</h2>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Correo Electronico", required: "required"%>
+      <%= f.password_field :password, autocomplete: "new-password", id:"contraseña", placeholder:"Contraseña", required: "required", minlength: "8"%>
+      <%= f.submit "Entrar" %>
+
+      <%= render "devise/shared/links" %>
+    <% end %>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name),:html => {:class => "formulario__register"}) do |f| %>
+      <h2>Registrarse</h2>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Correo Electronico", required: "required"%>
+      <%= f.password_field :password, autocomplete: "new-password", id:"contraseña", placeholder:"Contraseña", required: "required", minlength: "8"%>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirmar Contraseña", required: "required", minlength: "8"%>
+      <%= f.submit "Registrarse" %>
+
+      <%= render "devise/shared/links" %>
+    <% end %>
+  </div>

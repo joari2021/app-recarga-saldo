@@ -1,0 +1,65 @@
+@import "bootstrap";
+
+:root {
+  --colorTextos: #49454567;
+  --movistar: #019bf2;
+  --digitel: #5c068c;
+  --movilnet: #f36f09;
+  --cantv: #020094;
+  --inter: #006fba;
+  --simpletv: #1fb2e7;
+}
+
+//CAJAS DE LAS OPERADORAS ##############################################
+.border-left-movistar {
+  border-left: 0.25rem solid var(--movistar) !important;
+}
+
+.border-left-digitel {
+  border-left: 0.25rem solid var(--digitel) !important;
+}
+
+.border-left-movilnet {
+  border-left: 0.25rem solid var(--movilnet) !important;
+}
+
+.border-left-cantv {
+  border-left: 0.25rem solid var(--cantv) !important;
+}
+
+.border-left-inter {
+  border-left: 0.25rem solid var(--inter) !important;
+}
+
+.border-left-simpletv {
+  border-left: 0.25rem solid var(--simpletv) !important;
+}
+
+.contenedor-img:hover .img-operadora {
+  -webkit-transform: scale(1.2);
+  transform: scale(1.2);
+  //filter: opacity(.5);
+  transition: all 0.5s ease-in-out;
+}
+
+.contenedor-img {
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card-options {
+  text-align: center;
+}
+
+.card-options:hover .card-body {
+  -webkit-transform: scale(1.3);
+  transform: scale(1.3);
+  transition: all 0.5s ease-in-out;
+}
+
+.card-body {
+  overflow: hidden;
+  cursor: pointer;
+}
+//FIN DE CAJAS DE LAS OPERADORAS #######################################
+
