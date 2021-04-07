@@ -1,38 +1,28 @@
-
 $('#caja_form').html('<%= j render("form") %>');
 
-input_operadora = document.querySelector("#recharge_operator")
-input_type_pago = document.querySelector("#recharge_type_payment")
-input_cod_area = document.querySelector("#recharge_cod_area")
-input_number_phone = document.querySelector("#recharge_phone")
-input_monto = document.querySelector("#recharge_amount")
-btn_recarga = document.getElementById("btn_recarga")
-
-caja_type_pago = document.getElementById("caja_type_pago")
-caja_form = document.getElementById("caja_form")
-caja_cod_area = document.getElementById("cont-option-list")
-div_montos = document.getElementById("div_montos")
+<%=render "element_dom_globales"%>
 
 input_operadora.value = operadora_val
 
+$("#contenedor-switch").fadeIn("fast")
 switch (operadora_val) {
 
     case "movistar":
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/movistar.png", width:"100px", height:"30px")%>'
-    edit_modal("border-left-movistar","label-movistar","barra-movistar","close_movistar","btn-movistar")
+    edit_modal("border-left-movistar","label-movistar label-special","barra-movistar","close_movistar","btn-movistar","table-movistar")
     $("#caja_type_pago").fadeTo(600,1)
     break;
 
     case "digitel":
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/digitel.jpeg", width:"100px", height:"30px")%>'
-    edit_modal("border-left-digitel","label-digitel","barra-digitel","close_digitel","btn-digitel")
+    edit_modal("border-left-digitel","label-digitel label-special","barra-digitel","close_digitel","btn-digitel","table-digitel")
     $("#caja_type_pago").fadeTo(600,1)
     set_max_length(7)
     break;
 
     case "movilnet":
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/movilnet.png", width:"100px", height:"30px")%>'
-    edit_modal("border-left-movilnet","label-movilnet","barra-movilnet","close_movilnet","btn-movilnet")
+    edit_modal("border-left-movilnet","label-movilnet label-special","barra-movilnet","close_movilnet","btn-movilnet","table-movilnet")
     $("#caja_form").fadeIn(600)
 
     type_pago = "pre-pago"
@@ -58,7 +48,7 @@ switch (operadora_val) {
 
     case "cantv":
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/cantv.png", width:"100px", height:"30px")%>'
-    edit_modal("border-left-cantv","label-cantv","barra-cantv","close_cantv","btn-cantv")
+    edit_modal("border-left-cantv","label-cantv label-special","barra-cantv","close_cantv","btn-cantv","table-cantv")
     $("#caja_form").fadeTo(600,1)
 
     type_pago = "post-pago"
@@ -84,7 +74,7 @@ switch (operadora_val) {
 
     case "movistar_tv":
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/movistar_tv.png", width:"100px", height:"30px")%>'
-    edit_modal("border-left-movistar","label-movistar","barra-movistar","close_movistar","btn-movistar")
+    edit_modal("border-left-movistar","label-movistar label-special","barra-movistar","close_movistar","btn-movistar","table-movistar")
     $("#caja_form").fadeTo(600,1)
 
     type_pago = "pre-pago"
@@ -110,14 +100,14 @@ switch (operadora_val) {
 
     case "inter":
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/inter.jpeg", width:"100px", height:"30px")%>'
-    edit_modal("border-left-inter","label-inter","barra-inter","close_inter","btn-inter")
+    edit_modal("border-left-inter","label-inter label-special","barra-inter","close_inter","btn-inter","table-inter")
     $("#caja_type_pago").fadeTo(600,1)
     set_max_length(10)
     break;
 
     case "simple_tv":
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/simple_tv.jpeg", width:"100px", height:"30px")%>'
-    edit_modal("border-left-simpletv","label-simpletv","barra-simpletv","close_simpletv","btn-simpletv")
+    edit_modal("border-left-simpletv","label-simple_tv label-special","barra-simpletv","close_simpletv","btn-simpletv","table-simple_tv")
     $("#caja_form").fadeTo(600,1)
 
     type_pago = "pre-pago"

@@ -1,0 +1,68 @@
+$('#caja_form').html('<%= j render("form") %>');
+
+<%=render "element_dom_globales" %>
+
+
+switch ("<%=@recharge.operator%>") {
+
+    case "movistar":
+    title_modal.innerHTML = '<%=image_tag("sistema_recargas/movistar.png", width:"100px", height:"30px")%>'
+    edit_modal("border-left-movistar","label-movistar label-special","barra-movistar","close_movistar","btn-movistar")
+    $("#input_cod_area").css({"display":"none"})
+    break;
+
+    case "digitel":
+    title_modal.innerHTML = '<%=image_tag("sistema_recargas/digitel.jpeg", width:"100px", height:"30px")%>'
+    edit_modal("border-left-digitel","label-digitel label-special","barra-digitel","close_digitel","btn-digitel")
+    break;
+
+    case "inter":
+    title_modal.innerHTML = '<%=image_tag("sistema_recargas/inter.jpeg", width:"100px", height:"30px")%>'
+    edit_modal("border-left-inter","label-inter label-special","barra-inter","close_inter","btn-inter")
+    $("#input_cod_area").css({"display":"none"})
+    break;
+
+    default:
+    break;
+}
+cod_area = "<%=@recharge.cod_area%>"
+number = "<%=@recharge.phone%>"
+monto = "<%=number_with_precision(@recharge.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2) %>"  
+
+function block_entrada_input(input){
+    
+    switch(input.id){
+        case "recharge_cod_area":
+        input.value = cod_area
+        break;
+
+        case "recharge_phone":
+        input.value = number
+        break;
+
+        case "recharge_amount":
+        input.value = monto
+        break;
+
+        default:
+        break;
+    }
+}
+
+input_cod_area.setAttribute("oninput","block_entrada_input(this)")
+input_number_phone.setAttribute("oninput","block_entrada_input(this)")
+input_monto.setAttribute("oninput","block_entrada_input(this)")
+
+input_monto.value = "<%=number_with_precision(@recharge.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2) %>"
+
+btn_recarga.innerText = "pagar"
+btn_recarga.setAttribute("data-validate","false")
+$(caja_type_pago).css({"display":"none"})
+$(caja_form).fadeIn(600);
+
+$('.modal_original').addClass('show');
+$('.modal_original-wrap').addClass('show');
+
+<% unless @recharge.errors.any? %>
+    <!--$("#btn_opened_modal_products").trigger("click");-->
+<% end %>

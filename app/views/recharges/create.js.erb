@@ -1,12 +1,55 @@
 $("#close").trigger("click");
 
-if(operation === "recarga"){
-    title = "Recarga Enviada!"
-    text = "Puede verificar el estado de la recarga en la opción Historial ubicada en el menú lateral izquierdo"
-}
-swal({
-  title: title,
-  text: text,
-  icon: "success",
-  button: "Cerrar",
-});
+<%if @recharge.amount <= current_user.balance.balance%>
+  <%if @recharge.type_operation === "direct_recharge"%>
+      title = "Recarga Enviada!"
+      text = "Puede verificar el estado de la recarga en la opción Historial ubicada en el menú lateral izquierdo"
+
+      $("#card_balance").text("Bs <%= number_with_precision(current_user.balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%>")
+  <%else%>
+      title = "Consulta Enviada!"
+      text = "En unos segundos se mostrara en la sección de abajo el monto de la deuda y podrá hacer el pago si lo desea."
+
+      $("#row_consultation").append(`<%=render "caja_consultation", recharge: @recharge%>`);
+      $("#consultation<%=@recharge.id%>").css({"display":"none"})
+      $("#consultation<%=@recharge.id%>").fadeIn(600)
+  <%end%>
+
+  swal({
+    title: title,
+    text: text,
+    icon: "success",
+    button: "Cerrar",
+  });
+
+  $(".swal-button").click(function(){
+    <%if @contact_save === true%>
+      swal({
+        title: "Contacto Guardado",
+        text: "El contacto fue registrado con exito.",
+        icon: "success",
+        button: "Cerrar",
+      });
+    
+    <%else%>
+      swal({
+        title: "Contacto No Guardado",
+        text: "El número ya se encuentra registrado en tus contactos.",
+        icon: "warning",
+        button: "Cerrar",
+      });
+    <%end%>
+
+  })
+  
+
+<%else%>
+
+  swal({
+    title: "Recarga Cancelada",
+    text: "Su balance es inferior al monto de la recarga. Le sugerimos comprar saldo.",
+    icon: "warning",
+    button: "Cerrar",
+  });
+
+<%end%>

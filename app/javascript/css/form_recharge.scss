@@ -1,5 +1,6 @@
 //MODAL DE FORMULARIOS ###############################################
-.modal_original {
+.modal_original,
+.modal_contacts {
   background: rgba(48, 48, 48, 0.5);
   position: fixed;
   top: 0;
@@ -13,7 +14,8 @@
   z-index: 9999;
 }
 
-.modal_original-wrap {
+.modal_original-wrap,
+.modal_contacts-wrap {
   display: flex;
   align-items: center;
   width: 90%;
@@ -23,42 +25,53 @@
   transition: 0.3s ease all;
 }
 
-.modal_original.show {
+.modal_original.show,
+.modal_contacts.show {
   visibility: visible;
 }
 
-.modal_original-wrap.show {
+.modal_original-wrap.show,
+.modal_contacts-wrap.show {
   transform: scale(1);
   opacity: 1;
 }
 
-.close_modal {
+.close_modal,
+.close_modal_contact {
   position: absolute;
   right: 25px;
   font-size: 25px;
   cursor: pointer;
 }
 
-.close_movistar {
+.close_movistar,
+.text-movistar,
+.text-movistar_tv {
   color: var(--movistar) !important;
 }
 
-.close_digitel {
+.close_digitel,
+.text-digitel {
   color: var(--digitel) !important;
 }
 
-.close_movilnet {
+.close_movilnet,
+.text-movilnet {
   color: var(--movilnet) !important;
 }
 
-.close_cantv {
+.close_cantv,
+.text-cantv {
   color: var(--cantv) !important;
 }
 
-.close_inter {
+.close_inter,
+.text-inter {
   color: var(--inter) !important;
 }
-.close_simpletv {
+.close_simpletv,
+.text-simpletv,
+.text-simple_tv {
   color: var(--simpletv) !important;
 }
 //FIN MODAL FORMULARIOS ##############################################
@@ -78,7 +91,6 @@ input[type="number"]::-webkit-outer-spin-button {
 
 form {
   background: #fff;
-  padding: 40px 0;
   box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.8);
   border-radius: 10px;
 }
@@ -93,7 +105,7 @@ form .grupo {
   margin: 30px;
 }
 
-input {
+input.input-special {
   background: none;
   color: #c6c6c6;
   font-size: 18px;
@@ -104,12 +116,12 @@ input {
   border-bottom: 1px solid var(--colorTextos);
 }
 
-input:focus {
+input.input-special:focus {
   outline: none;
   color: #5e5d5d;
 }
 
-label {
+label.label-special {
   color: var(--colorTextos);
   font-size: 16px;
   position: absolute;
@@ -119,40 +131,42 @@ label {
   pointer-events: none;
 }
 
-input:focus ~ label,
-input:valid ~ label {
+input.input-special:focus ~ label.label-special,
+input.input-special:valid ~ label.label-special {
   top: -14px;
   font-size: 12px;
 }
 
 input:focus ~ .label-movistar,
-input:valid ~ .label-movistar {
-  color: var(--movistar);
+input:valid ~ .label-movistar,
+input:focus ~ .label-movistar_tv,
+input:valid ~ .label-movistar_tv {
+  color: var(--movistar) !important;
 }
 
 input:focus ~ .label-digitel,
-input:valid ~ .label-digitel {
-  color: var(--digitel);
+input:valid ~ .label-digitel{
+  color: var(--digitel) !important;
 }
 
 input:focus ~ .label-movilnet,
 input:valid ~ .label-movilnet {
-  color: var(--movilnet);
+  color: var(--movilnet) !important;
 }
 
 input:focus ~ .label-cantv,
 input:valid ~ .label-cantv {
-  color: var(--cantv);
+  color: var(--cantv) !important;
 }
 
 input:focus ~ .label-inter,
 input:valid ~ .label-inter {
-  color: var(--inter);
+  color: var(--inter) !important;
 }
 
-input:focus ~ .label-simpletv,
-input:valid ~ .label-simpletv {
-  color: var(--movistar);
+input:focus ~ .label-simple_tv,
+input:valid ~ .label-simple_tv {
+  color: var(--simpletv) !important;
 }
 
 .barra {
@@ -172,7 +186,8 @@ input:valid ~ .label-simpletv {
   left: 0;
 }
 
-.barra-movistar::before {
+.barra-movistar::before,
+.barra-movistar_tv::before{
   background: var(--movistar);
 }
 
@@ -207,36 +222,45 @@ input:focus ~ .barra::before {
   }*/
 }
 
-.badge-movistar {
-  color: #fff;
+.badge-movistar,
+.badge-movistar_tv,
+.table-movistar,
+.table-movistar_tv {
+  color: #fff !important;
   background-color: var(--movistar);
 }
 
-.badge-digitel {
-    color: #fff;
+.badge-digitel,
+.table-digitel {
+    color: #fff !important;
     background-color: var(--digitel);
   }
 
-.badge-movilnet {
-  color: #fff;
+.badge-movilnet,
+.table-movilnet {
+  color: #fff !important;
   background-color: var(--movilnet);
 }
 
-.badge-cantv {
-  color: #fff;
+.badge-cantv,
+.table-cantv {
+  color: #fff !important;
   background-color: var(--cantv);
 }
 
-.badge-inter {
-  color: #fff;
+.badge-inter,
+.table-inter {
+  color: #fff !important;
   background-color: var(--inter);
 }
-.badge-simpletv {
-  color: #fff;
+.badge-simpletv,
+.table-simple_tv {
+  color: #fff !important;
   background-color: var(--simpletv);
 }
 
-.badge-movistar:hover {
+.badge-movistar:hover,
+.badge-movistar_tv:hover {
   color: #fff;
   background-color: var(--movistar_hover);
 }
@@ -263,6 +287,70 @@ input:focus ~ .barra::before {
 .badge-simpletv:hover {
   color: #fff;
   background-color: var(--simpletv_hover);
+}
+
+.lbl{
+  display: inline-block;
+  width: 38px;
+  height: 22px;
+  background: #979797;
+  border-radius: 100px;
+  cursor: pointer;
+  position: relative;
+  transition: .2s;
+}
+ 
+.lbl::after{
+  content: '';
+  display: block;
+  width: 14px;
+  height: 14px;
+  background: #eee;
+  border-radius: 100px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  transition: .2s;
+}
+ 
+#switch:checked + .lbl::after{
+  left: 22px;
+}
+ 
+#switch:checked + .lbl-movistar,
+#switch:checked + .lbl-movistar_tv,
+.button-movistar,
+.button-movistar_tv{
+  background: var(--movistar) !important;
+}
+
+#switch:checked + .lbl-digitel,
+.button-digitel{
+  background: var(--digitel) !important;
+}
+
+#switch:checked + .lbl-movilnet,
+.button-movilnet{
+  background: var(--movilnet) !important;
+}
+
+#switch:checked + .lbl-cantv,
+.button-cantv{
+  background: var(--cantv) !important;
+}
+
+#switch:checked + .lbl-inter,
+.button-inter{
+  background: var(--inter) !important;
+}
+
+#switch:checked + .lbl-simple_tv,
+.button-simple_tv{
+  background: var(--simpletv) !important;
+}
+ 
+#switch{
+  display: none;
 }
 
 .btn-standar {
@@ -332,5 +420,15 @@ input:focus ~ .barra::before {
 }
 .btn--left:hover:before {
   width: 100%;
+}
+
+.button-movistar,
+.button-movistar_tv,
+.button-movilnet,
+.button-digitel,
+.button-cantv,
+.button-simple_tv,
+.button-inter{
+  color: #fff !important;
 }
 //FIN ELEMENTOS DEL FORMULARIO ########################################

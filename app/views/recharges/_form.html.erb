@@ -1,25 +1,61 @@
 <%= form_for @recharge, {remote: true}  do |form| %>
   <div class="form">
+    
+    <%if @recharge.new_record?%>
+      <div class="grupo"><button class="btn" id="btn_show_contacts" onclick="show_modal_contacts(event)"><i class="far fa-address-book"></i></button></div>
+    <%end%>
+
     <div class="grupo" id="input_cod_area">
-      <%= form.text_field :cod_area, oninput: "format_number(this)", onfocus: "show_cod_area()", onblur: "ocultar_cod_area()", maxlength: "4" %><span class="barra"></span>
-      <%= form.label :cod_area, "Cod. Área", for: "", class: "" %>
+      <%= form.text_field :cod_area, :required => "required", class:"input-special", oninput: "format_number(this)", onfocus: "show_cod_area()", onblur: "ocultar_cod_area()", maxlength: "4" %><span class="barra"></span>
+      <%= form.label :cod_area, "Cod. Área", for: "", class: "label-special" %>
       <span class="badge badge-pill badge-danger" id="msj_error_cod_area" style="display:none;">El código de área es inválido.</span>
       <div id="cont-option-list" style="display:none"><!--Los codigos de area se insertan con javascript--></div>
     </div>
+
     <div class="grupo">
-      <%= form.text_field :phone, :oninput => "format_number(this)" %><span class="barra"></span>
-      <%= form.label :phone, "Número", for:"", class: "" %>
+      <%= form.text_field :phone, :required => "required", class:"input-special", :oninput => "format_number(this)" %><span class="barra"></span>
+      <%= form.label :phone, "Número", for:"", class: "label-special" %>
       <span class="badge badge-pill badge-danger" id="msj_error_number_phone" style="display:none;">El número debe contener <span id="digit_lenght"></span> dígitos</span>
     </div>
+
     <div class="grupo" id="input_monto">
-      <%= form.text_field :amount, oninput:"format_input_monto_entero(this)", onfocus: "show_montos()", onblur: "ocultar_montos()" %><span class="barra"></span>
-      <%= form.label :amount, "Monto", for: "", class: "" %>
+      <%= form.text_field :amount, :required => "required", class:"input-special", oninput:"format_input_monto_entero(this)", onfocus: "show_montos()", onblur: "ocultar_montos()" %><span class="barra"></span>
+      <%= form.label :amount, "Monto", for: "", class: "label-special" %>
       <span class="badge badge-pill badge-danger" id="msj_error_monto" style="display:none;">El monto es inválido.</span>
-      <div id="div_montos" style="display:none"><!--Los codigos de area se insertan con javascript--></div>
+      <div id="div_montos" style="display:none"><!--Los montos se insertan con javascript--></div>
     </div>
+    
+    <%if @recharge.new_record?%>
+      <div class="grupo" id="contenedor-switch">
+        <div class="swtich-container">
+          <input type="checkbox" id="switch" name="recharge[save_number]" onchange="show_input_names(this)">
+          <label for="switch" class="lbl" style="margin-bottom:0px;"></label>
+          <label for="switch" class="font-weight-bold align-middle" id="label_switch" style="cursor:pointer;">Guardar número</label>
+        </div>
+      </div>
+
+      <div class="grupo" id="name_contact" style="display:none;">
+        <input class="input-special" maxlength="20" size="20" type="text" name="recharge[names]" id="recharge_names_contact"><span class="barra"></span>
+        <label class="label-special">Nombre o alias</label>
+        <span class="badge badge-pill badge-danger" id="msj_error_names" style="display:none;">Este campo no puede estar vacío</span>
+      </div>
+
+      <script>
+
+        $(document).ready(function(){
+            clase_color_switch = "lbl-" + input_operadora.value
+            clase_color_label = "text-" + input_operadora.value
+            clase_color_button = "button-" + input_operadora.value
+            $(".lbl").addClass(clase_color_switch)
+            $("#label_switch").addClass(clase_color_label)
+            $("#btn_show_contacts").addClass(clase_color_button)
+        });
+      </script>
+    <%end%>
 
     <%= form.text_field :operator, type:"hidden" %>
     <%= form.text_field :type_payment, type:"hidden" %>
+
     <div class="actions">
       <button type="button" class="" id="btn_recarga">Recargar</button>
       <%=form.submit "Recargar", class: "d-none", id: "btn_submit"%>
@@ -28,37 +64,53 @@
 <% end %>
 
 <script>
-  formulario = document.getElementById("new_recharge")
 
-  function change_name_params(modelo) {
-    input_cod_area.setAttribute("name",modelo + "[cod_area]")
-    input_number_phone.setAttribute("name",modelo + "[phone]")
-    input_monto.setAttribute("name",modelo + "[amount]")
-    input_operadora.setAttribute("name",modelo + "[operator]")
-    input_type_pago.setAttribute("name",modelo + "[type_payment]")
+  function show_modal_contacts(event) {
+    event.preventDefault()
+    $('.modal_original').removeClass('show');
+    $('.modal_original-wrap').removeClass('show');
+    $('.modal_contacts').addClass('show');
+    $('.modal_contacts-wrap').addClass('show');
   }
 
+  function show_input_names(input) {
+    if (input.checked) {
+      $("#recharge_names_contact").attr("required","required")
+      $("#name_contact").fadeIn(600)
+    } else {
+      $("#name_contact").css({"display":"none"})
+      $("#recharge_names_contact").removeAttr("required","required")
+    }
+  }
   $("#btn_recarga").click(function() {
-    validate_form = true
-    if (operation === "recarga") {
-        //VALIDACION DE CODIGO DE AREA
-        if (show_div_cod_area){
-            if (cod_area.indexOf(input_cod_area.value) === -1){
-            validate_form = false
-            $("#msj_error_cod_area").fadeIn(600)
-          }
-        }
-        
-        //VALIDACION DE NUMERO
-        digit_limit = input_number_phone.maxLength
-       
-        if (input_number_phone.value.length != digit_limit){
-          validate_form = false
-          document.getElementById("digit_lenght").innerText = digit_limit
-          $("#msj_error_number_phone").fadeIn(600)
-        }
+    if ($(this).data("validate") === true) {
+      validate_form = true
+      $("#msj_error_cod_area").css({"display":"none"})
+      $("#msj_error_number_phone").css({"display":"none"})
+      $("#msj_error_monto").css({"display":"none"})
+      $("#msj_error_names").css({"display":"none"})
 
-        //VALIDACION DE MONTO
+      //VALIDACION DE CODIGO DE AREA
+      if (show_div_cod_area){
+        if (cod_area.indexOf(input_cod_area.value) === -1){
+          validate_form = false
+          $("#msj_error_cod_area").fadeIn(600)
+        }
+      }else{
+        input_cod_area.removeAttribute("required")
+      }
+          
+      //VALIDACION DE NUMERO
+      digit_limit = input_number_phone.maxLength
+      
+      if (input_number_phone.value.length != digit_limit){
+        validate_form = false
+        document.getElementById("digit_lenght").innerText = digit_limit
+        $("#msj_error_number_phone").fadeIn(600)
+      }
+
+      //VALIDACION DE MONTO
+      if (operation === "recarga") {
         valor = format_integer(input_monto.value)
         monto_valid = false
 
@@ -73,43 +125,48 @@
           validate_form = false
           $("#msj_error_monto").fadeIn(600)
         }
-
-        //VALIDACION DEL FORMULARIO
-        if (validate_form) {
-          formulario.setAttribute("action","/recharges")
-          change_name_params("recharge")
-          $("#btn_submit").trigger("click")
-        } else {
-          return
-        }
-    } else {
-      //VALIDACION DE CODIGO DE AREA
-      if (show_div_cod_area){
-          if (cod_area.indexOf(input_cod_area.value) === -1){
-          validate_form = false
-          $("#msj_error_cod_area").fadeIn(600)
-        }
+      }else{
+        input_monto.removeAttribute("required")
       }
-      
-      //VALIDACION DE NUMERO
-      digit_limit = input_number_phone.maxLength
-      
-      if (input_number_phone.value.length != digit_limit){
-        validate_form = false
-        document.getElementById("digit_lenght").innerText = digit_limit
-        $("#msj_error_number_phone").fadeIn(600)
+
+      //VALIDACION DEL NOMBRE DEL CONTACTO (OPCIONAL)
+      if (switch_names.checked){
+        if ($("#recharge_names_contact").val().trim( ).length == 0) {
+          validate_form = false
+          $("#msj_error_names").fadeIn(600)
+        }
       }
 
       //VALIDACION DEL FORMULARIO
       if (validate_form) {
-        formulario.setAttribute("action","/balace_inquiries")
-        change_name_params("balace_inquiry")
+        input_monto.value = format_integer(input_monto.value)
         $("#btn_submit").trigger("click")
-        
       } else {
         return
       }
+    } else {
+      input_cod_area.removeAttribute("required")
+      $("#btn_submit").trigger("click")
+
     }
     
   })
+
+  inputs = document.querySelectorAll( '.fake_placeholder input' );
+  
+  inputs.forEach( input => {
+    //cuando entramos en el input
+    input.onfocus = ( ) => {
+      //al elemento anterior (el span) le agregamos la clase que la reubica en top
+      input.previousElementSibling.classList.add( 'reubicar' );
+    }
+  
+    //cuando salimos del input
+    input.onblur = ( ) => {
+      //si no hay texto, le quitamos la clase reubicar,
+      //para que se superponga con el input
+      if( input.value.trim( ).length == 0 )
+      input.previousElementSibling.classList.remove( 'reubicar' );
+    }
+  });
 </script>

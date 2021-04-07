@@ -1,0 +1,99 @@
+<div class="modal_contacts" style="min-width:500px !important">
+  <div class="modal_contacts-wrap modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title_modal_contact">Contactos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="far fa-times-circle close_modal" id="close_modal_contact"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form">
+            <div class="grupo" id="">
+                <input class="input-special" type="text" data-operadora="" maxlength="20" size="20" id="input_buscador_contacts" required="required"><span class="barra"></span>
+                <label for="" class="label-special">Nombre o alias</label>
+            </div>
+          </div>
+        </form>
+        
+        <table class="" id="tabla_buscador_contacts" >
+            <thead>
+                <tr>
+                  <th >Nombre</th>
+                  <th >Número</th>
+                  <th ></th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+function seleccionarContacto(event,contact) {
+  event.preventDefault()
+  input_cod_area.value = contact.getAttribute("data-cod_area")
+  input_number_phone.value = contact.getAttribute("data-number")
+  $("#contenedor-switch").css({"display":"none"})
+
+  $("#close_modal_contact").trigger("click")
+}
+
+$("#input_buscador_contacts").keyup(function(event){
+  
+  let termino = $(this).val();
+  //let id_venta = $(this).data("venta");
+  if(termino.length == 0) {
+    $("#tabla_buscador_contacts tbody").empty();
+  }
+  else {
+    let request_url = getRootUrl() + "/buscador_contacts/" + termino + "/" + input_operadora.value + "/" + input_type_pago.value;
+    $.get(request_url, function(data, status){
+      $("#tabla_buscador_contacts tbody").empty();
+
+      console.log(data);
+      if(data.length > 0){
+        
+        for(let x in data){
+          let names = data[x].names_contact;
+          let id = data[x].id;
+          let cod_area = data[x].cod_area
+          let number = data[x].number_contact
+          if (cod_area.length == 4){
+            number_comp = "(" + cod_area + ") " + number
+          }else{
+            number_comp = number
+          }
+          let rowContent = `
+                              <tr>
+                                <td>${names}</td>
+                                <td>${number_comp}</td>
+                                <td>
+                                    <a
+                                      href = "#"
+                                      data-cod_area = "${cod_area}"
+                                      data-number = "${number}"
+                                      class = "special-link p-2"
+                                      style = "color:#fff;"
+                                      id = "${id}"
+                                      onclick = "seleccionarContacto(event,this)"
+                                      >
+                                        Agregar
+                                    </a>
+                                </td>
+                              </tr>
+                            `;
+          $("#tabla_buscador_contacts tbody").append(rowContent);
+          
+        }
+      }
+    });
+  }
+});
+</script>

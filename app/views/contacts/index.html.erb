@@ -1,33 +1,41 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Contacts</h1>
+<div>  
+  <%= link_to new_contact_path, {remote: true, class: "btn btn-info", id: "anadir-contact-btn"}  do %>
+    <span class="fas fa-plus-square" style=""></span>
+  <% end %>
+</div>
+<br />
 
-<table>
-  <thead>
-    <tr>
-      <th>Names</th>
-      <th>Alias</th>
-      <th>Phone</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @contacts.each do |contact| %>
-      <tr>
-        <td><%= contact.names %></td>
-        <td><%= contact.alias %></td>
-        <td><%= contact.phone %></td>
-        <td><%= contact.user_id %></td>
-        <td><%= link_to 'Show', contact %></td>
-        <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-        <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<div id="main-container">
+  <table class="table-standar">
+    <thead class="thead-standar">
+      <tr class="tr-standar">
+        <th class="th-standar">Nombres o alias</th>
+        <th class="th-standar">Sistema</th>
+        <th class="th-standar">T. Pago</th>
+        <th class="th-standar">Cod. Area</th>
+        <th class="th-standar">Número</th>
+        <th class="th-standar">Acciones</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <%current_user.contacts.each do |contact|%>
+    <tr class="tr-standar" id="contact_<%=contact.id%>">
+      <td class="td-standar" data-label="Nombres o Alias"><%=contact.names%></td>
+      <td class="td-standar" data-label="Sistema"><%=contact.operator%></td>
+      <td class="td-standar" data-label="T. Pago"><%=contact.type_payment%></td>
+      <td class="td-standar" data-label="Cod. Área"><%=contact.cod_area%></td>
+      <td class="td-standar" data-label="Número"><%=contact.phone%></td>
+      <td class="td-standar" data-label="Acciones">
+        <%= link_to edit_contact_path(contact), {class: "btn btn-primary btn-sm", remote: true} do%>
+          <i class="fas fa-edit"></i>
+        <%end%>
+        <a href="#" class="btn btn-sm btn-danger" data-contact_id="contact_<%=contact.id%>" onclick="show_modal_delete(event,this)"><i class="fas fa-trash-alt"></i></a>
 
-<br>
+        <%= link_to "Borrar", contact, remote: true, method: :delete, class: "d-none", id:"delete_#{contact.id}" %>
+      </td>
+    </tr>
+    <%end%>
+  </table>
+</div>
 
-<%= link_to 'New Contact', new_contact_path %>
+<%= render 'modal_contacts' %>

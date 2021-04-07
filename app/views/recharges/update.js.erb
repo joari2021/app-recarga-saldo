@@ -1,0 +1,12 @@
+$("#close").trigger("click");
+
+$("#consultation_<%=@recharge.id%>").fadeOut(600,function(){
+    $(this).remove()
+})
+
+swal({
+  title: "Pago Realizado",
+  text: "puede revizar el estado de este pago en la opción Historial",
+  icon: "success",
+  button: "Cerrar",
+});

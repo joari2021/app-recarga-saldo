@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_01_224217) do
+ActiveRecord::Schema.define(version: 2021_04_03_173758) do
 
   create_table "acoounts", force: :cascade do |t|
     t.string "bank"
@@ -33,8 +33,6 @@ ActiveRecord::Schema.define(version: 2021_04_01_224217) do
     t.string "status", default: "en proceso"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id", null: false
-    t.index ["user_id"], name: "index_balace_inquiries_on_user_id"
   end
 
   create_table "balances", force: :cascade do |t|
@@ -47,11 +45,13 @@ ActiveRecord::Schema.define(version: 2021_04_01_224217) do
 
   create_table "contacts", force: :cascade do |t|
     t.string "names"
-    t.string "alias"
     t.string "phone"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "cod_area"
+    t.string "operator"
+    t.string "type_payment"
     t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
@@ -103,6 +103,8 @@ ActiveRecord::Schema.define(version: 2021_04_01_224217) do
     t.decimal "amount", precision: 18, scale: 2
     t.string "type_payment"
     t.string "status", default: "enviada"
+    t.string "type_operation", default: "direct_recharge"
+    t.integer "available_days"
     t.index ["user_id"], name: "index_recharges_on_user_id"
   end
 
@@ -119,7 +121,6 @@ ActiveRecord::Schema.define(version: 2021_04_01_224217) do
   end
 
   add_foreign_key "acoounts", "users"
-  add_foreign_key "balace_inquiries", "users"
   add_foreign_key "balances", "users"
   add_foreign_key "contacts", "users"
   add_foreign_key "deposits", "users"

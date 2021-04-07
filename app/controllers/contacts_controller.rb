@@ -56,6 +56,21 @@ class ContactsController < ApplicationController
     end
   end
 
+  def buscador
+    @resultados = Contact.buscador(params[:names],params[:operator],params[:type_payment]).map do |contact|
+      {
+          id: contact.id,
+          names_contact: contact.names,
+          cod_area: contact.cod_area.nil? ? "" : contact.cod_area,
+          number_contact: contact.phone
+      }
+    end
+
+    respond_to do |format|
+      format.json { render :json => @resultados }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
@@ -64,6 +79,6 @@ class ContactsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:names, :alias, :phone, :user_id)
+      params.require(:contact).permit(:names, :operator, :type_payment, :phone)
     end
 end

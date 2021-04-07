@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_one :balance, dependent: :destroy
   has_many :recharges, dependent: :destroy
   has_many :balace_inquiries, dependent: :destroy
+  has_many :contacts, dependent: :destroy
 
   after_create :set_profile
   after_create :set_balance

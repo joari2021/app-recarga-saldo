@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  resources :balace_inquiries
   resources :recharge_params
   resources :acoounts
+
   resources :contacts
+  get 'buscador_contacts/:names/:operator/:type_payment', to: 'contacts#buscador'
+
   resources :deposits
   resources :recharges
   resources :profiles

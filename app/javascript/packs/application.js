@@ -25,3 +25,4 @@ import "@fortawesome/fontawesome-free/css/all"
 import "bootstrap"
 import swal from 'sweetalert'
 import "channels/script_login_and_register"
+
