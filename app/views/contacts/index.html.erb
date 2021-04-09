@@ -43,28 +43,3 @@
 <script src="/js/js_views/all.js"></script>
 <script src="/js/js_views/contacts.js"></script>
 
-<script>
-  function show_modal_delete(event,link){
-    event.preventDefault()
-
-    swal({
-      title: "Esta seguro?",
-      text: "Esta acción es irreversible!",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-        swal("El contacto fue eliminado con exito!", {
-          icon: "success",
-        });
-        id = "delete_" + link.id;
-        document.getElementById(id).click();
-
-      } else {
-        swal("La eliminación ha sido cancelada!");
-      }
-    });
-  }
-</script>
