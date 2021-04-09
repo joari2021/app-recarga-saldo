@@ -21,15 +21,20 @@ class ContactsController < ApplicationController
 
   # POST /contacts or /contacts.json
   def create
-    @contact = Contact.new(contact_params)
 
+    @contact = current_user.contacts.create(contact_params)
+
+    @contact.operator.downcase!
+    @contact.type_payment.downcase!
+    @contact.operator.gsub!(' ','_')
+    
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to @contact, notice: "Contact was successfully created." }
-        format.json { render :show, status: :created, location: @contact }
+        format.json { head :no_content }
+        format.js
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+        format.json { render json: @contact.errors.full_messages, status: :unprocessable_entity }
+        format.js { render :new }
       end
     end
   end
@@ -38,20 +43,20 @@ class ContactsController < ApplicationController
   def update
     respond_to do |format|
       if @contact.update(contact_params)
-        format.html { redirect_to @contact, notice: "Contact was successfully updated." }
-        format.json { render :show, status: :ok, location: @contact }
+          format.json {head :no_content}
+          format.js
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+          format.json { render json: @contact.error.full_messages, status: :unprocessable_entity }
+          format.js { render :edit }
       end
-    end
+  end
   end
 
   # DELETE /contacts/1 or /contacts/1.json
   def destroy
     @contact.destroy
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: "Contact was successfully destroyed." }
+      format.js
       format.json { head :no_content }
     end
   end
@@ -79,6 +84,6 @@ class ContactsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:names, :operator, :type_payment, :phone)
+      params.require(:contact).permit(:names, :operator, :type_payment, :phone, :cod_area)
     end
 end

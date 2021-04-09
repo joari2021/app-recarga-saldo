@@ -1,4 +1,3 @@
-
 <div>  
   <%= link_to new_contact_path, {remote: true, class: "btn btn-info", id: "anadir-contact-btn"}  do %>
     <span class="fas fa-plus-square" style=""></span>
@@ -7,7 +6,7 @@
 <br />
 
 <div id="main-container">
-  <table class="table-standar">
+  <table class="table-standar" id="table_contacts">
     <thead class="thead-standar">
       <tr class="tr-standar">
         <th class="th-standar">Nombres o alias</th>
@@ -18,24 +17,54 @@
         <th class="th-standar">Acciones</th>
       </tr>
     </thead>
-    <%current_user.contacts.each do |contact|%>
-    <tr class="tr-standar" id="contact_<%=contact.id%>">
-      <td class="td-standar" data-label="Nombres o Alias"><%=contact.names%></td>
-      <td class="td-standar" data-label="Sistema"><%=contact.operator%></td>
-      <td class="td-standar" data-label="T. Pago"><%=contact.type_payment%></td>
-      <td class="td-standar" data-label="Cod. Área"><%=contact.cod_area%></td>
-      <td class="td-standar" data-label="Número"><%=contact.phone%></td>
-      <td class="td-standar" data-label="Acciones">
-        <%= link_to edit_contact_path(contact), {class: "btn btn-primary btn-sm", remote: true} do%>
-          <i class="fas fa-edit"></i>
-        <%end%>
-        <a href="#" class="btn btn-sm btn-danger" data-contact_id="contact_<%=contact.id%>" onclick="show_modal_delete(event,this)"><i class="fas fa-trash-alt"></i></a>
 
-        <%= link_to "Borrar", contact, remote: true, method: :delete, class: "d-none", id:"delete_#{contact.id}" %>
-      </td>
-    </tr>
+    <%current_user.contacts.each do |contact|%>
+      <tr class="tr-standar" id="contact_<%=contact.id%>">
+        <td class="td-standar" data-label="Nombres o Alias"><%=contact.names%></td>
+        <td class="td-standar" data-label="Sistema"><%=contact.operator%></td>
+        <td class="td-standar" data-label="T. Pago"><%=contact.type_payment%></td>
+        <td class="td-standar" data-label="Cod. Área"><%=contact.cod_area%></td>
+        <td class="td-standar" data-label="Número"><%=contact.phone%></td>
+        <td class="td-standar" data-label="Acciones">
+          <%= link_to edit_contact_path(contact), {class: "btn btn-primary btn-sm", remote: true} do%>
+            <i class="fas fa-edit"></i>
+          <% end %>
+
+          <a href="#" class="btn btn-sm btn-danger" id="<%=contact.id%>" onclick="show_modal_delete(event,this)"><i class="fas fa-trash-alt"></i></a>
+          <%= link_to "Borrar", contact, remote: true, method: :delete, class: "d-none", id:"delete_#{contact.id}" %>
+        </td>
+      </tr>
     <%end%>
   </table>
 </div>
 
 <%= render 'modal_contacts' %>
+
+<script src="/js/js_views/all.js"></script>
+<script src="/js/js_views/contacts.js"></script>
+
+<script>
+  function show_modal_delete(event,link){
+    event.preventDefault()
+
+    swal({
+      title: "Esta seguro?",
+      text: "Esta acción es irreversible!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("El contacto fue eliminado con exito!", {
+          icon: "success",
+        });
+        id = "delete_" + link.id;
+        document.getElementById(id).click();
+
+      } else {
+        swal("La eliminación ha sido cancelada!");
+      }
+    });
+  }
+</script>
