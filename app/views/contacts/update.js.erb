@@ -1,0 +1,26 @@
+$("#close_modal_contact_standar").trigger("click");
+
+swal({
+  title: "Actualición Exitosa!",
+  text: "Se han guardado los cambios del contacto con exito!",
+  icon: "success",
+});
+
+new_content = `<tr class="tr-standar" id="contact_<%=@contact.id%>" style="display:none;">
+                    <td class="td-standar" data-label="Nombres o Alias"><%=@contact.names%></td>
+                    <td class="td-standar" data-label="Sistema"><%=@contact.operator%></td>
+                    <td class="td-standar" data-label="T. Pago"><%=@contact.type_payment%></td>
+                    <td class="td-standar" data-label="Cod. Área"><%=@contact.cod_area%></td>
+                    <td class="td-standar" data-label="Número"><%=@contact.phone%></td>
+                    <td class="td-standar" data-label="Acciones">
+                        <%= link_to edit_contact_path(@contact), {class: "btn btn-primary btn-sm", remote: true} do%>
+                        <i class="fas fa-edit"></i>
+                        <%end%>
+                        <a href="#" class="btn btn-sm btn-danger" data-contact_id="contact_<%=@contact.id%>" onclick="show_modal_delete(event,this)"><i class="fas fa-trash-alt"></i></a>
+
+                        <%= link_to "Borrar", @contact, remote: true, method: :delete, class: "d-none", id:"delete_#{@contact.id}" %>
+                    </td>
+                </tr>`
+$('#contact_<%= @contact.id %>').replaceWith(new_content);
+$('#contact_<%= @contact.id %>').fadeTo(1000,1)
+

@@ -1,0 +1,35 @@
+$('#title_modal_contact').html("Editar contacto");
+ 
+$('#modal_body_contacts').html('<%= j render("form") %>');
+
+if ($("#contact_operator").val() === "movistar" && $("#contact_type_payment").val() === "post-pago" || $("#contact_operator").val() === "movistar_tv" || $("#contact_operator").val() === "inter" || $("#contact_operator").val() === "simple_tv"){
+    $("#div_cod_area").css({"display":"none"})
+}
+
+$(".modal_contacts").addClass("show")
+$(".modal_contacts-wrap").addClass("show")
+
+<%if @contact.errors.any?%>
+    <!--$("#btn_opened_modal_clientes").trigger("click");-->
+    <!--cnt = $(".field_with_errors").contents();-->
+    <!--$(".field_with_errors").replaceWith(cnt);-->
+
+    inputs = $(".input-special").parent()
+
+    for (i = 0; i < inputs.length; i++){
+        if (inputs[i].className === "field_with_errors"){
+            cnt = $(inputs[i]).contents()
+            $(inputs[i]).replaceWith(cnt)
+        }
+    }
+
+    labels = $(".label-special").parent()
+    
+    for (i = 0; i < labels.length; i++){
+        if (labels[i].className === "field_with_errors"){
+            cnt = $(labels[i]).contents()
+            $(labels[i]).replaceWith(cnt)
+        }
+    }
+
+<%end%>

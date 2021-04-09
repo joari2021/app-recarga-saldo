@@ -5,5 +5,5 @@ class Contact < ApplicationRecord
     Contact.where("names LIKE ? AND operator LIKE ? AND type_payment LIKE ?", "%#{names}%", "#{operator}", "#{type_payment}")
   end
 
-  validates :phone, uniqueness: {message: "este número ya esta registrado"}
+  validates :phone, presence: {message: "Este campo no puede estar vacio"}
 end

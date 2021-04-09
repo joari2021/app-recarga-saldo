@@ -1,37 +1,224 @@
-<%= form_with(model: contact) do |form| %>
-  <% if contact.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
-
-      <ul>
-        <% contact.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<%= form_for @contact, {remote: true}  do |form| %>
+  <div class="form">
+    
+    <div class="grupo">
+      <%= form.text_field :names, :required => "required", class:"input-special", maxlength: "20"%><span class="barra"></span>
+      <%= form.label :names, "Nombres o alias", for: "", class: "label-special label-movistar" %>
+      <%if @contact.errors[:names].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:names].to_s[/\w([^"]*)/] %></p>
+      <% end %>
     </div>
-  <% end %>
+    
+    <!--OPERADORAS #############################-->
+    <div class="grupo">
+      <%= form.text_field :operator, :required => "required", class:"input-special input-option", maxlength: "11", :"data-options" => "#options-operators" %><span class="barra"></span>
+      <%= form.label :operator, "Sistema", for: "", class: "label-special label-movistar" %>
+      <%if @contact.errors[:operator].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:operator].to_s[/\w([^"]*)/] %></p>
+      <% end %>
 
-  <div class="field">
-    <%= form.label :names %>
-    <%= form.text_field :names %>
-  </div>
+      <div id="options-operators" style="display:none" onchange = "verify_operator()" >
+        <div class="row">
+          <div class="col-6">
+            <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Movistar</a><br>
+            <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Digitel</a><br>
+            <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Movilnet</a><br>
+            <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Cantv</a>
+          </div>
+          <div class="col-6">
+              <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Movistar TV</a><br>
+              <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Inter</a><br>
+              <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Simple TV</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :alias %>
-    <%= form.text_field :alias %>
-  </div>
+    <!--TIPO DE PAGO #############################-->
+    <div class="grupo">
+      <%= form.text_field :type_payment, :required => "required", class:"input-special input-option", maxlength: "9", :"data-options" => "#options-type-payment" %><span class="barra"></span>
+      <%= form.label :type_payment, "Tipo de pago", for: "", class: "label-special label-movistar" %>
+      <%if @contact.errors[:type_payment].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:type_payment].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+     
+      <div id="options-type-payment" style="display:none">
+        <a href="#" class="badge badge-movistar" data-input ="#contact_type_payment" id="badge-prepago" onclick="push_value(event, this)" style="margin: 5px;">Pre-pago</a>
+        <a href="#" class="badge badge-movistar" data-input ="#contact_type_payment" id="badge-postpago" onclick="push_value(event, this)" style="margin: 5px;">Post-pago</a>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone %>
-  </div>
+    <!--CODIGO DE AREA #################################-->
+    <div class="grupo" id="div_cod_area">
+      <%= form.text_field :cod_area, :required => "required", class:"input-special input-option", :"data-options" => "#options-cod-area", oninput: "format_number(this)", onfocus:"create_cod_area()", maxlength: "4" %><span class="barra"></span>
+      <%= form.label :cod_area, "Cod. Área", for: "", class: "label-special label-movistar" %>
+      <%if @contact.errors[:cod_area].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:cod_area].to_s[/\w([^"]*)/] %></p>
+      <% end %>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
+      <div id="options-cod-area" style="display:none"><!--Los codigos de area se insertan con javascript--></div>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
+    <!--NUMERO ###########################################-->
+    <div class="grupo">
+      <%= form.text_field :phone, :required => "required", class:"input-special", :oninput => "format_number(this)", :onfocus => "set_length(this)" %><span class="barra"></span>
+      <%= form.label :phone, "Número", for:"", class: "label-special label-movistar" %>
+      <%if @contact.errors[:phone].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:phone].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn-standar btn--left btn-movistar" id="btn_recarga">Guardar</button>
+      <%=form.submit "Guardar", class: "d-none", id: "btn_submit"%>
+    </div>
   </div>
 <% end %>
+
+<script>
+  //VARIABLES
+  input_operator = document.getElementById("contact_operator")
+  input_type_payment = document.getElementById("contact_type_payment")
+  input_cod_area = document.getElementById("contact_cod_area")
+  input_number = document.getElementById("contact_phone")
+
+  $(".input-option").blur(function () { 
+    id_div = $(this).data("options")
+    $(id_div).fadeOut(200)
+  })
+
+  $(".input-option").focus(function () {
+      id_div = $(this).data("options")
+      $(id_div).fadeIn(200)
+  })
+
+  function verify_operator() {
+    operator = input_operator.value
+    $("#badge-prepago").removeClass("d-none")
+    $("#badge-postpago").removeClass("d-none")
+
+    //TRABAJANDO CON EL INPUT DE TIPO DE PAGO
+    if (operator === "Movilnet" || operator === "Movistar TV" || operator === "Simple TV") {
+      $("#badge-postpago").addClass("d-none")
+      $("#contact_type_payment").val("Pre-pago")
+
+    } else if (operator === "Cantv"){
+      $("#badge-prepago").addClass("d-none")
+      $("#contact_type_payment").val("Post-pago")
+    }else{
+      $("#contact_type_payment").val("")
+    }
+
+    //TRABAJANDO CON EL INPUT CODIGO DE AREA
+    if(operator === "Inter" || operator === "Movistar TV" || operator === "Simple TV"){
+      $("#div_cod_area").css({"display":"none"})
+    }else{
+      $("#div_cod_area").fadeIn(400)
+    }
+    input_cod_area.value = ""
+
+    input_number.value = ""
+
+  }
+
+  function verify_type_payment() {
+    if(input_operator.value === "Movistar" && input_type_payment.value === "Post-pago"){
+      $("#div_cod_area").css({"display":"none"})
+    }else if(input_operator.value === "Movistar" && input_type_payment.value === "Pre-pago"){
+      $("#div_cod_area").fadeIn(400)
+    }
+    input_number.value = ""
+  }
+
+  function push_value(event, option) {
+    event.preventDefault()
+
+    id_input = option.getAttribute("data-input")
+    $(id_input).val(option.innerText)
+
+    if(id_input === "#contact_operator"){
+      verify_operator()
+    }else if(id_input === "#contact_type_payment"){
+      verify_type_payment()
+    }
+  }
+
+  function insert_cod_area(cod_area) {
+    options_cod_area = document.getElementById("options-cod-area")
+    options_cod_area.innerHTML = ""
+  
+    for (let i = 0; i < cod_area.length; i++) {
+      const element = cod_area[i];
+      enlace = document.createElement("a")
+      enlace.setAttribute("href","#")
+      enlace.classList.add("badge","badge-movistar")
+      enlace.style.margin = "5px"
+      enlace.setAttribute("onclick","push_value(event,this)")
+      enlace.setAttribute("data-input","#contact_cod_area")
+      enlace.innerHTML = element
+
+      options_cod_area.appendChild(enlace)
+
+      if((i+1) % 5 === 0){
+        br = document.createElement("br")
+        options_cod_area.appendChild(br)
+      }
+    }
+  }
+
+  function create_cod_area() {
+    //CODIGOS DE AREA
+    cod_area = []
+    cod_area_movistar = ["0414","0424"]
+    cod_area_movilnet = ["0416","0426"]
+    cod_area_digitel = ["0412"]
+    cod_area_tlf_fija = ["0212","0234","0235","0238","0239","0240","0241","0242","0243","0244","0245","0246","0247","0248","0249","0251","0252","0253","0254","0255","0256","0257","0258","0259","0261","0262","0263","0264","0265","0266","0267","0268","0269","0270","0271","0272","0273","0274","0275","0276","0277","0278","0279","0281","0282","0283","0284","0285","0286","0287","0288","0289","0291","0292","0293","0294","0295"]
+
+    switch (input_operator.value) {
+      case "Movistar":
+        cod_area = [...cod_area_movistar,...cod_area_tlf_fija]
+        insert_cod_area(cod_area)
+        break;
+      
+      case "Digitel":
+        cod_area = [...cod_area_digitel,...cod_area_tlf_fija]
+        insert_cod_area(cod_area)
+        break;
+
+      case "Movilnet":
+        cod_area = [...cod_area_movilnet,...cod_area_tlf_fija]
+        insert_cod_area(cod_area)
+        break;
+    
+      default:
+        break;
+    }
+  }
+  function set_max_length(limit) {
+    input_number.setAttribute("maxlength",limit)
+  }
+
+  function set_length(input) {
+    operator = input_operator.value
+    type_payment = input_type_payment.value
+    if (operator === "Movistar" && type_payment === "Pre-pago" || operator === "Digitel" || operator === "Movilnet" || operator === "Cantv"){
+      set_max_length(7)
+    }else if (operator === "Movistar" && type_payment === "Post-pago" || operator === "Inter"){
+      set_max_length(10)
+    }else if (operator === "Movistar TV"){
+      set_max_length(8)
+    }else if (operator === "Simple TV"){
+      set_max_length(12)
+    }
+  }
+
+  $("#btn_recarga").click(function () {
+      if(input_operator.value === "Movistar" && input_type_payment.value === "Post-pago" || input_operator.value === "Inter" || input_operator.value === "Movistar TV" || input_operator.value === "Simple TV"){
+        input_cod_area.removeAttribute("required")
+      }
+      $("#btn_submit").trigger("click")
+  })
+
+</script>
+
+

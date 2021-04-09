@@ -22,25 +22,27 @@ $("#close").trigger("click");
     button: "Cerrar",
   });
 
-  $(".swal-button").click(function(){
-    <%if @contact_save === true%>
-      swal({
-        title: "Contacto Guardado",
-        text: "El contacto fue registrado con exito.",
-        icon: "success",
-        button: "Cerrar",
-      });
-    
-    <%else%>
-      swal({
-        title: "Contacto No Guardado",
-        text: "El número ya se encuentra registrado en tus contactos.",
-        icon: "warning",
-        button: "Cerrar",
-      });
-    <%end%>
-
-  })
+  <%if @contact_save.present?%>
+    $(".swal-button").click(function(){
+      <%if @contact_save === true%>
+        swal({
+          title: "Contacto Guardado",
+          text: "El contacto fue registrado con exito.",
+          icon: "success",
+          button: "Cerrar",
+        });
+      
+      <%else%>
+        swal({
+          title: "Contacto No Guardado",
+          text: "El número ya se encuentra registrado en tus contactos.",
+          icon: "warning",
+          button: "Cerrar",
+        });
+      <%end%>
+  
+    })
+  <%end%>
   
 
 <%else%>
