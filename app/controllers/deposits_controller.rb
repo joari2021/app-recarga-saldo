@@ -21,15 +21,15 @@ class DepositsController < ApplicationController
 
   # POST /deposits or /deposits.json
   def create
-    @deposit = Deposit.new(deposit_params)
+    @deposit = current_user.deposits.create(deposit_params)
 
     respond_to do |format|
       if @deposit.save
-        format.html { redirect_to @deposit, notice: "Deposit was successfully created." }
-        format.json { render :show, status: :created, location: @deposit }
+        format.json { head :no_content }
+        format.js
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @deposit.errors, status: :unprocessable_entity }
+        format.json { render json: @deposit.errors.full_messages, status: :unprocessable_entity }
+        format.js { render :new }
       end
     end
   end
@@ -64,6 +64,6 @@ class DepositsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def deposit_params
-      params.require(:deposit).permit(:amount, :bank_origin, :status, :phone, :user_id)
+      params.require(:deposit).permit(:amount, :bank_destinity, :status, :method_payment, :day_payment, :month_payment, :year_payment, :ref_payment) 
     end
 end

@@ -8,6 +8,7 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="/datepicker/css/bootstrap-datepicker3.standalone.css">
   </head>
 
   <body id="page-top">
@@ -127,6 +128,13 @@
                 <a class="nav-link" href="<%=url_for(contacts_path)%>">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Contactos</span></a>
+            </li>
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+                <a class="nav-link" href="<%=url_for(deposits_path)%>">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Depositos</span></a>
             </li>
 
             <!-- Divider -->
@@ -356,5 +364,10 @@
                 <div class="container-fluid">
 
                     <%= yield %>
+
+    
+
+    <script src="/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
   </body>
 </html>

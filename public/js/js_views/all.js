@@ -38,6 +38,15 @@ function format_input_monto_decimal(monto) {
   monto.value = valor;
 }
 
+function format_input_number_decimal_with_separator(monto) {
+  valor = monto.value.toString();
+
+  valor = valor.replace(/\D/g, "");
+  valor = valor.replace(/([0-9])([0-9]{2})$/, "$1,$2");
+  valor = valor.replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".");
+  monto.value = valor;
+}
+
 function format_number(number) {
   valor = number.value.toString();
   valor = valor.replace(/\D/g, "");

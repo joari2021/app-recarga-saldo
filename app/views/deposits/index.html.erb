@@ -1,35 +1,70 @@
-<p id="notice"><%= notice %></p>
+<div>  
+  <%= link_to new_deposit_path, {remote: true, class: "btn btn-info", id: "anadir-deposit-btn"}  do %>
+    <span class="fas fa-plus-square" style=""></span>
+  <% end %>
+</div>
+<br />
 
-<h1>Deposits</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Amount</th>
-      <th>Bank origin</th>
-      <th>Status</th>
-      <th>Phone</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @deposits.each do |deposit| %>
-      <tr>
-        <td><%= deposit.amount %></td>
-        <td><%= deposit.bank_origin %></td>
-        <td><%= deposit.status %></td>
-        <td><%= deposit.phone %></td>
-        <td><%= deposit.user_id %></td>
-        <td><%= link_to 'Show', deposit %></td>
-        <td><%= link_to 'Edit', edit_deposit_path(deposit) %></td>
-        <td><%= link_to 'Destroy', deposit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<div id="main-container">
+  <table class="table-standar" id="table_deposits">
+    <thead class="thead-standar">
+      <tr class="tr-standar">
+        <th class="th-standar">Fecha</th>
+        <th class="th-standar">Banco Destino</th>
+        <th class="th-standar">M. Pago</th>
+        <th class="th-standar">Referencia</th>
+        <th class="th-standar">Monto</th>
+        <th class="th-standar">Estatus</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <%current_user.deposits.each do |deposit|%>
+      <tr class="tr-standar" id="deposit_<%=deposit.id%>">
+        <td class="td-standar" data-label="Fecha"><%=deposit.day_payment.to_s.rjust(2, '0')%>/<%=deposit.month_payment.to_s.rjust(2, '0')%>/<%=deposit.year_payment%></td>
+        <td class="td-standar" data-label="Banco Destino"><%=deposit.bank_destinity%></td>
+        <td class="td-standar" data-label="M. Pago"><%=deposit.method_payment%></td>
+        <td class="td-standar" data-label="Referencia"><%=deposit.ref_payment%></td>
+        <td class="td-standar" data-label="Monto"><%=number_with_precision(deposit.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>
+        <td class="td-standar" data-label="Estatus">
+          <%if deposit.status === "Diferido"%>
+            <%color_badge = "badge-secondary"%>
+          <%end%>
+          <span class="badge badge-pill <%=color_badge%>"><%=deposit.status%></span>
+        </td>
+      </tr>
+    <%end%>
+  </table>
+</div>
 
-<%= link_to 'New Deposit', new_deposit_path %>
+<%= render 'modal_deposits' %>
+<%= render 'modal_accounts' %>
+
+<script src="/js/js_views/all.js"></script>
+<script src="/js/js_views/deposits.js"></script>
+
+<script>
+
+      $("#close_modal_deposit_standar").click(function () {
+        $(".modal_deposits").removeClass("show");
+        $(".modal_deposits-wrap").removeClass("show");
+      });
+
+      $("#close_modal_accounts_standar").click(function () {
+        $(".modal_accounts").removeClass("show");
+        $(".modal_accounts-wrap").removeClass("show");
+
+        $(".modal_deposits").addClass("show");
+        $(".modal_deposits-wrap").addClass("show");
+      });
+
+      function push_value(event, option) {
+        event.preventDefault()
+
+        id_input = option.getAttribute("data-input")
+        $(id_input).val(option.innerText)
+      }
+      
+  
+</script>
+
+

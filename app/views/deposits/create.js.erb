@@ -1,0 +1,25 @@
+$("#close_modal_deposit_standar").trigger("click");
+
+swal({
+  title: "Compra Registrada!",
+  text: "Tu compra ha sido registrada con exito. Debes esperar que sea verificada para que sea acreditado el monto enviado en tu balance",
+  icon: "success",
+});
+
+new_content = `<tr class="tr-standar" id="deposit_<%=@deposit.id%>">
+                    <td class="td-standar" data-label="Fecha"><%=@deposit.day_payment.to_s.rjust(2, '0')%>/<%=@deposit.month_payment.to_s.rjust(2, '0')%>/<%=@deposit.year_payment%></td>
+                    <td class="td-standar" data-label="Banco Destino"><%=@deposit.bank_destinity%></td>
+                    <td class="td-standar" data-label="M. Pago"><%=@deposit.method_payment%></td>
+                    <td class="td-standar" data-label="Referencia"><%=@deposit.ref_payment%></td>
+                    <td class="td-standar" data-label="Monto"><%=number_with_precision(@deposit.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>
+                    <td class="td-standar" data-label="Estatus">
+                      <%if @deposit.status === "Diferido"%>
+                        <%color_badge = "badge-secondary"%>
+                      <%end%>
+                      <span class="badge badge-pill <%=color_badge%>"><%=@deposit.status%></span>
+                    </td>
+                </tr>`
+
+$('#table_deposits').append(new_content)
+    
+$('#deposit_<%=@deposit.id%>').fadeTo(1000,1);

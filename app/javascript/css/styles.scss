@@ -172,3 +172,56 @@ p.msj_error{
   padding: 5px;
   max-width: 234px;
 }
+
+//MODALS ////////////////////////////////
+.modal_original,
+.modal_contacts,
+.modal_deposits,
+.modal_accounts {
+  background: rgba(48, 48, 48, 0.5);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  z-index: 9999;
+}
+
+.modal_original-wrap,
+.modal_contacts-wrap,
+.modal_deposits-wrap,
+.modal_accounts-wrap {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  max-width: 950px;
+  transform: scale(0.6);
+  opacity: 0;
+  transition: 0.3s ease all;
+}
+
+.modal_original.show,
+.modal_contacts.show,
+.modal_deposits.show,
+.modal_accounts.show {
+  visibility: visible;
+}
+
+.modal_original-wrap.show,
+.modal_contacts-wrap.show,
+.modal_deposits-wrap.show,
+.modal_accounts-wrap.show {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.close_modal{
+  position: absolute;
+  right: 25px;
+  font-size: 25px;
+  cursor: pointer;
+}

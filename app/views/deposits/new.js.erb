@@ -1,0 +1,28 @@
+$('#title_modal_deposit').html("Nuevo deposito");
+ 
+$('#modal_body_deposits').html('<%= j render("form") %>');
+
+$(".modal_deposits").addClass("show")
+$(".modal_deposits-wrap").addClass("show")
+
+<%if @deposit.errors.any?%>
+
+    inputs = $(".input-special").parent()
+
+    for (i = 0; i < inputs.length; i++){
+        if (inputs[i].className === "field_with_errors"){
+            cnt = $(inputs[i]).contents()
+            $(inputs[i]).replaceWith(cnt)
+        }
+    }
+
+    labels = $(".label-special").parent()
+    
+    for (i = 0; i < labels.length; i++){
+        if (labels[i].className === "field_with_errors"){
+            cnt = $(labels[i]).contents()
+            $(labels[i]).replaceWith(cnt)
+        }
+    }
+
+<%end%>
