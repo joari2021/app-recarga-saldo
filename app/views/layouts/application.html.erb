@@ -330,15 +330,26 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <%= image_tag("template/undraw_profile.svg", class:"img-profile rounded-circle") %>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=current_user.profile.name + " " + current_user.profile.last_name%></span>
+                                <%if current_user.profile.gender === "Hombre"%>
+                                    <%url_img = "template/undraw_profile.svg"%>
+                                <%elsif current_user.profile.gender === "Mujer"%>
+                                    <%url_img = "template/avatar_woman.png"%>
+                                <%end%>
+                                <%= image_tag(url_img, class:"img-profile rounded-circle") %>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a 
+                                    class="dropdown-item" 
+                                    href="<%if current_user.profile.status === "incompleto"%>
+                                            <%=url_for(edit_profile_path(current_user.profile))%>
+                                          <%else%>
+                                            <%=url_for(profiles_path)%>
+                                          <%end%>">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    Perfil
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -365,9 +376,26 @@
 
                     <%= yield %>
 
+                </div>
+            </div>
+        </div>
+    </div>
+
     
 
     <script src="/datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+    <script>
+        $('#checkin').datepicker({
+            language: "es",
+            todayBtn: "linked",
+            clearBtn: false,
+            format: "dd/mm/yyyy",
+            multidate: false,
+            autoclose: true,
+            todayHighlight: true
+
+        });
+    </script>
   </body>
 </html>

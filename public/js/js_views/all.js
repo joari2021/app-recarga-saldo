@@ -53,6 +53,10 @@ function format_number(number) {
   number.value = valor;
 }
 
+function readonly(input) {
+  input.value = ""
+}
+
 function getRootUrl() {
   return window.location.origin;
 }

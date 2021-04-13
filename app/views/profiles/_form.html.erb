@@ -1,72 +1,141 @@
-<%= form_with(model: profile) do |form| %>
-  <% if profile.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+<%= form_for @profile, {remote: true}  do |form| %>
+ 
+  <div class="form" style="margin-top:30px">
+    
+    <h4 class="text-center p-5">Editar Perfil</h4>
+    
+    <!--NOMBRES Y APELLIDOS ################################-->
+    <div class="row">
+      <div class="col-6">
+        <div class="grupo">
+          <%= form.text_field :name, :required => "required", class:"input-special", maxlength: "30" %><span class="barra"></span>
+          <%= form.label :name, "Nombres", for: "", class: "label-special label-movistar" %>
+        </div>
+      </div>
 
-      <ul>
-        <% profile.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+      <div class="col-6">
+        <div class="grupo">
+          <%= form.text_field :last_name, :required => "required", class:"input-special", maxlength: "30" %><span class="barra"></span>
+          <%= form.label :last_name, "Apellidos", for: "", class: "label-special label-movistar" %>
+        </div>
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+    <!--FECHA DE NACIMIENTO Y GENERO-->
+    <div class="row">
+      <div class="col-4">
+        <div class="grupo">
+          <div class="content-select">
+            <%= form.select(:gender, options_for_select([['Genero', ""], ['Mujer', "Mujer"], ['Hombre', 'Hombre']], @profile.gender) ) %>
+            <i></i>
+          </div>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </div>
+      <div class="col-4">
+        <div class="grupo" id="div_cod_area">
+          <input required="required" class="input-special" name="profile[date_of_birth]" value="<%=@profile.date_of_birth.strftime("%d/%m/%Y")%>"  type="text" id="checkin" oninput="readonly(this)">
+          <span class="barra"></span>
+          <label class="label-special label-movistar">Fecha de nacimiento</label>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
+      <div class="col-4">
+        <div class="grupo">
+          <%= form.text_field :age, :required => "required", class:"input-special", maxlength: "2", oninput: "format_number(this)" %><span class="barra"></span>
+          <%= form.label :age, "Edad", for: "", class: "label-special label-movistar" %>
+        </div>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :document %>
-    <%= form.number_field :document %>
-  </div>
 
-  <div class="field">
-    <%= form.label :type_document %>
-    <%= form.text_field :type_document %>
-  </div>
+    <!--DOCUMENTO Y TELEFONO #################################-->
+    <div class="row">
+      <div class="col-2">
+        <div class="grupo">
+          <div class="content-select">
+            <%= form.select(:type_document, options_for_select([['V', 'V'], ['E', "E"], ['P', "P"], ['J', "J"]], @profile.type_document) ) %>
+            <i></i>
+          </div>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= form.label :phone %>
-    <%= form.text_field :phone %>
-  </div>
+      <div class="col-5">
+        <div class="grupo">
+          <%= form.text_field :document, :required => "required", class:"input-special", maxlength: "9", oninput: "format_number(this)"%><span class="barra"></span>
+          <%= form.label :document, "N° Documento", for: "", class: "label-special label-movistar" %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= form.label :state %>
-    <%= form.text_field :state %>
-  </div>
+      <div class="col-5">
+        <div class="grupo">
+          <%= form.text_field :phone, :required => "required", class:"input-special", maxlength: "11", oninput: "format_number(this)"%><span class="barra"></span>
+          <%= form.label :phone, "N° Telefono", for: "", class: "label-special label-movistar" %>
+        </div>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :city %>
-    <%= form.text_field :city %>
-  </div>
+    <!--UBICACION-->
+    <div class="row">
+      <div class="col-4">
+        <div class="grupo">
+          <%= form.text_field :state, :required => "required", class:"input-special", maxlength: "20" %><span class="barra"></span>
+          <%= form.label :state, "Estado", for: "", class: "label-special label-movistar" %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= form.label :gender %>
-    <%= form.text_field :gender %>
-  </div>
+      <div class="col-4">
+        <div class="grupo">
+          <%= form.text_field :city, :required => "required", class:"input-special", maxlength: "20" %><span class="barra"></span>
+          <%= form.label :city, "Ciudad", for: "", class: "label-special label-movistar" %>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= form.label :age %>
-    <%= form.text_field :age %>
-  </div>
+      <div class="col-4">
+        <div class="grupo">
+          <%= form.text_field :zip_code, :required => "required", class:"input-special", maxlength: "4", oninput: "format_number(this)" %><span class="barra"></span>
+          <%= form.label :zip_code, "Codigo Postal", for: "", class: "label-special label-movistar" %>
+        </div>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :date_of_birth %>
-    <%= form.datetime_select :date_of_birth %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+    <div class="row">
+      <div class="col-12">
+        <div class="grupo">
+          <%= form.text_field :address, :required => "required", class:"input-special", maxlength: "100" %><span class="barra"></span>
+          <%= form.label :address, "Dirección", for: "", class: "label-special label-movistar" %>
+        </div>
+      </div>
+    </div>
+  
+   
+    <div class="actions">
+      <button type="button" class="btn-standar btn--left btn-movistar" id="btn_profile">Enviar</button>
+      <%=form.submit "Enviar", class: "d-none", id: "btn_submit"%>
+    </div>
   </div>
 <% end %>
+
+<script>
+  $("#btn_profile").click(function () {
+    swal({
+      title: "Confirmacion de envio!",
+      text: "Una vez actualizado no podras modificar tu perfil manualmente sino contactando a soporte. Te recomendamos verificar bien los datos antes de enviarlos. Si los datos son correctos puedes continuar.",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        swal("Los datos fueron enviados!", {
+          icon: "success",
+        });
+        $("#btn_submit").trigger("click")
+
+      } else {
+        swal("El envio fue cancelado!");
+      }
+    });
+    
+  })
+</script>

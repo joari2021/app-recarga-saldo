@@ -187,8 +187,8 @@
         element.className = "barra " + barra
     }
 
-    $("#title_modal_contact").addClass("text-" + input_operadora.value)
-    $("#close_modal_contact").addClass("close_" + input_operadora.value)
+    title_modal_contact.className = "modal-title text-" + input_operadora.value 
+    close_modal_contact.className = "far fa-times-circle close_modal close_" + input_operadora.value
     table_contacts.className = "table mt-3 " + table_fondo 
     close_modal.className = "far fa-times-circle close_modal " + close
     btn_recarga.className = "btn-standar btn--left " + btn

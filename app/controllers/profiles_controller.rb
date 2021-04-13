@@ -1,9 +1,11 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[ show edit update destroy ]
+  before_action :authenticate_edit_profile!, only: %i[ edit update]
+  before_action :authenticate_index_profile!, only: %i[ index]
 
   # GET /profiles or /profiles.json
   def index
-    @profiles = Profile.all
+    @profile = current_user.profile
   end
 
   # GET /profiles/1 or /profiles/1.json
@@ -36,13 +38,16 @@ class ProfilesController < ApplicationController
 
   # PATCH/PUT /profiles/1 or /profiles/1.json
   def update
-    respond_to do |format|
-      if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: "Profile was successfully updated." }
-        format.json { render :show, status: :ok, location: @profile }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
+    if @profile.status === "incompleto" && @profile.user_id === current_user.id
+      respond_to do |format|
+        if @profile.update(profile_params)
+          @profile.update(status: "completado")
+          format.html { redirect_to profiles_path, notice: "Perfil guardado con exito." }
+          format.json { head :no_content }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @profile.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -64,6 +69,6 @@ class ProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def profile_params
-      params.require(:profile).permit(:name, :last_name, :address, :document, :type_document, :phone, :state, :city, :gender, :age, :date_of_birth)
+      params.require(:profile).permit(:name, :last_name, :address, :document, :type_document, :phone, :state, :city, :gender, :age, :date_of_birth, :zip_code)
     end
 end

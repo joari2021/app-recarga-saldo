@@ -1,5 +1,6 @@
 //MODAL DE FORMULARIOS ###############################################
 .close_movistar,
+.close_movistar_tv,
 .text-movistar,
 .text-movistar_tv {
   color: var(--movistar) !important;
@@ -25,6 +26,7 @@
   color: var(--inter) !important;
 }
 .close_simpletv,
+.close_simple_tv,
 .text-simpletv,
 .text-simple_tv {
   color: var(--simpletv) !important;
@@ -32,6 +34,69 @@
 //FIN MODAL FORMULARIOS ##############################################
 
 //ELEMENTOS DEL FORMULARIO ##########################################
+
+input,
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.content-select select::-ms-expand {
+  display: none;
+}
+
+.content-select {
+  max-width: 250px;
+  position: relative;
+}
+
+.content-select select {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  padding: 12px 10px;
+  //height: 42px;
+  outline: 0;
+  border: 0;
+  border-radius: 0;
+  //background: #f0f0f0;
+  color: #c6c6c6;
+  font-size: 18px;
+  
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  //border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+
+.content-select select:hover {
+  border-bottom: 1px solid var(--movistar);
+  transition: 0.5s ease all;
+}
+
+/* 
+Creamos la fecha que aparece a la izquierda del select.
+Realmente este elemento es un cuadrado que sólo tienen
+dos bordes con color y que giramos con transform: rotate(-45deg);
+*/
+.content-select i {
+  position: absolute;
+  right: 20px;
+  top: calc(50% - 13px);
+  width: 16px;
+  height: 16px;
+  display: block;
+  border-left: 4px solid #2ac176;
+  border-bottom: 4px solid #2ac176;
+  transform: rotate(-45deg); /* Giramos el cuadrado */
+  transition: all 0.25s ease;
+}
+
+.content-select:hover i {
+  margin-top: 3px;
+}
 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
@@ -100,7 +165,7 @@ input:valid ~ .label-movistar_tv {
 }
 
 input:focus ~ .label-digitel,
-input:valid ~ .label-digitel{
+input:valid ~ .label-digitel {
   color: var(--digitel) !important;
 }
 
@@ -142,13 +207,13 @@ input:valid ~ .label-simple_tv {
 }
 
 .barra-movistar::before,
-.barra-movistar_tv::before{
+.barra-movistar_tv::before {
   background: var(--movistar);
 }
 
 .barra-digitel::before {
-    background: var(--digitel);
-  }
+  background: var(--digitel);
+}
 
 .barra-movilnet::before {
   background: var(--movilnet);
@@ -187,9 +252,9 @@ input:focus ~ .barra::before {
 
 .badge-digitel,
 .table-digitel {
-    color: #fff !important;
-    background-color: var(--digitel);
-  }
+  color: #fff !important;
+  background-color: var(--digitel);
+}
 
 .badge-movilnet,
 .table-movilnet {
@@ -221,9 +286,9 @@ input:focus ~ .barra::before {
 }
 
 .badge-digitel:hover {
-    color: #fff;
-    background-color: var(--digitel_hover);
-  }
+  color: #fff;
+  background-color: var(--digitel_hover);
+}
 
 .badge-movilnet:hover {
   color: #fff;
@@ -244,7 +309,7 @@ input:focus ~ .barra::before {
   background-color: var(--simpletv_hover);
 }
 
-.lbl{
+.lbl {
   display: inline-block;
   width: 38px;
   height: 22px;
@@ -252,11 +317,11 @@ input:focus ~ .barra::before {
   border-radius: 100px;
   cursor: pointer;
   position: relative;
-  transition: .2s;
+  transition: 0.2s;
 }
- 
-.lbl::after{
-  content: '';
+
+.lbl::after {
+  content: "";
   display: block;
   width: 14px;
   height: 14px;
@@ -265,46 +330,46 @@ input:focus ~ .barra::before {
   position: absolute;
   top: 4px;
   left: 4px;
-  transition: .2s;
+  transition: 0.2s;
 }
- 
-#switch:checked + .lbl::after{
+
+#switch:checked + .lbl::after {
   left: 22px;
 }
- 
+
 #switch:checked + .lbl-movistar,
 #switch:checked + .lbl-movistar_tv,
 .button-movistar,
-.button-movistar_tv{
+.button-movistar_tv {
   background: var(--movistar) !important;
 }
 
 #switch:checked + .lbl-digitel,
-.button-digitel{
+.button-digitel {
   background: var(--digitel) !important;
 }
 
 #switch:checked + .lbl-movilnet,
-.button-movilnet{
+.button-movilnet {
   background: var(--movilnet) !important;
 }
 
 #switch:checked + .lbl-cantv,
-.button-cantv{
+.button-cantv {
   background: var(--cantv) !important;
 }
 
 #switch:checked + .lbl-inter,
-.button-inter{
+.button-inter {
   background: var(--inter) !important;
 }
 
 #switch:checked + .lbl-simple_tv,
-.button-simple_tv{
+.button-simple_tv {
   background: var(--simpletv) !important;
 }
- 
-#switch{
+
+#switch {
   display: none;
 }
 
@@ -335,11 +400,11 @@ input:focus ~ .barra::before {
 }
 
 .btn-digitel:before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    background-color: var(--digitel);
-  }
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background-color: var(--digitel);
+}
 
 .btn-movilnet:before {
   content: "";
@@ -383,7 +448,7 @@ input:focus ~ .barra::before {
 .button-digitel,
 .button-cantv,
 .button-simple_tv,
-.button-inter{
+.button-inter {
   color: #fff !important;
 }
 //FIN ELEMENTOS DEL FORMULARIO ########################################

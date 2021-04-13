@@ -17,6 +17,7 @@
         <p class="msj_error mt-2 bg-danger rounded">Año: <%= @deposit.errors[:year_payment].to_s[/\w([^"]*)/] %></p>
       <% end %>
     </div>
+
     <!--BANCO DESTINO #############################-->
     <div class="grupo">
       <%= form.text_field :bank_destinity, :required => "required", class:"input-special input-option", :"data-options" => "#options-banks-destinity" %><span class="barra"></span>
@@ -78,14 +79,14 @@
 <% end %>
 <script>
   $('#checkin').datepicker({
-      language: "es",
-      todayBtn: "linked",
-      clearBtn: false,
-      format: "dd/mm/yyyy",
-      multidate: false,
-      autoclose: true,
-      todayHighlight: true
-  
+    language: "es",
+    todayBtn: "linked",
+    clearBtn: false,
+    format: "dd/mm/yyyy",
+    multidate: false,
+    autoclose: true,
+    todayHighlight: true
+
   });
   
   $(".input-option").blur(function () {
@@ -128,7 +129,4 @@
       $("#btn_submit").trigger("click")
   })
   
-  function readonly(input) {
-    input.value = ""
-  }
 </script>

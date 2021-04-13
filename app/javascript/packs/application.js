@@ -16,6 +16,7 @@ ActiveStorage.start()
 // ESTILOS CSS
 import "css/styles.scss"
 import "css/form_recharge.scss"
+import "css/profile.scss"
 import "css/login_and_register"
 
 import "css/sb-admin-2"

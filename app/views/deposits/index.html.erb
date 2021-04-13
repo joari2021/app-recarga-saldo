@@ -44,25 +44,25 @@
 
 <script>
 
-      $("#close_modal_deposit_standar").click(function () {
-        $(".modal_deposits").removeClass("show");
-        $(".modal_deposits-wrap").removeClass("show");
-      });
+    $("#close_modal_deposit_standar").click(function () {
+      $(".modal_deposits").removeClass("show");
+      $(".modal_deposits-wrap").removeClass("show");
+    });
 
-      $("#close_modal_accounts_standar").click(function () {
-        $(".modal_accounts").removeClass("show");
-        $(".modal_accounts-wrap").removeClass("show");
+    $("#close_modal_accounts_standar").click(function () {
+      $(".modal_accounts").removeClass("show");
+      $(".modal_accounts-wrap").removeClass("show");
 
-        $(".modal_deposits").addClass("show");
-        $(".modal_deposits-wrap").addClass("show");
-      });
+      $(".modal_deposits").addClass("show");
+      $(".modal_deposits-wrap").addClass("show");
+    });
 
-      function push_value(event, option) {
-        event.preventDefault()
+    function push_value(event, option) {
+      event.preventDefault()
 
-        id_input = option.getAttribute("data-input")
-        $(id_input).val(option.innerText)
-      }
+      id_input = option.getAttribute("data-input")
+      $(id_input).val(option.innerText)
+    }
       
   
 </script>

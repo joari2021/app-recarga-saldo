@@ -1,47 +1,82 @@
-<p id="notice"><%= notice %></p>
+    <section class="seccion-perfil-usuario">
+        <div class="perfil-usuario-header">
+            <div class="perfil-usuario-portada">
+                <div class="perfil-usuario-avatar">
+                    <%if current_user.profile.gender === "Hombre"%>
+                        <%url_img = "template/undraw_profile.svg"%>
+                    <%elsif current_user.profile.gender === "Mujer"%>
+                        <%url_img = "template/avatar_woman.png"%>
+                    <%end%>
+                    <%= image_tag(url_img, alt:"img-avatar") %>
+                    <!--
+                    <button type="button" class="boton-avatar">
+                        <i class="far fa-image"></i>
+                    </button>-->
+                </div>
+                <!--
+                <button type="button" class="boton-portada">
+                    <i class="far fa-image"></i> Cambiar fondo
+                </button>-->
+            </div>
+        </div>
+        <div class="perfil-usuario-body">
+            <div class="perfil-usuario-bio">
+                <h3 class="titulo"><%=current_user.profile.name + " " + current_user.profile.last_name%></h3>
+                <!--
+                <p class="texto">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua.</p>-->
+            </div>
+            <div class="perfil-usuario-footer">
+                <ul class="lista-datos">
+                    <li><i class="icono fas fa-address-card"></i> <span class="align-middle"><%=current_user.profile.type_document%>-<%=current_user.profile.document%></span></li>
+                    <li><i class="icono fas fa-venus-mars"></i> <span class="align-middle"><%=current_user.profile.gender%></span></li>
+                </ul>
+                <ul class="lista-datos">
+                    <li><i class="icono fas fa-phone-alt"></i> <span class="align-middle"><%=current_user.profile.phone%></span></li>
+                    <li><i class="icono fas fa-calendar-alt"></i> <span class="align-middle"><%=current_user.profile.date_of_birth.strftime("%d/%m/%Y")%></span></li>
+                    
+                </ul>
+                <ul class="" style="list-style:none">
+                  <li><i class="icono fas fa-map-marker-alt"></i> <%=current_user.profile.address%>. <%=current_user.profile.city%>, Edo. <%=current_user.profile.state%>. Codigo Postal: <%=current_user.profile.zip_code%>.</li>
+                </ul>
+            </div>
+            <!--
+              <div class="redes-sociales">
+                  <a href="" class="boton-redes facebook fab fa-facebook-f"><i class="icon-facebook"></i></a>
+                  <a href="" class="boton-redes twitter fab fa-twitter"><i class="icon-twitter"></i></a>
+                  <a href="" class="boton-redes instagram fab fa-instagram"><i class="icon-instagram"></i></a>
+              </div>
+            -->
+            <div class="perfil-usuario-footer my-3">
+                <p><b>Importante:</b> Si deseas actualizar tus datos personales debes comunicarte a nuestro correo de soporte enviando la foto del documento de identidad registrado en tu perfil y los detalles de los datos que quieres modificar.</p>
+                <hr>
+                <p class="mb-0">Correo Soporte: jorge.sud2021@gmail.com</p>
+            </div>
+        </div>
+    </section>
+    <!--====  End of html  ====-->
 
-<h1>Profiles</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Last name</th>
-      <th>Address</th>
-      <th>Document</th>
-      <th>Type document</th>
-      <th>Phone</th>
-      <th>State</th>
-      <th>City</th>
-      <th>Gender</th>
-      <th>Age</th>
-      <th>Date of birth</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @profiles.each do |profile| %>
-      <tr>
-        <td><%= profile.name %></td>
-        <td><%= profile.last_name %></td>
-        <td><%= profile.address %></td>
-        <td><%= profile.document %></td>
-        <td><%= profile.type_document %></td>
-        <td><%= profile.phone %></td>
-        <td><%= profile.state %></td>
-        <td><%= profile.city %></td>
-        <td><%= profile.gender %></td>
-        <td><%= profile.age %></td>
-        <td><%= profile.date_of_birth %></td>
-        <td><%= link_to 'Show', profile %></td>
-        <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
-        <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Profile', new_profile_path %>
+<!--=============================
+redes sociales fijadas en pantalla
+No es necesario que copies esto!
+==============================-->
+<style>
+.mensaje a {
+    color: inherit;
+    margin-right: .5rem;
+    display: inline-block;
+}
+.mensaje a:hover {
+    color: #309B76;
+    transform: scale(1.4)
+}
+</style>
+<div class="mis-redes" style="display: block;position: fixed;bottom: 1rem;left: 1rem; opacity: 0.5; z-index: 1000;">
+    <p style="font-size: .75rem;">Apock graficos</p>
+    <div>
+        <a target="_blank" href="https://www.facebook.com/ApockGraficos"><i class="fab fa-facebook-square"></i></a>
+        <a target="_blank" href="https://twitter.com/ApockGraficos"><i class="fab fa-twitter"></i></a>
+        <a target="_blank" href="https://www.instagram.com/ApockGraficos"><i class="fab fa-instagram"></i></a>
+        <a target="_blank" href="https://www.youtube.com/channel/UC15DkMZQ80aoW_Rqk4n2T_w"><i class="fab fa-youtube"></i></a>
+    </div>
+</div>

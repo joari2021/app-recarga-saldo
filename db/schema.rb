@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_183450) do
+ActiveRecord::Schema.define(version: 2021_04_12_204159) do
 
   create_table "acoounts", force: :cascade do |t|
     t.string "bank"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 2021_04_09_183450) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "zip_code"
+    t.string "status", default: "incompleto"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
