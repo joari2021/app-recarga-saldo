@@ -1,0 +1,53 @@
+<div id="main-container" class="mt-5">
+
+    <table class="table-standar" id="table_historial">
+
+        <thead class="thead-standar">
+            <tr class="tr-standar">
+                <th class="th-standar">Fecha y hora</th>
+                <th class="th-standar">Sistema</th>
+                <th class="th-standar">T. Pago</th>
+                <th class="th-standar">Nro</th>
+                <th class="th-standar">Monto</th>
+                <th class="th-standar">Estatus</th>
+            </tr>
+        </thead>
+
+        <tbody id="tbody_historial"><%=render 'recharges_from_historial'%></tbody>
+
+    </table>  
+    <%= will_paginate @recharges, class:"pagination d-none"%>
+</div>
+
+<%if @recharges.next_page%>
+    <div class="contenedor_loader" >
+        <div class="loader"></div>
+    </div>
+<%else%>
+    <section class="seccion-perfil-usuario">
+        <div class="perfil-usuario-body">
+            <div class="perfil-usuario-bio">
+                <h3 class="titulo">No hay ningún registro de recarga</h3>
+            
+                <p class="texto">Recarga tu balance haciendo un deposito y haz tu primera recarga rapido y seguro.</p>
+            </div>
+        </div>
+    </section>
+<%end%>
+
+<script>
+    $(document).ready(function(){
+        if ($('.pagination').length) {
+            $(window).scroll(function() {
+                url = $('.pagination .next_page').attr('href');
+                if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50){
+                    $.getScript(url)
+                    console.log(url);
+                    $('.pagination .next_page').removeAttr('href');
+                }
+            });
+        }
+    })
+    
+                        
+</script>

@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :recharges, dependent: :destroy
   has_many :contacts, dependent: :destroy
   has_many :deposits, dependent: :destroy
+  include PermissionsConcern
 
   after_create :set_profile
   after_create :set_balance

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-	layout :layout_by_resource
+     layout :layout_by_resource
 
     private
 
@@ -16,5 +16,9 @@ class ApplicationController < ActionController::Base
 
    def authenticate_index_profile!
         redirect_to edit_profile_path(current_user.profile) unless current_user.profile.status != "incompleto"
+   end
+
+   def authenticate_admin
+     redirect_to user_root_path unless user_signed_in? && current_user.is_admin? 
    end
 end

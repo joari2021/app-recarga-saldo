@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   resources :deposits
   resources :recharges
+  get 'historial', to: 'recharges#historial'
+
   resources :profiles
   root to: 'home#index'
   get '/dhasboard' => "dashboard#index", :as => :user_root
