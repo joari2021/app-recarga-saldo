@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_13_192655) do
+ActiveRecord::Schema.define(version: 2021_04_19_214847) do
 
   create_table "acoounts", force: :cascade do |t|
     t.string "bank"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2021_04_13_192655) do
 
   create_table "contacts", force: :cascade do |t|
     t.string "names"
-    t.string "phone"
+    t.string "number"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -105,13 +105,13 @@ ActiveRecord::Schema.define(version: 2021_04_13_192655) do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "phone"
+    t.string "number"
     t.string "cod_area"
     t.decimal "amount", precision: 18, scale: 2
     t.string "type_payment"
     t.string "status", default: "enviada"
-    t.string "type_operation", default: "direct_recharge"
     t.integer "available_days"
+    t.string "type_operation"
     t.index ["user_id"], name: "index_recharges_on_user_id"
   end
 

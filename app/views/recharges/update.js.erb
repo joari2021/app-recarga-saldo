@@ -1,4 +1,8 @@
-$("#close").trigger("click");
+$("#close_modal_recharge").trigger("click");
+
+<%if @recharge.type_operation === "direct_recharge" && @recharge.status === "enviada"%>
+  $("#card_balance").text("Bs <%= number_with_precision(current_user.balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%>")
+<%end%>
 
 $("#consultation_<%=@recharge.id%>").fadeOut(600,function(){
     $(this).remove()

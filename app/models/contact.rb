@@ -7,6 +7,6 @@ class Contact < ApplicationRecord
 
   validates :phone, presence: {message: "Este campo no puede estar vacio"}
 
-  validates :operator, inclusion: { in: %w(movistar movilnet digitel cantv movistar_tv inter simple_tv),
+  validates :operator, inclusion: { in: %w(Movistar Movilnet Digitel Cantv Movistar_TV Inter Simple_TV),
     message: "%{value}: Este valor no es valido" }
 end

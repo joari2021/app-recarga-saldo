@@ -1,5 +1,5 @@
-<div class="modal_contacts" style="min-width:500px !important">
-  <div class="modal_contacts-wrap modal-dialog modal-dialog-centered modal-dialog-scrollable">
+<div class="modal_original" style="min-width:500px !important" id="modal_contacts">
+  <div class="modal_original_wrap modal-dialog modal-dialog-centered modal-dialog-scrollable" id="modal_contacts_wrap">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="title_modal_contact">Contactos</h5>
@@ -29,6 +29,9 @@
                 
             </tbody>
         </table>
+        <div class="contenedor_loader" style="display:none;">
+            <div class="loader" id="loader_busq_contact"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -45,55 +48,4 @@ function seleccionarContacto(event,contact) {
   $("#close_modal_contact").trigger("click")
 }
 
-$("#input_buscador_contacts").keyup(function(event){
-  
-  let termino = $(this).val();
-  //let id_venta = $(this).data("venta");
-  if(termino.length == 0) {
-    $("#tabla_buscador_contacts tbody").empty();
-  }
-  else {
-    let request_url = getRootUrl() + "/buscador_contacts/" + termino + "/" + input_operadora.value + "/" + input_type_pago.value;
-    $.get(request_url, function(data, status){
-      $("#tabla_buscador_contacts tbody").empty();
-
-      console.log(data);
-      if(data.length > 0){
-        
-        for(let x in data){
-          let names = data[x].names_contact;
-          let id = data[x].id;
-          let cod_area = data[x].cod_area
-          let number = data[x].number_contact
-          if (cod_area.length == 4){
-            number_comp = "(" + cod_area + ") " + number
-          }else{
-            number_comp = number
-          }
-          let rowContent = `
-                              <tr>
-                                <td>${names}</td>
-                                <td>${number_comp}</td>
-                                <td>
-                                    <a
-                                      href = "#"
-                                      data-cod_area = "${cod_area}"
-                                      data-number = "${number}"
-                                      class = "special-link p-2"
-                                      style = "color:#fff;"
-                                      id = "${id}"
-                                      onclick = "seleccionarContacto(event,this)"
-                                      >
-                                        Agregar
-                                    </a>
-                                </td>
-                              </tr>
-                            `;
-          $("#tabla_buscador_contacts tbody").append(rowContent);
-          
-        }
-      }
-    });
-  }
-});
 </script>

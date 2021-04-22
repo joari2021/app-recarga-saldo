@@ -67,7 +67,7 @@ class ContactsController < ApplicationController
           id: contact.id,
           names_contact: contact.names,
           cod_area: contact.cod_area.nil? ? "" : contact.cod_area,
-          number_contact: contact.phone
+          number_contact: contact.number
       }
     end
 
@@ -84,6 +84,6 @@ class ContactsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:names, :operator, :type_payment, :phone, :cod_area)
+      params.require(:contact).permit(:names, :operator, :type_payment, :number, :cod_area)
     end
 end

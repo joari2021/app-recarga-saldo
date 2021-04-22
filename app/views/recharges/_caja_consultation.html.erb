@@ -1,19 +1,19 @@
 <%case recharge.operator
-     when "movistar"
-     border = "border-left-movistar"
-     text = "text-movistar"
+     when "Movistar"
+     border = "border-left-Movistar"
+     text = "color-Movistar"
 
-     when "digitel"
-     border = "border-left-digitel"
-     text = "text-digitel"
+     when "Digitel"
+     border = "border-left-Digitel"
+     text = "color-Digitel"
 
-     when "inter"
-     border = "border-left-inter"
-     text = "text-inter"
+     when "Inter"
+     border = "border-left-Inter"
+     text = "color-Inter"
 end
 %>
 
-<div class="col-xl-3 col-md-6 mb-4" id="consultation_<%=recharge.id%>">
+<div class="col-lg-4 col-sm-6 mb-4" id="consultation_<%=recharge.id%>">
     <div class="card <%=border%> shadow h-100 py-2">
         <div class="card-body">
             <div class="row no-gutters align-items-center">
@@ -22,7 +22,7 @@ end
                         <%=recharge.operator%>
                     </div>
                     <div class="text-sm mb-0">
-                    <span class="font-weight-bold">Número: </span><%=recharge.cod_area.present? ? "(" + recharge.cod_area + ") " : "" %><%=recharge.phone%> <br>
+                    <span class="font-weight-bold">Número: </span><%=recharge.cod_area.present? ? "(" + recharge.cod_area + ") " : "" %><%=recharge.number%> <br>
                     
                     <span class="font-weight-bold">Dias Disponibles: </span><%=recharge.available_days.nil? ? "?" : recharge.available_days%><br> 
                     
@@ -31,9 +31,11 @@ end
 
                     <div class="float-right mt-1">
                         <%if recharge.status === "procesada"%>
-                        <%=link_to "Pagar", edit_recharge_path(recharge), html_options = {class: "btn btn-info btn-sm", remote: true}%>
-                        <a href="#" class="btn btn-sm btn-danger" id="<%=recharge.id%>" onclick="show_modal_delete(event,this)"><i class="fas fa-trash-alt"></i></a>
-                        <%= link_to "Borrar", recharge, remote: true, method: :delete, class: "d-none", id:"delete_#{recharge.id}" %>
+                            <%=link_to "Pagar", edit_recharge_path(recharge), html_options = {class: "btn btn-info btn-sm show_loader_sup", remote: true}%>
+
+                            <a href="#" class="btn btn-sm btn-danger" id="<%=recharge.id%>" onclick="show_modal_delete(event,this)"><i class="fas fa-trash-alt"></i></a>
+
+                            <%= link_to "Borrar", recharge, remote: true, method: :delete, class: "d-none", id:"delete_#{recharge.id}" %>
 
                         <%elsif recharge.status === "enviada"%>
                             <span class="badge badge-secondary">En espera</span>

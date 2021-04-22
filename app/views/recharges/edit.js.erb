@@ -1,32 +1,27 @@
 $('#caja_form').html('<%= j render("form") %>');
 
 <%=render "element_dom_globales" %>
+console.log("edit")
+btn_recarga.setAttribute("data-validate","false")
 
-
-switch ("<%=@recharge.operator%>") {
-
-    case "movistar":
+<%if @recharge.operator === "Movistar"%> 
+    console.log("<%=@recharge.operator%>")
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/movistar.png", width:"100px", height:"30px")%>'
-    edit_modal("border-left-movistar","label-movistar label-special","barra-movistar","close_movistar","btn-movistar")
-    $("#input_cod_area").css({"display":"none"})
-    break;
-
-    case "digitel":
+    edit_modal()
+    $("#input_cod_area").remove()
+<%elsif @recharge.operator === "Digitel"%>
+    console.log("<%=@recharge.operator%>")
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/digitel.jpeg", width:"100px", height:"30px")%>'
-    edit_modal("border-left-digitel","label-digitel label-special","barra-digitel","close_digitel","btn-digitel")
-    break;
-
-    case "inter":
+    edit_modal()
+<%elsif @recharge.operator === "Inter"%>
+    console.log("Inter")
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/inter.jpeg", width:"100px", height:"30px")%>'
-    edit_modal("border-left-inter","label-inter label-special","barra-inter","close_inter","btn-inter")
-    $("#input_cod_area").css({"display":"none"})
-    break;
+    edit_modal()
+    $("#input_cod_area").remove()
+<%end%>
 
-    default:
-    break;
-}
 cod_area = "<%=@recharge.cod_area%>"
-number = "<%=@recharge.phone%>"
+number = "<%=@recharge.number%>"
 monto = "<%=number_with_precision(@recharge.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2) %>"  
 
 function block_entrada_input(input){
@@ -36,7 +31,7 @@ function block_entrada_input(input){
         input.value = cod_area
         break;
 
-        case "recharge_phone":
+        case "recharge_number":
         input.value = number
         break;
 
@@ -50,19 +45,18 @@ function block_entrada_input(input){
 }
 
 input_cod_area.setAttribute("oninput","block_entrada_input(this)")
-input_number_phone.setAttribute("oninput","block_entrada_input(this)")
+input_number.setAttribute("oninput","block_entrada_input(this)")
 input_monto.setAttribute("oninput","block_entrada_input(this)")
 
 input_monto.value = "<%=number_with_precision(@recharge.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2) %>"
 
 btn_recarga.innerText = "pagar"
-btn_recarga.setAttribute("data-validate","false")
+
 $(caja_type_pago).css({"display":"none"})
 $(caja_form).fadeIn(600);
 
-$('.modal_original').addClass('show');
-$('.modal_original-wrap').addClass('show');
-
 <% unless @recharge.errors.any? %>
-    <!--$("#btn_opened_modal_products").trigger("click");-->
+    hidden_loader()
+    $('#modal_recharge').addClass('show');
+    $('#modal_recharge_wrap').addClass('show');
 <% end %>

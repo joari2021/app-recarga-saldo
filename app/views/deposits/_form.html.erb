@@ -39,6 +39,8 @@
         </div>
       </div>
     </div>
+
+
     <!--METODO DE PAGO #############################-->
     <div class="grupo">
       <%= form.text_field :method_payment, :required => "required", class:"input-special input-option", :"data-options" => "#options-method-payment" %><span class="barra"></span>
@@ -51,6 +53,8 @@
         <a href="#" class="badge badge-movistar" data-input ="#deposit_method_payment" id="badge-postpago" onclick="push_value(event, this)" style="margin: 5px;">Pago movil</a>
       </div>
     </div>
+
+
     <!--REFERENCIA DEL PAGO #################################-->
     <div class="grupo" id="div_cod_area">
       <%= form.text_field :ref_payment, :required => "required", class:"input-special input-option", oninput: "format_number(this)", maxlength: "20" %><span class="barra"></span>
@@ -59,6 +63,8 @@
         <p class="msj_error mt-2 bg-danger rounded"><%= @deposit.errors[:ref_payment].to_s[/\w([^"]*)/] %></p>
       <% end %>
     </div>
+
+
     <!--MONTO ###########################################-->
     <div class="grupo">
       <%= form.text_field :amount, :required => "required", class:"input-special", :oninput => "format_input_number_decimal_with_separator(this)" %><span class="barra"></span>
@@ -78,6 +84,7 @@
   </div>
 <% end %>
 <script>
+
   $('#checkin').datepicker({
     language: "es",
     todayBtn: "linked",
@@ -98,15 +105,6 @@
       id_div = $(this).data("options")
       $(id_div).fadeIn(200)
   })
-  
-  function format_fecha(input){
-    valor = input.value.toString();
-    valor = valor.replace(/\D/g, "");
-  
-    for (i = valor.length; i < 10; i++) {
-      new_valor = valor + "0"
-    }
-  }
 
   function show_modal_accounts(event) {
     event.preventDefault()

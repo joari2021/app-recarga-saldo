@@ -6,9 +6,6 @@ $(".modal_contacts").addClass("show")
 $(".modal_contacts-wrap").addClass("show")
 
 <%if @contact.errors.any?%>
-    <!--$("#btn_opened_modal_clientes").trigger("click");-->
-    <!--cnt = $(".field_with_errors").contents();-->
-    <!--$(".field_with_errors").replaceWith(cnt);-->
 
     <%if @contact.operator === "movistar" && @contact.type_payment === "post-pago" || @contact.operator === "movistar_tv" || @contact.operator === "inter" || @contact.operator === "simple_tv"%>
         $("#div_cod_area").css({"display":"none"})

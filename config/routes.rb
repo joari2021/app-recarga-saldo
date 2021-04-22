@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'buscador_contacts/:names/:operator/:type_payment', to: 'contacts#buscador'
 
   resources :deposits
-  resources :recharges
+  resources :recharges, except: [:show]
   get 'historial', to: 'recharges#historial'
 
   resources :profiles

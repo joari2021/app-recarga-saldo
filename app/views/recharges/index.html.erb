@@ -1,39 +1,38 @@
 
 <div class="float-right">
-    <div class="card border-left-success shadow h-100 py-2">
+    <div class="card border-left-success shadow h-100">
         <div class="card-body">
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1 text-right">
                         Balance</div>
                     <div class="h5 mb-0 font-weight-bold text-gray-800" id="card_balance">Bs <%= number_with_precision(current_user.balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%> </div>
-                </div>
-                <div class="col-auto">
-                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <br><br><br><br><br><br>
-<div class="row">
 
-</div>
+<h3 class="text-center">Telefonia Móvil y Fija</h3>
+<hr><br>
 
-<div class="row">
-  <div class="col-xl-3 col-md-6 mb-4">
-    <%= link_to new_recharge_path, { remote: true, :'data-operator' => 'movistar', class:"link_new_recharge"}  do %>
-      <div class="card border-left-movistar shadow h-100 py-2 cont-oper" style="max-width:250px">
-        <div class="card-body contenedor-img">
-          <%= image_tag("sistema_recargas/movistar.png", class:"img-operadora", width:"100%", height:"70px") %>
+<div class="row justify-content-center">
+  <div class="col-lg-3 col-md-4 col-sm-6 col-7 mb-4 div-card">
+    <div class="d-block m-auto">
+      <%= link_to new_recharge_path, { remote: true, :'data-operator' => 'Movistar', class:"link_new_recharge show_loader_sup"}  do %>
+        <div class="card border-left-Movistar shadow h-100 py-2 cont-oper">
+          <div class="card-body contenedor-img">
+            <%= image_tag("sistema_recargas/movistar.png", class:"img-operadora", width:"100%", height:"70px") %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
   <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "digitel", class:"link_new_recharge"}  do %>
-      <div class="card border-left-digitel shadow h-100 py-2 cont-oper" style="max-width:250px">
+  <div class="col-lg-3 col-md-4 col-sm-6 col-7 mb-4 div-card">
+    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "Digitel", class:"link_new_recharge show_loader_sup"}  do %>
+      <div class="card border-left-Digitel shadow h-100 py-2 cont-oper">
         <div class="card-body contenedor-img">
           <%= image_tag("sistema_recargas/digitel.jpeg", class:"img-operadora", width:"100%", height:"70px") %>
         </div>
@@ -41,18 +40,18 @@
     <%end%>
   </div>
   <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "movilnet", class:"link_new_recharge"}  do %>
-      <div class="card border-left-movilnet shadow h-100 py-2 cont-oper" style="max-width:250px">
+  <div class="col-lg-3 col-md-4 col-sm-6 col-7 mb-4 div-card">
+    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "Movilnet", class:"link_new_recharge show_loader_sup"}  do %>
+      <div class="card border-left-Movilnet shadow h-100 py-2 cont-oper">
         <div class="card-body contenedor-img">
           <%= image_tag("sistema_recargas/movilnet.png", class:"img-operadora", width:"100%", height:"70px") %>
         </div>
       </div>
     <%end%>
   </div>
-  <div class="col-xl-3 col-md-6 mb-4">
-    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "cantv", class:"link_new_recharge"}  do %>
-      <div class="card border-left-cantv shadow h-100 py-2 cont-oper" style="max-width:250px">
+  <div class="col-lg-3 col-md-4 col-sm-6 col-7 mb-4 div-card">
+    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "Cantv", class:"link_new_recharge show_loader_sup"}  do %>
+      <div class="card border-left-Cantv shadow h-100 py-2 cont-oper">
         <div class="card-body contenedor-img">
           <%= image_tag("sistema_recargas/cantv.png", class:"img-operadora", width:"100%", height:"70px") %>
         </div>
@@ -60,12 +59,15 @@
     <%end%>
   </div>
 </div>
-<!-- Content Row -->
-<div class="row">
+
+<h3 class="text-center mt-3">Servicios TV</h3>
+<hr><br>
+
+<div class="row justify-content-center">
   <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "movistar_tv", class:"link_new_recharge"}  do %>
-      <div class="card border-left-movistar shadow h-100 py-2 cont-oper" style="max-width:250px">
+  <div class="col-lg-3 col-md-4 col-sm-6 col-7 mb-4 div-card">
+    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "Movistar_TV", class:"link_new_recharge show_loader_sup"}  do %>
+      <div class="card border-left-Movistar shadow h-100 py-2 cont-oper">
         <div class="card-body contenedor-img">
           <%= image_tag("sistema_recargas/movistar_tv.png", class:"img-operadora", width:"100%", height:"70px") %>
         </div>
@@ -73,9 +75,9 @@
     <%end%>
   </div>
   <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "inter", class:"link_new_recharge"}  do %>
-      <div class="card border-left-inter shadow h-100 py-2 cont-oper" style="max-width:250px">
+  <div class="col-lg-3 col-md-4 col-sm-6 col-7 mb-4 div-card">
+    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "Inter", class:"link_new_recharge show_loader_sup"}  do %>
+      <div class="card border-left-Inter shadow h-100 py-2 cont-oper">
         <div class="card-body contenedor-img">
           <%= image_tag("sistema_recargas/inter.jpeg", class:"img-operadora", width:"100%", height:"70px") %>
         </div>
@@ -83,9 +85,9 @@
     <%end%>
   </div>
   <!-- Earnings (Monthly) Card Example -->
-  <div class="col-xl-3 col-md-6 mb-4">
-    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "simple_tv", class:"link_new_recharge"}  do %>
-      <div class="card border-left-simpletv shadow h-100 py-2 cont-oper" style="max-width:250px">
+  <div class="col-lg-3 col-md-4 col-sm-6 col-7 mb-4 div-card">
+    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "Simple_TV", class:"link_new_recharge show_loader_sup"}  do %>
+      <div class="card border-left-Simple_TV shadow h-100 py-2 cont-oper">
         <div class="card-body contenedor-img">
           <%= image_tag("sistema_recargas/simple_tv.jpeg", class:"img-operadora", width:"100%", height:"70px") %>
         </div>
@@ -93,57 +95,57 @@
     <%end%>
   </div>
 </div>
-<div class="modal_original" data-operator="" data-type_payment="">
-  <div class="modal_original-wrap modal-dialog modal-dialog-centered modal-dialog-scrollable">
+
+<h3 class="text-center mt-3">Consultas y pagos Post-Pago</h3>
+<hr><br>
+
+<div class="row" id="row_consultation">
+  <%current_user.recharges.where(type_operation: "consultation").each do |recharge|%>
+    <%=render "caja_consultation", recharge: recharge%>
+  <%end%>
+</div>
+<%= render "modal_buscador_contacts"%>
+
+<!--MODAL RECARGA ##########################-->
+<div class="modal_original" id="modal_recharge">
+  <div class="modal_original_wrap modal-dialog modal-dialog-centered modal-dialog-scrollable" id="modal_recharge_wrap">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="title_modal"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <i class="far fa-times-circle close_modal" id="close"></i>
+          <i class="far fa-times-circle close_modal" id="close_modal_recharge"></i>
         </button>
       </div>
       <div class="modal-body">
         <!---TIPO DE PAGO-->
         <div class="row" id="caja_type_pago" style="display:none;">
           <div class="col-6 mb-4">
-            <div class="card-options" data-pago="pre-pago" style="width:200px">
+            <div class="card-options" data-pago="Prepago" style="width:200px">
               <div class="card-body card-body-content card-pointer">
                 Prepago
               </div>
             </div>
           </div>
           <div class="col-6 mb-4">
-            <div class="card-options" data-pago="post-pago" style="width:200px">
+            <div class="card-options" data-pago="Post-pago" style="width:200px">
               <div class="card-body card-body-content card-pointer">
-                Postpago
+                Post-pago
               </div>
             </div>
           </div>
         </div>
+
         <!--FORMULARIO-->
-        <div class="row" id="caja_form" style="display:none;">
-        </div>
-        <div class="row" id="confirm_payment_debt" style="display:none">
-        </div>
+        <div class="row" id="caja_form" style="display:none;"></div>
+        
+        <div class="row" id="confirm_payment_debt" style="display:none"></div>
       </div>
     </div>
   </div>
 </div>
-<div class="text-center w-100 mt-3">
-  <h3 class="">Consultas de Saldo</h3>
-</div>
-<!-- Content Row -->
-<div class="row" id="row_consultation">
-  <!-- Earnings (Monthly) Card Example -->
-  <%current_user.recharges.where(type_operation: "consultation").each do |recharge|%>
-    <%=render "caja_consultation", recharge: recharge%>
-  <%end%>
-</div>
-<%= render "modal_buscador_contacts"%>
+
 <!--PLUGIN PARA SONIDO DE NOTIFICACIONES-->
 <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
-<script src="js/js_views/all.js"></script>
-<script src="js/js_views/recharges.js"></script>
 
 <script>
   <%= render "element_dom_globales"%>
@@ -163,120 +165,28 @@
   show_div_cod_area = false
   operation = ""
   operadora_val = ""
+  
+  function card_options_function(event) {
 
-  function set_max_length(limit) {
-    input_number_phone.setAttribute("maxlength",limit)
-  }
-  
-  function edit_modal(border,label,barra,close,btn,table_fondo) {
-  
-    for (let i = 0; i < card_options.length; i++) {
-        const element = card_options[i];
-        element.className = "card card-options shadow h-100 py-2 " + border
-    }
-  
-    for (let i = 0; i < labels.length; i++) {
-        const element = labels[i];
-        if (element.className.indexOf("label-special") != -1){
-        element.className = label
-        }
-    }
-  
-    for (let i = 0; i < span_barra.length; i++) {
-        const element = span_barra[i];
-        element.className = "barra " + barra
-    }
-
-    title_modal_contact.className = "modal-title text-" + input_operadora.value 
-    close_modal_contact.className = "far fa-times-circle close_modal close_" + input_operadora.value
-    table_contacts.className = "table mt-3 " + table_fondo 
-    close_modal.className = "far fa-times-circle close_modal " + close
-    btn_recarga.className = "btn-standar btn--left " + btn
-  }
-  
-  function show_form(input_type_pago,cod_area,badge,monto_min,monto_max,multiplos) {
-    btn_recarga.setAttribute("data-validate","true")
-  
-    if(show_div_cod_area){
-  
-      caja_cod_area.innerHTML = ""
-  
-      for (let i = 0; i < cod_area.length; i++) {
-        const element = cod_area[i];
-        enlace = document.createElement("a")
-        enlace.setAttribute("href","#")
-        enlace.classList.add("badge",badge)
-        enlace.style.margin = "5px"
-        enlace.setAttribute("onclick","push_cod(event,this)")
-        enlace.innerHTML = element
-  
-        caja_cod_area.appendChild(enlace)
-  
-        if((i+1) % 5 === 0){
-          br = document.createElement("br")
-          caja_cod_area.appendChild(br)
-        }
-      }
-  
-      $("#input_cod_area").fadeTo(200,1);
-  
-    }else{
-  
-      $("#input_cod_area").css({"display":"none"})
-  
-    }
-  
-    if (operation === "recarga") {
-  
-      div_montos.innerHTML = ""
-      let i = 1;
-      for (let m = monto_min; m <= monto_max; m+=multiplos) {
-  
-        const monto = m;
-        enlace = document.createElement("a")
-        enlace.setAttribute("href","#")
-        enlace.classList.add("badge",badge)
-        enlace.style.margin = "5px"
-        enlace.setAttribute("onclick","push_monto(event,this)")
-        enlace.innerHTML = format_monto_entero(monto)
-  
-        div_montos.appendChild(enlace)
-  
-        if(i % 3 === 0){
-          br = document.createElement("br")
-          div_montos.appendChild(br)
-        }
-  
-        i++
-      }
-      $("#input_monto").removeClass("d-none")
-    } else {
-      $("#input_monto").addClass("d-none")
-    }
-  
-  
-    $(caja_type_pago).css({"display":"none"})
-    $(caja_form).fadeIn(600);
-  }
-
-  for (let i = 0; i < card_options.length; i++) {
-    card_options[i].addEventListener("click",function(event) {
+    if (input_operadora != null){
       switch (input_operadora.value) {
-        case "movistar":
-          type_pago = $(this).data("pago")
-          input_type_pago.value = type_pago
-  
+        case "Movistar":
+          if(input_type_pago.value.length === 0 ){
+            type_pago = $(this).data("pago")
+            input_type_pago.value = type_pago
+          }
+        
           cod_area = [...cod_area_movistar,...cod_area_tlf_fija]
-  
+
           monto_min = <%=@params_movistar.amount_min%>
           <%if current_user.balance.balance >= @params_movistar.amount_max%>
             monto_max = <%=@params_movistar.amount_max%>
           <%else%>
             monto_max = <%=current_user.balance.balance%>
           <%end%>
-  
+
           multiplos = <%=@params_movistar.multiplos_amount_permit%>
-          if(input_type_pago.value === "pre-pago"){
+          if(input_type_pago.value === "Prepago"){
             show_div_cod_area = true
             operation = "recarga"
             set_max_length(7)
@@ -286,64 +196,67 @@
             btn_recarga.innerText = "consultar"
             set_max_length(10)
           }
-          show_form(input_type_pago.value, cod_area,"badge-movistar",monto_min,monto_max,multiplos)
+          show_form(cod_area,monto_min,monto_max,multiplos)
           break;
-  
-        case "digitel":
+
+        case "Digitel":
           type_pago = $(this).data("pago")
           input_type_pago.value = type_pago
-  
+
           cod_area = [...cod_area_digitel,...cod_area_tlf_fija]
-  
+
           monto_min = <%=@params_digitel.amount_min%>
           <%if current_user.balance.balance >= @params_digitel.amount_max%>
             monto_max = <%=@params_digitel.amount_max%>
           <%else%>
             monto_max = <%=current_user.balance.balance%>
           <%end%>
-  
+
           multiplos = <%=@params_digitel.multiplos_amount_permit%>
           show_div_cod_area = true
-  
-          if(input_type_pago.value === "pre-pago"){
+
+          if(input_type_pago.value === "Prepago"){
             operation = "recarga"
           }else{
             operation = "consulta"
             btn_recarga.innerText = "consultar"
           }
-  
-          show_form(input_type_pago.value, cod_area,"badge-digitel",monto_min,monto_max,multiplos)
+
+          show_form(cod_area,monto_min,monto_max,multiplos)
           break;
-  
-        case "inter":
+
+        case "Inter":
           type_pago = $(this).data("pago")
           input_type_pago.value = type_pago
-  
+
           cod_area = []
-  
+
           monto_min = <%=@params_inter.amount_min%>
           <%if current_user.balance.balance >= @params_inter.amount_max%>
             monto_max = <%=@params_inter.amount_max%>
           <%else%>
             monto_max = <%=current_user.balance.balance%>
           <%end%>
-  
+
           multiplos = <%=@params_inter.multiplos_amount_permit%>
           show_div_cod_area = false
-  
-          if(input_type_pago.value === "pre-pago"){
+
+          if(input_type_pago.value === "Prepago"){
             operation = "recarga"
           }else{
             operation = "consulta"
             btn_recarga.innerText = "consultar"
           }
-          show_form(input_type_pago.value, cod_area,"badge-inter",monto_min,monto_max,multiplos)
+          show_form(cod_area,monto_min,monto_max,multiplos)
           break;
-  
+
         default:
           break;
       }
-    })
-  
+    }
+  }
+
+  for (let i = 0; i < card_options.length; i++) {
+    card_options[i].addEventListener("click",card_options_function)
   }
 </script>

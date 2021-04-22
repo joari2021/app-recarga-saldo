@@ -21,4 +21,13 @@ class ApplicationController < ActionController::Base
    def authenticate_admin
      redirect_to user_root_path unless user_signed_in? && current_user.is_admin? 
    end
+
+   def verify_consulta!
+     if current_user.recharges.where(number: recharge_params[:number], type_operation: "consultation").any?
+          respond_to do |format|
+               format.json {head :no_content}
+               format.js { render :deneged_consulta}
+          end
+     end
+   end
 end

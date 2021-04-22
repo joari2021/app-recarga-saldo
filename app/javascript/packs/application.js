@@ -15,7 +15,7 @@ ActiveStorage.start()
 
 // ESTILOS CSS
 import "css/styles.scss"
-import "css/form_recharge.scss"
+import "css/recharge.scss"
 import "css/profile.scss"
 import "css/login_and_register"
 
@@ -25,5 +25,10 @@ import "@fortawesome/fontawesome-free/css/all"
 //CODIGOS JS
 import "bootstrap"
 import swal from 'sweetalert'
+import "channels/sb-admin-2"
+import "channels/all"
 import "channels/script_login_and_register"
+import "channels/recharge"
+
+import "channels/hidden_loader"
 

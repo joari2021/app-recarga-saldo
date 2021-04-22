@@ -1,0 +1,272 @@
+//MODAL DE FORMULARIOS ###############################################
+.color-Movistar_TV,
+.color-Movistar{
+  color: var(--movistar) !important;
+}
+
+.color-Digitel {
+  color: var(--digitel) !important;
+}
+
+.color-Movilnet {
+  color: var(--movilnet) !important;
+}
+
+.color-Cantv {
+  color: var(--cantv) !important;
+}
+
+.color-Inter{
+  color: var(--inter) !important;
+}
+
+.color-Simple_TV {
+  color: var(--simpletv) !important;
+}
+
+.border-left-Movistar {
+  border-left: 0.25rem solid var(--movistar) !important;
+}
+
+.border-left-Digitel {
+  border-left: 0.25rem solid var(--digitel) !important;
+}
+
+.border-left-Movilnet {
+  border-left: 0.25rem solid var(--movilnet) !important;
+}
+
+.border-left-Cantv {
+  border-left: 0.25rem solid var(--cantv) !important;
+}
+
+.border-left-Inter {
+  border-left: 0.25rem solid var(--inter) !important;
+}
+
+.border-left-Simple_TV {
+  border-left: 0.25rem solid var(--simpletv) !important;
+}
+
+//ELEMENTOS DEL FORMULARIO ##########################################
+
+input:focus ~ .label-Movistar,
+input:valid ~ .label-Movistar,
+input:focus ~ .label-Movistar_TV,
+input:valid ~ .label-Movistar_TV {
+  color: var(--movistar) !important;
+}
+
+input:focus ~ .label-Digitel,
+input:valid ~ .label-Digitel {
+  color: var(--digitel) !important;
+}
+
+input:focus ~ .label-Movilnet,
+input:valid ~ .label-Movilnet {
+  color: var(--movilnet) !important;
+}
+
+input:focus ~ .label-Cantv,
+input:valid ~ .label-Cantv {
+  color: var(--cantv) !important;
+}
+
+input:focus ~ .label-Inter,
+input:valid ~ .label-Inter {
+  color: var(--inter) !important;
+}
+
+input:focus ~ .label-Simple_TV,
+input:valid ~ .label-Simple_TV {
+  color: var(--simpletv) !important;
+}
+
+input:focus ~ .barra::before {
+  width: 100%;
+}
+
+.barra {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.barra::before {
+  content: "";
+  height: 2px;
+  width: 0%;
+  bottom: 0;
+  position: absolute;
+  //background: linear-gradient(to right, #B06AB3, #4568DC);
+  transition: 0.3s ease width;
+  left: 0;
+}
+
+.barra-Movistar:before{
+  background-color: var(--movistar) !important;
+}
+
+.bg-Movistar,
+.bg-Movistar_TV,
+.bg-before-Movistar::before,
+.bg-before-Movistar_TV::before,
+#switch:checked + .lbl-Movistar,
+#switch:checked + .lbl-Movistar_TV {
+  color: #fff !important;
+  background-color: var(--movistar) !important;
+}
+
+.bg-Digitel,
+.bg-before-Digitel::before,
+#switch:checked + .lbl-Digitel {
+  color: #fff !important;
+  background: var(--digitel) !important;
+}
+
+.bg-Movilnet,
+.bg-before-Movilnet::before,
+#switch:checked + .lbl-Movilnet {
+  color: #fff !important;
+  background: var(--movilnet) !important;
+}
+
+.bg-Cantv,
+.bg-before-Cantv::before,
+#switch:checked + .lbl-Cantv {
+  color: #fff !important;
+  background: var(--cantv) !important;
+}
+
+.bg-Inter,
+.bg-before-Inter::before,
+#switch:checked + .lbl-Inter {
+  color: #fff !important;
+  background: var(--inter) !important;
+}
+
+.bg-Simple_TV,
+.bg-before-Simple_TV::before,
+#switch:checked + .lbl-Simple_TV {
+  color: #fff !important;
+  background: var(--simpletv) !important;
+}
+
+button.bg-Movistar:hover,
+button.bg-Movistar_TV:hover,
+span.bg-Movistar:hover,
+span.bg-Movistar_TV:hover,
+a.bg-Movistar:hover,
+a.bg-Movistar_TV:hover {
+  color: #fff !important;
+  background-color: var(--movistar_hover) !important;
+}
+
+button.bg-Digitel:hover,
+span.bg-Digitel:hover,
+a.bg-Digitel:hover{
+  color: #fff !important;
+  background-color: var(--digitel_hover) !important;
+}
+
+button.bg-Movilnet:hover,
+span.bg-Movilnet:hover,
+a.bg-Movilnet:hover {
+  color: #fff !important;
+  background-color: var(--movilnet_hover) !important;
+}
+
+button.bg-Cantv:hover,
+span.bg-Cantv:hover,
+a.bg-Cantv:hover {
+  color: #fff !important;
+  background-color: var(--cantv_hover) !important;
+}
+
+button.bg-Inter:hover,
+span.bg-Inter:hover,
+a.bg-Inter:hover {
+  color: #fff !important;
+  background-color: var(--inter_hover) !important;
+}
+button.bg-Simple_TV:hover,
+span.bg-Simple_TV:hover,
+a.bg-Simple_TV:hover {
+  color: #fff !important;
+  background-color: var(--simpletv_hover) !important;
+}
+
+@media screen and (max-width: 500px) {
+  /*
+  form {
+    width: 80%;
+  }*/
+}
+
+.lbl {
+  display: inline-block;
+  width: 38px;
+  height: 22px;
+  background: #979797;
+  border-radius: 100px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+}
+
+.lbl::after {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 14px;
+  background: #eee;
+  border-radius: 100px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  transition: 0.2s;
+}
+
+#switch:checked + .lbl::after {
+  left: 22px;
+}
+
+#switch {
+  display: none;
+}
+
+.btn-standar {
+  border: none;
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  height: 40px;
+  font-size: 16px;
+  cursor: pointer;
+  color: white !important;
+  padding: 0.5rem 2.5rem;
+  border-radius: 5rem;
+  text-transform: uppercase;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  font-weight: bold;
+}
+
+.btn-standar:before{
+  content: "";
+  position: absolute;
+  z-index: -1;
+}
+
+.btn--left:before {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  transition: width 0.25s linear;
+}
+.btn--left:hover:before {
+  width: 100%;
+}

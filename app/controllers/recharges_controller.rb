@@ -1,6 +1,7 @@
 class RechargesController < ApplicationController
   before_action :set_recharge, only: %i[ show edit update destroy ]
-  before_action :set_variables_recharge, only: %I[index new]
+  before_action :set_variables_recharge, only: %i[ index new create]
+  before_action :verify_consulta!, only: [:create] 
 
   # GET /recharges or /recharges.json
   def index
@@ -21,8 +22,8 @@ class RechargesController < ApplicationController
   end
 
   # GET /recharges/1 or /recharges/1.json
-  def show
-  end
+  #def show
+  #end
 
   # GET /recharges/new
   def new
@@ -37,56 +38,77 @@ class RechargesController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
       @recharge = current_user.recharges.create(recharge_params)
-      
-      if @recharge.amount <= current_user.balance.balance
-        balance_final = current_user.balance.balance -= @recharge.amount
-        ActiveRecord::Rollback unless current_user.balance.update(balance: balance_final)
 
-        @recharge.verify_type_payment
-        @recharge.verify_operator
-        @recharge.set_type_operation
-
-        respond_to do |format|
-          if @recharge.save
-            if recharge_params_special[:save_number]
-              cod_area = @recharge.operator === "movistar" && @recharge.type_payment === "pre-pago" || @recharge.operator === "digitel" ||@recharge.operator === "movilnet" || @recharge.operator === "cantv" ? @recharge.cod_area : nil
-              
-              @contact = current_user.contacts.create(operator: @recharge.operator, type_payment: @recharge.type_payment, cod_area: cod_area, phone: @recharge.phone, names: recharge_params_special[:names])
-              if @contact.save
-                @contact_save = true
-              else
-                @contact_save = false
-              end
-            end
-
-            format.json {head :no_content}
-            format.js
-          else
-            ActiveRecord::Rollback
-
-            format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
-            format.js { render :new }
-          end
-        end
-      else
-        respond_to do |format|
-          format.json {head :no_content}
-          format.js 
+      #ESTABLECIENDO EL TIPO DE OPERACION
+      if @recharge.operator === "Movistar" || @recharge.operator === "Digitel" || @recharge.operator === "Inter"
+        if @recharge.type_payment === "Post-pago"
+          @recharge.update(type_operation: "consultation")
+        else
+          @recharge.update(type_operation: "direct_recharge")
         end
       end
-    end 
+     
+      #ACTUALIZANDO EL BALANCE
+      if @recharge.type_operation === "direct_recharge" && @recharge.amount <= current_user.balance.balance
+        balance_final = current_user.balance.balance -= @recharge.amount
+
+        ActiveRecord::Rollback unless current_user.balance.update(balance: balance_final)
+
+      elsif @recharge.type_operation != "direct_recharge"
+        @recharge.amount = 0.0
+      end
+    end      
+
+    if @recharge.amount <= current_user.balance.balance
+      respond_to do |format|
+    
+        if @recharge.save
+          if recharge_params_special[:save_number]
+            cod_area = @recharge.operator === "Movistar" && @recharge.type_payment === "Prepago" || @recharge.operator === "Digitel" ||@recharge.operator === "Movilnet" || @recharge.operator === "Cantv" ? @recharge.cod_area : nil
+            
+            @contact = current_user.contacts.create(operator: @recharge.operator, type_payment: @recharge.type_payment, cod_area: cod_area, number: @recharge.phone, names: recharge_params_special[:names])
+
+            if @contact.save
+              @contact_save = true
+            else
+              @contact_save = false
+            end
+          end
+   
+          format.json {head :no_content}
+          format.js      
+        else
+          format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
+          format.js { render :new }
+          
+        end
+      end
+
+    else
+      @recharge.destroy
+
+      respond_to do |format|
+        format.json {head :no_content}
+        format.js { render :balance_insuficiente}
+      end
+    end
   end
 
   # PATCH/PUT /recharges/1 or /recharges/1.json
   def update
-    if @recharge.type_operation === "consultation" && @recharge.status === "procesada"
-      respond_to do |format|
-        if @recharge.update(status:"enviada",type_operation:"recharge")
-          format.json { head :no_content }
-          format.js
-        else
-          format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
-          format.js { render :edit }
+    ActiveRecord::Base.transaction do
+      if @recharge.type_operation === "consultation" && @recharge.status === "procesada"
+        respond_to do |format|
+          if @recharge.update(status:"enviada",type_operation:"direct_recharge")
+            balance_final = current_user.balance.balance -= @recharge.amount
+            ActiveRecord::Rollback unless current_user.balance.update(balance: balance_final)
+            
+            format.json { head :no_content }
+            format.js
+          else
+            format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
+            format.js { render :edit }
+          end
         end
       end
     end
@@ -102,9 +124,7 @@ class RechargesController < ApplicationController
   end
 
   private
-    def verify_amount(recharge)
-      
-    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_recharge
       @recharge = Recharge.find(params[:id])
@@ -122,12 +142,10 @@ class RechargesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recharge_params
-      params.require(:recharge).permit(:amount, :operator, :type_payment, :phone, :cod_area)
+      params.require(:recharge).permit(:amount, :operator, :type_payment, :number, :cod_area)
     end
 
     def recharge_params_special
       params.require(:recharge).permit(:save_number,:names)
     end
-
-    
 end

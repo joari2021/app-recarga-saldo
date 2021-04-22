@@ -17,29 +17,13 @@
   --simpletv_hover: #0f8cba;
 }
 
-//CAJAS DE LAS OPERADORAS ##############################################
-.border-left-movistar {
-  border-left: 0.25rem solid var(--movistar) !important;
-}
-
-.border-left-digitel {
-  border-left: 0.25rem solid var(--digitel) !important;
-}
-
-.border-left-movilnet {
-  border-left: 0.25rem solid var(--movilnet) !important;
-}
-
-.border-left-cantv {
-  border-left: 0.25rem solid var(--cantv) !important;
-}
-
-.border-left-inter {
-  border-left: 0.25rem solid var(--inter) !important;
-}
-
-.border-left-simpletv {
-  border-left: 0.25rem solid var(--simpletv) !important;
+.bg-special {
+  color: #fff;
+  background-color: #3c96ff;
+	background-image: -webkit-linear-gradient(bottom right, #3c96ff, #2dfbff);
+	background-image: -o-linear-gradient(bottom right, #3c96ff, #2dfbff);
+	background-image: linear-gradient(to top left, #2dfbff,  #3c96ff);
+  box-shadow: 0px 0px 43px 0px rgba(131, 131, 131, 0.38);
 }
 
 .contenedor-img:hover .img-operadora {
@@ -71,13 +55,13 @@
 .card-pointer {
   cursor: pointer;
 }
-//FIN DE CAJAS DE LAS OPERADORAS #######################################
 
-//SweetAlert ###########################################################
+////////////////////////////////////////////  SWEET ALERT  ############################################
 .swal-text {
   text-align: center;
 }
 
+///////////////////////////////////////////// LINK SPECIAL ##############################################
 a {
   text-decoration: none !important;
 }
@@ -95,7 +79,8 @@ a.special-link:focus {
   background-size: 100% 2px;
 }
 
-//TABLA ELEGANTE
+
+////////////////////////////////////////  TABLA ELEGANTE   //////////////////////////////////////
 #main-container {
   margin: 30px auto;
   width: 100%;
@@ -165,19 +150,8 @@ tr.tr-standar:hover td.td-standar {
   }
 }
 
-p.msj_error {
-  font-size: 75%;
-  color: white;
-  font-weight: bold;
-  padding: 5px;
-  max-width: 234px;
-}
-
-//MODALS ////////////////////////////////
-.modal_original,
-.modal_contacts,
-.modal_deposits,
-.modal_accounts {
+//////////////////////////////////////////  MODALS //////////////////////////////////////////
+.modal_original {
   background: rgba(48, 48, 48, 0.5);
   position: fixed;
   top: 0;
@@ -191,10 +165,7 @@ p.msj_error {
   z-index: 9999;
 }
 
-.modal_original-wrap,
-.modal_contacts-wrap,
-.modal_deposits-wrap,
-.modal_accounts-wrap {
+.modal_original_wrap{
   display: flex;
   align-items: center;
   width: 90%;
@@ -204,17 +175,11 @@ p.msj_error {
   transition: 0.3s ease all;
 }
 
-.modal_original.show,
-.modal_contacts.show,
-.modal_deposits.show,
-.modal_accounts.show {
+.modal_original.show {
   visibility: visible;
 }
 
-.modal_original-wrap.show,
-.modal_contacts-wrap.show,
-.modal_deposits-wrap.show,
-.modal_accounts-wrap.show {
+.modal_original_wrap.show {
   transform: scale(1);
   opacity: 1;
 }
@@ -226,7 +191,7 @@ p.msj_error {
   cursor: pointer;
 }
 
-//PROGRESS BAR
+///////////////////////////////  LOADER PARA PAGINACION ////////////////////////////////////
 .contenedor_loader {
   width: 100%;
   height: 0px;
@@ -237,20 +202,47 @@ p.msj_error {
   justify-content: center;
 }
 
+.contenedor_loader_sup {
+  background-color: #f3f3f3;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  transition: all 1.5s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .loader,
 .loader:before,
 .loader:after {
   border-radius: 50%;
-  width: 2em;
-  height: 2em;
   animation: loader 1.5s infinite ease-in-out;
 }
 
+.loader-tam,
+.loader-tam:before,
+.loader-tam:after{
+  width: 2em;
+  height: 2em;
+}
+
+.loader-sup-tam,
+.loader-sup-tam:before,
+.loader-sup-tam:after{
+  width: 2.5em;
+  height: 2.5em;
+}
+
 .loader {
-  color: #4685fa;
   font-size: 13px;
   position: relative;
   animation-delay: -0.16s;
+}
+.loader-color-standar {
+  color: #4685fa;
 }
 
 .loader:before,
@@ -280,11 +272,132 @@ p.msj_error {
   }
 }
 
-.bg-special {
-  color: #fff;
-  background-color: #3c96ff;
-	background-image: -webkit-linear-gradient(bottom right, #3c96ff, #2dfbff);
-	background-image: -o-linear-gradient(bottom right, #3c96ff, #2dfbff);
-	background-image: linear-gradient(to top left, #2dfbff,  #3c96ff);
-  box-shadow: 0px 0px 43px 0px rgba(131, 131, 131, 0.38);
+//////////////////////////////////// FORMULARIOS ###############################################
+input,
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.content-select select::-ms-expand {
+  display: none;
+}
+
+.content-select {
+  max-width: 250px;
+  position: relative;
+}
+
+.content-select select {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+  padding: 12px 10px;
+  //height: 42px;
+  outline: 0;
+  border: 0;
+  border-radius: 0;
+  //background: #f0f0f0;
+  color: #c6c6c6;
+  font-size: 18px;
+  
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  //border-radius: 12px;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.content-select select:hover {
+  border-bottom: 1px solid var(--movistar);
+  transition: 0.5s ease all;
+}
+
+/* 
+Creamos la fecha que aparece a la izquierda del select.
+Realmente este elemento es un cuadrado que sólo tienen
+dos bordes con color y que giramos con transform: rotate(-45deg);
+*/
+.content-select i {
+  position: absolute;
+  right: 20px;
+  top: calc(50% - 13px);
+  width: 16px;
+  height: 16px;
+  display: block;
+  border-left: 4px solid #2ac176;
+  border-bottom: 4px solid #2ac176;
+  transform: rotate(-45deg); /* Giramos el cuadrado */
+  transition: all 0.25s ease;
+}
+
+.content-select:hover i {
+  margin-top: 3px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.title-h1 {
+  text-align: center;
+  font-weight: 700;
+}
+
+form {
+  background: #fff;
+  box-shadow: 0 0 6px 0 rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+
+.form {
+  width: 100%;
+  margin: auto;
+}
+
+form .grupo {
+  position: relative;
+  margin: 30px;
+}
+
+input.input-special {
+  background: none;
+  color: #c6c6c6;
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--colorTextos);
+}
+
+input.input-special:focus {
+  outline: none;
+  color: #5e5d5d;
+}
+
+label.label-special {
+  color: var(--colorTextos);
+  font-size: 16px;
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  transition: 0.5s ease all;
+  pointer-events: none;
+}
+
+input.input-special:focus ~ label.label-special,
+input.input-special:valid ~ label.label-special {
+  top: -14px;
+  font-size: 12px;
+}
+
+p.msj_error {
+  font-size: 75%;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  max-width: 234px;
 }
