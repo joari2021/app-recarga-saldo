@@ -1,20 +1,16 @@
 $('#caja_form').html('<%= j render("form") %>');
 
 <%=render "element_dom_globales" %>
-console.log("edit")
 btn_recarga.setAttribute("data-validate","false")
 
 <%if @recharge.operator === "Movistar"%> 
-    console.log("<%=@recharge.operator%>")
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/movistar.png", width:"100px", height:"30px")%>'
     edit_modal()
     $("#input_cod_area").remove()
 <%elsif @recharge.operator === "Digitel"%>
-    console.log("<%=@recharge.operator%>")
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/digitel.jpeg", width:"100px", height:"30px")%>'
     edit_modal()
 <%elsif @recharge.operator === "Inter"%>
-    console.log("Inter")
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/inter.jpeg", width:"100px", height:"30px")%>'
     edit_modal()
     $("#input_cod_area").remove()
