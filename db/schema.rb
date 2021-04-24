@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_19_214847) do
+ActiveRecord::Schema.define(version: 2021_04_23_153639) do
 
   create_table "acoounts", force: :cascade do |t|
     t.string "bank"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2021_04_19_214847) do
     t.string "bank_destinity"
     t.string "ref_payment"
     t.string "status", default: "Diferido"
+    t.datetime "date_send"
     t.index ["user_id"], name: "index_deposits_on_user_id"
   end
 

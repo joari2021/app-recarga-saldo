@@ -1,13 +1,13 @@
 <div>  
-  <%= link_to new_deposit_path, {remote: true, class: "btn btn-info", id: "anadir-deposit-btn"}  do %>
-    <span class="fas fa-plus-square" style=""></span>
+  <%= link_to new_deposit_path, {remote: true, class: "btn btn_standar btn-common btn-effect bg-special", id: "anadir-deposit-btn"}  do %>
+    <span class="fas fa-plus-square" style="color:white"></span>
   <% end %>
 </div>
 <br />
 
 <div id="main-container">
-  <table class="table-standar" id="table_deposits">
-    <thead class="thead-standar">
+  <table class="table-standar table-deposit" id="table_deposits">
+    <thead class="thead-standar bg-special">
       <tr class="tr-standar">
         <th class="th-standar">Fecha</th>
         <th class="th-standar">Banco Destino</th>
@@ -20,9 +20,9 @@
 
     <%current_user.deposits.each do |deposit|%>
       <tr class="tr-standar" id="deposit_<%=deposit.id%>">
-        <td class="td-standar" data-label="Fecha"><%=deposit.day_payment.to_s.rjust(2, '0')%>/<%=deposit.month_payment.to_s.rjust(2, '0')%>/<%=deposit.year_payment%></td>
-        <td class="td-standar" data-label="Banco Destino"><%=deposit.bank_destinity%></td>
-        <td class="td-standar" data-label="M. Pago"><%=deposit.method_payment%></td>
+        <td class="td-standar" data-label="Fecha"><%=deposit.date_send.strftime("%d/%m/%Y")%></td>
+        <td class="td-standar" data-label="Banco Destino"><%=deposit.bank_destinity.gsub("_"," ")%></td>
+        <td class="td-standar" data-label="M. Pago"><%=deposit.method_payment.gsub("_"," ")%></td>
         <td class="td-standar" data-label="Referencia"><%=deposit.ref_payment%></td>
         <td class="td-standar" data-label="Monto"><%=number_with_precision(deposit.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>
         <td class="td-standar" data-label="Estatus">
@@ -39,32 +39,5 @@
 <%= render 'modal_deposits' %>
 <%= render 'modal_accounts' %>
 
-<script src="/js/js_views/all.js"></script>
-<script src="/js/js_views/deposits.js"></script>
-
-<script>
-
-    $("#close_modal_deposit_standar").click(function () {
-      $(".modal_deposits").removeClass("show");
-      $(".modal_deposits-wrap").removeClass("show");
-    });
-
-    $("#close_modal_accounts_standar").click(function () {
-      $(".modal_accounts").removeClass("show");
-      $(".modal_accounts-wrap").removeClass("show");
-
-      $(".modal_deposits").addClass("show");
-      $(".modal_deposits-wrap").addClass("show");
-    });
-
-    function push_value(event, option) {
-      event.preventDefault()
-
-      id_input = option.getAttribute("data-input")
-      $(id_input).val(option.innerText)
-    }
-      
-  
-</script>
 
 

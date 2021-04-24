@@ -1,130 +1,80 @@
 <%= form_for @deposit, {remote: true}  do |form| %>
   <div class="form">
-    <div class="grupo text-center"><a href="#" class="special-link p-2" onclick="show_modal_accounts(event)">Ver Cuentas</a></div>
+    <div class="grupo text-center"><a href="#" class="color-standar-medio font-weight-bold special-link p-2" onclick="show_modal_accounts(event)">Ver Cuentas</a></div>
 
-    <!--FECHA DEL PAGO#################################-->
+    <!--FECHA DEL PAGO  #################################-->
     <div class="grupo" id="div_cod_area">
-      <input required="required" class="input-special"  type="text" id="checkin" oninput="readonly(this)">
-      <span class="barra"></span>
-      <label class="label-special label-movistar">Fecha del pago</label>
-      <%if @deposit.errors[:day_payment].any? %>
-        <p class="msj_error mt-2 bg-danger rounded">Dia: <%= @deposit.errors[:day_payment].to_s[/\w([^"]*)/] %></p>
-      <% end %>
-      <%if @deposit.errors[:month_payment].any? %>
-        <p class="msj_error mt-2 bg-danger rounded">Mes: <%= @deposit.errors[:month_payment].to_s[/\w([^"]*)/] %></p>
-      <% end %>
-      <%if @deposit.errors[:year_payment].any? %>
-        <p class="msj_error mt-2 bg-danger rounded">Año: <%= @deposit.errors[:year_payment].to_s[/\w([^"]*)/] %></p>
+      <input required="required" class="input-special" type="text" id="date" name="deposit[date_send]" value="<%=@deposit.date_send.strftime("%d/%m/%Y") if @deposit.date_send.present?%>" oninput="readonly(this)">
+      <span class="barra bg-before-Standar"></span>
+      <label class="label-special label-Standar">Fecha del pago</label>
+      <%if @deposit.errors[:date_send].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @deposit.errors[:date_send].to_s[/\w([^"]*)/] %></p>
       <% end %>
     </div>
 
     <!--BANCO DESTINO #############################-->
     <div class="grupo">
-      <%= form.text_field :bank_destinity, :required => "required", class:"input-special input-option", :"data-options" => "#options-banks-destinity" %><span class="barra"></span>
-      <%= form.label :bank_destinity, "Banco Destino", for: "", class: "label-special label-movistar" %>
+      <%= form.text_field :bank_destinity, :required => "required", class:"input-special input-option", :"data-options" => "#options-banks-destinity", oninput:"readonly(this)" %><span class="barra bg-before-Standar"></span>
+      <%= form.label :bank_destinity, "Banco Destino", for: "", class: "label-special label-Standar" %>
       <%if @deposit.errors[:bank_destinity].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @deposit.errors[:bank_destinity].to_s[/\w([^"]*)/] %></p>
       <% end %>
-      <div id="options-banks-destinity" style="display:none" onchange = "verify_operator()" >
+
+      <div id="options-banks-destinity" style="display:none">
         <div class="row">
           <div class="col-6">
-            <a href="#" class="badge badge-movistar" data-input ="#deposit_bank_destinity" onclick="push_value(event, this)" style="margin: 5px;">Banco de Venezuela</a><br>
-            <a href="#" class="badge badge-movistar" data-input ="#deposit_bank_destinity" onclick="push_value(event, this)" style="margin: 5px;">Banco Bancaribe</a><br>
-            <a href="#" class="badge badge-movistar" data-input ="#deposit_bank_destinity" onclick="push_value(event, this)" style="margin: 5px;">Banco Bicentenario</a><br>
+            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this)">Banco de Venezuela</a><br>
+            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this)">Banco Bicentenario</a><br>
+            <a href="#" class="badge btn_standar btn-common btn-effect bg-special ml-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this)">Banco B.O.D</a>
           </div>
           <div class="col-6">
-            <a href="#" class="badge badge-movistar" data-input ="#deposit_bank_destinity" onclick="push_value(event, this)" style="margin: 5px;">Banco Mercantil</a><br>
-            <a href="#" class="badge badge-movistar" data-input ="#deposit_bank_destinity" onclick="push_value(event, this)" style="margin: 5px;">Banco B.O.D</a><br>
+            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this)">Banco Mercantil</a><br>
+            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this)">Banco Bancaribe</a><br>
           </div>
         </div>
       </div>
     </div>
 
-
     <!--METODO DE PAGO #############################-->
     <div class="grupo">
-      <%= form.text_field :method_payment, :required => "required", class:"input-special input-option", :"data-options" => "#options-method-payment" %><span class="barra"></span>
-      <%= form.label :method_payment, "Metodo de pago", for: "", class: "label-special label-movistar" %>
+      <%= form.text_field :method_payment, :required => "required", class:"input-special input-option", :"data-options" => "#options-method-payment", oninput:"readonly(this)"%><span class="barra bg-before-Standar"></span>
+      <%= form.label :method_payment, "Metodo de pago", for: "", class: "label-special label-Standar" %>
       <%if @deposit.errors[:method_payment].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @deposit.errors[:method_payment].to_s[/\w([^"]*)/] %></p>
       <% end %>
+
       <div id="options-method-payment" style="display:none">
-        <a href="#" class="badge badge-movistar" data-input ="#deposit_method_payment" id="badge-prepago" onclick="push_value(event, this)" style="margin: 5px;">Transferencia</a>
-        <a href="#" class="badge badge-movistar" data-input ="#deposit_method_payment" id="badge-postpago" onclick="push_value(event, this)" style="margin: 5px;">Pago movil</a>
+        <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#deposit_method_payment" id="badge-prepago" onclick="push_value_standar(event, this)">Transferencia</a>
+        <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#deposit_method_payment" id="badge-postpago" onclick="push_value_standar(event, this)">Pago móvil</a>
       </div>
     </div>
 
-
     <!--REFERENCIA DEL PAGO #################################-->
     <div class="grupo" id="div_cod_area">
-      <%= form.text_field :ref_payment, :required => "required", class:"input-special input-option", oninput: "format_number(this)", maxlength: "20" %><span class="barra"></span>
-      <%= form.label :ref_payment, "N° Referencia", for: "", class: "label-special label-movistar" %>
+      <%= form.text_field :ref_payment, :required => "required", class:"input-special input-option", oninput: "input_value_integer(this)", maxlength: "10", minlength: "4" %><span class="barra bg-before-Standar"></span>
+      <%= form.label :ref_payment, "N° Referencia", for: "", class: "label-special label-Standar" %>
       <%if @deposit.errors[:ref_payment].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @deposit.errors[:ref_payment].to_s[/\w([^"]*)/] %></p>
       <% end %>
     </div>
 
-
     <!--MONTO ###########################################-->
     <div class="grupo">
-      <%= form.text_field :amount, :required => "required", class:"input-special", :oninput => "format_input_number_decimal_with_separator(this)" %><span class="barra"></span>
-      <%= form.label :amount, "Monto", for:"", class: "label-special label-movistar" %>
+      <%= form.text_field :amount, :required => "required", class:"input-special", :oninput => "input_value_decimal_with_separator(this)" %><span class="barra bg-before-Standar"></span>
+      <%= form.label :amount, "Monto", for:"", class: "label-special label-Standar" %>
       <%if @deposit.errors[:amount].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @deposit.errors[:amount].to_s[/\w([^"]*)/] %></p>
       <% end %>
     </div>
-    <!--FECHA-->
-    <%= form.text_field :day_payment, type:"hidden" %>
-    <%= form.text_field :month_payment, type:"hidden" %>
-    <%= form.text_field :year_payment, type:"hidden" %>
+
     <div class="actions">
-      <button type="button" class="btn-standar btn--left btn-movistar" id="btn_deposit">Enviar</button>
+      <button type="button" class="btn_standar btn-common btn-effect bg-special text-uppercase" id="btn_deposit">Enviar</button>
       <%=form.submit "Enviar", class: "d-none", id: "btn_submit"%>
     </div>
   </div>
 <% end %>
 <script>
-
-  $('#checkin').datepicker({
-    language: "es",
-    todayBtn: "linked",
-    clearBtn: false,
-    format: "dd/mm/yyyy",
-    multidate: false,
-    autoclose: true,
-    todayHighlight: true
-
-  });
-  
-  $(".input-option").blur(function () {
-    id_div = $(this).data("options")
-    $(id_div).fadeOut(200)
-  })
-  
-  $(".input-option").focus(function () {
-      id_div = $(this).data("options")
-      $(id_div).fadeIn(200)
-  })
-
-  function show_modal_accounts(event) {
-    event.preventDefault()
-    $("#close_modal_deposit_standar").trigger("click")
-    $(".modal_accounts").addClass("show");
-    $(".modal_accounts-wrap").addClass("show");
-  }
-  
-  $("#btn_deposit").click(function () {
-  
-      array_fecha = $("#checkin").val().split("/")
-      $("#deposit_day_payment").val(array_fecha[0])
-      $("#deposit_month_payment").val(array_fecha[1])
-      $("#deposit_year_payment").val(array_fecha[2])
-  
-      $("#deposit_amount").val(function format() {
-        return format_decimal($("#deposit_amount").val())
-      })
-  
-      $("#btn_submit").trigger("click")
-  })
-  
+  show_datepicker()
+  toggle_list_options()
+  activar_submit_deposit()
 </script>

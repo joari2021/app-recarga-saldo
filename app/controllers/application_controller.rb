@@ -30,4 +30,11 @@ class ApplicationController < ActionController::Base
           end
      end
    end
+
+   def format_params
+     deposit_params[:bank_destinity].gsub!(' ','_')
+     deposit_params[:method_payment].gsub!(' ','_')
+     deposit_params[:amount].gsub!('.','')
+     deposit_params[:amount].gsub!(',','.')
+   end
 end

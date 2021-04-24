@@ -14,8 +14,7 @@
 </div>
 <br><br><br><br><br><br>
 
-<h3 class="text-center">Telefonia Móvil y Fija</h3>
-<hr><br>
+<h3 class="section-title pb-3 mb-4 text-center border-title font-weight-bold">Telefonia Móvil y Fija</h3>
 
 <div class="row justify-content-center">
   <div class="col-lg-3 col-md-4 col-sm-6 col-7 mb-4 div-card">
@@ -60,8 +59,7 @@
   </div>
 </div>
 
-<h3 class="text-center mt-3">Servicios TV</h3>
-<hr><br>
+<h3 class="section-title pb-3 mt-5 mb-4 text-center border-title font-weight-bold">Servicios TV</h3>
 
 <div class="row justify-content-center">
   <!-- Earnings (Monthly) Card Example -->
@@ -96,8 +94,8 @@
   </div>
 </div>
 
-<h3 class="text-center mt-3">Consultas y pagos Post-Pago</h3>
-<hr><br>
+<h3 class="section-title pb-3 mt-5 mb-4 text-center border-title font-weight-bold">Consultas y pagos Post-Pago</h3>
+
 
 <div class="row" id="row_consultation">
   <%current_user.recharges.where(type_operation: "consultation").each do |recharge|%>
@@ -113,7 +111,7 @@
       <div class="modal-header">
         <h5 class="modal-title" id="title_modal"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <i class="far fa-times-circle close_modal" id="close_modal_recharge"></i>
+          <i class="far fa-times-circle" id="close_modal_recharge"></i>
         </button>
       </div>
       <div class="modal-body">
@@ -138,7 +136,6 @@
         <!--FORMULARIO-->
         <div class="row" id="caja_form" style="display:none;"></div>
         
-        <div class="row" id="confirm_payment_debt" style="display:none"></div>
       </div>
     </div>
   </div>
@@ -168,16 +165,14 @@
   
   function card_options_function(event) {
 
-    if (input_operadora != null){
-      switch (input_operadora.value) {
+    if ($("#recharge_operator") != null){
+      if($("#recharge_type_payment").val().length === 0 ){
+        $("#recharge_type_payment").val($(this).data("pago"))
+      }
+      
+      switch ($("#recharge_operator").val()) {
         case "Movistar":
-          if(input_type_pago.value.length === 0 ){
-            type_pago = $(this).data("pago")
-            input_type_pago.value = type_pago
-          }
-        
-          cod_area = [...cod_area_movistar,...cod_area_tlf_fija]
-
+          
           monto_min = <%=@params_movistar.amount_min%>
           <%if current_user.balance.balance >= @params_movistar.amount_max%>
             monto_max = <%=@params_movistar.amount_max%>
@@ -186,22 +181,22 @@
           <%end%>
 
           multiplos = <%=@params_movistar.multiplos_amount_permit%>
-          if(input_type_pago.value === "Prepago"){
+          if($("#recharge_type_payment").val() === "Prepago"){
             show_div_cod_area = true
             operation = "recarga"
+            cod_area = [...cod_area_movistar,...cod_area_tlf_fija]
             set_max_length(7)
           }else{
             show_div_cod_area = false
             operation = "consulta"
-            btn_recarga.innerText = "consultar"
+            cod_area = []
+            $("#btn_recarga").text("consultar")
             set_max_length(10)
           }
-          show_form(cod_area,monto_min,monto_max,multiplos)
+          show_form(monto_min,monto_max,multiplos)
           break;
 
         case "Digitel":
-          type_pago = $(this).data("pago")
-          input_type_pago.value = type_pago
 
           cod_area = [...cod_area_digitel,...cod_area_tlf_fija]
 
@@ -215,19 +210,17 @@
           multiplos = <%=@params_digitel.multiplos_amount_permit%>
           show_div_cod_area = true
 
-          if(input_type_pago.value === "Prepago"){
+          if($("#recharge_type_payment").val() === "Prepago"){
             operation = "recarga"
           }else{
             operation = "consulta"
-            btn_recarga.innerText = "consultar"
+            $("#btn_recarga").text("consultar")
           }
 
-          show_form(cod_area,monto_min,monto_max,multiplos)
+          show_form(monto_min,monto_max,multiplos)
           break;
 
         case "Inter":
-          type_pago = $(this).data("pago")
-          input_type_pago.value = type_pago
 
           cod_area = []
 
@@ -241,13 +234,13 @@
           multiplos = <%=@params_inter.multiplos_amount_permit%>
           show_div_cod_area = false
 
-          if(input_type_pago.value === "Prepago"){
+          if($("#recharge_type_payment").val() === "Prepago"){
             operation = "recarga"
           }else{
             operation = "consulta"
-            btn_recarga.innerText = "consultar"
+            $("#btn_recarga").text("consultar")
           }
-          show_form(cod_area,monto_min,monto_max,multiplos)
+          show_form(monto_min,monto_max,multiplos)
           break;
 
         default:

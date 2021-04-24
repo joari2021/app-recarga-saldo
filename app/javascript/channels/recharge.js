@@ -1,5 +1,5 @@
 document.addEventListener("turbolinks:load", function () {
-  input_buscador_contacts.addEventListener("input", function (event) {
+  $("#input_buscador_contacts").keyup(function(event){
     termino = $(this).val();
 
     if (termino.length == 0) {
@@ -140,34 +140,22 @@ document.addEventListener("turbolinks:load", function () {
   } 
 
   edit_modal = function () {
-  
-    for (let i = 0; i < card_options.length; i++) {
-        const element = card_options[i];
-        element.className = "card card-options shadow h-100 py-2 border-left-" + input_operadora.value
-    }
-  
-    for (let i = 0; i < labels.length; i++) {
-        const element = labels[i];
-        if (element.className.indexOf("label-special") != -1){
-          element.className = "label-special label-" + input_operadora.value
-        }
-    }
-  
-    for (let i = 0; i < span_barra.length; i++) {
-        const element = span_barra[i];
-        element.className = "barra bg-before-" + input_operadora.value
-    }
+    //REESCRITURA DE CLASES DE ELEMENTOS YA RENDERIZADOS AL INICIO
+    $(".card-options").attr("class","card card-options shadow h-100 py-2 border-left-" + input_operadora.value)
+    $("#loader_busq_contact").attr("class","loader loader-tam color-" + input_operadora.value)
+    $("#close_modal_contact, #close_modal_recharge").attr("class","far fa-times-circle close_modal color-" + input_operadora.value)
+    $("#title_modal_contact").attr("class", "modal_title color-" + input_operadora.value)
+    $("#tabla_buscador_contacts").attr("class", "table mt-3 bg-" + input_operadora.value)
 
-    title_modal_contact.className = "modal-title color-" + input_operadora.value 
-    close_modal_contact.className = "far fa-times-circle close_modal color-" + input_operadora.value
-    table_contacts.className = "table mt-3 bg-" + input_operadora.value 
-    loader_buscador_contact.className = "loader color-" + input_operadora.value
-
-    close_modal.className = "far fa-times-circle close_modal color-" + input_operadora.value
-    btn_recarga.className = "btn-standar btn--left bg-before-" + input_operadora.value
+    //ADD DE CLASES A ELEMENTOS RENDERIZADOS DEL FORM
+    $(".label-special").addClass("label-" + input_operadora.value)
+    $(".barra").addClass("bg-before-" + input_operadora.value)
+    $(".lbl").addClass("lbl-" + input_operadora.value)
+    $("#label_switch").addClass("color-" + input_operadora.value)
+    $("#btn_show_contacts, #btn_recarga").addClass("bg-" + input_operadora.value)
   }
 
-  show_form = function (cod_area,monto_min,monto_max,multiplos) {
+  show_form = function (monto_min,monto_max,multiplos) {
   
     if(show_div_cod_area){
   
@@ -314,7 +302,7 @@ document.addEventListener("turbolinks:load", function () {
     });
   }
 
-  var_refresh_consult = setInterval(refresh_consultas, 100000);
+  var_refresh_consult = setInterval(refresh_consultas, 1000000);
   $.ajaxSetup({ cache: false });
   
 });

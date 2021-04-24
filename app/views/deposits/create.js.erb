@@ -1,4 +1,4 @@
-$("#close_modal_deposit_standar").trigger("click");
+$("#close_modal_deposit").trigger("click");
 
 swal({
   title: "Compra Registrada!",
@@ -7,9 +7,9 @@ swal({
 });
 
 new_content = `<tr class="tr-standar" id="deposit_<%=@deposit.id%>">
-                    <td class="td-standar" data-label="Fecha"><%=@deposit.day_payment.to_s.rjust(2, '0')%>/<%=@deposit.month_payment.to_s.rjust(2, '0')%>/<%=@deposit.year_payment%></td>
-                    <td class="td-standar" data-label="Banco Destino"><%=@deposit.bank_destinity%></td>
-                    <td class="td-standar" data-label="M. Pago"><%=@deposit.method_payment%></td>
+                    <td class="td-standar" data-label="Fecha"><%=@deposit.date_send.strftime("%d/%m/%Y")%></td>
+                    <td class="td-standar" data-label="Banco Destino"><%=@deposit.bank_destinity.gsub("_"," ")%></td>
+                    <td class="td-standar" data-label="M. Pago"><%=@deposit.method_payment.gsub("_"," ")%></td>
                     <td class="td-standar" data-label="Referencia"><%=@deposit.ref_payment%></td>
                     <td class="td-standar" data-label="Monto"><%=number_with_precision(@deposit.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>
                     <td class="td-standar" data-label="Estatus">

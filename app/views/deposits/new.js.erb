@@ -1,10 +1,11 @@
-$('#title_modal_deposit').html("Nuevo deposito");
+$('#title_modal_deposit').html("Nuevo Deposito");
  
 $('#modal_body_deposits').html('<%= j render("form") %>');
 
-$(".modal_deposits").addClass("show")
-$(".modal_deposits-wrap").addClass("show")
-
 <%if @deposit.errors.any?%>
+    $("#deposit_amount").val("<%=number_with_precision(@deposit.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%>")
     estilizar_errores_validacion()
+<%else%>
+    $("#modal_deposit").addClass("show")
+    $("#modal_deposit_wrap").addClass("show")
 <%end%>

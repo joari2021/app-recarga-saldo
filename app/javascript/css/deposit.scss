@@ -1,0 +1,52 @@
+@media screen and (max-width: 920px) {
+  .table-deposit {
+    border: 0;
+    background-color: #f8f9fc;
+  }
+
+  .table-deposit tr {
+    margin-bottom: 20px;
+    padding: 10px;
+    display: block;
+    color: #fff;
+    background-color: var(--color-fuerte) !important;
+    background-image: -webkit-linear-gradient(
+      bottom right,
+      var(--color-fuerte),
+      var(--color-debil)
+    );
+    background-image: -o-linear-gradient(
+      bottom right,
+      var(--color-fuerte),
+      var(--color-debil)
+    );
+    background-image: linear-gradient(
+      to top left,
+      var(--color-debil),
+      var(--color-fuerte)
+    );
+    border-radius: 25px;
+  }
+
+  .table-deposit td {
+    display: block;
+    text-align: right;
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .table-deposit td:last-child {
+    border-bottom: 0;
+  }
+
+  .table-deposit td:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .table-deposit thead {
+    display: none;
+  }
+}

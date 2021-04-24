@@ -103,10 +103,6 @@ input:focus ~ .barra::before {
   left: 0;
 }
 
-.barra-Movistar:before{
-  background-color: var(--movistar) !important;
-}
-
 .bg-Movistar,
 .bg-Movistar_TV,
 .bg-before-Movistar::before,
@@ -152,8 +148,6 @@ input:focus ~ .barra::before {
   background: var(--simpletv) !important;
 }
 
-button.bg-Movistar:hover,
-button.bg-Movistar_TV:hover,
 span.bg-Movistar:hover,
 span.bg-Movistar_TV:hover,
 a.bg-Movistar:hover,
@@ -162,34 +156,30 @@ a.bg-Movistar_TV:hover {
   background-color: var(--movistar_hover) !important;
 }
 
-button.bg-Digitel:hover,
 span.bg-Digitel:hover,
 a.bg-Digitel:hover{
   color: #fff !important;
   background-color: var(--digitel_hover) !important;
 }
 
-button.bg-Movilnet:hover,
 span.bg-Movilnet:hover,
 a.bg-Movilnet:hover {
   color: #fff !important;
   background-color: var(--movilnet_hover) !important;
 }
 
-button.bg-Cantv:hover,
 span.bg-Cantv:hover,
 a.bg-Cantv:hover {
   color: #fff !important;
   background-color: var(--cantv_hover) !important;
 }
 
-button.bg-Inter:hover,
 span.bg-Inter:hover,
 a.bg-Inter:hover {
   color: #fff !important;
   background-color: var(--inter_hover) !important;
 }
-button.bg-Simple_TV:hover,
+
 span.bg-Simple_TV:hover,
 a.bg-Simple_TV:hover {
   color: #fff !important;
@@ -235,6 +225,8 @@ a.bg-Simple_TV:hover {
   display: none;
 }
 
+
+/*  BUTTONS ////////////////////
 .btn-standar {
   border: none;
   display: block;
@@ -270,3 +262,4 @@ a.bg-Simple_TV:hover {
 .btn--left:hover:before {
   width: 100%;
 }
+*/

@@ -2,7 +2,7 @@
   <div class="form">
     
     <%if @recharge.new_record?%>
-      <div class="grupo"><button class="btn" id="btn_show_contacts" onclick="show_modal_contacts(event)"><i class="far fa-address-book"></i></button></div>
+      <div class="grupo"><button class="btn btn_standar btn-effect btn-common" id="btn_show_contacts" onclick="show_modal_contacts(event)"><i class="far fa-address-book"></i></button></div>
     <%end%>
 
     <!--CODIGO DE AREA ----------------------------------------------------------->
@@ -56,21 +56,13 @@
         <label class="label-special">Nombre o alias</label>
         <span class="badge badge-pill badge-danger" id="msj_error_names" style="display:none;">Este campo no puede estar vacío</span>
       </div>
-      <script>
-
-        $(document).ready(function(){
-            $(".lbl").addClass("lbl-" + input_operadora.value)
-            $("#label_switch").addClass("color-" + input_operadora.value)
-            $("#btn_show_contacts").addClass("bg-" + input_operadora.value)
-        });
-      </script>
     <%end%>
 
     <%= form.text_field :operator, type:"hidden" %>
     <%= form.text_field :type_payment, type:"hidden" %>
 
     <div class="actions">
-      <button type="button" class="" id="btn_recarga" onclick="validation_submit()">Recargar</button>
+      <button type="button" class="btn_standar btn-common btn-effect" id="btn_recarga" onclick="validation_submit()">Recargar</button>
       <%=form.submit "Recargar", class: "d-none", id: "btn_submit"%>
     </div>
   </div>
