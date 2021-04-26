@@ -18,6 +18,7 @@ import "css/styles.scss"
 import "css/recharge.scss"
 import "css/deposit.scss"
 import "css/contact.scss"
+import "css/historial.scss"
 import "css/profile.scss"
 import "css/login_and_register"
 

@@ -98,7 +98,6 @@ document.addEventListener("turbolinks:load", function () {
   
   var_refresh_consult = setInterval(refresh_consultas, 1000000);
   $.ajaxSetup({ cache: false });
-  
 });
 
 show_cod_area = function () {
@@ -119,7 +118,7 @@ ocultar_montos = function () {
 
 push_cod = function (e, badge) {
   e.preventDefault();
-  input_cod_area.value = badge.innerText;
+  $("#recharge_cod_area").val(badge.innerText)
   $("#cont-option-list").fadeOut(200);
 }
 

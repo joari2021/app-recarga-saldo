@@ -9,7 +9,7 @@ swal({
 new_content = `<tr class="tr-standar" id="contact_<%=@contact.id%>" style="display:none;">
                     <td class="td-standar" data-label="Nombres o Alias"><%=@contact.names%></td>
                     <td class="td-standar" data-label="Sistema"><%=@contact.operator.gsub("_"," ")%></td>
-                    <td class="td-standar" data-label="T. Pago"><%=@contact.type_payment.gsub("_"," ")%></td>
+                    <td class="td-standar" data-label="T. Pago"><%=@contact%></td>
                     <td class="td-standar" data-label="Número">
                       <%=@contact.cod_area.present? ? "(" + @contact.cod_area + ") " : "" %>
                       <%=@contact.number%></td>
