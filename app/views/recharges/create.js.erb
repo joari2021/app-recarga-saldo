@@ -40,6 +40,17 @@ swal({
     });
   })
 <%end%>
+
+<%if @contact_registrado.present?%>
+  $(".swal-button").click(function(){
+    swal({
+      title: "Contacto No Guardado",
+      text: "El número ya ha sido registrado entre tus contactos",
+      icon: "warning",
+      button: "Cerrar",
+    });
+  })
+<%end%>
     
     
 

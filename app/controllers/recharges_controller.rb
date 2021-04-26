@@ -67,11 +67,15 @@ class RechargesController < ApplicationController
         
         if @recharge.save
           if recharge_params_special[:save_number]
-            cod_area = @recharge.operator === "Movistar" && @recharge.type_payment === "Prepago" || @recharge.operator === "Digitel" ||@recharge.operator === "Movilnet" || @recharge.operator === "Cantv" ? @recharge.cod_area : nil
-            
-            @contact = current_user.contacts.create(operator: @recharge.operator, type_payment: @recharge.type_payment, cod_area: cod_area, number: @recharge.number, names: recharge_params_special[:names])
+            unless current_user.contacts.where(number: @recharge.number).any?
+              cod_area = @recharge.operator === "Movistar" && @recharge.type_payment === "Prepago" || @recharge.operator === "Digitel" ||@recharge.operator === "Movilnet" || @recharge.operator === "Cantv" ? @recharge.cod_area : nil
+              
+              @contact = current_user.contacts.create(operator: @recharge.operator, type_payment: @recharge.type_payment, cod_area: cod_area, number: @recharge.number, names: recharge_params_special[:names])
+            else
+              @contact_registrado = true
+            end
           end
-   
+          
           format.json {head :no_content}
           format.js      
         else
