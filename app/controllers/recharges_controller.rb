@@ -3,6 +3,7 @@ class RechargesController < ApplicationController
   before_action :set_variables_recharge, only: %i[ index new create]
   before_action :verify_consulta!, only: [:create] 
   before_action :format_params_recharge, only: [:create] 
+  before_action :rectify_amount, only: [:create, :update]
 
   # GET /recharges or /recharges.json
   def index
@@ -52,7 +53,7 @@ class RechargesController < ApplicationController
       end
      
       #ACTUALIZANDO EL BALANCE
-      if @recharge.type_operation === "direct_recharge" && @recharge.amount <= current_user.balance.balance
+      if @recharge.type_operation === "direct_recharge"
         balance_final = current_user.balance.balance -= @recharge.amount
 
         ActiveRecord::Rollback unless current_user.balance.update(balance: balance_final)
@@ -62,34 +63,24 @@ class RechargesController < ApplicationController
       end
     end      
 
-    if @recharge.amount <= current_user.balance.balance
-      respond_to do |format|
-        
-        if @recharge.save
-          if recharge_params_special[:save_number]
-            unless current_user.contacts.where(number: @recharge.number).any?
-              cod_area = @recharge.operator === "Movistar" && @recharge.type_payment === "Prepago" || @recharge.operator === "Digitel" ||@recharge.operator === "Movilnet" || @recharge.operator === "Cantv" ? @recharge.cod_area : nil
-              
-              @contact = current_user.contacts.create(operator: @recharge.operator, type_payment: @recharge.type_payment, cod_area: cod_area, number: @recharge.number, names: recharge_params_special[:names])
-            else
-              @contact_registrado = true
-            end
+    respond_to do |format|
+      
+      if @recharge.save
+        if recharge_params_special[:save_number]
+          unless current_user.contacts.where(number: @recharge.number).any?
+            cod_area = @recharge.operator === "Movistar" && @recharge.type_payment === "Prepago" || @recharge.operator === "Digitel" ||@recharge.operator === "Movilnet" || @recharge.operator === "Cantv" ? @recharge.cod_area : nil
+            
+            @contact = current_user.contacts.create(operator: @recharge.operator, type_payment: @recharge.type_payment, cod_area: cod_area, number: @recharge.number, names: recharge_params_special[:names])
+          else
+            @contact_registrado = true
           end
-          
-          format.json {head :no_content}
-          format.js      
-        else
-          format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
-          format.js { render :new }
         end
-      end
-
-    else
-      @recharge.destroy
-
-      respond_to do |format|
+        
         format.json {head :no_content}
-        format.js { render :balance_insuficiente}
+        format.js      
+      else
+        format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
+        format.js { render :new }
       end
     end
   end
@@ -152,5 +143,14 @@ class RechargesController < ApplicationController
     def format_params_recharge
       recharge_params[:amount].gsub!('.','')
       recharge_params[:amount].gsub!(',','.')
+    end
+
+    def rectify_amount
+      unless recharge_params[:amount].to_f <= current_user.balance.balance
+        respond_to do |format|
+          format.json {head :no_content}
+          format.js { render :balance_insuficiente}
+        end
+      end
     end
 end
