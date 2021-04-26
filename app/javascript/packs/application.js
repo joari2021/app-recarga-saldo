@@ -34,6 +34,7 @@ import "channels/script_login_and_register"
 import "channels/recharge"
 import "channels/deposit"
 import "channels/contact"
+import "channels/profile"
 
 import "channels/hidden_loader"
 

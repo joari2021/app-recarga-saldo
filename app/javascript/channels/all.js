@@ -3,6 +3,8 @@ document.addEventListener("turbolinks:load", function () {
     $(".contenedor_loader_sup").css({ opacity: "1", visibility: "visible" });
   });
 
+  show_datepicker()
+
   //VARIABLES
 
   //CODIGOS DE AREA
@@ -69,6 +71,8 @@ document.addEventListener("turbolinks:load", function () {
     "0294",
     "0295",
   ];
+
+
 });
 
 //FUNCIONES DE FORMATEO DE NUMEROS Y LETRAS PARA VALORES
@@ -208,18 +212,6 @@ getRootUrl = function () {
   return window.location.origin;
 };
 
-show_datepicker = function () {
-  $("#date").datepicker({
-    language: "es",
-    todayBtn: "linked",
-    clearBtn: false,
-    format: "dd/mm/yyyy",
-    multidate: false,
-    autoclose: true,
-    todayHighlight: true,
-  });
-};
-
 show_modal_delete = function (event, link) {
   event.preventDefault();
   swal({
@@ -240,5 +232,17 @@ show_modal_delete = function (event, link) {
     } else {
       swal("La eliminación fue cancelada!");
     }
+  });
+};
+
+show_datepicker = function () {
+  $("#date").datepicker({
+    language: "es",
+    todayBtn: "linked",
+    clearBtn: false,
+    format: "dd/mm/yyyy",
+    multidate: false,
+    autoclose: true,
+    todayHighlight: true,
   });
 };

@@ -308,7 +308,7 @@ select {
 }
 
 .content-select {
-  max-width: 250px;
+  //max-width: 250px;
   position: relative;
 }
 
@@ -316,7 +316,7 @@ select {
   display: inline-block;
   width: 100%;
   cursor: pointer;
-  padding: 12px 10px;
+  padding: 10.5px 10px;
   //height: 42px;
   outline: 0;
   border: 0;
@@ -332,8 +332,8 @@ select {
 }
 
 .content-select select:hover {
-  border-bottom: 1px solid var(--movistar);
-  transition: 0.5s ease all;
+  border-bottom: 1px solid var(--color-medio);
+  transition: 0.3s ease all;
 }
 
 /* 
@@ -348,8 +348,8 @@ dos bordes con color y que giramos con transform: rotate(-45deg);
   width: 16px;
   height: 16px;
   display: block;
-  border-left: 4px solid #2ac176;
-  border-bottom: 4px solid #2ac176;
+  border-left: 4px solid var(--color-medio);
+  border-bottom: 4px solid var(--color-medio);
   transform: rotate(-45deg); /* Giramos el cuadrado */
   transition: all 0.25s ease;
 }
@@ -422,7 +422,7 @@ p.msj_error {
   color: white;
   font-weight: bold;
   padding: 5px;
-  max-width: 234px;
+  //max-width: 234px; PROBAR QUE NO AFECTE SU ELEGANCIA EN LOS MODALS
 }
 
 input:focus ~ .label-Standar,

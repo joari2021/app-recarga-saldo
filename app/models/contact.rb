@@ -26,5 +26,4 @@ class Contact < ApplicationRecord
   validates :number, length: { is: 8, message: "Debe contener 8 dígitos.", if: :number_length_8? }
   validates :number, length: { is: 10, message: "Debe contener 10 dígitos.", if: :number_length_10? }
   validates :number, length: { is: 12, message: "Debe contener 12 dígitos.", if: :number_length_12? }
-
 end

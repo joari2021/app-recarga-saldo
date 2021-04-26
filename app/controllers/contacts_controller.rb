@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: %i[ show edit update destroy ]
   before_action :format_params_contact, only: [:create,:update]
-  before_action :verify_number_not_register, only: [:create,:update]
+  before_action :verify_number_not_register, only: [:create]
 
   # GET /contacts or /contacts.json
   def index
@@ -41,14 +41,14 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1 or /contacts/1.json
   def update
     respond_to do |format|
-      if @contact.update(contact_params)
+      if @contact.update(contact_update_params)
           format.json {head :no_content}
           format.js
       else
           format.json { render json: @contact.error.full_messages, status: :unprocessable_entity }
           format.js { render :edit }
       end
-  end
+    end
   end
 
   # DELETE /contacts/1 or /contacts/1.json
@@ -85,6 +85,11 @@ class ContactsController < ApplicationController
     def contact_params
       params.require(:contact).permit(:names, :operator, :type_payment, :number, :cod_area)
     end
+
+    def contact_update_params
+      params.require(:contact).permit(:names, :operator, :type_payment)
+    end
+
 
     def format_params_contact
       contact_params[:operator].gsub!(' ','_')
