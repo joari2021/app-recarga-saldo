@@ -1,9 +1,10 @@
 <%= form_for @contact, {remote: true}  do |form| %>
   <div class="form">
     
+    <!---NOMBRE O ALIAS-->
     <div class="grupo">
-      <%= form.text_field :names, :required => "required", class:"input-special", maxlength: "20"%><span class="barra"></span>
-      <%= form.label :names, "Nombres o alias", for: "", class: "label-special label-movistar" %>
+      <%= form.text_field :names, :required => "required", class:"input-special", maxlength: "20"%><span class="barra bg-before-Standar"></span>
+      <%= form.label :names, "Nombres o alias", for: "", class: "label-special label-Standar" %>
       <%if @contact.errors[:names].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:names].to_s[/\w([^"]*)/] %></p>
       <% end %>
@@ -11,8 +12,8 @@
     
     <!--OPERADORAS #############################-->
     <div class="grupo">
-      <%= form.text_field :operator, :required => "required", class:"input-special input-option", maxlength: "11", :"data-options" => "#options-operators" %><span class="barra"></span>
-      <%= form.label :operator, "Sistema", for: "", class: "label-special label-movistar" %>
+      <%= form.text_field :operator, :required => "required", class:"input-special input-option", maxlength: "11", :"data-options" => "#options-operators", oninput:"readonly(this)" %><span class="barra bg-before-Standar"></span>
+      <%= form.label :operator, "Sistema", for: "", class: "label-special label-Standar" %>
       <%if @contact.errors[:operator].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:operator].to_s[/\w([^"]*)/] %></p>
       <% end %>
@@ -20,15 +21,15 @@
       <div id="options-operators" style="display:none" onchange = "verify_operator()" >
         <div class="row">
           <div class="col-6">
-            <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Movistar</a><br>
-            <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Digitel</a><br>
-            <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Movilnet</a><br>
-            <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Cantv</a>
+            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Movistar</a><br>
+            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Digitel</a><br>
+            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Movilnet</a><br>
+            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Cantv</a>
           </div>
           <div class="col-6">
-              <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Movistar TV</a><br>
-              <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Inter</a><br>
-              <a href="#" class="badge badge-movistar" data-input ="#contact_operator" onclick="push_value(event, this)" style="margin: 5px;">Simple TV</a>
+              <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Movistar TV</a><br>
+              <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Inter</a><br>
+              <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Simple TV</a>
           </div>
         </div>
       </div>
@@ -36,22 +37,22 @@
 
     <!--TIPO DE PAGO #############################-->
     <div class="grupo">
-      <%= form.text_field :type_payment, :required => "required", class:"input-special input-option", maxlength: "9", :"data-options" => "#options-type-payment" %><span class="barra"></span>
-      <%= form.label :type_payment, "Tipo de pago", for: "", class: "label-special label-movistar" %>
+      <%= form.text_field :type_payment, :required => "required", class:"input-special input-option", maxlength: "9", :"data-options" => "#options-type-payment", oninput:"readonly(this)" %><span class="barra bg-before-Standar"></span>
+      <%= form.label :type_payment, "Tipo de pago", for: "", class: "label-special label-Standar" %>
       <%if @contact.errors[:type_payment].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:type_payment].to_s[/\w([^"]*)/] %></p>
       <% end %>
      
       <div id="options-type-payment" style="display:none">
-        <a href="#" class="badge badge-movistar" data-input ="#contact_type_payment" id="badge-prepago" onclick="push_value(event, this)" style="margin: 5px;">Pre-pago</a>
-        <a href="#" class="badge badge-movistar" data-input ="#contact_type_payment" id="badge-postpago" onclick="push_value(event, this)" style="margin: 5px;">Post-pago</a>
+        <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_type_payment" id="badge-prepago" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Prepago</a>
+        <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_type_payment" id="badge-postpago" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Post-pago</a>
       </div>
     </div>
 
     <!--CODIGO DE AREA #################################-->
     <div class="grupo" id="div_cod_area">
-      <%= form.text_field :cod_area, :required => "required", class:"input-special input-option", :"data-options" => "#options-cod-area", oninput: "format_number(this)", onfocus:"create_cod_area()", maxlength: "4" %><span class="barra"></span>
-      <%= form.label :cod_area, "Cod. Área", for: "", class: "label-special label-movistar" %>
+      <%= form.text_field :cod_area, :required => "required", class:"input-special input-option", :"data-options" => "#options-cod-area", oninput: "input_value_integer(this)", onfocus:"create_cod_area()", maxlength: "4" %><span class="barra bg-before-Standar"></span>
+      <%= form.label :cod_area, "Cod. Área", for: "", class: "label-special label-Standar" %>
       <%if @contact.errors[:cod_area].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:cod_area].to_s[/\w([^"]*)/] %></p>
       <% end %>
@@ -61,43 +62,22 @@
 
     <!--NUMERO ###########################################-->
     <div class="grupo">
-      <%= form.text_field :phone, :required => "required", class:"input-special", :oninput => "format_number(this)", :onfocus => "set_length(this)" %><span class="barra"></span>
-      <%= form.label :phone, "Número", for:"", class: "label-special label-movistar" %>
-      <%if @contact.errors[:phone].any? %>
-        <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:phone].to_s[/\w([^"]*)/] %></p>
+      <%= form.text_field :number, :required => "required", class:"input-special", :oninput => "input_value_integer(this)", :onfocus => "set_length(this)" %><span class="barra bg-before-Standar"></span>
+      <%= form.label :number, "Número", for:"", class: "label-special label-Standar" %>
+      <%if @contact.errors[:number].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:number].to_s[/\w([^"]*)/] %></p>
       <% end %>
     </div>
 
     <div class="actions">
-      <button type="button" class="btn-standar btn--left btn-movistar" id="btn_recarga">Guardar</button>
+      <button type="button" class="btn_standar btn-common btn-effect bg-special text-uppercase" id="btn_contact">Guardar</button>
       <%=form.submit "Guardar", class: "d-none", id: "btn_submit"%>
     </div>
   </div>
 <% end %>
 
 <script>
-  //VARIABLES
-  input_operator = document.getElementById("contact_operator")
-  input_type_payment = document.getElementById("contact_type_payment")
-  input_cod_area = document.getElementById("contact_cod_area")
-  input_number = document.getElementById("contact_phone")
-
-  $(".input-option").blur(function () { 
-    id_div = $(this).data("options")
-    $(id_div).fadeOut(200)
-  })
-
-  $(".input-option").focus(function () {
-      id_div = $(this).data("options")
-      $(id_div).fadeIn(200)
-  })
-
-  $("#btn_recarga").click(function () {
-      if(input_operator.value === "Movistar" && input_type_payment.value === "Post-pago" || input_operator.value === "Inter" || input_operator.value === "Movistar TV" || input_operator.value === "Simple TV"){
-        input_cod_area.removeAttribute("required")
-      }
-      $("#btn_submit").trigger("click")
-  })
-
+  toggle_list_options()
+  activar_submit_contact()
 </script>
 

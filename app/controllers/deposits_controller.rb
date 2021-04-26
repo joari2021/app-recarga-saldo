@@ -1,6 +1,6 @@
 class DepositsController < ApplicationController
   before_action :set_deposit, only: %i[show edit update destroy]
-  before_action :format_params, only: [:create]
+  before_action :format_params_deposit, only: [:create]
 
   # GET /deposits or /deposits.json
   def index
@@ -71,5 +71,12 @@ class DepositsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def deposit_params
     params.require(:deposit).permit(:amount, :bank_destinity, :status, :method_payment, :date_send, :ref_payment)
+  end
+
+  def format_params_deposit
+    deposit_params[:bank_destinity].gsub!(' ','_')
+    deposit_params[:method_payment].gsub!(' ','_')
+    deposit_params[:amount].gsub!('.','')
+    deposit_params[:amount].gsub!(',','.')
   end
 end

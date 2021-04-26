@@ -1,18 +1,17 @@
 <div>  
-  <%= link_to new_contact_path, {remote: true, class: "btn btn-info", id: "anadir-contact-btn"}  do %>
-    <span class="fas fa-plus-square" style=""></span>
+  <%= link_to new_contact_path, {remote: true, class: "btn btn_standar btn-common btn-effect bg-special", id: "anadir-contact-btn", style:"color:white;"}  do %>
+    <span class="fas fa-plus-square" style=""></span> Registrar Contacto
   <% end %>
 </div>
 <br />
 
 <div id="main-container">
-  <table class="table-standar" id="table_contacts">
-    <thead class="thead-standar">
+  <table class="table-standar table-contact" id="table_contacts">
+    <thead class="thead-standar bg-special">
       <tr class="tr-standar">
         <th class="th-standar">Nombres o alias</th>
         <th class="th-standar">Sistema</th>
         <th class="th-standar">T. Pago</th>
-        <th class="th-standar">Cod. Area</th>
         <th class="th-standar">Número</th>
         <th class="th-standar">Acciones</th>
       </tr>
@@ -21,10 +20,11 @@
     <%current_user.contacts.each do |contact|%>
       <tr class="tr-standar" id="contact_<%=contact.id%>">
         <td class="td-standar" data-label="Nombres o Alias"><%=contact.names%></td>
-        <td class="td-standar" data-label="Sistema"><%=contact.operator%></td>
-        <td class="td-standar" data-label="T. Pago"><%=contact.type_payment%></td>
-        <td class="td-standar" data-label="Cod. Área"><%=contact.cod_area%></td>
-        <td class="td-standar" data-label="Número"><%=contact.phone%></td>
+        <td class="td-standar" data-label="Sistema"><%=contact.operator.gsub("_"," ")%></td>
+        <td class="td-standar" data-label="T. Pago"><%=contact.type_payment.gsub("_"," ")%></td>
+        <td class="td-standar" data-label="Número">
+          <%=contact.cod_area.present? ? "(" + contact.cod_area + ") " : "" %>
+          <%=contact.number%></td>
         <td class="td-standar" data-label="Acciones">
           <%= link_to edit_contact_path(contact), {class: "btn btn-primary btn-sm", remote: true} do%>
             <i class="fas fa-edit"></i>
@@ -38,8 +38,11 @@
   </table>
 </div>
 
-<%= render 'modal_contacts' %>
+<div class="row justify-content-center" id="registro_vacio">
+  <%unless current_user.contacts.any?%>
+    <%=render "partials/registro_vacio"%>
+  <%end%>
+</div>
 
-<script src="/js/js_views/all.js"></script>
-<script src="/js/js_views/contacts.js"></script>
+<%= render 'modal_contacts' %>
 

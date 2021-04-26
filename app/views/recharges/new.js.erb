@@ -5,6 +5,9 @@ $('#caja_form').html('<%= j render("form") %>');
 $("#btn_recarga").attr("data-validate","true")
 input_operadora.value = operadora_val
 
+<!--VARIABLE PARA LEER DESDE LA FUNCION SET_MAX_LENGHT Y DIFERENCIARLA-->
+input_number = $("#recharge_number")
+
 function mostrar_type_pago(){
     <% unless @recharge.errors.any? %>
         $("#caja_type_pago").fadeIn(600)
@@ -25,7 +28,6 @@ switch (operadora_val) {
         title_modal.innerHTML = '<%=image_tag("sistema_recargas/digitel.jpeg", width:"100px", height:"30px")%>'
         edit_modal()
         mostrar_type_pago()
-        set_max_length(7)
     break;
 
     case "Movilnet":
@@ -49,7 +51,6 @@ switch (operadora_val) {
 
         show_div_cod_area = true
         operation = "recarga"
-        set_max_length(7)
 
         show_form(monto_min,monto_max,multiplos)
     break;
@@ -75,7 +76,6 @@ switch (operadora_val) {
 
         show_div_cod_area = true
         operation = "recarga"
-        set_max_length(7)
 
         show_form(monto_min,monto_max,multiplos)
     break;
@@ -101,7 +101,6 @@ switch (operadora_val) {
 
         show_div_cod_area = false
         operation = "recarga"
-        set_max_length(8)
 
         show_form(monto_min,monto_max,multiplos)
     break;
@@ -110,7 +109,6 @@ switch (operadora_val) {
         title_modal.innerHTML = '<%=image_tag("sistema_recargas/inter.jpeg", width:"100px", height:"30px")%>'
         edit_modal()
         mostrar_type_pago()
-        set_max_length(10)
     break;
 
     case "Simple_TV":
@@ -134,7 +132,6 @@ switch (operadora_val) {
 
         show_div_cod_area = false
         operation = "recarga"
-        set_max_length(12)
         show_form(monto_min,monto_max,multiplos)
     break;
 
@@ -143,6 +140,7 @@ switch (operadora_val) {
 }
 
 <% if @recharge.errors.any? %>
+
     <!--FORMATEANDO EL MONTO-->
     <%if @recharge.type_operation != "consultation"%>
 

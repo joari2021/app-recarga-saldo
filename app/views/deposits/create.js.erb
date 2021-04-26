@@ -21,5 +21,8 @@ new_content = `<tr class="tr-standar" id="deposit_<%=@deposit.id%>">
                 </tr>`
 
 $('#table_deposits').append(new_content)
-    
+
+<%if current_user.deposits.count === 1%>
+  $("#notify_vacio").css({"display":"none"})
+<%end%>
 $('#deposit_<%=@deposit.id%>').fadeTo(1000,1);

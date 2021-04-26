@@ -97,9 +97,13 @@
 <h3 class="section-title pb-3 mt-5 mb-4 text-center border-title font-weight-bold">Consultas y pagos Post-Pago</h3>
 
 
-<div class="row" id="row_consultation">
+<div class="row justify-content-center" id="row_consultation">
   <%current_user.recharges.where(type_operation: "consultation").each do |recharge|%>
     <%=render "caja_consultation", recharge: recharge%>
+  <%end%>
+
+  <%unless current_user.recharges.where(type_operation: "consultation").any?%>
+    <%=render "partials/registro_vacio"%>
   <%end%>
 </div>
 <%= render "modal_buscador_contacts"%>
@@ -185,13 +189,11 @@
             show_div_cod_area = true
             operation = "recarga"
             cod_area = [...cod_area_movistar,...cod_area_tlf_fija]
-            set_max_length(7)
           }else{
             show_div_cod_area = false
             operation = "consulta"
             cod_area = []
             $("#btn_recarga").text("consultar")
-            set_max_length(10)
           }
           show_form(monto_min,monto_max,multiplos)
           break;

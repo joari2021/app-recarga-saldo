@@ -1,4 +1,4 @@
-$("#close_modal_contact_standar").trigger("click");
+$("#close_modal_contact_register").trigger("click");
 
 swal({
   title: "Contacto guardado!",
@@ -8,21 +8,26 @@ swal({
 
 new_content = `<tr class="tr-standar" id="contact_<%=@contact.id%>" style="display:none;">
                     <td class="td-standar" data-label="Nombres o Alias"><%=@contact.names%></td>
-                    <td class="td-standar" data-label="Sistema"><%=@contact.operator%></td>
-                    <td class="td-standar" data-label="T. Pago"><%=@contact.type_payment%></td>
-                    <td class="td-standar" data-label="Cod. Área"><%=@contact.cod_area%></td>
-                    <td class="td-standar" data-label="Número"><%=@contact.phone%></td>
+                    <td class="td-standar" data-label="Sistema"><%=@contact.operator.gsub("_"," ")%></td>
+                    <td class="td-standar" data-label="T. Pago"><%=@contact.type_payment.gsub("_"," ")%></td>
+                    <td class="td-standar" data-label="Número">
+                      <%=@contact.cod_area.present? ? "(" + @contact.cod_area + ") " : "" %>
+                      <%=@contact.number%></td>
                     <td class="td-standar" data-label="Acciones">
                         <%= link_to edit_contact_path(@contact), {class: "btn btn-primary btn-sm", remote: true} do%>
                         <i class="fas fa-edit"></i>
                         <%end%>
-                        <a href="#" class="btn btn-sm btn-danger" data-contact_id="contact_<%=@contact.id%>" onclick="show_modal_delete(event,this)"><i class="fas fa-trash-alt"></i></a>
+                        <a href="#" class="btn btn-sm btn-danger" id="<%=@contact.id%>" onclick="show_modal_delete(event,this)"><i class="fas fa-trash-alt"></i></a>
 
                         <%= link_to "Borrar", @contact, remote: true, method: :delete, class: "d-none", id:"delete_#{@contact.id}" %>
                     </td>
                 </tr>`
 
 $('#table_contacts').append(new_content)
-    
+
+<%if current_user.contacts.count === 1%>
+  $("#notify_vacio").css({"display":"none"})
+<%end%>
+
 $('#contact_<%=@contact.id%>').fadeTo(1000,1);
 

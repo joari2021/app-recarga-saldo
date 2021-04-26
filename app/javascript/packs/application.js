@@ -17,6 +17,7 @@ ActiveStorage.start()
 import "css/styles.scss"
 import "css/recharge.scss"
 import "css/deposit.scss"
+import "css/contact.scss"
 import "css/profile.scss"
 import "css/login_and_register"
 
@@ -31,6 +32,7 @@ import "channels/all"
 import "channels/script_login_and_register"
 import "channels/recharge"
 import "channels/deposit"
+import "channels/contact"
 
 import "channels/hidden_loader"
 

@@ -2,6 +2,7 @@ class RechargesController < ApplicationController
   before_action :set_recharge, only: %i[ show edit update destroy ]
   before_action :set_variables_recharge, only: %i[ index new create]
   before_action :verify_consulta!, only: [:create] 
+  before_action :format_params_recharge, only: [:create] 
 
   # GET /recharges or /recharges.json
   def index
@@ -46,6 +47,8 @@ class RechargesController < ApplicationController
         else
           @recharge.update(type_operation: "direct_recharge")
         end
+      else
+        @recharge.update(type_operation: "direct_recharge")
       end
      
       #ACTUALIZANDO EL BALANCE
@@ -61,18 +64,12 @@ class RechargesController < ApplicationController
 
     if @recharge.amount <= current_user.balance.balance
       respond_to do |format|
-    
+        
         if @recharge.save
           if recharge_params_special[:save_number]
             cod_area = @recharge.operator === "Movistar" && @recharge.type_payment === "Prepago" || @recharge.operator === "Digitel" ||@recharge.operator === "Movilnet" || @recharge.operator === "Cantv" ? @recharge.cod_area : nil
             
-            @contact = current_user.contacts.create(operator: @recharge.operator, type_payment: @recharge.type_payment, cod_area: cod_area, number: @recharge.phone, names: recharge_params_special[:names])
-
-            if @contact.save
-              @contact_save = true
-            else
-              @contact_save = false
-            end
+            @contact = current_user.contacts.create(operator: @recharge.operator, type_payment: @recharge.type_payment, cod_area: cod_area, number: @recharge.number, names: recharge_params_special[:names])
           end
    
           format.json {head :no_content}
@@ -80,7 +77,6 @@ class RechargesController < ApplicationController
         else
           format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
           format.js { render :new }
-          
         end
       end
 
@@ -147,5 +143,10 @@ class RechargesController < ApplicationController
 
     def recharge_params_special
       params.require(:recharge).permit(:save_number,:names)
+    end
+
+    def format_params_recharge
+      recharge_params[:amount].gsub!('.','')
+      recharge_params[:amount].gsub!(',','.')
     end
 end

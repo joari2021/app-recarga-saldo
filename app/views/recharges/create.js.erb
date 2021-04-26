@@ -9,6 +9,7 @@ $("#close_modal_recharge").trigger("click");
     title = "Consulta Enviada!"
     text = "En unos segundos se mostrara en la sección de abajo el monto de la deuda y podrá hacer el pago si lo desea."
 
+    $("#notify_vacio").remove()
     $("#row_consultation").append(`<%=render "caja_consultation", recharge: @recharge%>`);
     $("#consultation<%=@recharge.id%>").css({"display":"none"})
     $("#consultation<%=@recharge.id%>").fadeIn(600)
@@ -21,24 +22,25 @@ swal({
   button: "Cerrar",
 });
 
-<%if @contact_save.present?%>
+<!--INFORME DE GUARDADO DE CONTACTOS-->
+<%if @contact.present?%>
   $(".swal-button").click(function(){
-    <%if @contact_save === true%>
-      swal({
+    
+    swal({
+      <% unless @contact.errors.any? %>
         title: "Contacto Guardado",
         text: "El contacto fue registrado con exito.",
         icon: "success",
-        button: "Cerrar",
-      });
-    
-    <%else%>
-      swal({
+      <%else%>
         title: "Contacto No Guardado",
-        text: "El número ya se encuentra registrado en tus contactos.",
+        text: "El contacto no se guardo debido a los siguientes errores:\n\n<%if @contact.errors[:names].any? %>* Nombres o alias: <%= @contact.errors[:names].to_s[/\w([^"]*)/] %><% end %>",
         icon: "warning",
-        button: "Cerrar",
-      });
-    <%end%>
+      <%end%>
+      button: "Cerrar",
+    });
   })
 <%end%>
+    
+    
+
 

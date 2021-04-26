@@ -1,5 +1,7 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: %i[ show edit update destroy ]
+  before_action :format_params_contact, only: [:create,:update]
+  before_action :verify_number_not_register, only: [:create,:update]
 
   # GET /contacts or /contacts.json
   def index
@@ -21,18 +23,15 @@ class ContactsController < ApplicationController
 
   # POST /contacts or /contacts.json
   def create
-
     @contact = current_user.contacts.create(contact_params)
 
-    @contact.operator.downcase!
-    @contact.type_payment.downcase!
-    @contact.operator.gsub!(' ','_')
-    
     respond_to do |format|
       if @contact.save
         format.json { head :no_content }
         format.js
       else
+        format_params_contact_reverse()
+        
         format.json { render json: @contact.errors.full_messages, status: :unprocessable_entity }
         format.js { render :new }
       end
@@ -85,5 +84,27 @@ class ContactsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def contact_params
       params.require(:contact).permit(:names, :operator, :type_payment, :number, :cod_area)
+    end
+
+    def format_params_contact
+      contact_params[:operator].gsub!(' ','_')
+      contact_params[:type_payment].gsub!(' ','_')
+    end
+
+    def format_params_contact_reverse
+      operator = @contact.operator.gsub("_"," ")
+      @contact.operator = operator
+
+      type_payment = @contact.type_payment.gsub("_"," ")
+      @contact.type_payment = type_payment
+    end
+
+    def verify_number_not_register
+      if current_user.contacts.where(number: contact_params[:number]).any?
+        respond_to do |format|
+            format.json { head :no_content }
+            format.js { render :number_registrado }
+        end
+      end
     end
 end
