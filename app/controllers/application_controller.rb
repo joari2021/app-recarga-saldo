@@ -5,9 +5,9 @@ class ApplicationController < ActionController::Base
 
      def layout_by_resource
         
-        if devise_controller?
-       		"devise"        
-        end
+          if devise_controller?
+               "devise"        
+          end
      end
 
      def authenticate_edit_profile!
