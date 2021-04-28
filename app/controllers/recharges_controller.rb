@@ -1,4 +1,5 @@
 class RechargesController < ApplicationController
+  before_action :authenticate_admin, only: [:process_recharges]
   before_action :set_recharge, only: %i[ show edit update destroy ]
   before_action :set_variables_recharge, only: %i[ index new create]
   before_action :verify_consulta!, only: [:create] 
@@ -87,8 +88,8 @@ class RechargesController < ApplicationController
 
   # PATCH/PUT /recharges/1 or /recharges/1.json
   def update
-    ActiveRecord::Base.transaction do
-      if @recharge.type_operation === "consultation" && @recharge.status === "procesada"
+    if @recharge.type_operation === "consultation" && @recharge.status === "procesada"
+      ActiveRecord::Base.transaction do
         respond_to do |format|
           if @recharge.update(status:"enviada",type_operation:"direct_recharge")
             balance_final = current_user.balance.balance -= @recharge.amount
@@ -102,6 +103,67 @@ class RechargesController < ApplicationController
           end
         end
       end
+    elsif current_user.is_admin?
+      if @recharge.type_operation === "direct_recharge"
+        if update_recharge_params[:operation] === "confirm"
+          if @recharge.update(status:"confirmada")
+            respond_to do |format|
+              format.json { head :no_content }
+              format.js
+            end
+          else
+            respond_to do |format|
+              format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
+              format.js {render :edit}
+            end
+          end
+        elsif update_recharge_params[:operation] === "deneged"
+          ActiveRecord::Base.transaction do
+            respond_to do |format|
+              if @recharge.update(status:"anulada")
+
+                balance_final = @recharge.user.balance.balance += @recharge.amount
+                ActiveRecord::Rollback unless @recharge.user.balance.update(balance: balance_final)
+
+                format.json { head :no_content }
+                format.js
+              else
+                format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
+                format.js {render :edit}   
+              end
+            end
+          end
+        end
+      elsif @recharge.type_operation === "consultation"
+        if update_recharge_params[:operation] === "confirm"
+          update_consultation_params[:amount].gsub!('.','')
+          update_consultation_params[:amount].gsub!(',','.')
+          
+          ActiveRecord::Base.transaction do
+            respond_to do |format|
+              if @recharge.update(update_consultation_params)
+                ActiveRecord::Rollback unless @recharge.update(status: "procesada")
+                format.json { head :no_content }
+                format.js
+              else
+                format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
+                format.js { render :edit }
+              end
+            end
+          end
+
+        elsif update_recharge_params[:operation] === "deneged"
+          respond_to do |format|
+            if @recharge.update(status:"anulada")
+              format.json { head :no_content }
+              format.js
+            else
+              format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
+              format.js {render :edit}   
+            end
+          end
+        end
+      end
     end
   end
 
@@ -112,6 +174,10 @@ class RechargesController < ApplicationController
       format.json { head :no_content }
       format.js
     end
+  end
+
+  def process_recharges
+    @recharges = Recharge.where(status: "enviada")
   end
 
   private
@@ -140,10 +206,19 @@ class RechargesController < ApplicationController
       params.require(:recharge).permit(:save_number,:names)
     end
 
+    def update_recharge_params
+      params.require(:recharge).permit(:operation)
+    end
+
+    def update_consultation_params
+      params.require(:recharge).permit(:amount)
+    end
+
     def format_params_recharge
       recharge_params[:amount].gsub!('.','')
       recharge_params[:amount].gsub!(',','.')
     end
+
 
     def rectify_amount
       unless recharge_params[:amount].to_f <= current_user.balance.balance

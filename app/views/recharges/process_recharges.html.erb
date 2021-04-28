@@ -1,0 +1,36 @@
+<div id="cont_recharges_for_process">
+    <div id="sub_cont_recharges_for_process">
+        <h3 class="section-title pb-3 mt-5 mb-4 text-center border-title font-weight-bold">Recargas</h3>
+        
+        <div class="row <%unless @recharges.where(type_operation: "direct_recharge").any?%>justify-content-center<%end%>"" id="recargas">
+            <%@recharges.where(type_operation: "direct_recharge").each do |recharge|%>
+                <%=render "caja_recharges_proccess", recharge: recharge%>
+            <%end%>
+        
+            <%unless @recharges.where(type_operation: "direct_recharge").any?%>
+                <%=render "partials/registro_vacio"%>
+            <%end%>
+        </div>
+        
+        <h3 class="section-title pb-3 mt-5 mb-4 text-center border-title font-weight-bold">Consultas</h3>
+        
+        <div class="row <%unless @recharges.where(type_operation: "consultation").any?%>justify-content-center<%end%>" id="consultas">
+            <%@recharges.where(type_operation: "consultation").each do |recharge|%>
+                <%=render "caja_recharges_proccess", recharge: recharge%>
+            <%end%>
+        
+            <%unless @recharges.where(type_operation: "consultation").any?%>
+                <%=render "partials/registro_vacio"%>
+            <%end%>
+        </div>
+    </div>
+</div>
+
+<%=render "modal_recharge"%>
+
+<!--PLUGIN PARA SONIDO DE NOTIFICACIONES-->
+<script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
+
+<script>
+    
+</script>

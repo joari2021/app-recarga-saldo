@@ -96,57 +96,20 @@
 
 <h3 class="section-title pb-3 mt-5 mb-4 text-center border-title font-weight-bold">Consultas y pagos Post-Pago</h3>
 
-
-<div class="row justify-content-center" id="row_consultation">
-  <%current_user.recharges.where(type_operation: "consultation").each do |recharge|%>
-    <%=render "caja_consultation", recharge: recharge%>
-  <%end%>
-
-  <%unless current_user.recharges.where(type_operation: "consultation").any?%>
-    <%=render "partials/registro_vacio"%>
-  <%end%>
+<div id="contenedor_consultations">
+  <div class="row justify-content-center" id="sub_contenedor_consultation">
+    <%current_user.recharges.where(type_operation: "consultation").each do |recharge|%>
+      <%=render "caja_consultation", recharge: recharge%>
+    <%end%>
+  
+    <%unless current_user.recharges.where(type_operation: "consultation").any?%>
+      <%=render "partials/registro_vacio"%>
+    <%end%>
+  </div>
 </div>
 <%= render "modal_buscador_contacts"%>
 
-<!--MODAL RECARGA ##########################-->
-<div class="modal_original" id="modal_recharge">
-  <div class="modal_original_wrap modal-dialog modal-dialog-centered modal-dialog-scrollable" id="modal_recharge_wrap">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="title_modal"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <i class="far fa-times-circle" id="close_modal_recharge"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <!---TIPO DE PAGO-->
-        <div class="row" id="caja_type_pago" style="display:none;">
-          <div class="col-6 mb-4">
-            <div class="card-options" data-pago="Prepago" style="width:200px">
-              <div class="card-body card-body-content card-pointer">
-                Prepago
-              </div>
-            </div>
-          </div>
-          <div class="col-6 mb-4">
-            <div class="card-options" data-pago="Post-pago" style="width:200px">
-              <div class="card-body card-body-content card-pointer">
-                Post-pago
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!--FORMULARIO-->
-        <div class="row" id="caja_form" style="display:none;"></div>
-        
-      </div>
-    </div>
-  </div>
-</div>
-
-<!--PLUGIN PARA SONIDO DE NOTIFICACIONES-->
-<script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
+<%=render "modal_recharge"%>
 
 <script>
   <%= render "element_dom_globales"%>
@@ -157,10 +120,7 @@
       $.ajaxSetup({ cache: false });
   }
   
-  function refrescarNotificaciones() {
-    //$('#sound').trigger('click');
-    $.playSound("http://localhost:3000/sounds/iphone-notificacion.mp3")
-  }*/
+  */
   
   //Variables globales
   show_div_cod_area = false

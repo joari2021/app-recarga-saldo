@@ -5,6 +5,17 @@
       <div class="grupo"><button class="btn btn_standar btn-effect btn-common" id="btn_show_contacts" onclick="show_modal_contacts(event)"><i class="far fa-address-book"></i></button></div>
     <%end%>
 
+    <%= form.text_field :operator, type:"hidden" %>
+    <!--- TIPO DE PAGO  ----------------------------------------------------------------->
+    <%if current_user.is_admin? && @recharge.status === "enviada"%>
+      <div class="grupo">
+        <%= form.text_field :type_payment, :required => "required", class:"input-special", oninput: "this.value='#{@recharge.type_payment}'" %><span class="barra barra-before-<%=@recharge.operator%>"></span>
+        <%= form.label :type_payment, "Tipo de pago", for:"", class: "label-special color-#{@recharge.operator}" %>
+      </div>
+    <%else%>
+      <%= form.text_field :type_payment, type:"hidden" %>
+    <%end%>
+
     <!--CODIGO DE AREA ----------------------------------------------------------->
     <div class="grupo" id="input_cod_area">
       <%= form.text_field :cod_area, :required => "required", class:"input-special", oninput: "input_value_integer(this)", onfocus: "show_cod_area()", onblur: "ocultar_cod_area()", maxlength: "4" %><span class="barra"></span>
@@ -58,11 +69,15 @@
       </div>
     <%end%>
 
-    <%= form.text_field :operator, type:"hidden" %>
-    <%= form.text_field :type_payment, type:"hidden" %>
-
     <div class="actions">
-      <button type="button" class="btn_standar btn-common btn-effect" id="btn_recarga" onclick="validation_submit()">Recargar</button>
+      <button type="button" class="btn_standar btn-common btn-effect text-uppercase" id="btn_recarga" onclick="validation_submit()">Recargar</button>
+
+      <%if current_user.is_admin?%>
+        <input type="hidden" name="recharge[operation]" id="operation_admin">
+
+        <button type="button" class="mt-2 btn_standar btn-common btn-effect text-uppercase bg-danger" onclick="show_modal_anulate(event)">Anular</button>
+      <%end%>
+
       <%=form.submit "Recargar", class: "d-none", id: "btn_submit"%>
     </div>
   </div>

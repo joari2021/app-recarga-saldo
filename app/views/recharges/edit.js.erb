@@ -1,12 +1,15 @@
 $('#caja_form').html('<%= j render("form") %>');
 
 <%=render "element_dom_globales" %>
+
 btn_recarga.setAttribute("data-validate","false")
 
 <%if @recharge.operator === "Movistar"%> 
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/movistar.png", width:"100px", height:"30px")%>'
     edit_modal()
-    $("#input_cod_area").remove()
+    <%if @recharge.type_payment === "Post-pago"%>
+        $("#input_cod_area").remove()
+    <%end%>
 <%elsif @recharge.operator === "Digitel"%>
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/digitel.jpeg", width:"100px", height:"30px")%>'
     edit_modal()
@@ -14,6 +17,28 @@ btn_recarga.setAttribute("data-validate","false")
     title_modal.innerHTML = '<%=image_tag("sistema_recargas/inter.jpeg", width:"100px", height:"30px")%>'
     edit_modal()
     $("#input_cod_area").remove()
+<%end%>
+
+<!--EDITAR RECARGA CON PRIVILEGIO DE ADMIN-->
+<%if current_user.is_admin?%>
+    $("#operation").val(operation_admin)
+
+    <%if @recharge.operator === "Movilnet"%>
+        title_modal.innerHTML = '<%=image_tag("sistema_recargas/movilnet.png", width:"100px", height:"30px")%>'
+        edit_modal()
+    <%elsif @recharge.operator === "Cantv"%>
+        title_modal.innerHTML = '<%=image_tag("sistema_recargas/cantv.png", width:"100px", height:"30px")%>'
+        edit_modal()
+    <%elsif @recharge.operator === "Movistar_TV"%> 
+        title_modal.innerHTML = '<%=image_tag("sistema_recargas/movistar_tv.png", width:"100px", height:"30px")%>'
+        edit_modal()
+        $("#input_cod_area").remove()
+    
+    <%elsif @recharge.operator === "Simple_TV"%>
+        title_modal.innerHTML = '<%=image_tag("sistema_recargas/simple_tv.jpeg", width:"100px", height:"30px")%>'
+        edit_modal()
+        $("#input_cod_area").remove()
+    <%end%>
 <%end%>
 
 cod_area = "<%=@recharge.cod_area%>"
@@ -42,17 +67,35 @@ function block_entrada_input(input){
 
 input_cod_area.setAttribute("oninput","block_entrada_input(this)")
 input_number.setAttribute("oninput","block_entrada_input(this)")
-input_monto.setAttribute("oninput","block_entrada_input(this)")
-
-input_monto.value = "<%=number_with_precision(@recharge.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2) %>"
-
-btn_recarga.innerText = "pagar"
+<%unless current_user.is_admin? && @recharge.type_operation === "consultation" && @recharge.status === "enviada"%>
+    input_monto.setAttribute("oninput","block_entrada_input(this)")
+    input_monto.value = "<%=number_with_precision(@recharge.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2) %>"
+<%else%>
+    input_monto.value = ""
+    input_monto.setAttribute("oninput","input_value_decimal_with_separator(this)")
+<%end%>
 
 $(caja_type_pago).css({"display":"none"})
-$(caja_form).fadeIn(600);
+$(caja_form).fadeIn(200);
 
-<% unless @recharge.errors.any? %>
-    hidden_loader()
+<%if @recharge.status === "procesada"%>
+    btn_recarga.innerText = "pagar"
+<%else %>
+    btn_recarga.innerText = "confirmar"
+<%end%>
+
+<% unless @recharge.errors.any?%>
+    hidden_loader_sup()
     $('#modal_recharge').addClass('show');
     $('#modal_recharge_wrap').addClass('show');
+<%else%>
+    <%if @recharge.status != "procesada" && current_user.is_admin?%>
+        swal({
+            title: "Error",
+            text: "Ha ocurrido un error y la acción no fue procesada",
+            icon: "warning",
+            button: "Cerrar",
+        });
+    <%end%>
 <% end %>
+

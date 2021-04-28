@@ -87,9 +87,8 @@ class ContactsController < ApplicationController
     end
 
     def contact_update_params
-      params.require(:contact).permit(:names, :operator, :type_payment)
+      params.require(:contact).permit(:names)
     end
-
 
     def format_params_contact
       contact_params[:operator].gsub!(' ','_')

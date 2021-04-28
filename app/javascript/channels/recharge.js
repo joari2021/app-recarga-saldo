@@ -89,14 +89,24 @@ document.addEventListener("turbolinks:load", function () {
     $("#modal_recharge_wrap").addClass("show");
     input_names_contact.value = ""
     $("#tabla_buscador_contacts tbody").empty();
-    
   });
   
   $(".link_new_recharge").click(function () {
     operadora_val = $(this).data("operator");
   });
   
-  var_refresh_consult = setInterval(refresh_consultas, 1000000);
+  
+  if (typeof var_refresh_consult=== "undefined"){
+    var_refresh_consult = setInterval(refresh_consultas, 15000);
+  }
+
+  array_recharges = []
+  $(".div_recharge").each(function(indice, elemento) {
+    array_recharges.push($(elemento).attr("id")); 
+  });
+  if (typeof var_refresh_recharges_for_process === "undefined"){
+    var_refresh_recharges_for_process = setInterval(refresh_recharges_for_process, 15000);
+  }
   $.ajaxSetup({ cache: false });
 });
 
@@ -129,6 +139,10 @@ push_monto = function (e, badge) {
 }
 
 validation_submit = function () {
+  //LINEA DE UPDATE EN FORM PARA ADMIN
+  $("#operation_admin").val("confirm")
+  /////**************************** */
+
   if ($("#btn_recarga").data("validate") === true) {
     validate_form = true
     $("p.msj_error").css({"display":"none"})
@@ -290,7 +304,50 @@ hidden_loader = function () {
 }
 
 refresh_consultas = function  () {
-  $("#row_consultation").load( getRootUrl() + "/recharges" + " #row_consultation", function(){
-    //*USAR SI ES NECESARIO DESPUES DE CARGAR */
+  $("#contenedor_consultations").load( getRootUrl() + "/recharges" + " #sub_contenedor_consultation");
+}
+refresh_recharges_for_process = function  () {
+  $("#cont_recharges_for_process").load( getRootUrl() + "/process_recharges" + " #sub_cont_recharges_for_process", function(){
+    /* USAR SI ES NECESARIO DESPUES DE CARGAR */
+    new_recharge = false
+    $(".div_recharge").each(function(indice, elemento) {
+      if (array_recharges.indexOf($(elemento).attr("id")) === -1){
+        array_recharges.push($(elemento).attr("id"))
+        new_recharge = true
+      }
+    });
+
+    if (new_recharge){
+      refrescarNotificaciones()
+    }
   });
 }
+
+refrescarNotificaciones = function () {
+  //$('#sound').trigger('click');
+  $.playSound(getRootUrl() + "/sounds/iphone-notificacion.mp3")
+}
+
+show_modal_anulate = function (event) {
+  event.preventDefault();
+  swal({
+    title: "Estas segur@ de anular esta recarga?",
+    text: "Esta acción es irreversible!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      $("#operation_admin").val("deneged")
+      $("#recharge_amount").removeAttr("required")
+      $("#btn_submit").trigger("click")
+      swal({
+        title: "Procesando. Por favor espere...",
+        closeOnClickOutside: false,
+      });
+      $("button.swal-button").css({"display":"none"})
+    } else {
+      swal("La anulación fue cancelada!");
+    }
+  });
+};
