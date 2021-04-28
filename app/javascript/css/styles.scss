@@ -115,6 +115,10 @@
   cursor: pointer;
 }
 
+.border-left-standar{
+  border-left: 3px solid var(--color-medio) !important;
+}
+
 ////////////////////////////////////////////  SWEET ALERT  ############################################
 .swal-text {
   text-align: center;

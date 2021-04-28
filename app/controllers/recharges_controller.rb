@@ -178,6 +178,7 @@ class RechargesController < ApplicationController
 
   def process_recharges
     @recharges = Recharge.where(status: "enviada")
+    @deposits = Deposit.where(status: "Diferido")
   end
 
   private

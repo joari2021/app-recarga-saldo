@@ -1,6 +1,8 @@
 <%= form_for @deposit, {remote: true}  do |form| %>
   <div class="form">
-    <div class="grupo text-center"><a href="#" class="color-standar-medio font-weight-bold special-link p-2" onclick="show_modal_accounts(event)">Ver Cuentas</a></div>
+    <%if @deposit.new_record?%>
+      <div class="grupo text-center"><a href="#" class="color-standar-medio font-weight-bold special-link p-2" onclick="show_modal_accounts(event)">Ver Cuentas</a></div>
+    <%end%>
 
     <!--FECHA DEL PAGO  #################################-->
     <div class="grupo" id="div_cod_area">
@@ -70,11 +72,15 @@
     <div class="actions">
       <button type="button" class="btn_standar btn-common btn-effect bg-special text-uppercase" id="btn_deposit">Enviar</button>
       <%=form.submit "Enviar", class: "d-none", id: "btn_submit"%>
+
+      <%if current_user.is_admin?%>
+        <input type="hidden" name="deposit[operation]" data-model="deposit" id="operation_admin">
+
+        <button type="button" class="mt-2 btn_standar btn-common btn-effect text-uppercase bg-danger" onclick="show_modal_anulate(event)">Anular</button>
+      <%end%>
     </div>
   </div>
 <% end %>
 <script>
-  show_datepicker()
-  toggle_list_options()
   activar_submit_deposit()
 </script>

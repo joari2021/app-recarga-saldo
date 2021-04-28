@@ -1,0 +1,19 @@
+<%=render "partials/solicitudes_pendientes"%>
+
+<div id="cont_deposits_for_process">
+    <div id="sub_cont_deposits_for_process">
+        <h3 class="section-title pb-3 mt-5 mb-4 text-center border-title font-weight-bold">Depositos</h3>
+        
+        <div class="row <%unless @deposits.any?%>justify-content-center<%end%>">
+            <%@deposits.each do |deposit|%>
+                <%=render "caja_deposits_proccess", deposit: deposit%>
+            <%end%>
+        
+            <%unless @deposits.any?%>
+                <%=render "partials/registro_vacio"%>
+            <%end%>
+        </div>
+    </div>
+</div>
+
+<%=render "modal_deposits"%>

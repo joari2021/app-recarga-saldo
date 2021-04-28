@@ -100,10 +100,6 @@ document.addEventListener("turbolinks:load", function () {
     var_refresh_consult = setInterval(refresh_consultas, 15000);
   }
 
-  array_recharges = []
-  $(".div_recharge").each(function(indice, elemento) {
-    array_recharges.push($(elemento).attr("id")); 
-  });
   if (typeof var_refresh_recharges_for_process === "undefined"){
     var_refresh_recharges_for_process = setInterval(refresh_recharges_for_process, 15000);
   }
@@ -309,45 +305,5 @@ refresh_consultas = function  () {
 refresh_recharges_for_process = function  () {
   $("#cont_recharges_for_process").load( getRootUrl() + "/process_recharges" + " #sub_cont_recharges_for_process", function(){
     /* USAR SI ES NECESARIO DESPUES DE CARGAR */
-    new_recharge = false
-    $(".div_recharge").each(function(indice, elemento) {
-      if (array_recharges.indexOf($(elemento).attr("id")) === -1){
-        array_recharges.push($(elemento).attr("id"))
-        new_recharge = true
-      }
-    });
-
-    if (new_recharge){
-      refrescarNotificaciones()
-    }
   });
 }
-
-refrescarNotificaciones = function () {
-  //$('#sound').trigger('click');
-  $.playSound(getRootUrl() + "/sounds/iphone-notificacion.mp3")
-}
-
-show_modal_anulate = function (event) {
-  event.preventDefault();
-  swal({
-    title: "Estas segur@ de anular esta recarga?",
-    text: "Esta acción es irreversible!",
-    icon: "warning",
-    buttons: true,
-    dangerMode: true,
-  }).then((willDelete) => {
-    if (willDelete) {
-      $("#operation_admin").val("deneged")
-      $("#recharge_amount").removeAttr("required")
-      $("#btn_submit").trigger("click")
-      swal({
-        title: "Procesando. Por favor espere...",
-        closeOnClickOutside: false,
-      });
-      $("button.swal-button").css({"display":"none"})
-    } else {
-      swal("La anulación fue cancelada!");
-    }
-  });
-};

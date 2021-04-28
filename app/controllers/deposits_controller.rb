@@ -1,4 +1,5 @@
 class DepositsController < ApplicationController
+  before_action :authenticate_admin, only: [:edit, :update, :destroy]
   before_action :set_deposit, only: %i[show edit update destroy]
   before_action :format_params_deposit, only: [:create]
 
@@ -41,13 +42,31 @@ class DepositsController < ApplicationController
 
   # PATCH/PUT /deposits/1 or /deposits/1.json
   def update
-    respond_to do |format|
-      if @deposit.update(deposit_params)
-        format.html { redirect_to @deposit, notice: 'Deposit was successfully updated.' }
-        format.json { render :show, status: :ok, location: @deposit }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @deposit.errors, status: :unprocessable_entity }
+    if update_deposit_params[:operation] === "confirm"
+      ActiveRecord::Base.transaction do
+        respond_to do |format|
+          if @deposit.update(status:"confirmado")
+
+            balance_final = @deposit.user.balance.balance += @deposit.amount
+            ActiveRecord::Rollback unless @deposit.user.balance.update(balance: balance_final)
+
+            format.json { head :no_content }
+            format.js
+          else
+            format.json { render json: @deposit.errors.full_messages, status: :unprocessable_entity }
+            format.js {render :edit}   
+          end
+        end
+      end
+    elsif update_deposit_params[:operation] === "deneged"
+      respond_to do |format|
+        if @deposit.update(status:"anulado")
+          format.json { head :no_content }
+          format.js
+        else
+          format.json { render json: @deposit.errors.full_messages, status: :unprocessable_entity }
+          format.js {render :edit}   
+        end
       end
     end
   end
@@ -61,8 +80,9 @@ class DepositsController < ApplicationController
     end
   end
 
-  def proccess_deposits
-    
+  def process_deposits
+    @deposits = Deposit.where(status:"Diferido")
+    @recharges = Recharge.where(status: "enviada")
   end
 
   private
@@ -75,6 +95,10 @@ class DepositsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def deposit_params
     params.require(:deposit).permit(:amount, :bank_destinity, :status, :method_payment, :date_send, :ref_payment)
+  end
+
+  def update_deposit_params
+    params.require(:deposit).permit(:operation)
   end
 
   def format_params_deposit

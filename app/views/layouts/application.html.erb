@@ -58,6 +58,12 @@
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Procesar Recargas</span></a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link show_loader_sup" href="<%=url_for(process_deposits_path)%>">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Procesar Depositos</span></a>
+            </li>
             
             <li class="nav-item">
                 <a class="nav-link show_loader_sup" href="<%=url_for(deposits_path)%>">
@@ -319,6 +325,9 @@
 
     <!-- Core plugin JavaScript-->
     <script src="/js_dashboard/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!--PLUGIN PARA SONIDO DE NOTIFICACIONES-->
+    <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
 
   </body>
 </html>

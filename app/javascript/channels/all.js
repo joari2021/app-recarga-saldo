@@ -71,14 +71,25 @@ document.addEventListener("turbolinks:load", function () {
     "0294",
     "0295",
   ];
+  
+  recharges_count = format_integer($("#recharges_cant").text())
+  deposits_count = format_integer($("#deposits_cant").text())
+ 
 
-
+  if (typeof var_refresh_solicitudes_pend != "undefined"){
+    var_refresh_solicitudes_pend = undefined
+  }
+  
+  if (typeof var_refresh_solicitudes_pend === "undefined"){
+    var_refresh_solicitudes_pend = setInterval(refresh_solicitudes_pend, 15000);
+  }
+  $.ajaxSetup({ cache: false });
 });
 
 //FUNCIONES DE FORMATEO DE NUMEROS Y LETRAS PARA VALORES
 format_options = function (option) {
-  re = / /g;
-  valor = option.replace(re, "_");
+  re = /_/g;
+  valor = option.replace(re, " ");
   return valor;
 };
 
@@ -246,3 +257,61 @@ show_datepicker = function () {
     todayHighlight: true,
   });
 };
+
+//SCRIPT PARA PROCESAR ACCIONES DEL ADMIN
+show_modal_anulate = function (event) {
+  event.preventDefault();
+  swal({
+    title: "Estas segur@ de anular esta recarga?",
+    text: "Esta acción es irreversible!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      $("#operation_admin").val("deneged")
+      
+      if ($("#operation_admin").data("model") === "recharge"){
+        $("#recharge_amount").removeAttr("required")
+      }
+      
+      $("#btn_submit").trigger("click")
+      swal({
+        title: "Procesando. Por favor espere...",
+        closeOnClickOutside: false,
+      });
+      $("button.swal-button").css({"display":"none"})
+    } else {
+      swal("La anulación fue cancelada!");
+    }
+  });
+};
+
+refresh_solicitudes_pend = function  () {
+  $("#cont_solicitudes_pend").load( window.location.href + " #sub_cont_solicitudes_pend", function(){
+    /* USAR SI ES NECESARIO DESPUES DE CARGAR */
+    new_recharge = false
+    new_deposit = false
+    
+    cant_new_recharges = format_integer($("#recharges_cant").text())
+    if (cant_new_recharges > recharges_count){
+      recharges_count = cant_new_recharges
+      new_recharge = true
+    }
+
+    cant_new_deposits = format_integer($("#deposits_cant").text())
+    if (cant_new_deposits > deposits_count){
+      deposits_count = cant_new_deposits
+      new_deposit = true
+    }
+
+    if (new_deposit || new_recharge){
+      refrescarNotificaciones()
+    }
+  });
+}
+
+refrescarNotificaciones = function () {
+  //$('#sound').trigger('click');
+  $.playSound(getRootUrl() + "/sounds/iphone-notificacion.mp3")
+}

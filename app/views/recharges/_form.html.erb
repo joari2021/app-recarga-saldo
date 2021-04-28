@@ -73,7 +73,7 @@
       <button type="button" class="btn_standar btn-common btn-effect text-uppercase" id="btn_recarga" onclick="validation_submit()">Recargar</button>
 
       <%if current_user.is_admin?%>
-        <input type="hidden" name="recharge[operation]" id="operation_admin">
+        <input type="hidden" name="recharge[operation]" data-model="recharge"  id="operation_admin">
 
         <button type="button" class="mt-2 btn_standar btn-common btn-effect text-uppercase bg-danger" onclick="show_modal_anulate(event)">Anular</button>
       <%end%>

@@ -2,6 +2,9 @@ $('#title_modal_deposit').html("Nuevo Deposito");
  
 $('#modal_body_deposits').html('<%= j render("form") %>');
 
+show_datepicker()
+toggle_list_options()
+
 <%if @deposit.errors.any?%>
     $("#deposit_amount").val("<%=number_with_precision(@deposit.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%>")
     estilizar_errores_validacion()

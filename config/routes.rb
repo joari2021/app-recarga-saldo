@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'buscador_contacts/:names/:operator/:type_payment', to: 'contacts#buscador'
 
   resources :deposits
+  get 'process_deposits', to: 'deposits#process_deposits'
 
   resources :recharge_params
   resources :recharges, except: [:show]
