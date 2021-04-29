@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   get 'process_recharges', to: 'recharges#process_recharges'
 
   resources :profiles
+  get 'users_all', to: 'profiles#users_all'
 end

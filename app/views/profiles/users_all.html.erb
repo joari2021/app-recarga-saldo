@@ -1,0 +1,31 @@
+<div id="cont_users_all"><%=render 'users'%></div>
+
+<%= will_paginate @users, class:"pagination d-none"%>
+
+<%if @users.next_page%>
+    <div class="contenedor_loader" >
+        <div class="loader"></div>
+    </div>  
+<%end%>
+
+<div class="row justify-content-center">
+  <%unless @users.any?%>
+    <%=render "partials/registro_vacio"%>
+  <%end%>
+</div>
+
+<%=render "modal_profile"%>
+
+<script>
+    $(document).ready(function(){
+        if ($('.pagination').length) {
+            $(window).scroll(function() {
+                url = $('.pagination .next_page').attr('href');
+                if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50){
+                    $.getScript(url)
+                    $('.pagination .next_page').removeAttr('href');
+                }
+            });
+        }
+    })                    
+</script>

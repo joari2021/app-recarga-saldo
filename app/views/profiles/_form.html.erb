@@ -63,7 +63,6 @@
       </div>
     </div>
 
-
     <!--DOCUMENTO Y TELEFONO #################################-->
     <div class="row mt-5">
       <div class="col-12 col-sm-3 col-lg-2">
@@ -143,16 +142,26 @@
         </div>
       </div>
     </div>
+
+    <%if current_user.is_admin?%>
+      <div class="row">
+        <div class="col-12">
+            <div class="position-relative mt-5 mx-4">
+              <div class="content-select">
+                <%= form.select(:status_usuario, options_for_select([['Activo', 'activo'], ['Bloqueado', "bloqueado"]], @profile.status_usuario) ) %>
+                <i></i>
+              </div>
+              <%if @profile.errors[:status_usuario].any? %>
+                <p class="msj_error mt-2 bg-danger rounded"><%= @profile.errors[:status_usuario].to_s[/\w([^"]*)/] %></p>
+              <% end %>
+            </div>
+          </div>
+      </div>
+    <%end%>
   
     <div class="actions mt-5">
-      <button type="button" class="btn_standar btn-common btn-effect bg-special text-uppercase" id="btn_profile">Enviar</button>
+      <button type="button" class="btn_standar btn-common btn-effect bg-special text-uppercase" id="btn_profile<%if current_user.is_admin?%>_admin<%end%>">Enviar</button>
       <%=form.submit "Enviar", class: "d-none", id: "btn_submit"%>
     </div>
   </div>
 <% end %>
-
-<script>
-  <%if @profile.errors.any?%>
-    estilizar_errores_validacion()
-  <%end%>
-</script>

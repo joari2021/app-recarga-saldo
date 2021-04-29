@@ -1,6 +1,8 @@
 document.addEventListener("turbolinks:load", function () {
   activar_submit_profile();
+  activar_close_modal_profile();
 });
+
 activar_submit_profile = function () {
   $("#btn_profile").click(function () {
     swal({
@@ -24,3 +26,16 @@ activar_submit_profile = function () {
     });
   });
 };
+
+activar_submit_profile_admin = function (){
+  $("#btn_profile_admin").click(function () {
+    $("#btn_submit").trigger("click");
+  })
+}
+
+activar_close_modal_profile = function(){
+  $("#close_modal_profile").click(function () {
+    $("#modal_profile").removeClass("show");
+    $("#modal_profile_wrap").removeClass("show");
+  });
+}
