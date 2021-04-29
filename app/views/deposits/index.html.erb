@@ -5,6 +5,20 @@
 </div>
 <br />
 
+<section class="seccion-perfil-usuario">
+    <div class="perfil-usuario-body" style="width:95% !important;max-width:100% !important">
+        <div class="perfil-usuario-bio" style="text-align:left;justify-content:left;">
+            <p class="texto"><span class="font-weight-bold">Información:</span> <span>Todos los depositos realizados se muestran aqui con su Estatus, los cuales se detallan a continuación:</span></p>
+
+            <p><span class="badge badge-pill badge-secondary">Diferido</span><span> : El deposito ha sido enviado y esta en espera de confirmación. Esto puede tardar entre 5 y 30 minutos.</span></p>
+
+            <p><span class="badge badge-pill badge-success">confirmado</span><span> : El deposito registrado ha sido confirmado y se ha acreditado el monto del pago en tu balance.</span></p>
+
+            <p><span class="badge badge-pill badge-danger">anulada</span> : El deposito ha sido anulado debido a que no se confirmo en nuestra cuenta bancaria una transacción con los datos registrados en dicho deposito.</p>
+        </div>
+    </div>
+</section>
+
 <div id="main-container">
   <table class="table-standar table-deposit" id="table_deposits">
     <thead class="thead-standar bg-special">
@@ -26,9 +40,14 @@
         <td class="td-standar" data-label="Referencia"><%=deposit.ref_payment%></td>
         <td class="td-standar" data-label="Monto"><%=number_with_precision(deposit.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>
         <td class="td-standar" data-label="Estatus">
-          <%if deposit.status === "Diferido"%>
-            <%color_badge = "badge-secondary"%>
-          <%end%>
+          <%case deposit.status%>
+            <%when "Diferido"%>
+               <%color_badge = "badge-secondary"%>
+            <%when "confirmado"%>
+              <%color_badge = "badge-success"%>
+            <%when "anulado"%>
+               <%color_badge = "badge-danger"%>
+            <%end%>
           <span class="badge badge-pill <%=color_badge%>"><%=deposit.status%></span>
         </td>
       </tr>

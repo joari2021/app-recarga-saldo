@@ -1,33 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="row justify-content-center mt-5">
+  <%@recharge_params.each do |params_operator| %>
+    <!--ESTABLECIENDO FORMATO DE LA IMAGEN-->
+    <%oper = params_operator.operadora %>
+    <%if oper === "Movistar" || oper == "Movilnet" || oper == "Cantv" || oper == "Movistar_TV"%>
+      <%format_img = "png"%>
+    <%else%>
+      <%format_img = "jpeg"%>
+    <%end%>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-7 mb-5">
+      <%= link_to edit_recharge_param_path(params_operator), { remote: true, class:"show_loader_sup"}  do %>
+        <div class="card border-left-<%=oper === "Movistar_TV" ? "Movistar" : oper%> shadow py-2">
+          <div class="card-body contenedor-img">
+            <%= image_tag("sistema_recargas/#{oper.downcase}.#{format_img}", class:"img-operadora", width:"100%", height:"70px") %>
+          </div>
+        </div>
+      <% end %>
+      <div class="card border-left-<%=oper === "Movistar_TV" ? "Movistar" : oper%> shadow mt-2 py-2">
+          <div class="card-body">
+            <span class="font-weight-bold">Monto mínimo: </span><span id="span_amount_min_<%=oper%>"><%=number_with_precision(params_operator.amount_min, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></span><hr>
 
-<h1>Recharge Params</h1>
+            <span class="font-weight-bold">Monto máximo: </span><span id="span_amount_max_<%=oper%>"><%=number_with_precision(params_operator.amount_max, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></span><hr>
 
-<table>
-  <thead>
-    <tr>
-      <th>Operadora</th>
-      <th>Amount min</th>
-      <th>Amount max</th>
-      <th>Multiplos amount permit</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+            <span class="font-weight-bold">Multiplos permitidos: </span><span id="span_multiplos_amount_permit_<%=oper%>"><%=number_with_precision(params_operator.multiplos_amount_permit, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></span>
+          </div>
+        </div>
+    </div>
+  <%end%>
+</div>
 
-  <tbody>
-    <% @recharge_params.each do |recharge_param| %>
-      <tr>
-        <td><%= recharge_param.operadora %></td>
-        <td><%= recharge_param.amount_min %></td>
-        <td><%= recharge_param.amount_max %></td>
-        <td><%= recharge_param.multiplos_amount_permit %></td>
-        <td><%= link_to 'Show', recharge_param %></td>
-        <td><%= link_to 'Edit', edit_recharge_param_path(recharge_param) %></td>
-        <td><%= link_to 'Destroy', recharge_param, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Recharge Param', new_recharge_param_path %>
+<%=render "modal_recharge_param"%>

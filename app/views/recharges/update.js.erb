@@ -17,10 +17,8 @@ $("#close_modal_recharge").trigger("click");
 <%elsif @recharge.type_operation === "direct_recharge" && @recharge.status === "confirmada"%>
   $("#recharge_<%=@recharge.id%>").fadeOut(400,function(){
     $(this).remove()
-    index = array_recharges.indexOf("recharge_<%=@recharge.id%>");
-    if (index != -1){
-      array_recharges.splice(index, 1); 
-    }
+    recharges_count -= 1 
+    $("#recharges_cant").text(recharges_count)
   })
 
   swal({
@@ -33,10 +31,8 @@ $("#close_modal_recharge").trigger("click");
 <%elsif @recharge.type_operation === "consultation" && @recharge.status === "procesada"%>
   $("#recharge_<%=@recharge.id%>").fadeOut(400,function(){
     $(this).remove()
-    index = array_recharges.indexOf("recharge_<%=@recharge.id%>");
-    if (index != -1){
-      array_recharges.splice(index, 1); 
-    }
+    recharges_count -= 1 
+    $("#recharges_cant").text(recharges_count)
   })
 
   swal({
@@ -49,10 +45,8 @@ $("#close_modal_recharge").trigger("click");
 <%elsif @recharge.status === "anulada"%>
   $("#recharge_<%=@recharge.id%>").fadeOut(400,function(){
     $(this).remove()
-    index = array_recharges.indexOf("recharge_<%=@recharge.id%>");
-    if (index != -1){
-      array_recharges.splice(index, 1); 
-    }
+    recharges_count -= 1 
+    $("#recharges_cant").text(recharges_count)
   })
 
   swal({

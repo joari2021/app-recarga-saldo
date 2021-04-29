@@ -1,4 +1,18 @@
-<div id="main-container" class="mt-5">
+<section class="seccion-perfil-usuario">
+    <div class="perfil-usuario-body" style="width:95% !important;max-width:100% !important">
+        <div class="perfil-usuario-bio" style="text-align:left;justify-content:left;">
+            <p class="texto"><span class="font-weight-bold">Información:</span> <span>Todas las recargas realizadas se muestran aqui con su Estatus, los cuales se detallan a continuación:</span></p>
+
+            <p><span class="badge badge-pill badge-primary">enviada</span><span> : La recarga ha sido enviada con exito y el monto de la misma se ha descontado de tu balance.</span></p>
+
+            <p><span class="badge badge-pill badge-success">confirmada</span><span> : Ha sido confirmado que la recarga se ha acreditado en el saldo del número destinatario.</span></p>
+
+            <p class="align-middle"><span class="badge badge-pill badge-danger align-middle">anulada</span><span> : La recarga se cancelo debido a algún error en los datos enviados al momento de realizarla. El monto de las recargas enviadas que resulten anuladas se reversara a tu balance inmediatamente. Te recomendamos que verifiques bien los datos de las recargas con este estatus antes de volver a realizarlas.</span></p>
+        </div>
+    </div>
+</section>
+
+<div id="main-container" class="mt-4">
 
     <table class="table-standar table-historial" id="table_historial">
 
@@ -22,18 +36,14 @@
 <%if @recharges.next_page%>
     <div class="contenedor_loader" >
         <div class="loader"></div>
-    </div>
-<%else%>
-    <section class="seccion-perfil-usuario">
-        <div class="perfil-usuario-body">
-            <div class="perfil-usuario-bio">
-                <h3 class="titulo">No hay ningún registro de recarga</h3>
-            
-                <p class="texto">Recarga tu balance haciendo un deposito y haz tu primera recarga rapido y seguro.</p>
-            </div>
-        </div>
-    </section>
+    </div>  
 <%end%>
+
+<div class="row justify-content-center">
+  <%unless current_user.recharges.any?%>
+    <%=render "partials/registro_vacio"%>
+  <%end%>
+</div>
 
 <script>
     $(document).ready(function(){
@@ -42,7 +52,6 @@
                 url = $('.pagination .next_page').attr('href');
                 if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50){
                     $.getScript(url)
-                    console.log(url);
                     $('.pagination .next_page').removeAttr('href');
                 }
             });

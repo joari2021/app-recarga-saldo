@@ -17,7 +17,5 @@ $("#deposit_<%=@deposit.id%>").remove()
         button: "Cerrar",
     });
 <%end%>
-index = array_deposits.indexOf("deposit_<%=@deposit.id%>");
-if (index != -1){
-    array_deposits.splice(index, 1); 
-}
+deposits_count -= 1 
+$("#deposits_cant").text(deposits_count)

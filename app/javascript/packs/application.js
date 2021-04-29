@@ -35,6 +35,7 @@ import "channels/recharge"
 import "channels/deposit"
 import "channels/contact"
 import "channels/profile"
+import "channels/recharge_params"
 
 import "channels/hidden_loader"
 

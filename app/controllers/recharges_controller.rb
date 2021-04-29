@@ -189,16 +189,15 @@ class RechargesController < ApplicationController
     end
 
     def set_variables_recharge
-      @params_movistar = RechargeParam.find_by(operadora:"movistar")
-      @params_digitel = RechargeParam.find_by(operadora:"digitel")
-      @params_movilnet = RechargeParam.find_by(operadora:"movilnet")
-      @params_cantv = RechargeParam.find_by(operadora:"cantv")
-      @params_movistar_tv = RechargeParam.find_by(operadora:"movistar_tv")
-      @params_inter = RechargeParam.find_by(operadora:"inter")
-      @params_simple_tv = RechargeParam.find_by(operadora:"simple_tv")
+      @params_movistar = RechargeParam.find_by(operadora:"Movistar")
+      @params_digitel = RechargeParam.find_by(operadora:"Digitel")
+      @params_movilnet = RechargeParam.find_by(operadora:"Movilnet")
+      @params_cantv = RechargeParam.find_by(operadora:"Cantv")
+      @params_movistar_tv = RechargeParam.find_by(operadora:"Movistar_TV")
+      @params_inter = RechargeParam.find_by(operadora:"Inter")
+      @params_simple_tv = RechargeParam.find_by(operadora:"Simple_TV")
     end
 
-    # Only allow a list of trusted parameters through.
     def recharge_params
       params.require(:recharge).permit(:amount, :operator, :type_payment, :number, :cod_area)
     end

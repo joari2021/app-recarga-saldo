@@ -1,0 +1,16 @@
+$('#title_modal_recharge_param').html("Parametros de recarga");
+$('#modal_body_recharge_param').html('<%= j render("form") %>');
+
+$("#recharge_param_amount_min").val("<%=number_with_precision(@recharge_param.amount_min, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%>")
+
+$("#recharge_param_amount_max").val("<%=number_with_precision(@recharge_param.amount_max, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%>")
+
+$("#recharge_param_multiplos_amount_permit").val("<%=number_with_precision(@recharge_param.multiplos_amount_permit, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%>")
+
+<%unless @recharge_param.errors.any?%>
+    hidden_loader_sup()
+    $("#modal_recharge_param").addClass("show")
+    $("#modal_recharge_param_wrap").addClass("show")
+<%else%>
+    estilizar_errores_validacion()
+<%end%>

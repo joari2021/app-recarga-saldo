@@ -1,15 +1,20 @@
 <%@recharges.each do |recharge|%>
     <tr class="tr-standar">
-        <td class="td-standar" data-label="Fecha y hora"><%=recharge.created_at.strftime("%d/%m/%Y %02H:%02M:%02S")%></td>
-        <td class="td-standar" data-label="Sistema"><%=recharge.operator%></td>
+        <td class="td-standar" data-label="Fecha y hora"><%=recharge.created_at.strftime("%d/%m/%Y %02H:%02M")%></td>
+        <td class="td-standar" data-label="Sistema"><%=recharge.operator.gsub("_"," ")%></td>
         <td class="td-standar" data-label="T. Pago"><%=recharge.type_payment%></td>
         <td class="td-standar" data-label="Número">
           <%=recharge.cod_area.present? ? "(" + recharge.cod_area + ") " : "" %>
           <%=recharge.number%></td>
         <td class="td-standar" data-label="Monto"><%=number_with_precision(recharge.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>
         <td class="td-standar" data-label="Estatus">
-            <%if recharge.status === "enviada"%>
-            <%color_badge = "badge-primary"%>
+            <%case recharge.status%>
+            <%when "enviada"%>
+               <%color_badge = "badge-primary"%>
+            <%when "confirmada"%>
+              <%color_badge = "badge-success"%>
+            <%when "anulada"%>
+               <%color_badge = "badge-danger"%>
             <%end%>
             <span class="badge badge-pill <%=color_badge%>"><%=recharge.status%></span>
         </td>
