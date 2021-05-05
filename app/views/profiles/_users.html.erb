@@ -1,6 +1,6 @@
 <%@users.each do |user|%>
-    <div class="col-md-6 mb-4">
-        <div class="card border-left-standar shadow h-100 py-2" id="user_<%=user.profile.id%>">
+    <div class="col-md-6 mb-4" id="user_<%=user.profile.id%>">
+        <div class="card border-left-standar shadow h-100 py-2">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -9,42 +9,42 @@
                         </div>
                         <div class="text-sm mb-0">
                             <table class="table" id="">
+                                <thead class="">
+                                    <tr class="">
+                                        <th class="p-2">Perfil</th>
+                                        <th class="p-2">Status</th>
+                                        <th class="p-2">Balance</th>
+                                    </tr>
+                                </thead>
 
-                            <thead class="">
-                                <tr class="">
-                                    <th class="p-2">Perfil</th>
-                                    <th class="p-2">Status</th>
-                                    <th class="p-2">Balance</th>
-                                </tr>
-                            </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="p-2 align-middle">
+                                            <%case user.profile.status%>
+                                            <%when "completado"%>
+                                            <%color_badge = "badge-success"%>
+                                            <%when "incompleto"%>
+                                            <%color_badge = "badge-secondary"%>
+                                            <%end%>
+                                            <span class="badge badge-pill <%=color_badge%>"><%=user.profile.status%></span>
+                                        </td>
 
-                            <tbody>
-                                <tr>
-                                    <td class="p-2 align-middle">
-                                        <%case user.profile.status%>
-                                        <%when "completado"%>
-                                          <%color_badge = "badge-success"%>
-                                        <%when "incompleto"%>
-                                          <%color_badge = "badge-secondary"%>
-                                        <%end%>
-                                        <span class="badge badge-pill <%=color_badge%>"><%=user.profile.status%></span>
-                                    </td>
+                                        <td class="p-2 align-middle">
+                                            <%case user.profile.status_usuario%>
+                                            <%when "activo"%>
+                                            <%color_badge = "badge-success"%>
+                                            <%when "bloqueado"%>
+                                            <%color_badge = "badge-danger"%>
+                                            <%end%>
+                                            <span class="badge badge-pill <%=color_badge%>"><%=user.profile.status_usuario%></span>
+                                        </td>
 
-                                    <td class="p-2 align-middle">
-                                        <%case user.profile.status_usuario%>
-                                        <%when "activo"%>
-                                          <%color_badge = "badge-success"%>
-                                        <%when "bloqueado"%>
-                                          <%color_badge = "badge-danger"%>
-                                        <%end%>
-                                        <span class="badge badge-pill <%=color_badge%>"><%=user.profile.status_usuario%></span>
-                                    </td>
-
-                                    <td class="p-2 align-middle">
-                                        <span><%=number_with_precision(user.balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></span>
-                                    </td>
-                                </tr>
-                            </tbody>
+                                        <td class="p-2 align-middle">
+                                            <span><%=number_with_precision(user.balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                       
                         <div class="text-center mt-3">   

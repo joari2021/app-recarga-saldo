@@ -33,13 +33,13 @@
             </ul>
             <ul class="lista-datos">
                 <li><i class="icono fas fa-phone-alt"></i> <span class="align-middle"><%=@profile.phone%></span></li>
-                <li><i class="icono fas fa-calendar-alt"></i> <span class="align-middle"><%=@profile.date_of_birth.strftime("%d/%m/%Y")%></span></li>
+                <li><i class="icono fas fa-calendar-alt mr-4"></i><span class="align-middle"><%=@profile.date_of_birth.strftime("%d/%m/%Y")%></span></li>
                 
             </ul>
             <ul class="" style="list-style:none">
-                <li><i class="icono fas fa-envelope"></i> <%=@profile.user.email%></li>
+                <li><i class="icono fas fa-envelope mr-4"></i> <%=@profile.user.email%></li>
 
-                <li class="mt-2"><i class="icono fas fa-map-marker-alt"></i> <%=@profile.address%>. <%=@profile.city%>, Edo. <%=@profile.state%>. Codigo Postal: <%=@profile.zip_code%>.</li>
+                <li class="mt-2"><i class="icono fas fa-map-marker-alt mr-4"></i> <%=@profile.address%>. <%=@profile.city%>, Edo. <%=@profile.state%>. Codigo Postal: <%=@profile.zip_code%>.</li>
             </ul>
         </div>
         <!--

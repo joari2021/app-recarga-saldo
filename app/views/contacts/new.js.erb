@@ -1,4 +1,4 @@
-$('#title_modal_contact').html("Nuevo contacto");
+$('#title_modal_contact').html("Nuevo cliente");
  
 $('#modal_body_contacts').html('<%= j render("form") %>');
 
@@ -7,6 +7,7 @@ $("#modal_contact_wrap").addClass("show")
 
 <!--VARIABLE PARA LEER DESDE LA FUNCION SET_MAX_LENGHT Y DIFERENCIARLA-->
 input_number = $("#contact_number")
+toggle_list_options()
 
 <%if @contact.errors.any?%>
 

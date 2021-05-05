@@ -32,4 +32,8 @@ class ApplicationController < ActionController::Base
                end
           end
      end
+
+     def authenticate_user_register!
+          redirect_to edit_profile_path(current_user.profile) unless current_user.profile.status === "completado" || current_user.is_admin?
+     end
 end

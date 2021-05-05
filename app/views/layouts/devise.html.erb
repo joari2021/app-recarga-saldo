@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width-device-width, initial-scale=1.0">
-	<title>Login y register</title>
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>Recargas Fast</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
-	<%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+		<%= csrf_meta_tags %>
+		<%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-</head>
-<body id="body_devise">
-	<main>
-		<div class="contenedor__todo">
-			<div class="caja__trasera">
-				<div class="caja__trasera-login">
-					<h3>¿Ya tienes cuenta?</h3>
-					<p>Inicia sesión para entrar en la página</p>
-					<button id="btn__iniciar-sesion">Iniciar Sesión</button>
-				</div>
+		<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+		<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+	</head>
+	<body id="body_devise">
+		<div class="contenedor_loader_sup bg-special">
+			<div class="loader loader-sup-tam"></div>
+		</div> 
 
-				<div class="caja__trasera-register">
-					<h3>¿Aún no tienes una cuenta?</h3>
-					<p>Registrate para que puedas iniciar sesión</p>
-					<button id="btn__registrarse">Registrarse</button>
-				</div>
-			</div>
+		<%if notice%>
+			<p class="alert alert-primary"><%= notice %></p>
+		<%end%>
 
-			<%=yield%>
-		</div>
-	</main>
-
-</body>
+		<%if alert%>
+			<p class="alert alert-danger"><%= alert %></p>
+		<%end%>
+		<main>
+			<div class="div-main"><%=yield%></div>
+		</main>
+		
+		<script src="/datepicker/js/bootstrap-datepicker.min.js"></script>
+		<script src="/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+		
+	</body>
 </html>

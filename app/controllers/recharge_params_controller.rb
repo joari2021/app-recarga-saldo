@@ -1,4 +1,5 @@
 class RechargeParamsController < ApplicationController
+  before_action :authenticate_user!
   before_action :authenticate_admin
   before_action :set_recharge_param, only: %i[ show edit update destroy ]
   before_action :format_params_recharge_param, only: %i[ create update]

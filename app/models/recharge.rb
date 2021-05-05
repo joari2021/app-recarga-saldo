@@ -2,6 +2,10 @@ class Recharge < ApplicationRecord
   belongs_to :user
   include ValidationsMethodsConcern
 
+  def self.buscador
+    Recharge.where(operator: "Movistar", status:"confirmada")
+  end
+
   #METODOS PARA VALIDAR EL MONTO
   def recharge_limit_is_1400000?
     operator === "Digitel" && type_payment === "Prepago"

@@ -84,6 +84,20 @@ document.addEventListener("turbolinks:load", function () {
     var_refresh_solicitudes_pend = setInterval(refresh_solicitudes_pend, 15000);
   }
   $.ajaxSetup({ cache: false });
+
+  href = window.location.href
+
+  if (href.indexOf("dashboard") != -1){
+    $("#access_dashboard").addClass("active")
+  }else if (href.indexOf("recharges") != -1){
+    $("#access_recharges").addClass("active")
+  }else if (href.indexOf("deposits") != -1){
+    $("#access_deposits").addClass("active")
+  }else if (href.indexOf("historial") != -1){
+    $("#access_historial").addClass("active")
+  }else if (href.indexOf("contacts") != -1){
+    $("#access_contacts").addClass("active")
+  }
 });
 
 //FUNCIONES DE FORMATEO DE NUMEROS Y LETRAS PARA VALORES
@@ -210,9 +224,9 @@ set_length = function (modelo) {
     operator === "Inter"
   ) {
     set_max_length(10);
-  } else if (operator === "Movistar TV") {
+  } else if (operator === "Movistar_TV" || operator === "Movistar TV") {
     set_max_length(8);
-  } else if (operator === "Simple TV") {
+  } else if (operator === "Simple_TV" || operator === "Simple TV") {
     set_max_length(12);
   } else {
     set_max_length(12);

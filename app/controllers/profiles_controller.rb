@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_action :authenticate_user!
   before_action :authenticate_admin, only: [:users_all]
   before_action :set_profile, only: %i[ show edit update destroy ]
   before_action :authenticate_edit_profile!, only: %i[ edit update]

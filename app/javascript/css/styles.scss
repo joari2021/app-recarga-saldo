@@ -21,6 +21,14 @@
   --simpletv_hover: #0f8cba;
 }
 
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+	font-family: 'Poppins', sans-serif;
+}
+
 .bg-special {
   color: #fff;
   background-color: #3c96ff;
@@ -386,7 +394,7 @@ form {
 
 form .grupo {
   position: relative;
-  margin: 30px;
+  margin: 20px 30px;
 }
 
 input.input-special {
@@ -426,7 +434,11 @@ p.msj_error {
   color: white;
   font-weight: bold;
   padding: 5px;
-  //max-width: 234px; PROBAR QUE NO AFECTE SU ELEGANCIA EN LOS MODALS
+  max-width: 234px;
+}
+
+.width-error{
+  max-width: 100% !important;
 }
 
 input:focus ~ .label-Standar,

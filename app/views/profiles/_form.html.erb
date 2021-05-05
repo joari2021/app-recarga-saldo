@@ -11,7 +11,7 @@
           <%= form.text_field :name, :required => "required", class:"input-special", maxlength: "30" %><span class="barra bg-before-Standar"></span>
           <%= form.label :name, "Nombres", for: "", class: "label-special label-Standar" %>
           <%if @profile.errors[:name].any? %>
-            <p class="msj_error mt-2 bg-danger rounded w-100"><%= @profile.errors[:name].to_s[/\w([^"]*)/] %></p>
+            <p class="msj_error mt-2 bg-danger rounded w-100 width-error"><%= @profile.errors[:name].to_s[/\w([^"]*)/] %></p>
           <% end %>
         </div>
       </div>
@@ -21,7 +21,7 @@
           <%= form.text_field :last_name, :required => "required", class:"input-special", maxlength: "30" %><span class="barra bg-before-Standar"></span>
           <%= form.label :last_name, "Apellidos", for: "", class: "label-special label-Standar" %>
           <%if @profile.errors[:last_name].any? %>
-            <p class="msj_error mt-2 bg-danger rounded"><%= @profile.errors[:last_name].to_s[/\w([^"]*)/] %></p>
+            <p class="msj_error mt-2 bg-danger rounded width-error"><%= @profile.errors[:last_name].to_s[/\w([^"]*)/] %></p>
           <% end %>
         </div>
       </div>
@@ -36,18 +36,18 @@
             <i></i>
           </div>
           <%if @profile.errors[:gender].any? %>
-            <p class="msj_error mt-2 bg-danger rounded"><%= @profile.errors[:gender].to_s[/\w([^"]*)/] %></p>
+            <p class="msj_error mt-2 bg-danger rounded width-error"><%= @profile.errors[:gender].to_s[/\w([^"]*)/] %></p>
           <% end %>
         </div>
       </div>
 
       <div class="col-12 col-sm-4">
         <div class="position-relative mt-5 mt-sm-0 mx-4 mx-sm-0" id="div_cod_area">
-          <input required="required" class="input-special" name="profile[date_of_birth]" value="<%=@profile.date_of_birth.strftime("%d/%m/%Y")%>"  type="text" id="date" oninput="readonly(this)">
+          <input required="required" class="input-special" name="profile[date_of_birth]" value="<%=@profile.date_of_birth.nil? ? "" : @profile.date_of_birth.strftime("%d/%m/%Y")%>"  type="text" id="date" oninput="readonly(this)">
           <span class="barra bg-before-Standar"></span>
           <label class="label-special label-Standar">Fecha de nacimiento</label>
           <%if @profile.errors[:date_of_birth].any? %>
-            <p class="msj_error mt-2 bg-danger rounded"><%= @profile.errors[:date_of_birth].to_s[/\w([^"]*)/] %></p>
+            <p class="msj_error mt-2 bg-danger rounded width-error"><%= @profile.errors[:date_of_birth].to_s[/\w([^"]*)/] %></p>
           <% end %>
         </div>
       </div>
@@ -57,7 +57,7 @@
           <%= form.text_field :age, :required => "required", class:"input-special", maxlength: "2", oninput: "input_value_integer(this)" %><span class="barra bg-before-Standar"></span>
           <%= form.label :age, "Edad", for: "", class: "label-special label-Standar" %>
           <%if @profile.errors[:age].any? %>
-            <p class="msj_error mt-2 bg-danger rounded"><%= @profile.errors[:age].to_s[/\w([^"]*)/] %></p>
+            <p class="msj_error mt-2 bg-danger rounded width-error"><%= @profile.errors[:age].to_s[/\w([^"]*)/] %></p>
           <% end %>
         </div>
       </div>
@@ -72,7 +72,7 @@
             <i></i>
           </div>
           <%if @profile.errors[:type_document].any? %>
-            <p class="msj_error mt-2 bg-danger rounded"><%= @profile.errors[:type_document].to_s[/\w([^"]*)/] %></p>
+            <p class="msj_error mt-2 bg-danger rounded width-error"><%= @profile.errors[:type_document].to_s[/\w([^"]*)/] %></p>
           <% end %>
         </div>
       </div>
@@ -82,7 +82,7 @@
           <%= form.text_field :document, :required => "required", class:"input-special", maxlength: "9", oninput: "input_value_integer(this)"%><span class="barra bg-before-Standar"></span>
           <%= form.label :document, "N° Documento", for: "", class: "label-special label-Standar" %>
           <%if @profile.errors[:document].any? %>
-            <p class="msj_error mt-2 bg-danger rounded"><%= @profile.errors[:document].to_s[/\w([^"]*)/] %></p>
+            <p class="msj_error mt-2 bg-danger rounded width-error"><%= @profile.errors[:document].to_s[/\w([^"]*)/] %></p>
           <% end %>
         </div>
       </div>
@@ -92,7 +92,7 @@
           <%= form.text_field :phone, :required => "required", class:"input-special", maxlength: "11", oninput: "input_value_integer(this)"%><span class="barra bg-before-Standar"></span>
           <%= form.label :phone, "N° Telefono", for: "", class: "label-special label-Standar" %>
           <%if @profile.errors[:phone].any? %>
-            <p class="msj_error mt-2 bg-danger rounded"><%= @profile.errors[:phone].to_s[/\w([^"]*)/] %></p>
+            <p class="msj_error mt-2 bg-danger rounded width-error"><%= @profile.errors[:phone].to_s[/\w([^"]*)/] %></p>
           <% end %>
         </div>
       </div>
@@ -105,7 +105,7 @@
           <%= form.text_field :state, :required => "required", class:"input-special", maxlength: "20" %><span class="barra bg-before-Standar"></span>
           <%= form.label :state, "Estado", for: "", class: "label-special label-Standar" %>
           <%if @profile.errors[:state].any? %>
-            <p class="msj_error mt-2 bg-danger rounded"><%= @profile.errors[:state].to_s[/\w([^"]*)/] %></p>
+            <p class="msj_error mt-2 bg-danger rounded width-error"><%= @profile.errors[:state].to_s[/\w([^"]*)/] %></p>
           <% end %>
         </div>
       </div>
@@ -115,7 +115,7 @@
           <%= form.text_field :city, :required => "required", class:"input-special", maxlength: "20" %><span class="barra bg-before-Standar"></span>
           <%= form.label :city, "Ciudad", for: "", class: "label-special label-Standar" %>
           <%if @profile.errors[:city].any? %>
-            <p class="msj_error mt-2 bg-danger rounded"><%= @profile.errors[:city].to_s[/\w([^"]*)/] %></p>
+            <p class="msj_error mt-2 bg-danger rounded width-error"><%= @profile.errors[:city].to_s[/\w([^"]*)/] %></p>
           <% end %>
         </div>
       </div>
@@ -125,7 +125,7 @@
           <%= form.text_field :zip_code, :required => "required", class:"input-special", maxlength: "4", oninput: "input_value_integer(this)" %><span class="barra bg-before-Standar"></span>
           <%= form.label :zip_code, "Codigo Postal", for: "", class: "label-special label-Standar" %>
           <%if @profile.errors[:zip_code].any? %>
-            <p class="msj_error mt-2 bg-danger rounded"><%= @profile.errors[:zip_code].to_s[/\w([^"]*)/] %></p>
+            <p class="msj_error mt-2 bg-danger rounded width-error"><%= @profile.errors[:zip_code].to_s[/\w([^"]*)/] %></p>
           <% end %>
         </div>
       </div>
@@ -137,7 +137,7 @@
           <%= form.text_field :address, :required => "required", class:"input-special", maxlength: "100" %><span class="barra bg-before-Standar"></span>
           <%= form.label :address, "Dirección", for: "", class: "label-special label-Standar" %>
           <%if @profile.errors[:address].any? %>
-            <p class="msj_error mt-2 bg-danger rounded"><%= @profile.errors[:address].to_s[/\w([^"]*)/] %></p>
+            <p class="msj_error mt-2 bg-danger rounded width-error"><%= @profile.errors[:address].to_s[/\w([^"]*)/] %></p>
           <% end %>
         </div>
       </div>
@@ -152,7 +152,7 @@
                 <i></i>
               </div>
               <%if @profile.errors[:status_usuario].any? %>
-                <p class="msj_error mt-2 bg-danger rounded"><%= @profile.errors[:status_usuario].to_s[/\w([^"]*)/] %></p>
+                <p class="msj_error mt-2 bg-danger rounded width-error"><%= @profile.errors[:status_usuario].to_s[/\w([^"]*)/] %></p>
               <% end %>
             </div>
           </div>
@@ -165,3 +165,10 @@
     </div>
   </div>
 <% end %>
+
+
+<script>
+  <%if @profile.errors.any?%>
+    estilizar_errores_validacion()
+  <%end%>
+</script>

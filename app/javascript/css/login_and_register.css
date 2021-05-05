@@ -1,11 +1,3 @@
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	text-decoration: none;
-	font-family: 'Roboto', sans-serif;
-}
-
 #body_devise{
 	background-image: url(/img/sasuke.jpg);
 	background-size: cover;
@@ -18,6 +10,8 @@ main{
 	width: 100%;
 	padding: 20px;
 	margin: auto;
+}
+.div-main{
 	margin-top: 100px;
 }
 
@@ -30,7 +24,7 @@ main{
 
 .caja__trasera{
 	width: 100%;
-	float: center;
+	/*float: center;*/
 	padding: 10px 20px;
 	display: flex;
 	justify-content: center;
@@ -47,6 +41,7 @@ main{
 	color: white;
 	transition: all 500ms;
 }
+
 .caja__trasera div p,
 .caja__trasera div button{
 	margin-top: 30px;
@@ -60,6 +55,7 @@ main{
 .caja__trasera button{
 	padding: 10px 40px; 
 	border: 2px solid #fff;
+	border-radius: 30px;
 	background: transparent;
 	font-size: 14px;
 	font-weight: 600;
@@ -75,6 +71,7 @@ main{
 }
 
 /*Formularios*/
+
 .contenedor__login-register{
 	display: flex;
 	align-items: center;
@@ -87,6 +84,7 @@ main{
 }
 
 .contenedor__login-register form{
+	
 	width: 100%;
 	padding: 80px 20px;
 	background: #fff;
@@ -94,7 +92,7 @@ main{
 	border-radius: 20px;
 	
 }
-
+/*
 .contenedor__login-register form h3{
 	font-size: 30px;
 	text-align: center;
@@ -121,7 +119,7 @@ main{
 	color: white;
 	cursor: pointer;
 	outline: none;
-}
+}*/
 
 .formulario__login{
 	opacity: 1;
@@ -134,12 +132,12 @@ main{
 
 /* Responsive Design */
 @media screen and (max-width: 850px) {
-	main{
+	.div-main{
 		margin-top: 50px;
 	}
 
 	.caja__trasera{
-		max-width: 350px;
+		max-width: 320px;
 		height: 300px;
 		flex-direction: column;
 		margin: auto;
@@ -157,7 +155,7 @@ main{
 		margin: auto;
 	}
 
-	.contenedor__login-register{
+	.contenedor__login-register form{
 		position: relative;
 	}
 }

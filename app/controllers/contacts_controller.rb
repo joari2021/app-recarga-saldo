@@ -1,4 +1,6 @@
 class ContactsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :authenticate_user_register!
   before_action :set_contact, only: %i[ show edit update destroy ]
   before_action :format_params_contact, only: [:create,:update]
   before_action :verify_number_not_register, only: [:create]

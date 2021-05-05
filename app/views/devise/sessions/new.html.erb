@@ -1,1 +1,7 @@
 <%=render "devise/partial/form"%>
+
+<script>
+    document.addEventListener("turbolinks:load", function () {
+        $("#btn__iniciar-sesion").trigger("click")
+    })
+</script>

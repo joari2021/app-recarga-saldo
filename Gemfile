@@ -32,6 +32,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 #Other Gems
 gem 'devise'
 gem 'will_paginate', '~> 3.1.0'
+gem 'letter_opener'
+gem 'friendly_id', '~> 5.4.0'
 gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 
 group :development, :test do

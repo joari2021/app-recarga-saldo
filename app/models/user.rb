@@ -1,9 +1,9 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :lockable, :timeoutable, :trackable and :omniauthable
   
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
   has_one :profile, dependent: :destroy
   has_one :balance, dependent: :destroy
@@ -12,8 +12,8 @@ class User < ApplicationRecord
   has_many :deposits, dependent: :destroy
   include PermissionsConcern
 
-  after_create :set_profile
-  after_create :set_balance
+  before_create :set_profile
+  before_create :set_balance
 
   def set_profile
     self.profile = Profile.create()

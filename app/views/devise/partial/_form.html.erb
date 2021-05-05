@@ -1,22 +1,82 @@
-<div class="contenedor__login-register">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name),:html => {:class => "formulario__login"}) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+<div class="contenedor__todo">
+    <div class="caja__trasera">
+        <div class="caja__trasera-login">
+                <h3>¿Ya tienes cuenta?</h3>
+                <p>Inicia sesión para entrar en la página</p>
+                <button id="btn__iniciar-sesion">Iniciar Sesión</button>
+        </div>
 
-      <h2>Iniciar Sesión</h2>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Correo Electronico", required: "required"%>
-      <%= f.password_field :password, autocomplete: "new-password", id:"contraseña", placeholder:"Contraseña", required: "required", minlength: "8"%>
-      <%= f.submit "Entrar" %>
+        <div class="caja__trasera-register">
+            <h3>¿Aún no tienes una cuenta?</h3>
+            <p>Registrate para que puedas iniciar sesión</p>
+            <button id="btn__registrarse">Registrarse</button>
+        </div>
+    </div>
 
-      <%= render "devise/shared/links" %>
-    <% end %>
+    <div class="contenedor__login-register">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name),:html => {:class => "formulario__login", :id => "form-session"}) do |f| %>
+            
+            <div class="form">
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name),:html => {:class => "formulario__register"}) do |f| %>
-      <h2>Registrarse</h2>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Correo Electronico", required: "required"%>
-      <%= f.password_field :password, autocomplete: "new-password", id:"contraseña", placeholder:"Contraseña", required: "required", minlength: "8"%>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirmar Contraseña", required: "required", minlength: "8"%>
-      <%= f.submit "Registrarse" %>
+                <h2 class="section-title pb-3 text-center font-weight-bold">Iniciar Sesión</h2>
 
-      <%= render "devise/shared/links" %>
-    <% end %>
-  </div>
+                <div class="grupo">
+                    <%= f.text_field :email, autofocus: true, autocomplete: "email", required: "required", class:"input-special", id:"email_session"%><span class="barra bg-before-Standar"></span>
+                    <%= f.label :email, "Correo electrónico", for: "", class: "label-special label-Standar" %>
+                </div>
+
+                <div class="grupo">
+                  <%= f.password_field :password, autocomplete: "new-password", id:"password_session", required: "required", minlength: "8", class:"input-special"%><span class="barra bg-before-Standar"></span>
+                  <%= f.label :password, "Contraseña", for: "", class: "label-special label-Standar" %>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn_standar btn-common btn-effect bg-special text-uppercase show_loader_sup" data-disable-with="Continuar" name="commit">Continuar</button>
+                </div>
+
+                <%= render "devise/shared/links" %>
+            </div>
+        <% end %>
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name),:html => {:class => "formulario__register", :id => "form-register"}) do |f| %>
+            <div class="form">
+                <h2 class="section-title pb-3 text-center font-weight-bold">Registro</h2>
+
+                <div class="grupo">
+                    <%= f.text_field :email, autofocus: true, autocomplete: "email", required: "required", class:"input-special", id:"email_register"%><span class="barra bg-before-Standar"></span>
+                    <%= f.label :email, "Correo electrónico", for: "", class: "label-special label-Standar" %>
+                    <%if resource.errors[:email].any? %>
+                        <p class="msj_error mt-2 bg-danger rounded width-error"><%=resource.errors[:email].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                </div>
+
+                <div class="grupo">
+                    <%= f.password_field :password, autocomplete: "new-password", id:"password_register", required: "required", minlength: "8", class:"input-special"%><span class="barra bg-before-Standar"></span>
+                    <%= f.label :password, "Contraseña", for: "", class: "label-special label-Standar" %>
+
+                    <% if resource.errors[:password].any? %>
+                        <p class="msj_error mt-2 bg-danger rounded width-error"><%=resource.errors[:password].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                </div>
+
+                <div class="grupo">
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password", id:"password_confirm_register", required: "required", minlength: "8", class:"input-special"%><span class="barra bg-before-Standar"></span>
+                    <%= f.label :password_confirmation, "Confirmar contraseña", for: "", class: "label-special label-Standar" %>
+                    <% if resource.errors[:password_confirmation].any? %>
+                        <p class="msj_error mt-2 bg-danger rounded width-error"><%=resource.errors[:password_confirmation].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn_standar btn-common btn-effect bg-special text-uppercase show_loader_sup" data-disable-with="Continuar" name="commit">Continuar</button>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<script>
+    <%if resource.errors.any?%>
+        estilizar_errores_validacion()
+    <%end%>
+</script>

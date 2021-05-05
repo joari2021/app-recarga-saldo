@@ -1,0 +1,66 @@
+<div class="contenedor__todo">
+    <div class="caja__trasera">
+        <div class="caja__trasera-login">
+            <h3>¿Olvidaste<br>tu contraseña?</h3>
+            <p>Usa tu correo para recuperarla</p>
+            <button id="btn__iniciar-sesion">Recuperar contraseña</button>
+        </div>
+
+        <div class="caja__trasera-register">
+            <h3>¿No has recibido<br>las instrucciones para<br>confirmar tu correo?</h3>
+            <button id="btn__registrarse">Reenviar instrucciones</button>
+        </div>
+    </div>
+
+    <div class="contenedor__login-register">
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, :class => "formulario__login", :id => "form-session" }) do |f|%>
+            
+            <div class="form">
+
+                <h2 class="section-title pb-3 text-center font-weight-bold">Recuperar Contraseña</h2>
+
+                <div class="grupo">
+                    <%= f.text_field :email, autofocus: true, autocomplete: "email", required: "required", class:"input-special", id:"email_session"%><span class="barra bg-before-Standar"></span>
+                    <%= f.label :email, "Correo electrónico", for: "", class: "label-special label-Standar" %>
+
+                    <%if resource.errors[:email].any? %>
+                        <p class="msj_error mt-2 bg-danger rounded width-error"><%=resource.errors[:email].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn_standar btn-common btn-effect bg-special text-uppercase show_loader_sup" data-disable-with="Continuar" name="commit">Continuar</button>
+                </div>
+
+                <%= render "devise/shared/links_login_sign_up" %>
+            </div>
+        <% end %>
+
+        <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name),:html => {method: :post, :class => "formulario__register", :id => "form-register"}) do |f| %>
+
+            <div class="form">
+                <h2 class="section-title pb-3 text-center font-weight-bold">Reenviar instrucciones de confirmación</h2>
+
+                <div class="grupo">
+                    <%= f.text_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), required: "required", class:"input-special", id:"email_register"%><span class="barra bg-before-Standar"></span>
+                    <%= f.label :email, "Correo electrónico", for: "", class: "label-special label-Standar" %>
+                    <%if resource.errors[:email].any? %>
+                        <p class="msj_error mt-2 bg-danger rounded width-error"><%=resource.errors[:email].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn_standar btn-common btn-effect bg-special text-uppercase show_loader_sup" data-disable-with="Continuar" name="commit">Continuar</button>
+                </div>
+
+                <%= render "devise/shared/links_login_sign_up" %>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<script>
+    <%if resource.errors.any?%>
+        estilizar_errores_validacion()
+    <%end%>
+</script>

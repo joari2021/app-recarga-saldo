@@ -45,7 +45,7 @@
     <div class="grupo" id="input_monto">
       <%= form.text_field :amount, :required => "required", class:"input-special", oninput:"input_value_integer_with_separator(this)", onfocus: "show_montos()", onblur: "ocultar_montos()" %><span class="barra"></span>
       <%= form.label :amount, "Monto", for: "", class: "label-special" %>
-      <p class="msj_error mt-2 bg-danger rounded"  id="msj_error_monto" style="display:none;">El monto es inválido.</p>
+      <p class="msj_error mt-2 bg-danger rounded"  id="msj_error_monto" style="display:none;">El monto es inválido o es superior a tu balance disponible.</p>
       <%if @recharge.errors[:amount].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:amount].to_s[/\w([^"]*)/] %></p>
       <% end %>

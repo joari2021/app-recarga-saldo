@@ -1,4 +1,6 @@
 class DepositsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :authenticate_user_register!
   before_action :authenticate_admin, only: [:edit, :update, :destroy]
   before_action :set_deposit, only: %i[show edit update destroy]
   before_action :format_params_deposit, only: [:create]

@@ -1,0 +1,7 @@
+<% if controller_name != 'sessions' %>
+  <div class="grupo text-center"><%= link_to "Ya tengo una cuenta", new_session_path(resource_name), class:"color-standar-medio font-weight-bold special-link p-1 show_loader_sup" %></div>
+<% end %>
+
+<% if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <div class="grupo text-center"><%= link_to "No estoy registrado", new_registration_path(resource_name), class:"color-standar-medio font-weight-bold special-link p-1 show_loader_sup" %></div>
+<% end %>

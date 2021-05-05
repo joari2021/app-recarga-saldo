@@ -1,4 +1,6 @@
 class RechargesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :authenticate_user_register!
   before_action :authenticate_admin, only: [:process_recharges]
   before_action :set_recharge, only: %i[ show edit update destroy ]
   before_action :set_variables_recharge, only: %i[ index new create]
@@ -173,6 +175,41 @@ class RechargesController < ApplicationController
     respond_to do |format|
       format.json { head :no_content }
       format.js
+    end
+  end
+
+  def promedio_recargas
+      all_recharges = current_user.recharges.where(status:"confirmada").count
+
+      movistar = current_user.recharges.where(status: "confirmada", operator: "Movistar").count
+      digitel = current_user.recharges.where(status: "confirmada", operator: "Digitel").count
+      movilnet = current_user.recharges.where(status: "confirmada", operator: "Movilnet").count
+      cantv = current_user.recharges.where(status: "confirmada", operator: "Cantv").count
+      inter = current_user.recharges.where(status: "confirmada", operator: "Inter").count
+      movistar_tv = current_user.recharges.where(status: "confirmada", operator: "Movistar_TV").count
+      simple_tv = current_user.recharges.where(status: "confirmada", operator: "Simple_TV").count
+
+      @movistar_p = movistar > 0 ? (movistar * 100) / all_recharges : 0
+      @digitel_p = digitel > 0 ? (digitel * 100) / all_recharges : 0
+      @movilnet_p = movilnet > 0 ? (movilnet * 100) / all_recharges : 0
+      @cantv_p = cantv > 0 ? (cantv * 100) / all_recharges : 0
+      @inter_p = inter > 0 ? (inter * 100) / all_recharges : 0
+      @movistar_tv_p = movistar_tv > 0 ? (movistar_tv * 100) / all_recharges : 0
+      @simple_tv_p = simple_tv > 0 ? (simple_tv * 100) / all_recharges : 0
+      
+      @resultados =
+        {
+            movistar_p: movistar_p,
+            digitel_p: digitel_p,
+            movilnet_p: movilnet_p,
+            cantv_p: cantv_p,
+            inter_p: inter_p,
+            movistar_tv_p: movistar_tv_p,
+            simple_tv_p: simple_tv_p
+        }
+
+    respond_to do |format|
+      format.json { render :json => @resultados }
     end
   end
 

@@ -94,12 +94,18 @@ GEM
       warden (~> 1.2.3)
     erubi (1.10.0)
     ffi (1.15.0-x86-mingw32)
+    friendly_id (5.4.2)
+      activerecord (>= 4.0.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.7.0)
+      launchy (~> 2.2)
     loofah (2.9.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -221,7 +227,9 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
+  friendly_id (~> 5.4.0)
   jbuilder (~> 2.7)
+  letter_opener
   mimemagic!
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
