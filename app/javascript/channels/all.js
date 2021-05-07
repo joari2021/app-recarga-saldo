@@ -89,13 +89,13 @@ document.addEventListener("turbolinks:load", function () {
 
   if (href.indexOf("dashboard") != -1){
     $("#access_dashboard").addClass("active")
-  }else if (href.indexOf("recharges") != -1){
+  }else if (href.indexOf("recargas") != -1){
     $("#access_recharges").addClass("active")
-  }else if (href.indexOf("deposits") != -1){
+  }else if (href.indexOf("compra") != -1){
     $("#access_deposits").addClass("active")
   }else if (href.indexOf("historial") != -1){
     $("#access_historial").addClass("active")
-  }else if (href.indexOf("contacts") != -1){
+  }else if (href.indexOf("clientes") != -1){
     $("#access_contacts").addClass("active")
   }
 });

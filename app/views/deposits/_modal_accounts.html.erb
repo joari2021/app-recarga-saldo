@@ -1,5 +1,5 @@
 <div class="modal_original" style="min-width:500px !important" id="modal_accounts">
-  <div class="modal_original_wrap modal-dialog modal-dialog-centered modal-dialog-scrollable" id="modal_accounts_wrap">
+  <div class="modal_original_wrap modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable" id="modal_accounts_wrap" style="background:#111 !important">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title section-title font-weight-bold">Cuentas Bancarias</h5>
@@ -8,56 +8,78 @@
         </button>
       </div>
       <div class="modal-body" id="modal_body_accounts">
-        <h5 class="text-center section-title font-weight-bold">Transferencias</h5>
-        <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Banco de Venezuela</h5>
-            <hr>
-            <p class="card-text">Titular: Jorge Ochoa</p>
-            <p class="card-text">N° Cedula: V-21515060</p>
-            <p class="card-text">N° Cuenta: 0102-0650-28-0000210502</p>
-          </div>
-        </div>
+        
+        <div class="content-accounts">
+          <div class="container-accounts">
+            <div class="box">
+              <span></span>
+              <div class="content-account">
+                <h2>Banco Venezuela</h2>
+                <p class="">Titular: Jorge Ochoa</p>
+                <p class="">N° Cedula: V-21515060</p>
+                <p class="">N° Cuenta:<br>0102-0650-28-0000210502</p>
+                <button type="button" class="btn_standar btn-common btn-effect bg-venezuela text-uppercase mt-4 btn_select_account" data-bank="0" data-method="0" id="btn_select_account">Elegir</button>
+              </div>  
+            </div>
+    
+            <div class="box">
+              <span></span>
+              <div class="content-account">
+                <h2>Banco Mercantil</h2>
+                <p class="">Titular: Jorge Ochoa</p>
+                <p class="">N° Cedula: V-21515060</p>
+                <p class="">N° Cuenta:<br>0105-0187-36-1187066524</p>
+                <button type="button" class="btn_standar btn-common btn-effect bg-mercantil text-uppercase mt-4 btn_select_account" data-bank="1" data-method="0" id="">Elegir</button>
+              </div>  
+            </div>
+    
+            <div class="box">
+              <span></span>
+              <div class="content-account">
+                <h2>Banco B.O.D</h2>
+                <p class="">Titular: Jorge Ochoa</p>
+                <p class="">N° Cedula: V-21515060</p>
+                <p class="">N° Cuenta:<br>0116-0507-95-0022126820</p>
+                <button type="button" class="btn_standar btn-common btn-effect bg-bod text-uppercase mt-4 btn_select_account" data-bank="2" data-method="0">Elegir</button>
+              </div>  
+            </div>
 
-        <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Banco Mercantil</h5>
-            <hr>
-            <p class="card-text">Titular: Jorge Ochoa</p>
-            <p class="card-text">N° Cedula: V-21515060</p>
-            <p class="card-text">N° Cuenta: 0105-0187-36-1187066524</p>
-          </div>
-        </div>
+            <div class="box">
+              <span></span>
+              <div class="content-account">
+                <h2>Banco Bancaribe</h2>
+                <p class="">Titular: Gisela Hernández</p>
+                <p class="">N° Cedula: V-7016890</p>
+                <p class="">N° Cuenta:<br>0114-0169-42-1691358808</p>
+                <button type="button" class="btn_standar btn-common btn-effect bg-bancaribe text-uppercase mt-4 btn_select_account" data-bank="3" data-method="0">Elegir</button>
+              </div>  
+            </div>
 
-        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Banco B.O.D</h5>
-            <hr>
-            <p class="card-text">Titular: Jorge Ochoa</p>
-            <p class="card-text">N° Cedula: V-21515060</p>
-            <p class="card-text">N° Cuenta: 0116-0507-95-0022126820</p>
-          </div>
-        </div>
+            <div class="box">
+              <span></span>
+              <div class="content-account">
+                <h2>Banco Bicentenario</h2>
+                <p class="">Titular: Jorge Ochoa</p>
+                <p class="">N° Cedula: V-21515060</p>
+                <p class="">N° Cuenta:<br>0175-0180-17-0076695698</p>
+                <button type="button" class="btn_standar btn-common btn-effect bg-bicentenario text-uppercase mt-4 btn_select_account" data-bank="4" data-method="0">Elegir</button>
+              </div>  
+            </div>
 
-        <div class="card text-white bg-danger mb-3" style="max-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Banco Bicentenario</h5>
-            <hr>
-            <p class="card-text">Titular: Jorge Ochoa</p>
-            <p class="card-text">N° Cedula: V-21515060</p>
-            <p class="card-text">N° Cuenta: 0175-0180-17-0076695698</p>
+            <div class="box">
+              <span></span>
+              <div class="content-account">
+                <h2>Pago Móvil</h2>
+                <p class="">Banco:<br>Banco De Venezuela (0102)</p>
+                <p class="">N° Cedula: V-21515060</p>
+                <p class="">Telefono: (0414) 8170372</p>
+                <button type="button" class="btn_standar btn-common btn-effect bg-special text-uppercase mt-4 btn_select_account" data-bank="0" data-method="1">Elegir</button>
+              </div>  
+            </div>
           </div>
         </div>
-
-        <div class="card text-white bg-info mb-3" style="max-width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title">Banco Bancaribe</h5>
-            <hr>
-            <p class="card-text">Titular: Gisela Hernández</p>
-            <p class="card-text">N° Cedula: V-7016890</p>
-            <p class="card-text">N° Cuenta: 0114-0169-42-1691358808</p>
-          </div>
-        </div>
+        <!--
+      
 
         <h5 class="text-center section-title font-weight-bold">Pago Movil</h5>
         <div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
@@ -69,6 +91,7 @@
             <p class="card-text">Telefono: (0414) 8170372</p>
           </div>
         </div>
+        -->
       </div>
     </div>
   </div>

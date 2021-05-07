@@ -19,13 +19,6 @@
 			<div class="loader loader-sup-tam"></div>
 		</div> 
 
-		<%if notice%>
-			<p class="alert alert-primary"><%= notice %></p>
-		<%end%>
-
-		<%if alert%>
-			<p class="alert alert-danger"><%= alert %></p>
-		<%end%>
 		<main>
 			<div class="div-main"><%=yield%></div>
 		</main>
@@ -33,5 +26,6 @@
 		<script src="/datepicker/js/bootstrap-datepicker.min.js"></script>
 		<script src="/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
 		
+		<%=render "partials/script_show_notification"%>
 	</body>
 </html>

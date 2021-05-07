@@ -1,0 +1,30 @@
+<script src="/js/notify/perfect-scrollbar.jquery.min.js"></script>
+<script src="/js/notify/bootstrap-notify.js"></script>
+<script>
+    md = {
+        showNotification: function(message, color) {
+            
+            $.notify({
+                message: message
+        
+            }, {
+                type: color,
+                timer: 10000,
+                placement: {
+                from: "top",
+                align: "right"
+                }
+            });
+        },
+    }
+    function comprobar_flash_messages(){
+        <%if notice%>
+            md.showNotification('<%=notice%>','success')
+        <%end%>
+
+        <%if alert%>
+            md.showNotification('<%=alert%>','danger')
+        <%end%>
+    }
+    
+</script>

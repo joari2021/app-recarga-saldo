@@ -25,9 +25,14 @@ import "css/login_and_register"
 import "css/sb-admin-2"
 import "@fortawesome/fontawesome-free/css/all"
 
-//CODIGOS JS
+//////////////   JAVASCRIPT  //////////////////////
+
+/*PLUGINS*/
 import "bootstrap"
 import swal from 'sweetalert'
+
+
+//CODIGOS JS
 import "channels/sb-admin-2"
 import "channels/all"
 import "channels/script_login_and_register"

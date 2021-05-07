@@ -12,6 +12,17 @@ document.addEventListener("turbolinks:load", function () {
     $("#modal_deposit_wrap").addClass("show");
   });
 
+  $(".btn_select_account").click(function(){
+    banks = ["Banco de Venezuela", "Banco Mercantil", "Banco B.O.D", "Banco Bancaribe", "Banco Bicentenario"]
+    methods = ["Transferencia", "Pago móvil"]
+
+    bank = $(this).data("bank")
+    method = $(this).data("method")
+    $("#close_modal_accounts").trigger("click")
+    $("#deposit_bank_destinity").val(banks[format_integer(bank)])
+    $("#deposit_method_payment").val(methods[format_integer(method)])
+  })
+
   if (typeof var_refresh_deposits_for_process === "undefined"){
     var_refresh_deposits_for_process = setInterval(refresh_deposits_for_process, 15000);
   }

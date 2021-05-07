@@ -480,3 +480,335 @@ input:valid ~ .label-Standar {
 .border-title {
   border-bottom: solid 2px #3cd1ff;
 }
+
+/////////////////////////////// NOTIFICACIONES /////////////////////////////////////
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.alert.alert-with-icon {
+  padding-left: 66px;
+}
+
+.alert.alert-with-icon i[data-notify="icon"] {
+  font-size: 30px;
+  display: block;
+  left: 15px;
+  position: absolute;
+  top: 50%;
+  margin-top: -15px;
+  color: #fff;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
+@-webkit-keyframes fadeOutDown {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+.fadeOutDown {
+  -webkit-animation-name: fadeOutDown;
+  animation-name: fadeOutDown;
+}
+
+@-webkit-keyframes fadeOutUp {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes fadeOutUp {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+.fadeOutUp {
+  -webkit-animation-name: fadeOutUp;
+  animation-name: fadeOutUp;
+}
+
+.alert-dismissible .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.75rem 1.25rem;
+  color: inherit;
+}
+
+.close {
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: .5;
+}
+
+.icon-notification {
+  float: left;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: .5;
+  height: 100%;
+}
+
+.close:hover,
+.close:focus {
+  color: #000000;
+  text-decoration: none;
+  opacity: .75;
+}
+
+.close:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+button.close {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+
+.alert .close, .alert .icon-notification {
+  line-height: .5;
+}
+
+.alert .close i, .alert .icon-notification i {
+  font-size: 20px;
+}
+
+////////////////////// modal de cuentas /////////////////////////@at-root
+.content-accounts{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  
+  //background: #111;
+}
+
+.container-accounts{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+  flex-wrap: wrap;
+  
+}
+
+.container-accounts .box{
+  position: relative;
+  width: 320px;
+  height: 400px;
+  color: #fff;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 20px;
+  transition: 0.5s;
+}
+
+.container-accounts .box:hover{
+  transform: translateY(-20px);
+}
+
+.container-accounts .box::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #3a6186;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #89253e, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #89253e, #3a6186); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.bg-venezuela{
+  background: #3a6186;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #89253e, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #89253e, #3a6186); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container-accounts .box::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #3a6186;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #89253e, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #89253e, #3a6186); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  filter: blur(30px);
+}
+
+.container-accounts .box:nth-child(2)::before,
+.container-accounts .box:nth-child(2)::after,
+.bg-mercantil{
+  //background: linear-gradient(315deg, #47A3DA, #ff5800);
+  background: #108dc7;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ef8e38, #108dc7);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ef8e38, #108dc7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.container-accounts .box:nth-child(3)::before,
+.container-accounts .box:nth-child(3)::after,
+.bg-bod{
+  //background: linear-gradient(315deg, #4dff03,#00d0ff);
+  background: #FDFC47;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #24FE41, #FDFC47);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #24FE41, #FDFC47); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.container-accounts .box:nth-child(4)::before,
+.container-accounts .box:nth-child(4)::after,
+.bg-bancaribe{
+  background: #00A2B1;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #00427b, #00A2B1);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #00427b, #00A2B1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container-accounts .box:nth-child(5)::before,
+.container-accounts .box:nth-child(5)::after,
+.bg-bicentenario{
+  background: #ED213A;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.container-accounts .box:nth-child(6)::before,
+.container-accounts .box:nth-child(6)::after{
+  background-color: #3c96ff;
+	background-image: -webkit-linear-gradient(bottom right, #3c96ff, #2dfbff);
+	background-image: -o-linear-gradient(bottom right, #3c96ff, #2dfbff);
+	background-image: linear-gradient(to top left, #2dfbff,  #3c96ff);
+}
+
+
+.container-accounts .box span{
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  background: rgba(0,0,0,0.6);
+  z-index: 2;
+  border-radius: 20px !important;
+}
+
+.container-accounts .box span::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  border-radius: 20px !important;
+}
+
+.container-accounts .box .content-account{
+  position: relative;
+  z-index: 10;
+  padding: 20px 40px;
+}
+
+.container-accounts .box .content-account h2{
+  font-size: 2em;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.container-accounts .box .content-account p{
+  font-size: 1.1em;
+  color: #ffffff;
+  margin-bottom: 10px;
+}

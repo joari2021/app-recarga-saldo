@@ -9,16 +9,10 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="/datepicker/css/bootstrap-datepicker3.standalone.css">
+    
   </head>
 
   <body id="page-top">
-    <%if notice%>
-      <p class="alert alert-primary"><%= notice %></p>
-    <%end%>
-
-    <%if alert%>
-      <p class="alert alert-danger"><%= alert %></p>
-    <%end%>
     
     <div class="contenedor_loader_sup bg-special">
         <div class="loader loader-sup-tam"></div>
@@ -237,12 +231,16 @@
         </div>
     </div>
 
+    
+
     <script src="/datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="/js_dashboard/vendor/jquery-easing/jquery.easing.min.js"></script>
 
+    <%=render "partials/script_show_notification"%>
+    
     <!--PLUGIN PARA SONIDO DE NOTIFICACIONES-->
     <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
 
