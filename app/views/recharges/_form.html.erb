@@ -30,7 +30,6 @@
       <div id="cont-option-list" style="display:none"><!--Los codigos de area se insertan con javascript--></div>
     </div>
   
-
     <!--- NUMERO DE TELEFONO ----------------------------------------------------------------->
     <div class="grupo">
       <%= form.text_field :number, :required => "required", class:"input-special", oninput: "input_value_integer(this)" %><span class="barra"></span>
@@ -50,6 +49,16 @@
         <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:amount].to_s[/\w([^"]*)/] %></p>
       <% end %>
       <div id="div_montos" style="display:none"><!--Los montos se insertan con javascript--></div>
+
+      <%if current_user.is_admin? && @recharge_type_payment === "Post-pago"%>
+        <%if @recharge.operator === "Digitel" || @recharge.operator === "Movistar"%>
+          <%monto_recharge = @recharge.amount / 1.05%>
+          <span class="btn_standar bg-special m-1">Monto Deuda: <%=number_with_precision(monto_recharge, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2) %></span>
+        <%elsif @recharge.operator === "Cantv"%>
+          <%monto_recharge = @recharge.amount / 1.05%>
+          <span class="btn_standar bg-special m-1">Monto a pagar: <%=number_with_precision(monto_recharge, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2) %></span>
+        <%end%>
+      <%end%>
     </div>
 
     <!--CONTACTO-->
@@ -69,16 +78,64 @@
       </div>
     <%end%>
 
+    <%if current_user.is_admin?%>
+      <!--DIAS DISPONIBLES-->
+      <%if @recharge.operator === "Simple_TV"%>
+        <div class="grupo">
+          <%= form.text_field :available_days, :required => "required", class:"input-special", oninput:"input_value_integer(this)" %><span class="barra"></span>
+          <%= form.label :available_days, "Dias disponibles", for: "", class: "label-special" %>
+          <%if @recharge.errors[:available_days].any? %>
+            <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:available_days].to_s[/\w([^"]*)/] %></p>
+          <% end %>
+        </div>
+      <%end%>
+
+      <!--RENTA MENSUAL-->
+      
+      <%if @recharge.operator === "Simple_TV" || @recharge.operator === "Inter"%>
+        <%if @recharge.type_payment === "Prepago"%>
+            <div class="grupo">
+              <%= form.text_field :renta_mensual, :required => "required", class:"input-special", oninput:"input_value_decimal_with_separator(this)" %><span class="barra"></span>
+              <%= form.label :renta_mensual, "Renta mensual", for: "", class: "label-special" %>
+              <%if @recharge.errors[:renta_mensual].any? %>
+                <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:renta_mensual].to_s[/\w([^"]*)/] %></p>
+              <% end %>
+            </div>
+        <%end%>
+      <%end%>
+      
+      <!--SALDO RESULTANTE-->
+      <%if @recharge.operator === "Cantv"%>
+        <div class="grupo">
+          <%= form.number_field :saldo_resultante, :required => "required", class:"input-special", step:"0.01" %><span class="barra"></span>
+          <%= form.label :saldo_resultante, "Saldo Actual", for: "", class: "label-special" %>
+          <%if @recharge.errors[:saldo_resultante].any? %>
+            <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:saldo_resultante].to_s[/\w([^"]*)/] %></p>
+          <% end %>
+        </div>
+      <%end%>
+    <%end%>
+
+    <%if current_user.is_admin?%>
+      <div class="grupo" id="contenedor-switch">
+        <div class="swtich-container">
+          <input type="checkbox" id="switch" name="recharge[number_inexistente]">
+          <label for="switch" class="lbl" style="margin-bottom:0px;"></label>
+          <label for="switch" class="font-weight-bold align-middle" id="label_switch" style="cursor:pointer;">Número inexistente</label>
+        </div>
+      </div>
+    <%end%>
+
     <div class="actions">
       <button type="button" class="btn_standar btn-common btn-effect text-uppercase" id="btn_recarga" onclick="validation_submit()">Recargar</button>
 
       <%if current_user.is_admin?%>
-        <input type="hidden" name="recharge[operation]" data-model="recharge"  id="operation_admin">
+        <input type="hidden" name="recharge[status]" data-model="recharge" id="operation_admin" value="anulada">
 
         <button type="button" class="mt-2 btn_standar btn-common btn-effect text-uppercase bg-danger" onclick="show_modal_anulate(event)">Anular</button>
       <%end%>
 
-      <%=form.submit "Recargar", class: "d-none", id: "btn_submit"%>
+      <%=form.submit "Recargar", class: "d-none", id: "btn_submit", onclick: "disabled_button('#btn_recarga')"%>
     </div>
   </div>
 <% end %>

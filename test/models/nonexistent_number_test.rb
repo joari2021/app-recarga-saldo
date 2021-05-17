@@ -1,6 +1,6 @@
 require "test_helper"
 
-class AcoountTest < ActiveSupport::TestCase
+class NonexistentNumberTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

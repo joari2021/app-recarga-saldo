@@ -20,10 +20,12 @@
     function comprobar_flash_messages(){
         <%if notice%>
             md.showNotification('<%=notice%>','success')
+            <%notice = ""%>
         <%end%>
 
         <%if alert%>
             md.showNotification('<%=alert%>','danger')
+            <%alert = ""%>
         <%end%>
     }
     

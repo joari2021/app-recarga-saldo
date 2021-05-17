@@ -71,10 +71,10 @@
 
     <div class="actions">
       <button type="button" class="btn_standar btn-common btn-effect bg-special text-uppercase" id="btn_deposit">Enviar</button>
-      <%=form.submit "Enviar", class: "d-none", id: "btn_submit"%>
+      <%=form.submit "Enviar", class: "d-none", id: "btn_submit", onclick: "disabled_button('#btn_deposit')"%>
 
       <%if current_user.is_admin?%>
-        <input type="hidden" name="deposit[operation]" data-model="deposit" id="operation_admin">
+        <input type="hidden" name="deposit[operation]" data-model="deposit" value="deneged" id="operation_admin">
 
         <button type="button" class="mt-2 btn_standar btn-common btn-effect text-uppercase bg-danger" onclick="show_modal_anulate(event)">Anular</button>
       <%end%>

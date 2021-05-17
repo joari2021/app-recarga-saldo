@@ -10,7 +10,7 @@ $("#close_modal_recharge").trigger("click");
     text = "En unos segundos se mostrara en la sección de abajo el monto de la deuda y podrá hacer el pago si lo desea."
 
     $("#notify_vacio").remove()
-    $("#row_consultation").append(`<%=render "caja_consultation", recharge: @recharge%>`);
+    $("#sub_contenedor_consultation").append(`<%=render "caja_consultation", recharge: @recharge%>`);
     $("#consultation<%=@recharge.id%>").css({"display":"none"})
     $("#consultation<%=@recharge.id%>").fadeIn(600)
 <%end%>

@@ -1,8 +1,8 @@
 <div class="modal_original" style="min-width:500px !important" id="modal_contacts">
-  <div class="modal_original_wrap modal-dialog modal-dialog-centered modal-dialog-scrollable" id="modal_contacts_wrap">
+  <div class="modal_original_wrap modal-lg modal-dialog modal-dialog-centered modal-dialog-scrollable" id="modal_contacts_wrap">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="" id="title_modal_contact">Contactos</h5>
+        <h5 class="" id="title_modal_contact">Clientes</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="far fa-times-circle" id="close_modal_contact"></i>
         </button>
@@ -17,16 +17,8 @@
           </div>
         </form>
         
-        <table class="" id="tabla_buscador_contacts" >
-            <thead>
-                <tr>
-                  <th >Nombre</th>
-                  <th >Número</th>
-                  <th ></th>
-                </tr>
-            </thead>
+        <table class="table mt-3" id="tabla_buscador_contacts" style="border-collapse:separate;border-spacing:0px 5px !important;">
             <tbody>
-                
             </tbody>
         </table>
         <div class="contenedor_loader" style="display:none;">
@@ -36,16 +28,3 @@
     </div>
   </div>
 </div>
-
-<script>
-
-function seleccionarContacto(event,contact) {
-  event.preventDefault()
-  input_cod_area.value = contact.getAttribute("data-cod_area")
-  input_number_phone.value = contact.getAttribute("data-number")
-  $("#contenedor-switch").css({"display":"none"})
-
-  $("#close_modal_contact").trigger("click")
-}
-
-</script>

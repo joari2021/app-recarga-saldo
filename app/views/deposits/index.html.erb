@@ -32,7 +32,7 @@
       </tr>
     </thead>
 
-    <%current_user.deposits.each do |deposit|%>
+    <%@deposits.each do |deposit|%>
       <tr class="tr-standar" id="deposit_<%=deposit.id%>">
         <td class="td-standar" data-label="Fecha"><%=deposit.date_send.strftime("%d/%m/%Y")%></td>
         <td class="td-standar" data-label="Banco Destino"><%=deposit.bank_destinity.gsub("_"," ")%></td>

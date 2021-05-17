@@ -103,9 +103,14 @@ create_cod_area = function () {
       break;
 
     case "Movilnet":
-      cod_area = [cod_area_movilnet];
+      cod_area = cod_area_movilnet;
       insert_cod_area(cod_area);
       break;
+
+      case "Cantv":
+        cod_area = cod_area_tlf_fija;
+        insert_cod_area(cod_area);
+        break;
 
     default:
       break;

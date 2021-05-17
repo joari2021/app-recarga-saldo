@@ -7,7 +7,9 @@ class DepositsController < ApplicationController
 
   # GET /deposits or /deposits.json
   def index
-    @deposits = Deposit.all
+    @deposits = current_user.deposits.all
+                                     .order("date_send DESC")
+                                     .paginate(page: params[:page], per_page: 20)
   end
 
   # GET /deposits/1 or /deposits/1.json

@@ -72,10 +72,11 @@ document.addEventListener("turbolinks:load", function () {
     "0295",
   ];
   
+  
   recharges_count = format_integer($("#recharges_cant").text())
   deposits_count = format_integer($("#deposits_cant").text())
  
-
+  /*
   if (typeof var_refresh_solicitudes_pend != "undefined"){
     var_refresh_solicitudes_pend = undefined
   }
@@ -83,7 +84,7 @@ document.addEventListener("turbolinks:load", function () {
   if (typeof var_refresh_solicitudes_pend === "undefined"){
     var_refresh_solicitudes_pend = setInterval(refresh_solicitudes_pend, 15000);
   }
-  $.ajaxSetup({ cache: false });
+  $.ajaxSetup({ cache: false });*/
 
   href = window.location.href
 
@@ -276,19 +277,22 @@ show_datepicker = function () {
 show_modal_anulate = function (event) {
   event.preventDefault();
   swal({
-    title: "Estas segur@ de anular esta recarga?",
+    title: "Estas segur@ de anular esta operación?",
     text: "Esta acción es irreversible!",
     icon: "warning",
     buttons: true,
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      $("#operation_admin").val("deneged")
-      
-      if ($("#operation_admin").data("model") === "recharge"){
+      // FUNCIONARA SOLO EN EL FORM DE RECHARGE EDIT DEL A.
+     if ($("#recharge_status").val("anulada")){
         $("#recharge_amount").removeAttr("required")
-      }
-      
+        $("#recharge_renta_mensual").removeAttr("required")
+        $("#recharge_available_days").removeAttr("required")
+        $("#recharge_saldo_resultante").removeAttr("required")
+     }
+      ///////////////////////////////////
+
       $("#btn_submit").trigger("click")
       swal({
         title: "Procesando. Por favor espere...",
@@ -300,6 +304,36 @@ show_modal_anulate = function (event) {
     }
   });
 };
+
+disabled_button = function (button){
+  last_form = document.forms.length - 1
+  elementosEnForm = document.forms[last_form].elements;
+
+  submit = true
+  for (i = 0; i < elementosEnForm.length; i++){
+    
+    if (elementosEnForm[i].getAttribute("required") != null){
+      
+      if (elementosEnForm[i].value.length === 0){
+        submit = false
+        break
+      }
+    }
+  }
+
+  if (submit){
+    clases_button = $(button).attr("class").split(" ")
+    $.each(clases_button, function (ind, clase) { 
+      if (clase.indexOf("bg") != -1){
+        $(button).removeClass(clase)
+      } 
+    }); 
+    $(button).attr("disabled","disabled")
+    $(button).css({"background":"#d9dadf"})
+    $(button).removeClass("btn-effect")
+    $(button).removeClass("btn-common")
+  }
+}
 
 refresh_solicitudes_pend = function  () {
   $("#cont_solicitudes_pend").load( window.location.href + " #sub_cont_solicitudes_pend", function(){

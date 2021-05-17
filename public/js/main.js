@@ -105,13 +105,23 @@
   /* 
    Sticky Nav
    ========================================================================== */
+   // Scroll to top button appear
+    $(document).on('scroll', function() {
+      var scrollDistance = $(this).scrollTop();
+      if (scrollDistance > 100) {
+        $('.scroll-to-top').fadeIn();
+      } else {
+        $('.scroll-to-top').fadeOut();
+      }
+    });
+    /*
     $(window).on('scroll', function() {
         if ($(window).scrollTop() > 100) {
             $('.header-top-area').addClass('menu-bg');
         } else {
             $('.header-top-area').removeClass('menu-bg');
         }
-    });
+    });*/
 
   /* 
  VIDEO POP-UP
@@ -128,6 +138,7 @@
   /* 
    Back Top Link
    ========================================================================== */
+    /*
     var offset = 200;
     var duration = 500;
     $(window).scroll(function() {
@@ -137,14 +148,33 @@
         $('.back-to-top').fadeOut(400);
       }
     });
-
+    
     $('.back-to-top').on('click',function(event) {
       event.preventDefault();
       $('html, body').animate({
         scrollTop: 0
       }, 600);
       return false;
-    })
+    })*/
+
+    // Scroll to top button appear
+    $(document).on('scroll', function() {
+      var scrollDistance = $(this).scrollTop();
+      if (scrollDistance > 100) {
+        $('.scroll-to-top').fadeIn();
+      } else {
+        $('.scroll-to-top').fadeOut();
+      }
+    });
+  
+    // Smooth scrolling using jQuery easing
+    $(document).on('click', 'a.scroll-to-top', function(e) {
+      var $anchor = $(this);
+      $('html, body').stop().animate({
+        scrollTop: ($($anchor.attr('href')).offset().top)
+      }, 1000, 'easeInOutExpo');
+      e.preventDefault();
+    });
 
   /* 
    One Page Navigation & wow js

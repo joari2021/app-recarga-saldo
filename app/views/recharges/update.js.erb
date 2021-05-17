@@ -28,7 +28,7 @@ $("#close_modal_recharge").trigger("click");
     button: "Cerrar",
   });
 
-<%elsif @recharge.type_operation === "consultation" && @recharge.status === "procesada"%>
+<%elsif @recharge.type_operation === "consultation" && @recharge.status === "confirmada"%>
   $("#recharge_<%=@recharge.id%>").fadeOut(400,function(){
     $(this).remove()
     recharges_count -= 1 

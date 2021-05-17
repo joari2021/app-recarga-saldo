@@ -1,0 +1,32 @@
+<%= form_with(model: nonexistent_number) do |form| %>
+  <% if nonexistent_number.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(nonexistent_number.errors.count, "error") %> prohibited this nonexistent_number from being saved:</h2>
+
+      <ul>
+        <% nonexistent_number.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :operator %>
+    <%= form.text_field :operator %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type_payment %>
+    <%= form.text_field :type_payment %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.text_field :number %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

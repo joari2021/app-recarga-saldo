@@ -135,7 +135,7 @@
             <!-- Card Header - Dropdown -->
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Resumen de recargas</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Recargas realizadas</h6>
 
                 <!--
                 <div class="dropdown no-arrow">
@@ -367,8 +367,21 @@
     </div>
 </div>
 
-<!-- Page level plugins -->
-<script src="/js_dashboard/vendor/chart.js/Chart.js"></script>
+<!--MODAL INFORMATIVO-->
+<div class="modal_original" id="modal_standar" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true" style="padding-right: 15px; display: block;">
+    <div class="modal_original_wrap modal-dialog modal-dialog-centered modal-md" id="modal_standar_wrap">
+        <div class="modal-content">
+            <div class="card shadow-sm">
+                <%= image_tag("info/parametros_digitel.jpg", {class:"bd-placeholder-img", width:"100%"}) %>
+                <div class="card-body m-1 p-1">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn_standar btn-common btn-effect bg-Digitel text-uppercase" id="btn_modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     movistar_p = <%=@movistar_p%>;
@@ -383,6 +396,9 @@
     
     ventaMonths = <%=@venta_months_2021%>
 </script>
+
+<!-- Page level plugins -->
+<script src="/js_dashboard/vendor/chart.js/Chart.js"></script>
 <!-- Page level custom scripts -->
 <script src="/js_dashboard/js/demo/chart-area-demo.js"></script>
 <script src="/js_dashboard/js/demo/chart-pie-demo.js"></script>

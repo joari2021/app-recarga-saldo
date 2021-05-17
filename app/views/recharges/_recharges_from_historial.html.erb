@@ -1,13 +1,14 @@
 <%@recharges.each do |recharge|%>
     <tr class="tr-standar">
-        <td class="td-standar" data-label="Fecha y hora"><%=recharge.created_at.strftime("%d/%m/%Y %02H:%02M")%></td>
-        <td class="td-standar" data-label="Sistema"><%=recharge.operator.gsub("_"," ")%></td>
-        <td class="td-standar" data-label="T. Pago"><%=recharge.type_payment%></td>
-        <td class="td-standar" data-label="Número">
+        <td class="td-standar align-middle" data-label="Fecha y hora"><%=recharge.created_at.strftime("%d/%m/%Y %02H:%02M")%></td>
+        <td class="td-standar align-middle" data-label="Sistema"><%=recharge.operator.gsub("_"," ")%></td>
+        <!--
+        <td class="td-standar align-middle" data-label="T. Pago"><%=recharge.type_payment%></td>-->
+        <td class="td-standar align-middle" data-label="Número">
           <%=recharge.cod_area.present? ? "(" + recharge.cod_area + ") " : "" %>
           <%=recharge.number%></td>
-        <td class="td-standar" data-label="Monto"><%=number_with_precision(recharge.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>
-        <td class="td-standar" data-label="Estatus">
+        <td class="td-standar align-middle" data-label="Monto"><%=number_with_precision(recharge.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>
+        <td class="td-standar align-middle" data-label="Estatus">
             <%case recharge.status%>
             <%when "enviada"%>
                <%color_badge = "badge-primary"%>
@@ -17,6 +18,11 @@
                <%color_badge = "badge-danger"%>
             <%end%>
             <span class="badge badge-pill <%=color_badge%>"><%=recharge.status%></span>
+        </td>
+        <td class="td-standar align-middle" data-label="Acción">
+          <%= link_to recharge_path(recharge), {remote: true, class:"btn btn_standar btn-common btn-effect bg-special"}  do %>
+              <i class="far fa-eye text-gray-100"></i>
+          <% end %>
         </td>
     </tr>
 <%end%>

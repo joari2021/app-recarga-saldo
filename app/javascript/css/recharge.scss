@@ -82,27 +82,6 @@ input:valid ~ .label-Simple_TV {
   color: var(--simpletv) !important;
 }
 
-input:focus ~ .barra::before {
-  width: 100%;
-}
-
-.barra {
-  position: relative;
-  display: block;
-  width: 100%;
-}
-
-.barra::before {
-  content: "";
-  height: 2px;
-  width: 0%;
-  bottom: 0;
-  position: absolute;
-  //background: linear-gradient(to right, #B06AB3, #4568DC);
-  transition: 0.3s ease width;
-  left: 0;
-}
-
 .bg-Movistar,
 .bg-Movistar_TV,
 .bg-before-Movistar::before,
@@ -225,41 +204,30 @@ a.bg-Simple_TV:hover {
   display: none;
 }
 
-
-/*  BUTTONS ////////////////////
-.btn-standar {
-  border: none;
-  display: block;
-  width: 80%;
-  margin: 10px auto;
-  height: 40px;
-  font-size: 16px;
-  cursor: pointer;
-  color: white !important;
-  padding: 0.5rem 2.5rem;
-  border-radius: 5rem;
-  text-transform: uppercase;
-  text-align: center;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-  font-weight: bold;
-}
-
-.btn-standar:before{
-  content: "";
+/* ##################### CONTENEDOR DE RECARGA ###############*/
+.container-recharge .box::before{
+  content: '';
   position: absolute;
-  z-index: -1;
-}
-
-.btn--left:before {
   top: 0;
   left: 0;
-  width: 0;
-  height: 100%;
-  transition: width 0.25s linear;
-}
-.btn--left:hover:before {
   width: 100%;
+  height: 100%;
+  background-color: #3c96ff;
+	background-image: -webkit-linear-gradient(bottom right, #3c96ff, #2dfbff);
+	background-image: -o-linear-gradient(bottom right, #3c96ff, #2dfbff);
+	background-image: linear-gradient(to top left, #2dfbff,  #3c96ff);
 }
-*/
+
+.container-recharge .box::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #3c96ff;
+	background-image: -webkit-linear-gradient(bottom right, #3c96ff, #2dfbff);
+	background-image: -o-linear-gradient(bottom right, #3c96ff, #2dfbff);
+	background-image: linear-gradient(to top left, #2dfbff,  #3c96ff);
+  filter: blur(30px);
+}

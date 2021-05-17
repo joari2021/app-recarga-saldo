@@ -23,10 +23,11 @@ document.addEventListener("turbolinks:load", function () {
     $("#deposit_method_payment").val(methods[format_integer(method)])
   })
 
+  /*
   if (typeof var_refresh_deposits_for_process === "undefined"){
     var_refresh_deposits_for_process = setInterval(refresh_deposits_for_process, 15000);
   }
-  $.ajaxSetup({ cache: false });
+  $.ajaxSetup({ cache: false });*/
 });
 
 show_modal_accounts = function (event) {
@@ -45,8 +46,6 @@ activar_submit_deposit = function () {
 };
 
 refresh_deposits_for_process = function  () {
-  $("#cont_deposits_for_process").load( getRootUrl() + "/process_deposits" + " #sub_cont_deposits_for_process", function(){
-    /* USAR SI ES NECESARIO DESPUES DE CARGAR */
-  });
+  $("#cont_deposits_for_process").load( window.location.href + " #sub_cont_deposits_for_process");
 }
 

@@ -8731,6 +8731,10 @@ button.bg-dark:focus {
 }
 
 @media (min-width: 992px) {
+  .w-lg-100{
+    width: 100% !important;
+  }
+
   .m-lg-0 {
     margin: 0 !important;
   }

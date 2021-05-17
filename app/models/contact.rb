@@ -3,7 +3,11 @@ class Contact < ApplicationRecord
   include ValidationsMethodsConcern
 
   def self.buscador(names,operator,type_payment)
-    Contact.where("names LIKE ? AND operator LIKE ? AND type_payment LIKE ?", "%#{names}%", "#{operator}", "#{type_payment}")
+    if names != "all"
+      Contact.where("names LIKE ? AND operator LIKE ? AND type_payment LIKE ?", "%#{names}%", "#{operator}", "#{type_payment}")
+    else
+      Contact.where("operator LIKE ? AND type_payment LIKE ?", "#{operator}", "#{type_payment}")
+    end
   end
 
   validates :names, length: { in: 3..20, message: "Debe contener minimo 3 caracteres y máximo 20." }

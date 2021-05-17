@@ -36,6 +36,7 @@ import swal from 'sweetalert'
 import "channels/sb-admin-2"
 import "channels/all"
 import "channels/script_login_and_register"
+import "channels/dashboard"
 import "channels/recharge"
 import "channels/deposit"
 import "channels/contact"

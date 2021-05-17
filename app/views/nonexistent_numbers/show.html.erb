@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Operator:</strong>
+  <%= @nonexistent_number.operator %>
+</p>
+
+<p>
+  <strong>Type payment:</strong>
+  <%= @nonexistent_number.type_payment %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @nonexistent_number.number %>
+</p>
+
+<%= link_to 'Edit', edit_nonexistent_number_path(@nonexistent_number) %> |
+<%= link_to 'Back', nonexistent_numbers_path %>

@@ -2,22 +2,35 @@ class Recharge < ApplicationRecord
   belongs_to :user
   include ValidationsMethodsConcern
 
+  def marcar_number_as_inexistente
+    if self.number_inexistente.present?
+      number = self.cod_area.present? ? self.cod_area + self.number : self.number
+
+      NonexistentNumber.create(operator: self.operator, type_payment: self.type_payment, number: number)
+    end
+  end
+
   def self.buscador
     Recharge.where(operator: "Movistar", status:"confirmada")
   end
 
   #METODOS PARA VALIDAR EL MONTO
-  def recharge_limit_is_1400000?
+  def recharge_limit_is_800000?
+    operator === "Movilnet" && type_payment === "Prepago"
+  end
+
+  def recharge_limit_is_1000000?
+    operator === "Simple_TV" || operator === "Cantv" || operator === "Inter" && type_payment === "Prepago"
+  end
+
+  def recharge_limit_is_2500000?
     operator === "Digitel" && type_payment === "Prepago"
   end
 
   def recharge_limit_is_1500000?
-    operator === "Movistar" && type_payment === "Prepago"
+    operator === "Movistar" && type_payment === "Prepago" || operator === "Movistar_TV"
   end
 
-  def recharge_limit_is_800000?
-    operator === "Movilnet" && type_payment === "Prepago"
-  end
 
   validates :operator, inclusion: { in: %w(Movistar Movilnet Digitel Cantv Movistar_TV Inter Simple_TV),
     message: "El sistema seleccionado es invalido" }
@@ -39,7 +52,8 @@ class Recharge < ApplicationRecord
   validates :number, length: { is: 12, message: "Debe contener 12 dígitos.", if: :number_length_12? }
     
   #CONTINUAR SEGUN LOS PARAMETROS FINALES DEL MONTO PERMITIDOS PARA LAS RECARGAS
-  validates :amount, numericality: { greater_than_or_equal_to: 1400000, message: "El monto es inválido", if: :recharge_limit_is_1400000? }
-  validates :amount, numericality: { greater_than_or_equal_to: 1500000, message: "El monto es inválido", if: :recharge_limit_is_1500000? }
   validates :amount, numericality: { greater_than_or_equal_to: 800000, message: "El monto es inválido", if: :recharge_limit_is_800000? }
+  validates :amount, numericality: { greater_than_or_equal_to: 1000000, message: "El monto es inválido", if: :recharge_limit_is_1000000? }
+  validates :amount, numericality: { greater_than_or_equal_to: 1500000, message: "El monto es inválido", if: :recharge_limit_is_1500000? }
+  validates :amount, numericality: { greater_than_or_equal_to: 2500000, message: "El monto es inválido", if: :recharge_limit_is_2500000? }
 end

@@ -71,7 +71,7 @@
 
     <div class="actions">
       <button type="button" class="btn_standar btn-common btn-effect bg-special text-uppercase" id="btn_contact">Guardar</button>
-      <%=form.submit "Guardar", class: "d-none", id: "btn_submit"%>
+      <%=form.submit "Guardar", class: "d-none", id: "btn_submit", onclick: "disabled_button('#btn_contact')"%>
     </div>
   </div>
 <% end %>

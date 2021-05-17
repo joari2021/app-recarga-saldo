@@ -7,7 +7,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts or /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = current_user.contacts.all
   end
 
   # GET /contacts/1 or /contacts/1.json
@@ -63,7 +63,7 @@ class ContactsController < ApplicationController
   end
 
   def buscador
-    @resultados = Contact.buscador(params[:names],params[:operator],params[:type_payment]).map do |contact|
+    @resultados = current_user.contacts.buscador(params[:names],params[:operator],params[:type_payment]).map do |contact|
       {
           id: contact.id,
           names_contact: contact.names,

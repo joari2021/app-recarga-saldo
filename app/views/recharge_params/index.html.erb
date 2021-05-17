@@ -2,16 +2,12 @@
   <%@recharge_params.each do |params_operator| %>
     <!--ESTABLECIENDO FORMATO DE LA IMAGEN-->
     <%oper = params_operator.operadora %>
-    <%if oper === "Movistar" || oper == "Movilnet" || oper == "Cantv" || oper == "Movistar_TV"%>
-      <%format_img = "png"%>
-    <%else%>
-      <%format_img = "jpeg"%>
-    <%end%>
+    
     <div class="col-lg-3 col-md-4 col-sm-6 col-7 mb-5">
       <%= link_to edit_recharge_param_path(params_operator), { remote: true, class:"show_loader_sup"}  do %>
         <div class="card border-left-<%=oper === "Movistar_TV" ? "Movistar" : oper%> shadow py-2">
           <div class="card-body contenedor-img">
-            <%= image_tag("sistema_recargas/#{oper.downcase}.#{format_img}", class:"img-operadora", width:"100%", height:"70px") %>
+            <%= image_tag("sistema_recargas/#{oper.downcase}.png", class:"img-operadora", width:"100%", height:"70px") %>
           </div>
         </div>
       <% end %>

@@ -4,13 +4,22 @@ class RechargesController < ApplicationController
   before_action :authenticate_admin, only: [:process_recharges]
   before_action :set_recharge, only: %i[ show edit update destroy ]
   before_action :set_variables_recharge, only: %i[ index new create]
+  before_action :verify_exist_number, only: [:create]
   before_action :verify_consulta!, only: [:create] 
   before_action :format_params_recharge, only: [:create] 
+  before_action :format_update_params_recharge, only: [:update] 
   before_action :rectify_amount, only: [:create, :update]
+
 
   # GET /recharges or /recharges.json
   def index
     #@recharges = Recharge.all
+    date_final = Time.now.utc.in_time_zone("Caracas").strftime("%Y-%m-%d") 
+    parsed_date_f = Date.parse(date_final)
+
+    consultas = current_user.recharges.where(type_operation: "consultation", status: ["confirmada","anulada"])
+    consultas_vencidas = consultas.where.not(created_at: parsed_date_f.midnight..parsed_date_f.end_of_day)
+    consultas_vencidas.destroy_all
   end
 
   def historial
@@ -56,7 +65,7 @@ class RechargesController < ApplicationController
       end
      
       #ACTUALIZANDO EL BALANCE
-      if @recharge.type_operation === "direct_recharge"
+      if @recharge.save && @recharge.type_operation === "direct_recharge"
         balance_final = current_user.balance.balance -= @recharge.amount
 
         ActiveRecord::Rollback unless current_user.balance.update(balance: balance_final)
@@ -90,126 +99,90 @@ class RechargesController < ApplicationController
 
   # PATCH/PUT /recharges/1 or /recharges/1.json
   def update
-    if @recharge.type_operation === "consultation" && @recharge.status === "procesada"
-      ActiveRecord::Base.transaction do
-        respond_to do |format|
-          if @recharge.update(status:"enviada",type_operation:"direct_recharge")
-            balance_final = current_user.balance.balance -= @recharge.amount
-            ActiveRecord::Rollback unless current_user.balance.update(balance: balance_final)
-            
-            format.json { head :no_content }
-            format.js
-          else
-            format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
-            format.js { render :edit }
+    save_success = false
+    respond_to do |format|
+      if current_user.id === @recharge.user.id
+        if @recharge.type_operation === "consultation" && @recharge.status === "confirmada"
+          ActiveRecord::Base.transaction do
+            if @recharge.update(status:"enviada",type_operation:"direct_recharge")
+              balance_final = current_user.balance.balance -= @recharge.amount
+              ActiveRecord::Rollback unless current_user.balance.update(balance: balance_final) && save_success = true
+            end
           end
+        end
+      elsif current_user.is_admin?
+        ActiveRecord::Base.transaction do
+          if @recharge.update(update_recharge_params) && save_success = true
+
+            #AÑADIR NUMERO INEXISTENTE A LA LISTA NEGRA
+            if @recharge.status === "anulada"
+              @recharge.marcar_number_as_inexistente
+            end
+
+            # REINTEGRAR MONTO DE LA RECARGA AL BALANCE DEL USUARIO SI LA MISMA ES ANULADA
+            if @recharge.type_operation === "direct_recharge" && @recharge.status === "anulada"
+              balance_final = @recharge.user.balance.balance += @recharge.amount
+              ActiveRecord::Rollback unless @recharge.user.balance.update(balance: balance_final)
+
+              if balance_final != @recharge.user.balance.balance
+                save_success = false
+              end
+            end
+            
+            #SUMAR 5% AL MONTO DE LAS RECARGAS DE SERVICIOS POST-PAGO MOVISTAR Y DIGITEL 
+            if @recharge.type_operation === "consultation" && @recharge.status === "confirmada" && @recharge.operator != "Inter"
+              monto_final = @recharge.amount * 1.05
+              ActiveRecord::Rollback unless @recharge.update(amount: monto_final)
+
+              unless @recharge.amount >= monto_final  
+                save_success = false
+              end
+            end
+            
+            #CALCULAR SALDO RESULTANTE DESPUES DE UNA RECARGA A NUMEROS CANTV
+            if @recharge.status === "confirmada" && @recharge.operator === "Cantv"
+              saldo_final = @recharge.saldo_resultante + (@recharge.amount / 1.05)
+              ActiveRecord::Rollback unless @recharge.update(saldo_resultante: saldo_final)
+
+              unless @recharge.saldo_resultante != update_recharge_params[:saldo_resultante].to_f  
+                save_success = false
+              end
+            end
+
+            #CALCULAR DEUDA FALTANTE DESPUES DE UNA RECARGA A NUMEROS INTER
+            if @recharge.status === "confirmada" && @recharge.operator === "Inter" && @recharge.type_payment === "Prepago"
+              renta_final = @recharge.renta_mensual - @recharge.amount 
+              ActiveRecord::Rollback unless @recharge.update(renta_mensual: renta_final)
+
+              unless @recharge.renta_mensual != update_recharge_params[:renta_mensual].to_f  
+                save_success = false
+              end
+            end
+          end    
         end
       end
-    elsif current_user.is_admin?
-      if @recharge.type_operation === "direct_recharge"
-        if update_recharge_params[:operation] === "confirm"
-          if @recharge.update(status:"confirmada")
-            respond_to do |format|
-              format.json { head :no_content }
-              format.js
-            end
-          else
-            respond_to do |format|
-              format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
-              format.js {render :edit}
-            end
-          end
-        elsif update_recharge_params[:operation] === "deneged"
-          ActiveRecord::Base.transaction do
-            respond_to do |format|
-              if @recharge.update(status:"anulada")
-
-                balance_final = @recharge.user.balance.balance += @recharge.amount
-                ActiveRecord::Rollback unless @recharge.user.balance.update(balance: balance_final)
-
-                format.json { head :no_content }
-                format.js
-              else
-                format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
-                format.js {render :edit}   
-              end
-            end
-          end
-        end
-      elsif @recharge.type_operation === "consultation"
-        if update_recharge_params[:operation] === "confirm"
-          update_consultation_params[:amount].gsub!('.','')
-          update_consultation_params[:amount].gsub!(',','.')
-          
-          ActiveRecord::Base.transaction do
-            respond_to do |format|
-              if @recharge.update(update_consultation_params)
-                ActiveRecord::Rollback unless @recharge.update(status: "procesada")
-                format.json { head :no_content }
-                format.js
-              else
-                format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
-                format.js { render :edit }
-              end
-            end
-          end
-
-        elsif update_recharge_params[:operation] === "deneged"
-          respond_to do |format|
-            if @recharge.update(status:"anulada")
-              format.json { head :no_content }
-              format.js
-            else
-              format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
-              format.js {render :edit}   
-            end
-          end
-        end
+      
+      #REDIGIR
+      if save_success
+        format.json { head :no_content }
+        format.js
+      else
+        format.json { render json: @recharge.errors.full_messages, status: :unprocessable_entity }
+        format.js {render :edit}
       end
     end
   end
 
   # DELETE /recharges/1 or /recharges/1.json
   def destroy
-    @recharge.destroy
-    respond_to do |format|
-      format.json { head :no_content }
-      format.js
-    end
-  end
-
-  def promedio_recargas
-      all_recharges = current_user.recharges.where(status:"confirmada").count
-
-      movistar = current_user.recharges.where(status: "confirmada", operator: "Movistar").count
-      digitel = current_user.recharges.where(status: "confirmada", operator: "Digitel").count
-      movilnet = current_user.recharges.where(status: "confirmada", operator: "Movilnet").count
-      cantv = current_user.recharges.where(status: "confirmada", operator: "Cantv").count
-      inter = current_user.recharges.where(status: "confirmada", operator: "Inter").count
-      movistar_tv = current_user.recharges.where(status: "confirmada", operator: "Movistar_TV").count
-      simple_tv = current_user.recharges.where(status: "confirmada", operator: "Simple_TV").count
-
-      @movistar_p = movistar > 0 ? (movistar * 100) / all_recharges : 0
-      @digitel_p = digitel > 0 ? (digitel * 100) / all_recharges : 0
-      @movilnet_p = movilnet > 0 ? (movilnet * 100) / all_recharges : 0
-      @cantv_p = cantv > 0 ? (cantv * 100) / all_recharges : 0
-      @inter_p = inter > 0 ? (inter * 100) / all_recharges : 0
-      @movistar_tv_p = movistar_tv > 0 ? (movistar_tv * 100) / all_recharges : 0
-      @simple_tv_p = simple_tv > 0 ? (simple_tv * 100) / all_recharges : 0
-      
-      @resultados =
-        {
-            movistar_p: movistar_p,
-            digitel_p: digitel_p,
-            movilnet_p: movilnet_p,
-            cantv_p: cantv_p,
-            inter_p: inter_p,
-            movistar_tv_p: movistar_tv_p,
-            simple_tv_p: simple_tv_p
-        }
-
-    respond_to do |format|
-      format.json { render :json => @resultados }
+    if current_user.id === @recharge.user.id
+      if @recharge.type_operation === "consultation" && @recharge.status === "anulada"
+        @recharge.destroy
+        respond_to do |format|
+          format.json { head :no_content }
+          format.js
+        end
+      end
     end
   end
 
@@ -220,7 +193,6 @@ class RechargesController < ApplicationController
 
   private
     
-    # Use callbacks to share common setup or constraints between actions.
     def set_recharge
       @recharge = Recharge.find(params[:id])
     end
@@ -247,15 +219,33 @@ class RechargesController < ApplicationController
       params.require(:recharge).permit(:operation)
     end
 
-    def update_consultation_params
-      params.require(:recharge).permit(:amount)
+    def update_recharge_params
+      params.require(:recharge).permit(:status,:amount,:renta_mensual,:saldo_resultante,:available_days,:number_inexistente)
     end
 
     def format_params_recharge
-      recharge_params[:amount].gsub!('.','')
-      recharge_params[:amount].gsub!(',','.')
+      recharge_params[:amount].gsub!('.','') unless recharge_params[:amount].nil?
+      recharge_params[:amount].gsub!(',','.') unless recharge_params[:amount].nil?
     end
 
+    def format_update_params_recharge
+      update_recharge_params[:amount].gsub!('.','') unless update_recharge_params[:amount].nil?
+      update_recharge_params[:amount].gsub!(',','.') unless update_recharge_params[:amount].nil?
+
+      update_recharge_params[:renta_mensual].gsub!('.','') unless update_recharge_params[:renta_mensual].nil?
+      update_recharge_params[:renta_mensual].gsub!(',','.') unless update_recharge_params[:renta_mensual].nil?
+    end
+
+    def verify_exist_number
+      number = recharge_params[:cod_area].present? ? recharge_params[:cod_area] + recharge_params[:number] : recharge_params[:number]
+
+      if NonexistentNumber.where(operator: recharge_params[:operator], type_payment: recharge_params[:type_payment], number: number).any?
+        respond_to do |format|
+          format.json {head :no_content}
+          format.js { render :number_non_existent}
+        end
+      end
+    end
 
     def rectify_amount
       unless recharge_params[:amount].to_f <= current_user.balance.balance
@@ -263,6 +253,17 @@ class RechargesController < ApplicationController
           format.json {head :no_content}
           format.js { render :balance_insuficiente}
         end
+      end
+    end
+
+    def verify_consulta!
+      if recharge_params[:type_payment] === "Post-pago" && recharge_params[:operator] != "Cantv"
+           if current_user.recharges.where(number: recharge_params[:number], type_operation: "consultation").any?
+                respond_to do |format|
+                     format.json {head :no_content}
+                     format.js { render :deneged_consulta}
+                end
+           end
       end
     end
 end
