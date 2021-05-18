@@ -12,6 +12,12 @@ function anchoPagina(){
 	if (window.innerWidth > 850) {
 		$('.caja__trasera-login').css({"display":"block"})
 		$('.caja__trasera-register').css({"display":"block"})
+
+		if($('.formulario__register').css("display") === "none"){
+			login()
+		}else{
+			register()
+		}
 	}else{
 		if($('.formulario__register').css("display") === "none"){
 			$('.caja__trasera-register').css({"display":"block"})
