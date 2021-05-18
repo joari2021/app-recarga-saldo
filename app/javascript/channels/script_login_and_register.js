@@ -13,11 +13,21 @@ function anchoPagina(){
 		$('.caja__trasera-login').css({"display":"block"})
 		$('.caja__trasera-register').css({"display":"block"})
 	}else{
-		$('.caja__trasera-register').css({"display":"block"})
-		$('.caja__trasera-register').css({"opacity":"1"})
-		$('.caja__trasera-login').css({"display":"none"})
-		$('.formulario__login').css({"display":"block"})
-		$('.formulario__register').css({"display":"none"})
+		if($('.formulario__register').css("display") === "none"){
+			$('.caja__trasera-register').css({"display":"block"})
+			$('.caja__trasera-register').css({"opacity":"1"})
+			$('.formulario__register').css({"display":"none"})
+
+			$('.caja__trasera-login').css({"display":"none"})
+			$('.formulario__login').css({"display":"block"})
+		}else{
+			$('.caja__trasera-login').css({"display":"block"})
+			$('.caja__trasera-login').css({"opacity":"1"})
+			$('.formulario__login').css({"display":"none"})
+
+			$('.caja__trasera-register').css({"display":"none"})
+			$('.formulario__register').css({"display":"block"})
+		}
 		$('.contenedor__login-register').css({"left":"0px"})
 	}
 }

@@ -72,7 +72,6 @@ document.addEventListener("turbolinks:load", function () {
     "0295",
   ];
   
-  
   recharges_count = format_integer($("#recharges_cant").text())
   deposits_count = format_integer($("#deposits_cant").text())
  
@@ -90,7 +89,7 @@ document.addEventListener("turbolinks:load", function () {
 
   if (href.indexOf("dashboard") != -1){
     $("#access_dashboard").addClass("active")
-  }else if (href.indexOf("recargas") != -1){
+  }else if (href.indexOf("vender_recargas") != -1){
     $("#access_recharges").addClass("active")
   }else if (href.indexOf("compra") != -1){
     $("#access_deposits").addClass("active")
