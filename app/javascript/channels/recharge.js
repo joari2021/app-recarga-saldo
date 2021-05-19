@@ -234,7 +234,7 @@ edit_modal = function () {
   //REESCRITURA DE CLASES DE ELEMENTOS YA RENDERIZADOS AL INICIO
   $(".card-options").attr(
     "class",
-    "card card-options shadow h-100 py-2 border-left-" + operator
+    "card card-options m-auto shadow h-100 py-2 border-left-" + operator
   );
   $("#loader_busq_contact").attr(
     "class",

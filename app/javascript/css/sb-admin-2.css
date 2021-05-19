@@ -5807,7 +5807,7 @@ a.close.disabled {
     max-width: 300px;
   }
 }
-
+/*
 @media (min-width: 992px) {
   .modal-lg,
   .modal-xl {
@@ -5819,7 +5819,7 @@ a.close.disabled {
   .modal-xl {
     max-width: 1140px;
   }
-}
+}*/
 
 .tooltip {
   position: absolute;

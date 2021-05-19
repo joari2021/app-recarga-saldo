@@ -1,8 +1,7 @@
 <div class="modal_original" id="modal_accounts">
-  <div class="modal_original_wrap modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable" id="modal_accounts_wrap" style="background:#111 !important">
+  <div class="modal_original_wrap modal-dialog-centered modal-dialog-scrollable modal-accounts" id="modal_accounts_wrap" style="background:#111 !important">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title section-title font-weight-bold">Cuentas Bancarias</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <i class="far fa-times-circle close_modal color-standar-medio" id="close_modal_accounts"></i>
         </button>
@@ -11,100 +10,139 @@
         
         <div class="content-accounts">
           <div class="container-accounts">
-            <div class="box bg-venezuela">
-              <span></span>
-              <div class="content-account">
-                <h2>Banco Venezuela</h2>
-                <p class="mb-0">Titular</p>
-                <p class="text-right">Jorge Ochoa</p>
-                <hr>
-                <p class="mb-0">Cédula</p>
-                <p class="text-right">V-21515060</p>
-                <hr>
-                <p class="mb-0">N° Cuenta</p>
-                <p class="text-right">0102 0650 28<br>0000210502</p>
-                <button type="button" class="btn_standar btn-common btn-effect bg-venezuela text-uppercase mt-4 btn_select_account" data-bank="0" data-method="0">Elegir</button>
-              </div>  
-            </div>
-    
-            <div class="box">
-              <span></span>
-              <div class="content-account">
-                <h2>Banco Mercantil</h2>
-                <p class="mb-0">Titular</p>
-                <p class="text-right">Jorge Ochoa</p>
-                <hr>
-                <p class="mb-0">Cédula</p>
-                <p class="text-right">V-21515060</p>
-                <hr>
-                <p class="mb-0">N° Cuenta</p>
-                <p class="text-right">0105 0187 36<br>1187066524</p>
-                <button type="button" class="btn_standar btn-common btn-effect bg-mercantil text-uppercase mt-4 btn_select_account" data-bank="1" data-method="0" id="">Elegir</button>
-              </div>  
-            </div>
-    
-            <div class="box">
-              <span></span>
-              <div class="content-account">
-                <h2 class="mx-5">Banco B.O.D</h2>
-                <p class="mb-0">Titular</p>
-                <p class="text-right">Jorge Ochoa</p>
-                <hr>
-                <p class="mb-0">Cédula</p>
-                <p class="text-right">V-21515060</p>
-                <hr>
-                <p class="mb-0">N° Cuenta</p>
-                <p class="text-right">0116 0507 95<br>0022126820</p>
-                <button type="button" class="btn_standar btn-common btn-effect bg-bod text-uppercase mt-4 btn_select_account" data-bank="2" data-method="0">Elegir</button>
-              </div>  
-            </div>
+            <h3 class="modal-title section-title font-weight-bold">Cuentas Bancarias</h3>
+            <div class="row">
+              <!--BANCO DE VENEZUELA-->
+              <div class="col-12 col-sm-6 col-lg-4">
+                <div class="box bg-venezuela">
+                  <span></span>
+                  <div class="content-account">
+                    <div class="img-logo">
+                      <%= image_tag("metodos_de_pago/0102.png") %>
+                    </div>
+                    <h2>Banco Venezuela</h2>
+                    <p class="mb-0">Titular</p>
+                    <p class="text-right">Jorge Ochoa</p>
+                    <hr>
+                    <p class="mb-0">Cédula</p>
+                    <p class="text-right">V-21515060</p>
+                    <hr>
+                    <p class="mb-0">N° Cuenta</p>
+                    <p class="text-right">0102 0650 28<br>0000210502</p>
+                    <button type="button" class="btn_standar btn-common btn-effect bg-venezuela text-uppercase mt-4 btn_select_account" data-bank="0" data-method="0">Elegir</button>
+                  </div>  
+                </div>
+              </div>
 
-            <div class="box">
-              <span></span>
-              <div class="content-account">
-                <h2 class="mx-3">Banco Bancaribe</h2>
-                <p class="mb-0">Titular</p>
-                <p class="text-right">Gisela<br>Hernández</p>
-                <hr>
-                <p class="mb-0">Cédula</p>
-                <p class="text-right">V-7016890</p>
-                <hr>
-                <p class="mb-0">N° Cuenta</p>
-                <p class="text-right">0114 0169 42<br>1691358808</p>
-                <button type="button" class="btn_standar btn-common btn-effect bg-bancaribe text-uppercase mt-4 btn_select_account" data-bank="3" data-method="0">Elegir</button>
-              </div>  
-            </div>
+              <!--BANCO MERCANTIL-->
+              <div class="col-12 col-sm-6 col-lg-4">
+                <div class="box box-2">
+                  <span></span>
+                  <div class="content-account">
+                    <div class="img-logo">
+                      <%= image_tag("metodos_de_pago/0105.png") %>
+                    </div>
+                    <h2>Banco Mercantil</h2>
+                    <p class="mb-0">Titular</p>
+                    <p class="text-right">Jorge Ochoa</p>
+                    <hr>
+                    <p class="mb-0">Cédula</p>
+                    <p class="text-right">V-21515060</p>
+                    <hr>
+                    <p class="mb-0">N° Cuenta</p>
+                    <p class="text-right">0105 0187 36<br>1187066524</p>
+                    <button type="button" class="btn_standar btn-common btn-effect bg-mercantil text-uppercase mt-4 btn_select_account" data-bank="1" data-method="0" id="">Elegir</button>
+                  </div>  
+                </div>
+              </div>
 
-            <div class="box">
-              <span></span>
-              <div class="content-account">
-                <h2>Banco Bicentenario</h2>
-                <p class="mb-0">Titular</p>
-                <p class="text-right">Jorge Ochoa</p>
-                <hr>
-                <p class="mb-0">Cédula</p>
-                <p class="text-right">V-21515060</p>
-                <hr>
-                <p class="mb-0">N° Cuenta</p>
-                <p class="text-right">0175 0180 17<br>0076695698</p>
-                <button type="button" class="btn_standar btn-common btn-effect bg-bicentenario text-uppercase mt-4 btn_select_account" data-bank="4" data-method="0">Elegir</button>
-              </div>  
-            </div>
+              <!--BANCO B.O.D-->
+              <div class="col-12 col-sm-6 col-lg-4">
+                <div class="box box-3">
+                  <span></span>
+                  <div class="content-account">
+                    <div class="img-logo">
+                      <%= image_tag("metodos_de_pago/0116.png") %>
+                    </div>
+                    <h2>Banco B.O.D</h2>
+                    <p class="mb-0">Titular</p>
+                    <p class="text-right">Jorge Ochoa</p>
+                    <hr>
+                    <p class="mb-0">Cédula</p>
+                    <p class="text-right">V-21515060</p>
+                    <hr>
+                    <p class="mb-0">N° Cuenta</p>
+                    <p class="text-right">0116 0507 95<br>0022126820</p>
+                    <button type="button" class="btn_standar btn-common btn-effect bg-bod text-uppercase mt-4 btn_select_account" data-bank="2" data-method="0">Elegir</button>
+                  </div>  
+                </div>
+              </div>
 
-            <div class="box">
-              <span></span>
-              <div class="content-account">
-                <h2 class="mx-5">Pago <small class="ml-3"></small>móvil</h2>
-                <p class="mb-0">Banco</p>
-                <p class="text-right">(0102)<br>Banco De<br>Venezuela</p>
-                <hr>
-                <p class="mb-0">Cédula</p>
-                <p class="text-right">V-21515060</p>
-                <hr>
-                <p class="mb-0">N° Telefono</p>
-                <p class="text-right">(0414) 8170372</p>
-                <button type="button" class="btn_standar btn-common btn-effect bg-special text-uppercase mt-4 btn_select_account" data-bank="0" data-method="1">Elegir</button>
-              </div>  
+              <!--BANCO BANCARIBE-->
+              <div class="col-12 col-sm-6 col-lg-4">
+                <div class="box box-4">
+                  <span></span>
+                  <div class="content-account">
+                    <div class="img-logo">
+                      <%= image_tag("metodos_de_pago/0114.png") %>
+                    </div>
+                    <h2 class="mx-3">Banco Bancaribe</h2>
+                    <p class="mb-0">Titular</p>
+                    <p class="text-right">Gisela<br>Hernández</p>
+                    <hr>
+                    <p class="mb-0">Cédula</p>
+                    <p class="text-right">V-7016890</p>
+                    <hr>
+                    <p class="mb-0">N° Cuenta</p>
+                    <p class="text-right">0114 0169 42<br>1691358808</p>
+                    <button type="button" class="btn_standar btn-common btn-effect bg-bancaribe text-uppercase mt-4 btn_select_account" data-bank="3" data-method="0">Elegir</button>
+                  </div>  
+                </div>
+              </div>
+
+              <!--BANCO BICENTENARIO-->
+              <div class="col-12 col-sm-6 col-lg-4">
+                <div class="box box-5">
+                  <span></span>
+                  <div class="content-account">
+                    <div class="img-logo">
+                      <%= image_tag("metodos_de_pago/0175.png") %>
+                    </div>
+                    <h2>Banco Bicentenario</h2>
+                    <p class="mb-0">Titular</p>
+                    <p class="text-right">Jorge Ochoa</p>
+                    <hr>
+                    <p class="mb-0">Cédula</p>
+                    <p class="text-right">V-21515060</p>
+                    <hr>
+                    <p class="mb-0">N° Cuenta</p>
+                    <p class="text-right">0175 0180 17<br>0076695698</p>
+                    <button type="button" class="btn_standar btn-common btn-effect bg-bicentenario text-uppercase mt-4 btn_select_account" data-bank="4" data-method="0">Elegir</button>
+                  </div>  
+                </div>
+              </div>
+
+              <!--PAGO MOVIL-->
+              <div class="col-12 col-sm-6 col-lg-4">
+                <div class="box box-6">
+                  <span></span>
+                  <div class="content-account">
+                    <div class="img-logo">
+                      <%= image_tag("metodos_de_pago/PM.png") %>
+                    </div>
+                    <h2>Pago móvil</h2>
+                    <p class="mb-0">Banco</p>
+                    <p class="text-right">(0102)<br>Banco De<br>Venezuela</p>
+                    <hr>
+                    <p class="mb-0">Cédula</p>
+                    <p class="text-right">V-21515060</p>
+                    <hr>
+                    <p class="mb-0">N° Telefono</p>
+                    <p class="text-right">(0414) 8170372</p>
+                    <button type="button" class="btn_standar btn-common btn-effect bg-special text-uppercase mt-4 btn_select_account" data-bank="0" data-method="1">Elegir</button>
+                  </div>  
+                </div>
+              </div>
             </div>
           </div>
         </div>

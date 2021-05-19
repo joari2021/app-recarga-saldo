@@ -1,4 +1,25 @@
 ////////////////////// modal de cuentas /////////////////////////@at-root
+.modal-accounts{
+  width:95% !important;
+}
+
+.img-logo {
+  //bottom: -40px;
+  //right: 30px;
+  background: #fff;
+  border-radius: 50%;
+  padding: 10px;
+  width:80px;
+  height:80px;
+  margin: 20px auto;
+}
+.img-logo img{
+  //bottom: -40px;
+  //right: 30px;
+  width:60px;
+  height:60px;
+}
+
 .content-accounts,
 .content-recharge{
   display: flex;
@@ -23,15 +44,23 @@
 .container-accounts .box,
 .container-recharge .box{
   position: relative;
-  width: 350px;
-  height: 450px;
+  width: 100%;
+  height: 600px;
   color: #fff;
   background: #111;
-  display: flex;
-  justify-content: center;
+  //display: flex;
+  //justify-content: center;
   align-items: center;
-  margin: 20px;
+  margin: 20px 5px;
   transition: 0.5s;
+}
+
+@media screen and (max-width: 440px) {
+  .container-accounts .box,
+  .container-recharge .box{
+    width: 100% !important;
+    margin: 20px 5px !important;
+  }
 }
 
 .container-accounts .box:hover{
@@ -69,8 +98,8 @@
   background: linear-gradient(to left, #89253e, #3a6186); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.container-accounts .box:nth-child(2)::before,
-.container-accounts .box:nth-child(2)::after,
+.container-accounts .box-2::before,
+.container-accounts .box-2::after,
 .bg-mercantil{
   //background: linear-gradient(315deg, #47A3DA, #ff5800);
   background: #108dc7;  /* fallback for old browsers */
@@ -79,8 +108,8 @@
 
 }
 
-.container-accounts .box:nth-child(3)::before,
-.container-accounts .box:nth-child(3)::after,
+.container-accounts .box-3::before,
+.container-accounts .box-3::after,
 .bg-bod{
   //background: linear-gradient(315deg, #4dff03,#00d0ff);
   background: #FDFC47;  /* fallback for old browsers */
@@ -89,23 +118,23 @@
 
 }
 
-.container-accounts .box:nth-child(4)::before,
-.container-accounts .box:nth-child(4)::after,
+.container-accounts .box-4::before,
+.container-accounts .box-4::after,
 .bg-bancaribe{
   background: #00A2B1;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to top, #00427b, #00A2B1);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to top, #00427b, #00A2B1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.container-accounts .box:nth-child(5)::before,
-.container-accounts .box:nth-child(5)::after,
+.container-accounts .box-5::before,
+.container-accounts .box-5::after,
 .bg-bicentenario{
   background: #ED213A;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to bottom, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to bottom, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-.container-accounts .box:nth-child(6)::before,
-.container-accounts .box:nth-child(6)::after{
+.container-accounts .box-6::before,
+.container-accounts .box-6::after{
   background-color: #3c96ff;
 	background-image: -webkit-linear-gradient(bottom right, #3c96ff, #2dfbff);
 	background-image: -o-linear-gradient(bottom right, #3c96ff, #2dfbff);
@@ -150,6 +179,7 @@
   font-size: 2em;
   color: #ffffff;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .container-accounts .box .content-account p,
