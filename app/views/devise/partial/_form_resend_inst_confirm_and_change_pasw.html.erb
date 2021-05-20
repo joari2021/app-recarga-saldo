@@ -17,7 +17,7 @@
             
             <div class="form">
 
-                <h2 class="section-title pb-3 text-center font-weight-bold">Recuperar Contraseña</h2>
+                <h2 class="color-special pb-3 text-center font-weight-bold">Recuperar Contraseña</h2>
 
                 <div class="grupo">
                     <%= f.text_field :email, autofocus: true, autocomplete: "email", required: "required", class:"input-special", id:"email_session"%><span class="barra bg-before-Standar"></span>
@@ -39,7 +39,7 @@
         <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name),:html => {method: :post, :class => "formulario__register", :id => "form-register"}) do |f| %>
 
             <div class="form">
-                <h2 class="section-title pb-3 text-center font-weight-bold">Reenviar instrucciones de confirmación</h2>
+                <h2 class="color-special pb-3 text-center font-weight-bold">Reenviar instrucciones de confirmación</h2>
 
                 <div class="grupo">
                     <%= f.text_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), required: "required", class:"input-special", id:"email_register"%><span class="barra bg-before-Standar"></span>

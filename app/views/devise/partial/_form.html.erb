@@ -18,7 +18,7 @@
             
             <div class="form">
 
-                <h2 class="section-title pb-3 text-center font-weight-bold">Iniciar Sesión</h2>
+                <h2 class="color-special pb-3 text-center font-weight-bold">Iniciar Sesión</h2>
 
                 <div class="grupo">
                     <%= f.text_field :email, autofocus: true, autocomplete: "email", required: "required", class:"input-special", id:"email_session"%><span class="barra bg-before-Standar"></span>
@@ -40,7 +40,7 @@
 
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name),:html => {:class => "formulario__register", :id => "form-register"}) do |f| %>
             <div class="form">
-                <h2 class="section-title pb-3 text-center font-weight-bold">Registro</h2>
+                <h2 class="color-special pb-3 text-center font-weight-bold">Registro</h2>
 
                 <div class="grupo">
                     <%= f.text_field :email, autofocus: true, autocomplete: "email", required: "required", class:"input-special", id:"email_register"%><span class="barra bg-before-Standar"></span>
@@ -66,6 +66,8 @@
                         <p class="msj_error mt-2 bg-danger rounded width-error"><%=resource.errors[:password_confirmation].to_s[/\w([^"]*)/] %></p>
                     <% end %>
                 </div>
+                
+                <%=f.hidden_field :user_referidor_id, value:"#{params[:ref]}"%>
 
                 <div class="actions">
                     <button type="submit" class="btn_standar btn-common btn-effect bg-special text-uppercase show_loader_sup" data-disable-with="Continuar" name="commit">Continuar</button>

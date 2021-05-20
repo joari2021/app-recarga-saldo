@@ -54,13 +54,8 @@
   margin: 20px 5px;
   transition: 0.5s;
 }
-
-@media screen and (max-width: 440px) {
-  .container-accounts .box,
-  .container-recharge .box{
-    width: 100% !important;
-    margin: 20px 5px !important;
-  }
+.container-accounts .box-monedero{
+  height: 500px !important;
 }
 
 .container-accounts .box:hover{

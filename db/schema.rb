@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_13_154701) do
+ActiveRecord::Schema.define(version: 2021_05_20_035103) do
 
   create_table "acoounts", force: :cascade do |t|
     t.string "bank"
@@ -141,6 +141,8 @@ ActiveRecord::Schema.define(version: 2021_05_13_154701) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.string "user_referidor_id"
+    t.string "referidor_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

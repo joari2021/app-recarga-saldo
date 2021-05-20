@@ -362,3 +362,14 @@ refrescarNotificaciones = function () {
   //$('#sound').trigger('click');
   $.playSound(getRootUrl() + "/sounds/iphone-notificacion.mp3")
 }
+
+copiarAlPortapapeles = function (content_copy,mensaje) {
+  var aux = document.createElement("input");
+  aux.setAttribute("value", content_copy);
+  document.body.appendChild(aux);
+  aux.select();
+  document.execCommand("copy");
+  document.body.removeChild(aux);
+
+  md.showNotification(mensaje,'success')
+}

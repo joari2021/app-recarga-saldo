@@ -242,7 +242,7 @@ edit_modal = function () {
   );
   $("#close_modal_contact, #close_modal_recharge").attr(
     "class",
-    "far fa-times-circle close_modal color-" + operator
+    "far fa-times-circle close_modal btn-effect rounded-circle color-" + operator
   );
   $("#title_modal_contact").attr("class", "modal_title color-" + operator);
 
