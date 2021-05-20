@@ -90,8 +90,5 @@ function show_second_grafico() {
   });
 }
 
-document.addEventListener("turbolinks:load", function () {
-  if (window.location.href.indexOf("dashboard") != -1){
-     setTimeout(show_second_grafico, 2000);
-  }
-})
+show_second_grafico()
+  

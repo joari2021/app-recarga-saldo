@@ -31,9 +31,23 @@
     <link rel="stylesheet" href="css/nivo-lightbox.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/responsive.css" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+      integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+      crossorigin="anonymous"
+    />
   </head>
 
   <body>
+    <!-- Preloader -->
+    <div class="contenedor_loader_sup bg-special">
+        <div class="loader loader-sup-tam"></div>
+    </div> 
+    <!-- End Preloader -->
+
     <!-- Header Section Start -->
     <header id="home" class="hero-area">
       <div class="overlay"></div>
@@ -84,10 +98,6 @@
               <li class="nav-item">
                 <a class="nav-link page-scroll" href="#blog">Noticias</a>
               </li>
-              
-              <li class="nav-item">
-                <a class="btn btn-trial" href="/users/login_or_register">Entra ó Registrate</a>
-              </li>
             </ul>
           </div>
         </div>
@@ -97,7 +107,7 @@
           <div class="col-lg-7 col-md-12 col-xs-12">
             <div class="contents">
               <h2 class="head-title">
-                Sistema definitivo de Recargas<br />y Pagos en Venezuela. 
+                Sistema definitivo de Recargas<br/>y Pagos en Venezuela. 
               </h2>
               <p>
                 Recarga a todas las operadoras y servicios del pais prepago y post-pago de forma ágil y rapida.
@@ -110,7 +120,7 @@
           </div>
           <div class="col-lg-5 col-md-12 col-xs-12">
             <div class="intro-img">
-              <%= image_tag("logo/Logo_definitivo.png") %>
+              <%= image_tag("logo/Logo_landing.png") %>
             </div>
           </div>
         </div>
@@ -765,23 +775,23 @@
           <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
             <div class="blog-item-wrapper">
               <div class="blog-item-img">
-                <a href="https://noticiasaldiayalahora.co/nacionales/gobierno-nacional-prepara-servicio-de-television-satelital-gratuita-con-una-parrilla-de-43-canales/" target="_blank">
+                <a href="https://noticiasaldiayalahora.co/nacionales/conoce-la-imagen-del-nuevo-kit-de-servicio-gratuito-de-television-satelital-del-gobierno/" target="_blank">
                   <img src="https://i0.wp.com/noticiasaldiayalahora.co/wp-content/uploads/2021/05/television-satelital.jpg?resize=777%2C437&ssl=1" alt="Servicio TV Gratuito" style="width:100%; height:230px;">
                 </a>
                 <!--
                 <div class="author-img">
-                  <%= image_tag("blog/author.png") %>
+                  <%= image_tag("sistema_recargas/digitel.png", style:"width:60px; height:60px") %>
                 </div>-->
               </div>
               <div class="blog-item-text">
                 <h3>
-                  <a href="https://noticiasaldiayalahora.co/nacionales/gobierno-nacional-prepara-servicio-de-television-satelital-gratuita-con-una-parrilla-de-43-canales/" target="_blank"
-                    >Gobierno nacional prepara servicio de televisión satelital gratuita con una parrilla de 43 canales</a
+                  <a href="https://noticiasaldiayalahora.co/nacionales/conoce-la-imagen-del-nuevo-kit-de-servicio-gratuito-de-television-satelital-del-gobierno/" target="_blank"
+                    >Conoce la imagen del nuevo kit de servicio gratuito de televisión satelital del gobierno</a
                   >
                 </h3>
                 <div class="author">
-                  <!--<span class="name"><a >Noticias al dia y la hora</a></span>-->
-                  <span class="date float-right">16 Mayo, 2021</span>
+                  <!--<span class="name"><a href="#">Noticias al dia y la hora</a></span>-->
+                  <span class="date float-right">19 Mayo, 2021</span>
                 </div>
               </div>
             </div>
@@ -791,22 +801,22 @@
           <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
             <div class="blog-item-wrapper">
               <div class="blog-item-img">
-                <a href="https://noticiasaldiayalahora.co/nacionales/los-tres-metodos-para-cambiar-su-plan-aba-cantv/" target="_blank">
-                  <img src="https://i1.wp.com/noticiasaldiayalahora.co/wp-content/uploads/2021/04/Cantv-ABA.jpg?resize=777%2C437&ssl=1" alt="Cambio de planes ABA" style="width:100%; height:230px;">
+                <a href="https://noticiasaldiayalahora.co/economia/inter-realizara-actualizacion-tecnologica-para-aumentar-ancho-de-banda-en-caracas-este-19-mayo/" target="_blank">
+                  <img src="https://i0.wp.com/noticiasaldiayalahora.co/wp-content/uploads/2019/11/intercable.jpg?resize=777%2C437&ssl=1" alt="Cambio de planes ABA" style="width:100%; height:230px;">
                 </a>
                 <div class="author-img">
-                  <%= image_tag("sistema_recargas/cantv.png", style:"width:60px;height:60px") %>
+                  <%= image_tag("sistema_recargas/inter.png", style:"width:60px;height:60px") %>
                 </div>
               </div>
               <div class="blog-item-text">
                 <h3>
-                  <a href="https://noticiasaldiayalahora.co/nacionales/los-tres-metodos-para-cambiar-su-plan-aba-cantv/" target="_blank"
-                    >Los tres métodos para cambiar su plan ABA Cantv</a
+                  <a href="https://noticiasaldiayalahora.co/economia/inter-realizara-actualizacion-tecnologica-para-aumentar-ancho-de-banda-en-caracas-este-19-mayo/" target="_blank"
+                    >Inter realizará actualización tecnológica para aumentar ancho de banda en Caracas este 19 mayo</a
                   >
                 </h3>
                 <div class="author">
                   <!--<span class="name"><a href="#">Posted by Admin</a></span>-->
-                  <span class="date float-right">16 Mayo, 2021</span>
+                  <span class="date float-right">18 Mayo, 2021</span>
                 </div>
               </div>
             </div>
@@ -816,33 +826,38 @@
           <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
             <div class="blog-item-wrapper">
               <div class="blog-item-img">
-                <a href="https://noticiasaldiayalahora.co/economia/digitel-tiene-nuevas-zonas-4g-lte-en-las-costas-de-la-region-central-detalles/" target="_blank">
-                  <img src="https://i0.wp.com/noticiasaldiayalahora.co/wp-content/uploads/2021/05/Nuevo-CDA-Digitel-San-Crstobal-850x400-1.jpeg?resize=777%2C400&ssl=1" alt="Digitel 4G" style="width:100%; height:230px;">
+                <a href="https://i0.wp.com/noticiasaldiayalahora.co/wp-content/uploads/2020/12/SimpleTV-a-850x400-1.jpeg?resize=777%2C400&ssl=1" target="_blank">
+                  <img src="https://i0.wp.com/noticiasaldiayalahora.co/wp-content/uploads/2020/12/SimpleTV-a-850x400-1.jpeg?resize=777%2C400&ssl=1" alt="Planes Simple TV" style="width:100%; height:230px;">
                 </a>
+                
                 <div class="author-img">
-                  <%= image_tag("sistema_recargas/digitel.png", style:"width:60px; height:60px") %>
+                  <%= image_tag("sistema_recargas/simple_tv.png", style:"width:60px;height:60px") %>
                 </div>
               </div>
               <div class="blog-item-text">
                 <h3>
-                  <a href="https://noticiasaldiayalahora.co/economia/digitel-tiene-nuevas-zonas-4g-lte-en-las-costas-de-la-region-central-detalles/" target="_blank"
-                    >Digitel tiene nuevas zonas 4G LTE en las costas de la región central</a
+                  <a href="https://noticiasaldiayalahora.co/nacionales/gobierno-nacional-prepara-servicio-de-television-satelital-gratuita-con-una-parrilla-de-43-canales/" target="_blank"
+                    >SimpleTV ajusta las tarifas de sus planes económicos</a
                   >
                 </h3>
                 <div class="author">
-                  <!--<span class="name"><a href="#">Noticias al dia y la hora</a></span>-->
-                  <span class="date float-right">15 Mayo, 2021</span>
+                  <!--<span class="name"><a >Noticias al dia y la hora</a></span>-->
+                  <span class="date float-right">18 Mayo, 2021</span>
                 </div>
               </div>
             </div>
           </div>
+
+          
+
+          
         </div>
       </div>
     </section>
     <!-- blog Section End -->
 
     <!-- download Section Start -->
-    <section id="download" class="mb-3">
+    <section id="download">
       <div class="container">
         <div class="row">
           <div class="col-lg-6 col-md-6 col-xs-12">
@@ -852,7 +867,7 @@
           </div>
           <div class="col-lg-6 col-md-6 col-xs-12">
             <div class="download-wrapper wow fadeInRight" data-wow-delay="0.2s">
-              <div>
+              <div class="mb-2">
                 <div class="download-text">
                   <h4>Descarga nuestra aplicación desde la tienda</h4>
                   <p>
@@ -976,18 +991,14 @@
       <i class="lni-chevron-up"></i>
     </a>
 
-    <!-- Preloader -->
-   
-    <div id="preloader">
-      <div class="loader" id="loader-1"></div>
-    </div>
-    <!-- End Preloader -->
-
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     
     <script src="/js/jquery-min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+
+    <%=render "partials/script_show_notification"%>
+
     <script src="/js/owl.carousel.js"></script>
     <script src="/js/jquery.mixitup.js"></script>
     <script src="/js/jquery.nav.js"></script>
@@ -999,8 +1010,6 @@
     <script src="/js/jquery.magnific-popup.min.js"></script>
     <script src="/js/waypoints.min.js"></script>
     <script src="/js/main.js"></script>
-
-    <%=render "partials/script_show_notification"%>
 
     <script>
         function read_more(link,event,id_content) {

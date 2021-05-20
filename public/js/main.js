@@ -4,7 +4,14 @@
   
   /* Page Loader active
   ========================================================*/
-  $('#preloader').fadeOut();
+  window.addEventListener('load', () => {
+      hidden_loader_sup()
+      
+  })
+  const hidden_loader_sup = function (){
+      $(".contenedor_loader_sup").css({"opacity":"0","visibility":"hidden"})
+      comprobar_flash_messages()
+  }
 
   /* 
   CounterUp

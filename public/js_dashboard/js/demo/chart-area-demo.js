@@ -141,10 +141,5 @@ function show_first_grafico() {
   });
 }
 
-document.addEventListener("turbolinks:load", function () {
-  
-  if (window.location.href.indexOf("dashboard") != -1){
-     setTimeout(show_first_grafico, 2000);
-  }
-})
+show_first_grafico()
 

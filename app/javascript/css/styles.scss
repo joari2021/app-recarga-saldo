@@ -1,9 +1,9 @@
 @import "bootstrap";
 
 :root {
-  --color-fuerte: #3c96ff;
-  --color-medio: #3cd1ff;
-  --color-debil: #2dfbff;
+  --color-fuerte: #ec008c;
+  --color-medio: #ff0e5e;
+  --color-debil: #fc6767;
   --colorTexto: #49454567;
 
   --movistar: #019bf2;
@@ -32,9 +32,8 @@
 .bg-special {
   color: #fff;
   background-color: var(--color-fuerte);
-	background-image: -webkit-linear-gradient(bottom right, var(--color-fuerte), var(--color-debil));
-	background-image: -o-linear-gradient(bottom right, var(--color-fuerte), var(--color-debil));
-	background-image: linear-gradient(to bottom right, var(--color-fuerte),  var(--color-debil));
+  background: -webkit-linear-gradient(to right, var(--color-fuerte), var(--color-debil));
+  background: linear-gradient(to right, var(--color-fuerte), var(--color-debil));
   box-shadow: 0px 0px 43px 0px rgba(131, 131, 131, 0.38);
 }
 
@@ -127,6 +126,32 @@
   border-left: 3px solid var(--color-medio) !important;
 }
 
+/* Fondos Gradientes
+==================================================================*/
+.bg-g-1{
+  background: #56ab2f;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-g-2{
+  background: #00c6ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #0072ff, #00c6ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #0072ff, #00c6ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-g-3{
+  background: #1D976C;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #93F9B9, #1D976C);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #93F9B9, #1D976C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.bg-g-4{
+  background: #f12711;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
 ////////////////////////////////////////////  SWEET ALERT  ############################################
 .swal-text {
   text-align: center;
@@ -151,7 +176,8 @@ a.special-link:focus {
 }
 
 
-////////////////////////////////////////  TABLA ELEGANTE   //////////////////////////////////////
+/* TABLA ELEGANTE
+===================================================================*/
 #main-container {
   margin: 30px auto;
   width: 100%;
@@ -169,21 +195,15 @@ a.special-link:focus {
   padding: 20px;
 }
 
-
-.thead-standar {
-  border-bottom: solid 3px #157aee;
-}
-
 tr.tr-standar:nth-child(even) {
   background-color: #ddd;
 }
 
 tr.tr-standar:hover {
   color: #fff;
-  background-color: var(--color-fuerte) !important;
-	background-image: -webkit-linear-gradient(bottom right, var(--color-fuerte), var(--color-debil));
-	background-image: -o-linear-gradient(bottom right, var(--color-fuerte), var(--color-debil));
-	background-image: linear-gradient(to top left, var(--color-debil), var(--color-fuerte));
+  background-color: var(--color-fuerte);
+  background: -webkit-linear-gradient(to right, var(--color-fuerte), var(--color-debil));
+  background: linear-gradient(to right, var(--color-fuerte), var(--color-debil));
   transition: 0.3s ease all;
 }
 
@@ -482,9 +502,8 @@ input:valid ~ .label-Standar {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   background-color: var(--color-fuerte);
-  background-image: -webkit-linear-gradient(bottom right, var(--color-fuerte), var(--color-debil));
-  background-image: -o-linear-gradient(bottom right, var(--color-fuerte), var(--color-debil));
-  background-image: linear-gradient(to top left, var(--color-fuerte), var(--color-debil));
+  background-image: -webkit-linear-gradient(to right, var(--color-fuerte), var(--color-debil));
+  background-image: linear-gradient(to right, var(--color-fuerte), var(--color-debil));
 }
 
 .color-standar-fuerte {
@@ -499,8 +518,8 @@ input:valid ~ .label-Standar {
   color: var(--color-debil) !important;
 }
 
-.border-title {
-  border-bottom: solid 2px #3cd1ff;
+hr.divider-title {
+  border-bottom: solid 2px var(--color-medio);
 }
 
 /////////////////////////////// NOTIFICACIONES /////////////////////////////////////

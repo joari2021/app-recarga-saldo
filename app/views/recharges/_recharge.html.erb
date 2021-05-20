@@ -1,9 +1,8 @@
 <div class="content-recharge" style="min-height:0vh !important">
-    <div class="container-recharge py-0">
-        <div class="box" style="height: 100% !important">
+    <div class="container-recharge py-0 px-2">
+        <div class="box" style="max-width:400px; height: 100% !important">
             <span class="span-card-special"></span>
             <div class="div-recharge">
-                
                 <div class="card shadow h-100 mt-2 mb-3" style="border-radius:70px">
                     <%operator = @recharge.operator%>
 
@@ -76,7 +75,7 @@
                 <%when "confirmada"%>
                 <%color_badge = "badge-success"%>
                 <%when "anulada"%>
-                <%color_badge = "badge-danger"%>
+                <%color_badge = "badge-warning"%>
                 <%end%>
                 <p class="mb-0">Status</p>
                 <p class="text-right"><a class="badge badge-pill <%=color_badge%>"><%=@recharge.status%></a></p>

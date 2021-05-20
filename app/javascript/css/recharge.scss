@@ -212,10 +212,9 @@ a.bg-Simple_TV:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #3c96ff;
-	background-image: -webkit-linear-gradient(bottom right, #3c96ff, #2dfbff);
-	background-image: -o-linear-gradient(bottom right, #3c96ff, #2dfbff);
-	background-image: linear-gradient(to top left, #2dfbff,  #3c96ff);
+  background-color: var(--color-fuerte);
+  background: -webkit-linear-gradient(to right, var(--color-fuerte), var(--color-debil));
+  background: linear-gradient(to right, var(--color-fuerte), var(--color-debil));
 }
 
 .container-recharge .box::after{
@@ -225,9 +224,8 @@ a.bg-Simple_TV:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #3c96ff;
-	background-image: -webkit-linear-gradient(bottom right, #3c96ff, #2dfbff);
-	background-image: -o-linear-gradient(bottom right, #3c96ff, #2dfbff);
-	background-image: linear-gradient(to top left, #2dfbff,  #3c96ff);
+  background-color: var(--color-fuerte);
+  background: -webkit-linear-gradient(to right, var(--color-fuerte), var(--color-debil));
+  background: linear-gradient(to right, var(--color-fuerte), var(--color-debil));
   filter: blur(30px);
 }

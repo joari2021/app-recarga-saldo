@@ -30,10 +30,9 @@ main{
 	justify-content: center;
 	backdrop-filter:blur(10px);
 	/*background-color: rgba(0,128,255,0.5);*/
-	background-color: #2dfbff;
-	background-image: -webkit-linear-gradient(bottom right, #3c96ff, #2dfbff);
-	background-image: -o-linear-gradient(bottom right, #3c96ff, #2dfbff);
-	background-image: linear-gradient(to top left, #3c96ff, #2dfbff);
+	background-color: var(--color-fuerte);
+	background: -webkit-linear-gradient(to right, var(--color-fuerte), var(--color-debil));
+	background: linear-gradient(to right, var(--color-fuerte), var(--color-debil));
 }
 
 .caja__trasera div{
@@ -67,7 +66,7 @@ main{
 
 .caja__trasera button:hover{
 	background: #fff;
-	color: #46A2FD;
+	color: var(--color-fuerte);
 }
 
 /*Formularios*/
