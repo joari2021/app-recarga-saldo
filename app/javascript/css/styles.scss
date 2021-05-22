@@ -23,6 +23,13 @@
   --simpletv_hover: #0f8cba;
 }
 
+/* Z-INDEX 
+PRELOADERS = 9999
+MENSAJES FLASH => 7000
+MODALS => 5000
+DROWN MENU = 1000
+CAJAS => 50
+==================================================================================*/
 
 *{
 	margin: 0;
@@ -69,7 +76,6 @@
 hr.divider-title {
   border-bottom: solid 2px var(--color-medio) !important;
 }
-
 
 /* BOTONES
 =====================================================================================*/
@@ -205,18 +211,19 @@ hr.divider-title {
 
 .bg-g-4{
   background: #f12711;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: -webkit-linear-gradient(to left, #f5af19, #f12711); 
+  background: linear-gradient(to left, #f5af19, #f12711); 
 }
 
-/*
- SWEET ALERT  ================================================================*/
+/* SWEET ALERT  
+===============================================================================*/
 .swal-text {
   text-align: center;
 }
 
-/*
- LINK SPECIAL ================================================================*/
+/*  LINK SPECIAL
+=================================================================================*/
+
 a {
   text-decoration: none !important;
 }
@@ -281,7 +288,7 @@ tr.tr-standar:hover {
   justify-content: center;
   align-items: center;
   visibility: hidden;
-  z-index: 9999;
+  z-index: 5000;
 }
 
 .modal_original_wrap{
@@ -311,7 +318,7 @@ tr.tr-standar:hover {
 }
 
 /* LOADER 
-====================================================================*/
+========================================================================================*/
 .contenedor_loader {
   width: 100%;
   height: 0px;
@@ -390,7 +397,7 @@ tr.tr-standar:hover {
 }
 
 /*  FORMULARIOS
-============ =============================================================*/
+============ ==============================================================================*/
 input,
 select {
   appearance: none;
