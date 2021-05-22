@@ -5,7 +5,7 @@
     <%end%>
 
     <!--FECHA DEL PAGO  #################################-->
-    <div class="grupo" id="div_cod_area">
+    <div class="grupo">
       <input required="required" class="input-special" type="text" id="date" name="deposit[date_send]" value="<%=@deposit.date_send.strftime("%d/%m/%Y") if @deposit.date_send.present?%>" oninput="readonly(this)">
       <span class="barra bg-before-Standar"></span>
       <label class="label-special label-Standar">Fecha del pago</label>
@@ -14,30 +14,27 @@
       <% end %>
     </div>
 
-    <!--BANCO DESTINO #############################-->
+    <!--Cuenta Credito
+     ===================================================================-->
     <div class="grupo">
       <%= form.text_field :bank_destinity, :required => "required", class:"input-special input-option", :"data-options" => "#options-banks-destinity", oninput:"readonly(this)" %><span class="barra bg-before-Standar"></span>
-      <%= form.label :bank_destinity, "Banco Destino", for: "", class: "label-special label-Standar" %>
+      <%= form.label :bank_destinity, "Cuenta Crédito", for: "", class: "label-special label-Standar" %>
       <%if @deposit.errors[:bank_destinity].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @deposit.errors[:bank_destinity].to_s[/\w([^"]*)/] %></p>
       <% end %>
 
       <div id="options-banks-destinity" style="display:none">
-        <div class="row">
-          <div class="col-6">
-            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this)">Banco de Venezuela</a><br>
-            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this)">Banco Bicentenario</a><br>
-            <a href="#" class="badge btn_standar btn-common btn-effect bg-special ml-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this)">Banco B.O.D</a>
-          </div>
-          <div class="col-6">
-            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this)">Banco Mercantil</a><br>
-            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this)">Banco Bancaribe</a><br>
-          </div>
-        </div>
+          <a href="#" class="btn_standar btn-common btn-effect bg-special mt-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this),rectify_method_p(this)">Banco de Venezuela</a>
+          <a href="#" class="btn_standar btn-common btn-effect bg-special mt-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this),rectify_method_p(this)">Banco Mercantil</a>
+          <a href="#" class="btn_standar btn-common btn-effect bg-special mt-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this),rectify_method_p(this)">Banco B.O.D</a>
+          <a href="#" class="btn_standar btn-common btn-effect bg-special mt-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this),rectify_method_p(this)">Banco Bancaribe</a>
+          <a href="#" class="btn_standar btn-common btn-effect bg-special mt-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this),rectify_method_p(this)">Banco Bicentenario</a>
+          <a href="#" class="btn_standar btn-common btn-effect bg-special mt-1" data-input ="#deposit_bank_destinity" onclick="push_value_standar(event, this),rectify_method_p(this)">veMonedero</a>
       </div>
     </div>
 
-    <!--METODO DE PAGO #############################-->
+    <!--Metodo de pago
+     ========================================================================-->
     <div class="grupo">
       <%= form.text_field :method_payment, :required => "required", class:"input-special input-option", :"data-options" => "#options-method-payment", oninput:"readonly(this)"%><span class="barra bg-before-Standar"></span>
       <%= form.label :method_payment, "Metodo de pago", for: "", class: "label-special label-Standar" %>
@@ -46,8 +43,8 @@
       <% end %>
 
       <div id="options-method-payment" style="display:none">
-        <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#deposit_method_payment" id="badge-prepago" onclick="push_value_standar(event, this)">Transferencia</a>
-        <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#deposit_method_payment" id="badge-postpago" onclick="push_value_standar(event, this)">Pago móvil</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-special" data-input ="#deposit_method_payment" onclick="push_value_standar(event, this)">Transferencia</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-special" data-input ="#deposit_method_payment" id="option-pago-movil" onclick="push_value_standar(event, this)">Pago móvil</a>
       </div>
     </div>
 

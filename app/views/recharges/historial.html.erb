@@ -1,3 +1,6 @@
+<style>
+
+</style>
 <section class="seccion-perfil-usuario">
     <div class="perfil-usuario-body" style="width:95% !important;max-width:100% !important">
         <div class="perfil-usuario-bio" style="text-align:left;justify-content:left;">
@@ -48,6 +51,7 @@
 
 <%=render "modal_recharge"%>
 
+
 <script>
     $(document).ready(function(){
         if ($('.pagination').length) {
@@ -59,5 +63,7 @@
                 }
             });
         }
+
+        $("#modal_recharge_wrap .modal-content").addClass("bg-dark-strong")
     })                  
 </script>

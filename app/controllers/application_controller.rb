@@ -2,7 +2,10 @@ class ApplicationController < ActionController::Base
      layout :layout_by_resource
 
      private
-
+     def handle_unverified_request
+          redirect_back(fallback_location: user_root_path, alert: "Ha ocurrido un error al guardar los datos. Esto se debe a un conflicto con el cache de tu navegador. Por favor intenta de nuevo sin minimizar el navegador.")
+     end
+      
      def layout_by_resource
         
           if devise_controller?

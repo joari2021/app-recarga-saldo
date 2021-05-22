@@ -14,8 +14,6 @@
   margin: 20px auto;
 }
 .img-logo img{
-  //bottom: -40px;
-  //right: 30px;
   width:60px;
   height:60px;
 }
@@ -26,8 +24,6 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  
-  //background: #111;
 }
 
 .container-accounts,
@@ -38,7 +34,6 @@
   align-items: center;
   padding: 30px 0;
   flex-wrap: wrap;
-  
 }
 
 .container-accounts .box,
@@ -54,6 +49,7 @@
   margin: 20px 5px;
   transition: 0.5s;
 }
+
 .container-accounts .box-monedero{
   height: 500px !important;
 }
@@ -135,6 +131,37 @@
   background: linear-gradient(to right, var(--color-fuerte), var(--color-debil));
 }
 
+.container-accounts .box-7::before,
+.container-accounts .box-7::after,
+.bg-ve-monedero{
+  background: #457fca;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #5691c8, #457fca);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #5691c8, #457fca); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container-accounts .box-8::before,
+.container-accounts .box-8::after,
+.bg-mercado-pago{
+  background: #2980B9;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container-accounts .box-9::before,
+.container-accounts .box-9::after,
+.bg-paypal{
+  background: #003087;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #009cde, #003087);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #009cde, #003087); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container-accounts .box-10::before,
+.container-accounts .box-10::after,
+.bg-skrill{
+  background: #872166;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #4f2455, #872166);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #4f2455, #872166); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 
 .container-accounts .box span,
 .container-recharge .box span{

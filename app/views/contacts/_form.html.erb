@@ -19,19 +19,15 @@
       <% end %>
 
       <div id="options-operators" style="display:none" onchange = "verify_operator()" >
-        <div class="row">
-          <div class="col-6">
-            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Movistar</a><br>
-            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Digitel</a><br>
-            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Movilnet</a><br>
-            <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Cantv</a>
-          </div>
-          <div class="col-6">
-              <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Movistar TV</a><br>
-              <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Inter</a><br>
-              <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Simple TV</a>
-          </div>
-        </div>
+        
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Movistar" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Movistar</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Digitel" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Digitel</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Movilnet" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Movilnet</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Cantv" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Cantv</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Movistar" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Movistar TV</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Inter" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Inter</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Simple_TV" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Simple TV</a>
+          
       </div>
     </div>
 
@@ -44,8 +40,8 @@
       <% end %>
      
       <div id="options-type-payment" style="display:none">
-        <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_type_payment" id="badge-prepago" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Prepago</a>
-        <a href="#" class="badge btn_standar btn-common btn-effect bg-special m-1" data-input ="#contact_type_payment" id="badge-postpago" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Post-pago</a>
+        <a href="#" class="btn_standar btn-common btn-effect bg-special mt-1" data-input ="#contact_type_payment" id="badge-prepago" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Prepago</a>
+        <a href="#" class="btn_standar btn-common btn-effect bg-special mt-1" data-input ="#contact_type_payment" id="badge-postpago" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Post-pago</a>
       </div>
     </div>
 
@@ -57,7 +53,7 @@
         <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:cod_area].to_s[/\w([^"]*)/] %></p>
       <% end %>
 
-      <div id="options-cod-area" style="display:none"><!--Los codigos de area se insertan con javascript--></div>
+      <div class="row justify-content-center" id="options-cod-area" style="display:none;max-width:234px;"><!--Los codigos de area se insertan con javascript--></div>
     </div>
 
     <!--NUMERO ###########################################-->

@@ -1,11 +1,11 @@
 <div class="modal_original" id="modal_accounts">
-  <div class="modal_original_wrap modal-dialog-centered modal-dialog-scrollable modal-accounts" id="modal_accounts_wrap" style="background:#111 !important">
-    <div class="modal-content">
+  <div class="modal_original_wrap modal-dialog-centered modal-dialog-scrollable modal-accounts" id="modal_accounts_wrap">
+    <div class="modal-content bg-dark-strong">
       <div class="modal-header">
         <i class="far fa-times-circle close_modal color-special btn-effect rounded-circle"  id="close_modal_accounts"></i>
         <br>
       </div>
-      <div class="modal-body" id="modal_body_accounts">
+      <div class="modal-body" id="modal_body_accounts" >
         <div class="content-accounts">
           <div class="container-accounts">
             <h3 class="modal-title color-special font-weight-bold mb-3">Cuentas Bancarias</h3>
@@ -147,11 +147,11 @@
             <div class="row justify-content-center mr-1">
               <!--VE MONEDERO-->
               <div class="col-12 col-sm-6 col-lg-4">
-                <div class="box box-monedero bg-venezuela">
+                <div class="box box-monedero box-7">
                   <span></span>
                   <div class="content-account">
                     <div class="img-logo">
-                      <%= image_tag("metodos_de_pago/0102.png") %>
+                      <%= image_tag("metodos_de_pago/veMonedero.png") %>
                     </div>
                     <h2>veMonedero</h2>
                     <br>
@@ -160,57 +160,55 @@
                     <hr>
                     <p class="mb-0">N° Telefono</p>
                     <p class="text-right">(0414)<br>8170372</p>
-                    <button type="button" class="btn_standar btn-common btn-effect bg-venezuela text-uppercase mt-4 btn_select_account" data-bank="5" data-method="3">Elegir</button>
+                    <button type="button" class="btn_standar btn-common btn-effect bg-ve-monedero text-uppercase mt-4 btn_select_account" data-bank="5" data-method="0">Elegir</button>
                   </div>  
                 </div>
               </div>
 
               <!--MERCADO PAGO-->
               <div class="col-12 col-sm-6 col-lg-4">
-                <div class="box box-monedero box-2">
+                <div class="box box-monedero box-8">
                   <span></span>
                   <div class="content-account">
                     <div class="img-logo">
-                      <%= image_tag("metodos_de_pago/0105.png") %>
+                      <%= image_tag("metodos_de_pago/mercado_pago.png") %>
                     </div>
                     <h2>Mercado Pago</h2>
                     <br><br>
-                    <button type="button" class="btn_standar btn-common bg-mercantil text-uppercase mt-4" disabled>Muy pronto</button>
+                    <button type="button" class="btn_standar btn-common bg-mercado-pago text-uppercase mt-4" disabled>Muy pronto</button>
                   </div>  
                 </div>
               </div>
 
-
               <!--PAYPAL-->
               <div class="col-12 col-sm-6 col-lg-4">
-                <div class="box box-monedero box-4">
+                <div class="box box-monedero box-9">
                   <span></span>
                   <div class="content-account">
                     <div class="img-logo">
-                      <%= image_tag("metodos_de_pago/0114.png") %>
+                      <%= image_tag("metodos_de_pago/paypal.png") %>
                     </div>
                     <h2>Paypal</h2>
                     <br><br>
-                    <button type="button" class="btn_standar btn-common bg-mercantil text-uppercase mt-4" disabled>Muy pronto</button>
+                    <button type="button" class="btn_standar btn-common bg-paypal text-uppercase mt-4" disabled>Muy pronto</button>
                   </div>  
                 </div>
               </div>
 
               <!--SKRILL-->
               <div class="col-12 col-sm-6 col-lg-4">
-                <div class="box box-monedero box-4">
+                <div class="box box-monedero box-10">
                   <span></span>
                   <div class="content-account">
                     <div class="img-logo">
-                      <%= image_tag("metodos_de_pago/0114.png") %>
+                      <%= image_tag("metodos_de_pago/skrill.png") %>
                     </div>
                     <h2>Skrill</h2>
                     <br><br>
-                    <button type="button" class="btn_standar btn-common bg-mercantil text-uppercase mt-4" disabled>Muy pronto</button>
+                    <button type="button" class="btn_standar btn-common bg-skrill text-uppercase mt-4" disabled>Muy pronto</button>
                   </div>  
                 </div>
               </div>
-       
             </div>
           </div>
         </div>

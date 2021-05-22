@@ -82,11 +82,12 @@ insert_cod_area = function (cod_area) {
     enlace.innerHTML = element;
 
     options_cod_area.appendChild(enlace);
-
+    
+    /*
     if ((i + 1) % 5 === 0) {
       br = document.createElement("br");
       options_cod_area.appendChild(br);
-    }
+    }*/
   }
 };
 

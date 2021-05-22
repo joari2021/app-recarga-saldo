@@ -364,12 +364,14 @@ refrescarNotificaciones = function () {
 }
 
 copiarAlPortapapeles = function (content_copy,mensaje) {
+  $("#icon-copy").css({"display":"none"})
   var aux = document.createElement("input");
   aux.setAttribute("value", content_copy);
   document.body.appendChild(aux);
   aux.select();
   document.execCommand("copy");
   document.body.removeChild(aux);
+  $("#icon-copy").fadeTo(1000,1)
 
   md.showNotification(mensaje,'success')
 }

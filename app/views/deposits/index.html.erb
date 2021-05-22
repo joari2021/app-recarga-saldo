@@ -14,7 +14,7 @@
 
             <p><span class="badge badge-pill badge-success">confirmado</span><span> : El deposito registrado ha sido confirmado y se ha acreditado el monto del pago en tu balance.</span></p>
 
-            <p><span class="badge badge-pill badge-danger">anulada</span> : El deposito ha sido anulado debido a que no se confirmo en nuestra cuenta bancaria una transacción con los datos registrados en dicho deposito.</p>
+            <p><span class="badge badge-pill badge-warning">anulado</span> : El deposito ha sido anulado debido a que no se confirmo en nuestra cuenta bancaria una transacción con los datos registrados en dicho deposito.</p>
         </div>
     </div>
 </section>
@@ -24,7 +24,7 @@
     <thead class="thead-standar bg-special">
       <tr class="tr-standar">
         <th class="th-standar">Fecha</th>
-        <th class="th-standar">Banco Destino</th>
+        <th class="th-standar">Cuenta Crédito</th>
         <th class="th-standar">M. Pago</th>
         <th class="th-standar">Referencia</th>
         <th class="th-standar">Monto</th>
@@ -35,7 +35,7 @@
     <%@deposits.each do |deposit|%>
       <tr class="tr-standar" id="deposit_<%=deposit.id%>">
         <td class="td-standar" data-label="Fecha"><%=deposit.date_send.strftime("%d/%m/%Y")%></td>
-        <td class="td-standar" data-label="Banco Destino"><%=deposit.bank_destinity.gsub("_"," ")%></td>
+        <td class="td-standar" data-label="Cuenta Crédito"><%=deposit.bank_destinity.gsub("_"," ")%></td>
         <td class="td-standar" data-label="M. Pago"><%=deposit.method_payment.gsub("_"," ")%></td>
         <td class="td-standar" data-label="Referencia"><%=deposit.ref_payment%></td>
         <td class="td-standar" data-label="Monto"><%=number_with_precision(deposit.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>
@@ -46,7 +46,7 @@
             <%when "confirmado"%>
               <%color_badge = "badge-success"%>
             <%when "anulado"%>
-               <%color_badge = "badge-danger"%>
+               <%color_badge = "badge-warning"%>
             <%end%>
           <span class="badge badge-pill <%=color_badge%>"><%=deposit.status%></span>
         </td>

@@ -86,6 +86,7 @@
                   >Socios</a
                 >
               </li>
+              <!--
               <li class="nav-item">
                 <a class="nav-link page-scroll" href="#team">Equipo</a>
               </li>
@@ -93,10 +94,14 @@
                 <a class="nav-link page-scroll" href="#testimonial"
                   >Testimonios</a
                 >
-              </li>
+              </li>-->
 
               <li class="nav-item">
                 <a class="nav-link page-scroll" href="#blog">Noticias</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="btn btn-trial" href="<%=url_for(new_user_session_url)%>">Entrar ó Registrarse</a>
               </li>
             </ul>
           </div>
@@ -267,7 +272,7 @@
     </div>
     <!-- features Section End -->
 
-    <!-- Counter Section Start -->
+    <!-- Datos estadisticos-->
     <section id="counter" class="section">
       <div class="container">
         <div class="row">
@@ -335,7 +340,7 @@
         </div>
       </div>
     </section>
-    <!-- Counter Section End -->
+    <!-- Datos estadisticos End -->
 
     <!-- INFORMACION DE LOS SERVICIOS DE LA PAGINA CON MARKETING-->
     <div id="features-two" class="section">
@@ -388,7 +393,7 @@
           <!--TERCERO-->
           <div class="col-lg-6 col-md-12 col-sm-12 order-5">
             <div class="img-thumb wow fadeInLeft" data-wow-delay="0.3s">
-              <%= image_tag("servicios/premios.png", {class:"img-fluid w-lg-100 w-col-75 h-auto m-auto m-lg-0", style:"display:inherit;"}) %>
+              <%= image_tag("servicios/premios.png", {class:"img-fluid w-75 w-lg-100 h-auto m-auto", style:"display:inherit;"}) %>
             </div>
           </div>
           <div class="col-lg-6 col-md-12 col-sm-12 order-6">
@@ -507,7 +512,8 @@
     </section>
     <!-- Awesome Screens Section End -->
 
-    <!-- Team section Start -->
+    
+    <!-- Team section Start 
     <section id="team" class="section">
       <div class="container">
         <div class="section-header">
@@ -628,9 +634,9 @@
         </div>
       </div>
     </section>
-    <!-- Team section End -->
+     -->
 
-    <!-- Testimonial Section Start -->
+    <!-- Testimonial Section Start 
     <section id="testimonial" class="section">
       <div class="container">
         <div class="section-header">
@@ -757,7 +763,7 @@
         </div>
       </div>
     </section>
-    <!-- Testimonial Section End -->
+    -->
 
     <!-- Blog Section -->
     <section id="blog" class="section">
@@ -775,12 +781,38 @@
           <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
             <div class="blog-item-wrapper">
               <div class="blog-item-img">
+                <a href="https://noticiasaldiayalahora.co/nacionales/movilnet-abre-nueva-modalidad-de-recarga-de-saldo-por-mensaje-de-texto/" target="_blank">
+                  <img src="https://i2.wp.com/noticiasaldiayalahora.co/wp-content/uploads/2015/10/movilnet0810152.jpg?resize=640%2C437&ssl=1" alt="Movilnet" style="width:100%; height:230px;">
+                </a>
+                
+                <div class="author-img">
+                  <%= image_tag("sistema_recargas/movilnet.png", style:"width:80px; height:50px") %>
+                </div>
+              </div>
+              <div class="blog-item-text">
+                <h3>
+                  <a href="https://noticiasaldiayalahora.co/nacionales/movilnet-abre-nueva-modalidad-de-recarga-de-saldo-por-mensaje-de-texto/" target="_blank"
+                    >Movilnet abre nueva modalidad de recarga de saldo por mensaje de texto</a
+                  >
+                </h3>
+                <div class="author">
+                  <!--<span class="name"><a href="#">Noticias al dia y la hora</a></span>-->
+                  <span class="date float-right">19 Mayo, 2021</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NOTICIA NRO 2-->
+          <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
+            <div class="blog-item-wrapper">
+              <div class="blog-item-img">
                 <a href="https://noticiasaldiayalahora.co/nacionales/conoce-la-imagen-del-nuevo-kit-de-servicio-gratuito-de-television-satelital-del-gobierno/" target="_blank">
                   <img src="https://i0.wp.com/noticiasaldiayalahora.co/wp-content/uploads/2021/05/television-satelital.jpg?resize=777%2C437&ssl=1" alt="Servicio TV Gratuito" style="width:100%; height:230px;">
                 </a>
                 <!--
                 <div class="author-img">
-                  <%= image_tag("sistema_recargas/digitel.png", style:"width:60px; height:60px") %>
+                  <%= image_tag("sistema_recargas/digitel.png", style:"width:80px; height:50px") %>
                 </div>-->
               </div>
               <div class="blog-item-text">
@@ -797,7 +829,7 @@
             </div>
           </div>
 
-          <!-- NOTICIA NRO 2-->
+          <!-- NOTICIA NRO 3-->
           <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
             <div class="blog-item-wrapper">
               <div class="blog-item-img">
@@ -805,7 +837,7 @@
                   <img src="https://i0.wp.com/noticiasaldiayalahora.co/wp-content/uploads/2019/11/intercable.jpg?resize=777%2C437&ssl=1" alt="Cambio de planes ABA" style="width:100%; height:230px;">
                 </a>
                 <div class="author-img">
-                  <%= image_tag("sistema_recargas/inter.png", style:"width:60px;height:60px") %>
+                  <%= image_tag("sistema_recargas/inter.png", style:"width:80px; height:50px") %>
                 </div>
               </div>
               <div class="blog-item-text">
@@ -822,7 +854,7 @@
             </div>
           </div>
 
-          <!-- NOTICIA NRO 3-->
+          <!-- NOTICIA NRO 4-->
           <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
             <div class="blog-item-wrapper">
               <div class="blog-item-img">
@@ -831,7 +863,7 @@
                 </a>
                 
                 <div class="author-img">
-                  <%= image_tag("sistema_recargas/simple_tv.png", style:"width:60px;height:60px") %>
+                  <%= image_tag("sistema_recargas/simple_tv.png", style:"width:80px; height:50px") %>
                 </div>
               </div>
               <div class="blog-item-text">
@@ -847,9 +879,6 @@
               </div>
             </div>
           </div>
-
-          
-
           
         </div>
       </div>
@@ -895,17 +924,19 @@
       <!-- Footer Area Start -->
       <section class="footer-Content">
         <div class="container">
-          <div class="row">
+          <div class="row justify-content-center">
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
-              <%= image_tag("logo.png") %>
+              <%= image_tag("logo/Marca_blank_2.png", width:"100%") %>
+              <!--
               <div class="textwidget">
                 <p>
                   Appropriately implement one-to-one catalysts for change
                   vis-a-vis wireless catalysts for change. Enthusiastically
                   architect adaptive.
                 </p>
-              </div>
+              </div>-->
             </div>
+            <!--
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
               <div class="widget">
                 <h3 class="block-title">Create a Free Account</h3>
@@ -938,7 +969,7 @@
                   <li><a href="#">Help</a></li>
                 </ul>
               </div>
-            </div>
+            </div>-->
           </div>
         </div>
         <!-- Copyright Start  -->
@@ -948,17 +979,18 @@
               <div class="col-md-12">
                 <div class="site-info float-left">
                   <p>
-                    Crafted by
-                    <a href="http://uideck.com" rel="nofollow">UIdeck</a>
+                    Elaborado por Recargas Fast
+                    <!--<a href="http://uideck.com" rel="nofollow" ></a>-->
                   </p>
                 </div>
                 <div class="float-right">
                   <ul class="footer-social">
                     <li>
-                      <a class="facebook" href="#"
-                        ><i class="lni-facebook-filled"></i
+                      <a class="facebook" href="https://www.facebook.com/Recargas-Fast-108041258134695" target="_blank"
+                        ><i class="lni-facebook-filled" style="font-size:30px"></i
                       ></a>
                     </li>
+                    <!--
                     <li>
                       <a class="twitter" href="#"
                         ><i class="lni-twitter-filled"></i
@@ -968,11 +1000,10 @@
                       <a class="linkedin" href="#"
                         ><i class="lni-linkedin-fill"></i
                       ></a>
-                    </li>
+                    </li>-->
                     <li>
-                      <a class="google-plus" href="#"
-                        ><i class="lni-google-plus"></i
-                      ></a>
+                      <a class="whatsapp" href="https://wa.me/message/OPTJGH6ZPDYRH1" target="_blank">
+                        <i class="fab fa-whatsapp" style="font-size:35px"></i></a>
                     </li>
                   </ul>
                 </div>

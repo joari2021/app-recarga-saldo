@@ -7,6 +7,16 @@ document.addEventListener("turbolinks:load", function () {
     });
 
     $("#btn-abrir").click(showPopup);
+
+    $("#btn_show_modal_prom").click(function () {
+        $('#modal_prom_ref').addClass('show');
+        $('#modal_prom_ref_wrap').addClass('show');
+    })
+
+    $("#btn_close_modal_prom").click(function () {
+        $('#modal_prom_ref').removeClass('show');
+        $('#modal_prom_ref_wrap').removeClass('show');
+    })
 })
 
 function show_modal_info(){

@@ -31,6 +31,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'will_paginate', '~> 3.1.0'
 gem 'letter_opener'
+gem 'airbrake'
 gem 'friendly_id', '~> 5.4.0'
 gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 
@@ -43,8 +44,6 @@ end
 group :production do 
   gem 'pg'
 end
-
-
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.

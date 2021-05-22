@@ -22,16 +22,7 @@
   --inter_hover: #025b97;
   --simpletv_hover: #0f8cba;
 }
-.color-special {
-  //font-size: 30px;
-  //font-weight: 600;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-color: var(--color-fuerte);
-  background-image: -webkit-linear-gradient(to right, var(--color-fuerte), var(--color-debil));
-  background-image: linear-gradient(to right, var(--color-fuerte), var(--color-debil));
-}
+
 
 *{
 	margin: 0;
@@ -75,18 +66,6 @@
   border-left: 3px solid var(--color-medio) !important;
 }
 
-.color-standar-fuerte {
-  color: var(--color-fuerte) !important;
-}
-
-.color-standar-medio {
-  color: var(--color-medio) !important;
-}
-
-.color-standar-debil {
-  color: var(--color-debil) !important;
-}
-
 hr.divider-title {
   border-bottom: solid 2px var(--color-medio) !important;
 }
@@ -94,6 +73,9 @@ hr.divider-title {
 
 /* BOTONES
 =====================================================================================*/
+.icono-copy:hover{
+  cursor:pointer;
+}
 .btn_standar {
   margin: 0px auto;
   font-size: 14px;
@@ -149,14 +131,58 @@ hr.divider-title {
   width: 100%;
 }
 
-/* Fondos Gradientes
+/* Colores, Fondos Simples y Fondos Gradientes
 ====================================================================================*/
+.color-special {
+  //font-size: 30px;
+  //font-weight: 600;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-color: var(--color-fuerte);
+  background-image: -webkit-linear-gradient(to right, var(--color-fuerte), var(--color-debil));
+  background-image: linear-gradient(to right, var(--color-fuerte), var(--color-debil));
+}
+
+.color-special-two {
+  //font-size: 30px;
+  //font-weight: 600;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-color: #1A2980;  /* fallback for old browsers */
+  background-image: -webkit-linear-gradient(to left, #26D0CE, #1A2980);  /* Chrome 10-25, Safari 5.1-6 */
+  background-image: linear-gradient(to left, #26D0CE, #1A2980); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+.color-standar-fuerte {
+  color: var(--color-fuerte) !important;
+}
+
+.color-standar-medio {
+  color: var(--color-medio) !important;
+}
+
+.color-standar-debil {
+  color: var(--color-debil) !important;
+}
+
+.bg-dark-strong{
+  background: #111 !important;
+}
 .bg-special {
   color: #fff;
   background-color: var(--color-fuerte);
   background: -webkit-linear-gradient(to right, var(--color-fuerte), var(--color-debil));
   background: linear-gradient(to right, var(--color-fuerte), var(--color-debil));
   box-shadow: 0px 0px 43px 0px rgba(131, 131, 131, 0.38);
+}
+
+.bg-special-two {
+  background: #1A2980;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #26D0CE, #1A2980);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #26D0CE, #1A2980); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .bg-g-1{
@@ -242,8 +268,8 @@ tr.tr-standar:hover {
 
 
 
-/*
- MODALS ==========================================================================*/ 
+/* MODALS
+ ==========================================================================*/ 
 .modal_original {
   background: rgba(48, 48, 48, 0.5);
   position: fixed;
@@ -284,8 +310,8 @@ tr.tr-standar:hover {
   cursor: pointer;
 }
 
-/*
-LOADER ====================================================================*/
+/* LOADER 
+====================================================================*/
 .contenedor_loader {
   width: 100%;
   height: 0px;
@@ -363,8 +389,8 @@ LOADER ====================================================================*/
   }
 }
 
-/*
- FORMULARIOS =============================================================*/
+/*  FORMULARIOS
+============ =============================================================*/
 input,
 select {
   appearance: none;
@@ -427,6 +453,48 @@ dos bordes con color y que giramos con transform: rotate(-45deg);
   margin-top: 3px;
 }
 
+.select-css {
+  display: block;
+  font-size: 18px;
+  color: var(--colorTexto);
+  line-height: 2;
+  padding: .8em 1.4em .3em .2em;
+  width: 100%;
+  max-width: 100%; 
+  box-sizing: border-box;
+  margin: 0;
+  border-bottom: 1px solid #49454567;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  background-color: #fff;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+    linear-gradient(to bottom, #ffffff 0%,#ffffff 100%);
+  background-repeat: no-repeat, repeat;
+  background-position: right .7em top 50%, 0 0;
+  background-size: .65em auto, 100%;
+  transition: 0.3s ease all;
+ }
+ .select-css::-ms-expand {
+  display: none;
+ }
+ .select-css:hover {
+  border-bottom: 2px solid var(--color-medio) !important;
+  cursor:pointer;
+  
+ }
+ .select-css:focus {
+  /*border-color: #aaa;
+  box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+  box-shadow: 0 0 0 3px -moz-mac-focusring;*/
+  color: #222; 
+  outline: none;
+ }
+
+ .select-css option {
+  font-weight:normal;
+ }
+ 
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;

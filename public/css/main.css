@@ -424,12 +424,12 @@ button:focus {
   background: #1da1f2;
 }
 
-.google-plus a {
-  color: #dd4d42;
+.whatsapp a {
+  color: #3db15a;
 }
 
-.google-plus a:hover {
-  background: #dd4d42;
+.whatsapp a:hover {
+  background: #3db15a;
 }
 
 .youtube a {
@@ -898,7 +898,7 @@ button:focus {
     download
    ========================================================================== */
 #download {
-  background: #f6fbfd;
+  /*background: #f6fbfd;*/
   padding: 80px 0 0px;
 }
 
@@ -1444,8 +1444,8 @@ button:focus {
   color: #fff;
 }
 
-.single-team .social-list .google-plus a:hover {
-  background: #dd4d42;
+.single-team .social-list .whatsapp a:hover {
+  background: #3db15a;
   color: #fff;
 }
 
@@ -2250,8 +2250,8 @@ textarea {
   color: #007bb5;
 }
 
-.contact-social li .google-plus:hover {
-  color: #dd4b39;
+.contact-social li .whatsapp:hover {
+  color: #3db15a;
 }
 
 /* ==========================================================================
@@ -2344,8 +2344,8 @@ footer .menu li a:hover {
   color: #007bb5;
 }
 
-.footer-social li .google-plus:hover {
-  color: #dd4b39;
+.footer-social li .whatsapp:hover {
+  color: #3db15a;
 }
 
 .copyright {

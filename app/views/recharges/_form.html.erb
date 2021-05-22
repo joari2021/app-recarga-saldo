@@ -27,7 +27,7 @@
         <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:cod_area].to_s[/\w([^"]*)/] %></p>
       <% end %>
 
-      <div id="cont-option-list" style="display:none"><!--Los codigos de area se insertan con javascript--></div>
+      <div class="row justify-content-center" id="cont-option-list" style="display:none;max-width:249px;"><!--Los codigos de area se insertan con javascript--></div>
     </div>
   
     <!--- NUMERO DE TELEFONO ----------------------------------------------------------------->
@@ -48,7 +48,7 @@
       <%if @recharge.errors[:amount].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:amount].to_s[/\w([^"]*)/] %></p>
       <% end %>
-      <div id="div_montos" style="display:none"><!--Los montos se insertan con javascript--></div>
+      <div class="row justify-content-center" id="div_montos" style="display:none;max-width:249px;"><!--Los codigos de area se insertan con javascript--></div>
 
       <%if current_user.is_admin? && @recharge_type_payment === "Post-pago"%>
         <%if @recharge.operator === "Digitel" || @recharge.operator === "Movistar"%>
@@ -91,7 +91,6 @@
       <%end%>
 
       <!--RENTA MENSUAL-->
-      
       <%if @recharge.operator === "Simple_TV" || @recharge.operator === "Inter"%>
         <%if @recharge.type_payment === "Prepago"%>
             <div class="grupo">

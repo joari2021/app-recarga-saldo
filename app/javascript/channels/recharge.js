@@ -265,17 +265,18 @@ show_form = function (monto_min, monto_max, multiplos) {
       const element = cod_area[i];
       enlace = document.createElement("a");
       enlace.setAttribute("href", "#");
-      enlace.classList.add("badge", "bg-" + input_operadora.value);
+      enlace.classList.add("badge", "btn-effect", "btn_standar", "btn-common", "bg-" + input_operadora.value);
       enlace.style.margin = "5px";
       enlace.setAttribute("onclick", "push_cod(event,this)");
       enlace.innerHTML = element;
 
       caja_cod_area.appendChild(enlace);
 
+      /*
       if ((i + 1) % 5 === 0) {
         br = document.createElement("br");
         caja_cod_area.appendChild(br);
-      }
+      }*/
     }
     $("#input_cod_area").fadeIn(200);
   } else {
@@ -289,18 +290,19 @@ show_form = function (monto_min, monto_max, multiplos) {
       monto = m;
       enlace = document.createElement("a");
       enlace.setAttribute("href", "#");
-      enlace.classList.add("badge", "bg-" + input_operadora.value);
+      enlace.classList.add("badge", "btn-effect", "btn_standar", "btn-common", "bg-" + input_operadora.value);
       enlace.style.margin = "5px";
       enlace.setAttribute("onclick", "push_monto(event,this)");
 
       enlace.innerHTML = format_number_integer_with_separator(monto);
 
       div_montos.appendChild(enlace);
-
+      
+      /*
       if (i % 3 === 0) {
         br = document.createElement("br");
         div_montos.appendChild(br);
-      }
+      }*/
       i++;
     }
     $("#input_monto").removeClass("d-none");

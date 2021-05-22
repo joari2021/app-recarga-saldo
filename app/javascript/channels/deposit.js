@@ -13,7 +13,7 @@ document.addEventListener("turbolinks:load", function () {
   });
 
   $(".btn_select_account").click(function(){
-    banks = ["Banco de Venezuela", "Banco Mercantil", "Banco B.O.D", "Banco Bancaribe", "Banco Bicentenario"]
+    banks = ["Banco de Venezuela", "Banco Mercantil", "Banco B.O.D", "Banco Bancaribe", "Banco Bicentenario", "veMonedero"]
     methods = ["Transferencia", "Pago móvil"]
 
     bank = $(this).data("bank")
@@ -23,6 +23,7 @@ document.addEventListener("turbolinks:load", function () {
     $("#deposit_method_payment").val(methods[format_integer(method)])
   })
 
+  
   /*
   if (typeof var_refresh_deposits_for_process === "undefined"){
     var_refresh_deposits_for_process = setInterval(refresh_deposits_for_process, 15000);
@@ -36,6 +37,15 @@ show_modal_accounts = function (event) {
   $("#modal_accounts").addClass("show");
   $("#modal_accounts_wrap").addClass("show");
 };
+
+rectify_method_p = function (option) {
+  if (option.innerText != "Banco de Venezuela"){
+    $("#option-pago-movil").addClass("d-none")
+  }else{
+    $("#option-pago-movil").removeClass("d-none")
+  }
+  $("#deposit_method_payment").val("")
+}
 
 activar_submit_deposit = function () {
 

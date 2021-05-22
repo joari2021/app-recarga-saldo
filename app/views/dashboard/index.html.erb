@@ -1,11 +1,10 @@
 <!-- Page Heading -->
-<!--
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+
+<div class="align-items-center justify-content-between mb-4">
+    <button class="btn-sm btn text-gray-100 btn-effect btn-common bg-special-two" id="btn_show_modal_prom"><i
+            class="far fa-eye fa-sm"></i> Promoción de referidos</button>
 </div>
--->
+
 <!-- Content Row -->
 <div class="row">
 
@@ -103,7 +102,7 @@
             <!-- Card Header - Dropdown -->
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold color-special">Resumen de ventas</h6>
+                <h6 class="m-0 font-weight-bold color-special">Resumen de ventas (Año en curso)</h6>
                 <!--
                 <div class="dropdown no-arrow">
                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -135,7 +134,7 @@
             <!-- Card Header - Dropdown -->
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold color-special">Recargas realizadas</h6>
+                <h6 class="m-0 font-weight-bold color-special">Recargas realizadas (Año en curso)</h6>
             </div>
             <!-- Card Body -->
             <div class="card-body">
@@ -179,30 +178,13 @@
             <!-- Card Header - Dropdown -->
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold color-special">Resumen de ventas</h6>
+                <h6 class="m-0 font-weight-bold color-special">Recargas realizadas (Últimos 6 meses)</h6>
             </div>
             <!-- Card Body -->
             <div class="card-body">
                 <div class="chart-area">
                     <canvas id="myBarChart"></canvas>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-4 col-lg-5 mb-4">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            
-                <h6 class="m-0 font-weight-bold color-special">Link para referir</h6>
-            </div>
-            <div class="card-body">
-                
-                <%link = "#{url_for(new_user_registration_url)}?ref=#{current_user.referidor_id}"%>
-
-                <i class="far fa-copy float-right color-special" onclick="copiarAlPortapapeles('<%=link%>','Link copiado con éxito.')"></i>
-                
-                <span><%=truncate(link,length: 40)%></span>
             </div>
         </div>
     </div>
@@ -252,6 +234,41 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!--MODAL PROMOCION DE REFERIDOS
+========================================================================-->
+<div class="modal_original" id="modal_prom_ref" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+    <div class="modal_original_wrap modal-dialog modal-dialog-centered modal-dialog-scrollable modal-md" id="modal_prom_ref_wrap">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title color-special-two font-weight-bold" id="title_modal_contact">Promoción de Referidos</h5>
+                <i class="far fa-times-circle close_modal color-special-two btn-effect rounded-circle" id="btn_close_modal_prom"></i>
+            </div>
+            <div class="modal-body">
+                <div class="card shadow-sm">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold color-special-two">Link para referir</h6>
+                    </div>
+                    <div class="card-body">
+                        <%link = "#{url_for(new_user_registration_url)}?ref=#{current_user.referidor_id}"%>
+
+                        <i class="far fa-clone float-right color-special-two icono-copy" id="icon-copy" onclick="copiarAlPortapapeles('<%=link%>','Link copiado con éxito.')" style="font-size:30px"></i>
+                        
+                        <span><%=truncate(link,length: 40)%></span>
+                    </div>
+                </div>
+
+                <div class="mt-5">
+                    <p class="px-2">Comparte el link de referido que te suministramos con todos tus amigos, familiares y en tus redes sociales para que otras personas conozcan de nuestra página web por medio de tí. Cada vez que un usuario que se ha registrado con tu link alcance vender <b>Bs 100.000.000</b> en saldo, tú recibiras una bonificación de <b>Bs 500.000</b> directo en tu balance al final de mes.</p>
+    
+                    <p class="px-2">Para poder ser beneficiario de esta bonificación deberás tener un mínimo de cinco (05) usuarios registrados con tu link. A partir de ese momento cada vez que dichos usuarios alcancen el monto en ventas requerido recibiras la bonificación mencionada por lo que podrás tener con trabajo y diligencia un ingreso pasivo importante si te lo propones.</p>
+    
+                    <p class="px-2">Esta promoción estará disponible hasta el 23 de agosto del 2022.</p>
+                </div>
+            </div>
+        </div>  
     </div>
 </div>
 
