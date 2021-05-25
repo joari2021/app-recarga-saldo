@@ -1135,7 +1135,7 @@ button:focus {
 
 #features .nav-tabs {
   background: #f6fbfd;
-  margin-top: -100px;
+  margin-top: -50px;
 }
 
 #features .nav-tabs .nav-item.show .nav-link,

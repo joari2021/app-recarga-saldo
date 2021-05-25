@@ -1,5 +1,5 @@
 @import "bootstrap";
-
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,600|Roboto");
 /*GENERAL
 =============================================================*/
 :root {
@@ -36,7 +36,7 @@ CAJAS => 50
 	padding: 0;
 	box-sizing: border-box;
 	text-decoration: none;
-	font-family: 'Poppins', sans-serif;
+	font-family: "Roboto", sans-serif;
 }
 
 .contenedor-img:hover .img-operadora {
@@ -82,12 +82,13 @@ hr.divider-title {
 .icono-copy:hover{
   cursor:pointer;
 }
+
 .btn_standar {
   margin: 0px auto;
   font-size: 14px;
   padding: 10px 30px;
   border-radius: 30px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
   letter-spacing: 1px;
   font-weight: 600;
   color: #fff;
@@ -177,6 +178,7 @@ hr.divider-title {
 .bg-dark-strong{
   background: #111 !important;
 }
+
 .bg-special {
   color: #fff;
   background-color: var(--color-fuerte);
@@ -244,6 +246,7 @@ a.special-link:focus {
 
 /* TABLA ELEGANTE
 ===================================================================================*/
+
 #main-container {
   margin: 30px auto;
   width: 100%;
@@ -273,10 +276,9 @@ tr.tr-standar:hover {
   transition: 0.3s ease all;
 }
 
-
-
 /* MODALS
  ==========================================================================*/ 
+
 .modal_original {
   background: rgba(48, 48, 48, 0.5);
   position: fixed;
@@ -319,6 +321,7 @@ tr.tr-standar:hover {
 
 /* LOADER 
 ========================================================================================*/
+
 .contenedor_loader {
   width: 100%;
   height: 0px;
@@ -426,7 +429,6 @@ select {
   //background: #f0f0f0;
   color: #c6c6c6;
   font-size: 18px;
-  
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   //border-radius: 12px;
   position: relative;
@@ -604,8 +606,9 @@ input:valid ~ .label-Standar {
   background-color: var(--color-medio) !important;
 }
 
+/* NOTIFICACIONES 
+======================================================================================*/
 
-/////////////////////////////// NOTIFICACIONES /////////////////////////////////////
 .animated {
   -webkit-animation-duration: 1s;
   animation-duration: 1s;

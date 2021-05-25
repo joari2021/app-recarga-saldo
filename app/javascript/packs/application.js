@@ -15,6 +15,7 @@ ActiveStorage.start()
 
 // ESTILOS CSS
 import "css/styles.scss"
+import "css/dashboard.scss"
 import "css/recharge.scss"
 import "css/deposit.scss"
 import "css/contact.scss"

@@ -43,6 +43,12 @@ Airbrake.configure do |c|
   # https://github.com/airbrake/airbrake-ruby#ignore_environments
   c.ignore_environments = %w[test]
 
+  Airbrake.add_filter do |notice|
+    if notice[:errors].any? { |error| error[:type] == 'SignalException' }
+      notice.ignore!
+    end
+  end
+
   # A list of parameters that should be filtered out of what is sent to
   # Airbrake. By default, all "password" attributes will have their contents
   # replaced.
