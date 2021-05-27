@@ -91,7 +91,7 @@ document.addEventListener("turbolinks:load", function () {
     $("#access_dashboard").addClass("active")
   }else if (href.indexOf("vender_recargas") != -1){
     $("#access_recharges").addClass("active")
-  }else if (href.indexOf("compra") != -1){
+  }else if (href.indexOf("deposits") != -1){
     $("#access_deposits").addClass("active")
   }else if (href.indexOf("historial") != -1){
     $("#access_historial").addClass("active")
