@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   
   get 'buscador_contacts/:operator/:type_payment/:names', to: 'contacts#buscador'
 
-  resources :deposits, path: 'registro_compras'
+  resources :deposits
   get 'process_deposits', to: 'deposits#process_deposits'
 
   resources :recharge_params
