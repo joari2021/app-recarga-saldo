@@ -3,6 +3,8 @@
 <div id="cont_recharges_for_process">
     <div id="sub_cont_recharges_for_process">
         <h3 class="color-special pb-3 mt-5 mb-4 text-center border-title font-weight-bold">Recargas</h3>
+        <hr class="divider-title">
+        <br>
         
         <div class="row <%unless @recharges.where(type_operation: "direct_recharge").any?%>justify-content-center<%end%>"" id="recargas">
             <%@recharges.where(type_operation: "direct_recharge").each do |recharge|%>
@@ -15,6 +17,8 @@
         </div>
         
         <h3 class="color-special pb-3 mt-5 mb-4 text-center border-title font-weight-bold">Consultas</h3>
+        <hr class="divider-title">
+        <br>
         
         <div class="row <%unless @recharges.where(type_operation: "consultation").any?%>justify-content-center<%end%>" id="consultas">
             <%@recharges.where(type_operation: "consultation").each do |recharge|%>

@@ -1,100 +1,61 @@
-<div class="float-right">
-    <div class="card bg-special shadow h-100">
-        <div class="card-body">
-            <div class="row no-gutters align-items-center">
-                <div class="col-auto">
-                    <i class="fas fa-wallet fa-2x text-gray-100"></i>
-                </div>
-                <div class="col mx-3">
-                    <div class="h6 mb-0 font-weight-bold text-gray-100" id="card_balance">Bs <%= number_with_precision(current_user.balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%> </div>
+<div id="section-recharge">
+  <div id="sub-section-recharge">
+    <div class="float-right">
+        <div class="card bg-special shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col-auto">
+                        <i class="fas fa-wallet fa-2x text-gray-100"></i>
+                    </div>
+                    <div class="col mx-3">
+                        <div class="h6 mb-0 font-weight-bold text-gray-100" id="card_balance">Bs <%= number_with_precision(current_user.balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%> </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<br><br><br><br><br><br>
-
-<div class="w-100 text-center"><span class="h3 font-weight-bold color-special d-inline-block">Telefonia Móvil y Fija</span></div>
-<hr class="divider-title">
-<br>
-
-<div class="row justify-content-center">
-  <div class="col-lg-3 col-md-4 col-sm-6 col-8 mb-4 div-card">
-    <div class="d-block m-auto">
-      <%= link_to new_recharge_path, { remote: true, :'data-operator' => 'Movistar', class:"link_new_recharge show_loader_sup"}  do %>
-        <div class="card border-left-Movistar shadow h-100 py-2 cont-oper">
-          <div class="card-body contenedor-img">
-            <%= image_tag("sistema_recargas/movistar.png", class:"img-operadora", width:"100%", height:"70px") %>
-          </div>
-        </div>
-      <% end %>
+    <br><br><br><br><br><br>
+    
+    <div class="w-100 text-center"><span class="h3 font-weight-bold color-special d-inline-block">Telefonia Móvil y Fija</span></div>
+    <hr class="divider-title">
+    <br>
+    
+    <div class="row justify-content-center">
+      <!--MOVISTAR
+      ===========================================================================================-->
+      <%=render "system_to_recharge", operator: "Movistar", available: @configuration.movistar%>
+      
+      <!--DIGITEL
+      ===========================================================================================-->
+      <%=render "system_to_recharge", operator: "Digitel", available: @configuration.digitel%>
+    
+      <!--MOVILNET
+      ===========================================================================================-->
+      <%=render "system_to_recharge", operator: "Movilnet", available: @configuration.movilnet%>
+     
+      <!--CANTV
+      ===========================================================================================-->
+      <%=render "system_to_recharge", operator: "Cantv", available: @configuration.cantv%>
     </div>
-  </div>
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-lg-3 col-md-4 col-sm-6 col-8 mb-4 div-card">
-    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "Digitel", class:"link_new_recharge show_loader_sup"}  do %>
-      <div class="card border-left-Digitel shadow h-100 py-2 cont-oper">
-        <div class="card-body contenedor-img">
-          <%= image_tag("sistema_recargas/digitel.png", class:"img-operadora", width:"100%", height:"70px") %>
-        </div>
-      </div>
-    <%end%>
-  </div>
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-lg-3 col-md-4 col-sm-6 col-8 mb-4 div-card">
-    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "Movilnet", class:"link_new_recharge show_loader_sup"}  do %>
-      <div class="card border-left-Movilnet shadow h-100 py-2 cont-oper">
-        <div class="card-body contenedor-img">
-          <%= image_tag("sistema_recargas/movilnet.png", class:"img-operadora", width:"100%", height:"70px") %>
-        </div>
-      </div>
-    <%end%>
-  </div>
-  <div class="col-lg-3 col-md-4 col-sm-6 col-8 mb-4 div-card">
-    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "Cantv", class:"link_new_recharge show_loader_sup"}  do %>
-      <div class="card border-left-Cantv shadow h-100 py-2 cont-oper">
-        <div class="card-body contenedor-img">
-          <%= image_tag("sistema_recargas/cantv.png", class:"img-operadora", width:"100%", height:"70px") %>
-        </div>
-      </div>
-    <%end%>
-  </div>
-</div>
-
-<div class="w-100 text-center"><span class="h3 mt-5 font-weight-bold color-special d-inline-block">Servicios TV</span></div>
-<hr class="divider-title">
-<br>
-
-<div class="row justify-content-center">
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-lg-3 col-md-4 col-sm-6 col-8 mb-4 div-card">
-    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "Movistar_TV", class:"link_new_recharge show_loader_sup"}  do %>
-      <div class="card border-left-Movistar shadow h-100 py-2 cont-oper">
-        <div class="card-body contenedor-img">
-          <%= image_tag("sistema_recargas/movistar_tv.png", class:"img-operadora", width:"100%", height:"70px") %>
-        </div>
-      </div>
-    <%end%>
-  </div>
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-lg-3 col-md-4 col-sm-6 col-8 mb-4 div-card">
-    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "Inter", class:"link_new_recharge show_loader_sup"}  do %>
-      <div class="card border-left-Inter shadow h-100 py-2 cont-oper">
-        <div class="card-body contenedor-img">
-          <%= image_tag("sistema_recargas/inter.png", class:"img-operadora", width:"100%", height:"70px") %>
-        </div>
-      </div>
-    <%end%>
-  </div>
-  <!-- Earnings (Monthly) Card Example -->
-  <div class="col-lg-3 col-md-4 col-sm-6 col-8 mb-4 div-card">
-    <%= link_to new_recharge_path, { remote: true, :'data-operator' => "Simple_TV", class:"link_new_recharge show_loader_sup"}  do %>
-      <div class="card border-left-Simple_TV shadow h-100 py-2 cont-oper">
-        <div class="card-body contenedor-img">
-          <%= image_tag("sistema_recargas/simple_tv.png", class:"img-operadora", width:"100%", height:"70px") %>
-        </div>
-      </div>
-    <%end%>
+    
+    <div class="w-100 text-center"><span class="h3 mt-5 font-weight-bold color-special d-inline-block">Servicios TV</span></div>
+    <hr class="divider-title">
+    <br>
+    
+    <div class="row justify-content-center">
+    
+      <!-- MOVISTAR TV
+      =================================================================================== -->
+      <%=render "system_to_recharge", operator: "Movistar_TV", available: @configuration.movistar_tv%>
+      
+      <!-- INTER
+      =================================================================================== -->
+      <%=render "system_to_recharge", operator: "Inter", available: @configuration.inter%>
+    
+      <!-- SIMPLE TV
+      =================================================================================== -->
+      <%=render "system_to_recharge", operator: "Simple_TV", available: @configuration.simple_tv%>
+    </div>
   </div>
 </div>
 
@@ -120,12 +81,10 @@
 <script>
   <%= render "element_dom_globales"%>
   
-  
   //Variables globales
   show_div_cod_area = false
   operation = ""
-  operadora_val = ""
-  
+
   function card_options_function(event) {
 
     if ($("#recharge_operator") != null){

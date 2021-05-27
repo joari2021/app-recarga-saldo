@@ -75,7 +75,7 @@ document.addEventListener("turbolinks:load", function () {
   recharges_count = format_integer($("#recharges_cant").text())
   deposits_count = format_integer($("#deposits_cant").text())
  
-  /*
+  
   if (typeof var_refresh_solicitudes_pend != "undefined"){
     var_refresh_solicitudes_pend = undefined
   }
@@ -83,7 +83,7 @@ document.addEventListener("turbolinks:load", function () {
   if (typeof var_refresh_solicitudes_pend === "undefined"){
     var_refresh_solicitudes_pend = setInterval(refresh_solicitudes_pend, 15000);
   }
-  $.ajaxSetup({ cache: false });*/
+  $.ajaxSetup({ cache: false });
 
   href = window.location.href
 

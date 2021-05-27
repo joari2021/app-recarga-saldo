@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :nonexistent_numbers
+  
   root to: 'home#index'
   devise_for :users, :controllers => { registrations: 'registrations' }, :path_names => { :sign_up => "register_or_login", :sign_in => "login_or_register" }
   get '/dashboard' => "dashboard#index", :as => :user_root
@@ -18,4 +18,9 @@ Rails.application.routes.draw do
 
   resources :profiles, path: 'perfil'
   get 'users_all', to: 'profiles#users_all'
+
+  resources :system_configurations
+  resources :nonexistent_numbers
+
+  get 'balances', to: 'balance#index'
 end

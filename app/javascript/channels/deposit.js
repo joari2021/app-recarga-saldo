@@ -24,11 +24,11 @@ document.addEventListener("turbolinks:load", function () {
   })
 
   
-  /*
+  
   if (typeof var_refresh_deposits_for_process === "undefined"){
     var_refresh_deposits_for_process = setInterval(refresh_deposits_for_process, 15000);
   }
-  $.ajaxSetup({ cache: false });*/
+  $.ajaxSetup({ cache: false });
 });
 
 show_modal_accounts = function (event) {

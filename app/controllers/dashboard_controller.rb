@@ -28,15 +28,15 @@ class DashboardController < ApplicationController
 
     # Recargas Realizadas (TODAS)
     #=============================================================================
-    @movistar_p = @recharges.where(status: "confirmada", operator: "Movistar").count
-    @digitel_p = @recharges.where(status: "confirmada", operator: "Digitel").count
-    @movilnet_p = @recharges.where(status: "confirmada", operator: "Movilnet").count
-    @cantv_p = @recharges.where(status: "confirmada", operator: "Cantv").count
-    @inter_p = @recharges.where(status: "confirmada", operator: "Inter").count
-    @movistar_tv_p = @recharges.where(status: "confirmada", operator: "Movistar_TV").count
-    @simple_tv_p = @recharges.where(status: "confirmada", operator: "Simple_TV").count
+    @movistar_p = @recharges.where(type_operation:"direct_recharge", status: "confirmada", operator: "Movistar").count
+    @digitel_p = @recharges.where(type_operation:"direct_recharge", status: "confirmada", operator: "Digitel").count
+    @movilnet_p = @recharges.where(type_operation:"direct_recharge", status: "confirmada", operator: "Movilnet").count
+    @cantv_p = @recharges.where(type_operation:"direct_recharge", status: "confirmada", operator: "Cantv").count
+    @inter_p = @recharges.where(type_operation:"direct_recharge", status: "confirmada", operator: "Inter").count
+    @movistar_tv_p = @recharges.where(type_operation:"direct_recharge", status: "confirmada", operator: "Movistar_TV").count
+    @simple_tv_p = @recharges.where(type_operation:"direct_recharge", status: "confirmada", operator: "Simple_TV").count
 
-    # Recargas Realizas (ULTIMOS 6 MESES)
+    # Recargas Realizadas (ULTIMOS 6 MESES)
     #==============================================================================
     
     month_first_before = Time.now.strftime("%m").to_i - 6

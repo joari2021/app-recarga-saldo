@@ -3,7 +3,6 @@ $('#caja_form').html('<%= j render("form") %>');
 <%=render "element_dom_globales"%>
 
 $("#btn_recarga").attr("data-validate","true")
-input_operadora.value = operadora_val
 
 <!--VARIABLE PARA LEER DESDE LA FUNCION SET_MAX_LENGHT Y DIFERENCIARLA-->
 input_number = $("#recharge_number")
@@ -16,7 +15,7 @@ function mostrar_type_pago(){
 
 $("#contenedor-switch").fadeIn("fast")
 
-switch (operadora_val) {
+switch ($("#recharge_operator").val()) {
 
     case "Movistar":
         title_modal.innerHTML = '<%=image_tag("sistema_recargas/movistar.png", width:"100px", height:"30px")%>'
@@ -156,11 +155,7 @@ switch (operadora_val) {
     <%end%>
 
     estilizar_errores_validacion()
-
-    hidden_loader_sup()
 <%else%>
-    hidden_loader_sup()
-
     $('#modal_recharge').addClass('show');
     $('#modal_recharge_wrap').addClass('show');
 <% end %>

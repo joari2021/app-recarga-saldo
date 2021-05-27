@@ -1,0 +1,26 @@
+<div class="col-lg-3 col-md-4 col-sm-6 col-8 mb-4 div-card">
+    <div class="d-block m-auto">
+        <%if available%>
+            <%link_recharge = new_recharge_path + "?operator=#{operator}"%>
+            <%= link_to link_recharge, { remote: true}  do %>
+                <div class="card border-left-<%=operator%> shadow h-100 py-2 cont-oper">
+                    <div class="card-body contenedor-img">
+                        <%= image_tag("sistema_recargas/#{operator.downcase}.png", class:"img-operadora", width:"100%", height:"70px") %>
+                    </div>
+                </div>
+            <% end %>
+            <div class="text-center">
+                <i class="fas fa-check-circle text-success icon-not-disabled"></i>
+            </div>
+        <%else%>
+            <div class="card border-left-<%=operator%> shadow h-100 py-2 cont-oper" data-title="No Disponible">
+                <div class="card-body contenedor-img" >
+                    <%=image_tag("sistema_recargas/#{operator.downcase}.png", width:"100%", height:"70px") %>
+                </div>
+            </div>
+            <div class="text-center">
+                <i class="fas fa-times-circle text-danger icon-disabled"></i>
+            </div>
+        <%end%>
+    </div>
+</div>

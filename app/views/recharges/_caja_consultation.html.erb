@@ -36,7 +36,7 @@ end
 
                     <div class="float-right mt-1">
                         <%if recharge.status === "confirmada"%>
-                            <%=link_to "Pagar", edit_recharge_path(recharge), html_options = {class: "btn btn-info btn-sm show_loader_sup", remote: true}%>
+                            <%=link_to "Pagar", edit_recharge_path(recharge), html_options = {class: "btn btn-info btn-sm", remote: true}%>
                         <%elsif recharge.status === "enviada"%>
                             <span class="badge badge-secondary">En espera</span>
                         <%elsif recharge.status === "anulada"%>

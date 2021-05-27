@@ -1,0 +1,99 @@
+<%= form_with(model: system_configuration) do |form| %>
+  <% if system_configuration.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(system_configuration.errors.count, "error") %> prohibited this system_configuration from being saved:</h2>
+
+      <ul>
+        <% system_configuration.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="position-relative ml-4 mr-4 mr-sm-0">
+    <div class="content-select">
+      <%= form.label :movistar %>
+      <%= form.select(:movistar, options_for_select([['Elegir', ""], ['Si', "true"], ['No', 'false']], system_configuration.movistar) ) %>
+      <i></i>
+    </div>
+    <%if system_configuration.errors[:movistar].any? %>
+      <p class="msj_error mt-2 bg-danger rounded width-error"><%= system_configuration.errors[:movistar].to_s[/\w([^"]*)/] %></p>
+    <% end %>
+  </div>
+
+  <div class="position-relative ml-4 mr-4 mr-sm-0 mt-4">
+    <div class="content-select">
+      <%= form.label :digitel %>
+      <%= form.select(:digitel, options_for_select([['Elegir', ""], ['Si', "true"], ['No', 'false']], system_configuration.digitel) ) %>
+      <i></i>
+    </div>
+    <%if system_configuration.errors[:digitel].any? %>
+      <p class="msj_error mt-2 bg-danger rounded width-error"><%= system_configuration.errors[:digitel].to_s[/\w([^"]*)/] %></p>
+    <% end %>
+  </div>
+
+  <div class="position-relative ml-4 mr-4 mr-sm-0 mt-4">
+    <div class="content-select">
+      <%= form.label :movilnet %>
+      <%= form.select(:movilnet, options_for_select([['Elegir', ""], ['Si', "true"], ['No', 'false']], system_configuration.movilnet) ) %>
+      <i></i>
+    </div>
+    <%if system_configuration.errors[:movilnet].any? %>
+      <p class="msj_error mt-2 bg-danger rounded width-error"><%= system_configuration.errors[:movilnet].to_s[/\w([^"]*)/] %></p>
+    <% end %>
+  </div>
+
+  <div class="position-relative ml-4 mr-4 mr-sm-0 mt-4">
+    <div class="content-select">
+      <%= form.label :cantv %>
+      <%= form.select(:cantv, options_for_select([['Elegir', ""], ['Si', "true"], ['No', 'false']], system_configuration.cantv) ) %>
+      <i></i>
+    </div>
+    <%if system_configuration.errors[:cantv].any? %>
+      <p class="msj_error mt-2 bg-danger rounded width-error"><%= system_configuration.errors[:cantv].to_s[/\w([^"]*)/] %></p>
+    <% end %>
+  </div>
+
+  <div class="position-relative ml-4 mr-4 mr-sm-0 mt-4">
+    <div class="content-select">
+      <%= form.label :movistar_tv %>
+      <%= form.select(:movistar_tv, options_for_select([['Elegir', ""], ['Si', "true"], ['No', 'false']], system_configuration.movistar_tv) ) %>
+      <i></i>
+    </div>
+    <%if system_configuration.errors[:movistar_tv].any? %>
+      <p class="msj_error mt-2 bg-danger rounded width-error"><%= system_configuration.errors[:movistar_tv].to_s[/\w([^"]*)/] %></p>
+    <% end %>
+  </div>
+
+  <div class="position-relative ml-4 mr-4 mr-sm-0 mt-4">
+    <div class="content-select">
+      <%= form.label :inter %>
+      <%= form.select(:inter, options_for_select([['Elegir', ""], ['Si', "true"], ['No', 'false']], system_configuration.inter) ) %>
+      <i></i>
+    </div>
+    <%if system_configuration.errors[:inter].any? %>
+      <p class="msj_error mt-2 bg-danger rounded width-error"><%= system_configuration.errors[:inter].to_s[/\w([^"]*)/] %></p>
+    <% end %>
+  </div>
+
+  <div class="position-relative ml-4 mr-4 mr-sm-0 mt-4">
+    <div class="content-select">
+      <%= form.label :simple_tv %>
+      <%= form.select(:simple_tv, options_for_select([['Elegir', ""], ['Si', "true"], ['No', 'false']], system_configuration.simple_tv) ) %>
+      <i></i>
+    </div>
+    <%if system_configuration.errors[:simple_tv].any? %>
+      <p class="msj_error mt-2 bg-danger rounded width-error"><%= system_configuration.errors[:simple_tv].to_s[/\w([^"]*)/] %></p>
+    <% end %>
+  </div>
+
+  <div class="field mt-4">
+    <%= form.label :dolar_bcv %>
+    <%= form.text_field :dolar_bcv %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

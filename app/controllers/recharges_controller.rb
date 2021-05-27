@@ -4,12 +4,13 @@ class RechargesController < ApplicationController
   before_action :authenticate_admin, only: [:process_recharges]
   before_action :set_recharge, only: %i[ show edit update destroy ]
   before_action :set_variables_recharge, only: %i[ index new create]
+
+  before_action :verificar_disponibilidad_sistema, only: %i[create update]
   before_action :verify_exist_number, only: [:create]
   before_action :verify_consulta!, only: [:create] 
   before_action :format_params_recharge, only: [:create] 
   before_action :format_update_params_recharge, only: [:update] 
   before_action :rectify_amount, only: [:create, :update]
-
 
   # GET /recharges or /recharges.json
   def index
@@ -18,8 +19,10 @@ class RechargesController < ApplicationController
     parsed_date_f = Date.parse(date_final)
 
     consultas = current_user.recharges.where(type_operation: "consultation", status: ["confirmada","anulada"])
-    consultas_vencidas = consultas.where.not(created_at: parsed_date_f.midnight..parsed_date_f.end_of_day)
+    consultas_vencidas = consultas.where.not(updated_at: parsed_date_f.midnight..parsed_date_f.end_of_day)
     consultas_vencidas.destroy_all
+
+    @configuration = SystemConfiguration.first
   end
 
   def historial
@@ -193,77 +196,102 @@ class RechargesController < ApplicationController
 
   private
     
-    def set_recharge
-      @recharge = Recharge.find(params[:id])
-    end
+  def set_recharge
+    @recharge = Recharge.find(params[:id])
+  end
 
-    def set_variables_recharge
-      @params_movistar = RechargeParam.find_by(operadora:"Movistar")
-      @params_digitel = RechargeParam.find_by(operadora:"Digitel")
-      @params_movilnet = RechargeParam.find_by(operadora:"Movilnet")
-      @params_cantv = RechargeParam.find_by(operadora:"Cantv")
-      @params_movistar_tv = RechargeParam.find_by(operadora:"Movistar_TV")
-      @params_inter = RechargeParam.find_by(operadora:"Inter")
-      @params_simple_tv = RechargeParam.find_by(operadora:"Simple_TV")
-    end
+  def set_variables_recharge
+    @params_movistar = RechargeParam.find_by(operadora:"Movistar")
+    @params_digitel = RechargeParam.find_by(operadora:"Digitel")
+    @params_movilnet = RechargeParam.find_by(operadora:"Movilnet")
+    @params_cantv = RechargeParam.find_by(operadora:"Cantv")
+    @params_movistar_tv = RechargeParam.find_by(operadora:"Movistar_TV")
+    @params_inter = RechargeParam.find_by(operadora:"Inter")
+    @params_simple_tv = RechargeParam.find_by(operadora:"Simple_TV")
+  end
 
-    def recharge_params
-      params.require(:recharge).permit(:amount, :operator, :type_payment, :number, :cod_area)
-    end
+  def recharge_params
+    params.require(:recharge).permit(:amount, :operator, :type_payment, :number, :cod_area)
+  end
 
-    def recharge_params_special
-      params.require(:recharge).permit(:save_number,:names)
-    end
+  def recharge_params_special
+    params.require(:recharge).permit(:save_number,:names)
+  end
 
-    def update_recharge_params
-      params.require(:recharge).permit(:operation)
-    end
+  def update_recharge_params
+    params.require(:recharge).permit(:status,:amount,:renta_mensual,:saldo_resultante,:available_days,:number_inexistente)
+  end
 
-    def update_recharge_params
-      params.require(:recharge).permit(:status,:amount,:renta_mensual,:saldo_resultante,:available_days,:number_inexistente)
-    end
+  def format_params_recharge
+    recharge_params[:amount].gsub!('.','') unless recharge_params[:amount].nil?
+    recharge_params[:amount].gsub!(',','.') unless recharge_params[:amount].nil?
+  end
 
-    def format_params_recharge
-      recharge_params[:amount].gsub!('.','') unless recharge_params[:amount].nil?
-      recharge_params[:amount].gsub!(',','.') unless recharge_params[:amount].nil?
-    end
+  def format_update_params_recharge
+    update_recharge_params[:amount].gsub!('.','') unless update_recharge_params[:amount].nil?
+    update_recharge_params[:amount].gsub!(',','.') unless update_recharge_params[:amount].nil?
 
-    def format_update_params_recharge
-      update_recharge_params[:amount].gsub!('.','') unless update_recharge_params[:amount].nil?
-      update_recharge_params[:amount].gsub!(',','.') unless update_recharge_params[:amount].nil?
+    update_recharge_params[:renta_mensual].gsub!('.','') unless update_recharge_params[:renta_mensual].nil?
+    update_recharge_params[:renta_mensual].gsub!(',','.') unless update_recharge_params[:renta_mensual].nil?
+  end
 
-      update_recharge_params[:renta_mensual].gsub!('.','') unless update_recharge_params[:renta_mensual].nil?
-      update_recharge_params[:renta_mensual].gsub!(',','.') unless update_recharge_params[:renta_mensual].nil?
-    end
+  def verificar_disponibilidad_sistema
+    unless current_user.is_admin?
+      configuration = SystemConfiguration.first
+      sistema = recharge_params[:operator].present? ? recharge_params[:operator] : @recharge.operator
+      sistema_available = false
+      case sistema
+      when "Movistar"
+        sistema_available = configuration.movistar
+      when "Digitel"
+        sistema_available = configuration.digitel
+      when "Movilnet"
+        sistema_available = configuration.movilnet
+      when "Cantv"
+        sistema_available = configuration.cantv
+      when "Movistar_TV"
+        sistema_available = configuration.movistar_tv
+      when "Inter"
+        sistema_available = configuration.inter
+      when "Simple_TV"
+        sistema_available = configuration.simple_tv
+      else
+      end
 
-    def verify_exist_number
-      number = recharge_params[:cod_area].present? ? recharge_params[:cod_area] + recharge_params[:number] : recharge_params[:number]
-
-      if NonexistentNumber.where(operator: recharge_params[:operator], type_payment: recharge_params[:type_payment], number: number).any?
-        respond_to do |format|
-          format.json {head :no_content}
-          format.js { render :number_non_existent}
-        end
+      unless sistema_available
+        redirect_to recharges_path, alert: "Sistema no disponible."
       end
     end
+  end
 
-    def rectify_amount
-      unless recharge_params[:amount].to_f <= current_user.balance.balance
-        respond_to do |format|
-          format.json {head :no_content}
-          format.js { render :balance_insuficiente}
-        end
+  def verify_exist_number
+    number = recharge_params[:cod_area].present? ? recharge_params[:cod_area] + recharge_params[:number] : recharge_params[:number]
+
+    if NonexistentNumber.where(operator: recharge_params[:operator], type_payment: recharge_params[:type_payment], number: number).any?
+      respond_to do |format|
+        format.json {head :no_content}
+        format.js { render :number_non_existent}
       end
     end
+  end
 
-    def verify_consulta!
-      if recharge_params[:type_payment] === "Post-pago" && recharge_params[:operator] != "Cantv"
-           if current_user.recharges.where(number: recharge_params[:number], type_operation: "consultation").any?
-                respond_to do |format|
-                     format.json {head :no_content}
-                     format.js { render :deneged_consulta}
-                end
-           end
+  def rectify_amount
+    unless recharge_params[:amount].to_f <= current_user.balance.balance || current_user.is_admin?
+      respond_to do |format|
+        format.json {head :no_content}
+        format.js { render :balance_insuficiente}
       end
     end
+  end
+
+  def verify_consulta!
+    if recharge_params[:type_payment] === "Post-pago" && recharge_params[:operator] != "Cantv"
+      if current_user.recharges.where(number: recharge_params[:number], type_operation: "consultation").any?
+          respond_to do |format|
+                format.json {head :no_content}
+                format.js { render :deneged_consulta}
+          end
+      end
+    end
+  end
 end

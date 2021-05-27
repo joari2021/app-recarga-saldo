@@ -21,11 +21,10 @@ document.addEventListener("turbolinks:load", function () {
     $("#tabla_buscador_contacts tbody").empty();
   });
 
-  $(".link_new_recharge").click(function () {
-    operadora_val = $(this).data("operator");
-  });
+  if (typeof var_refresh_available_system === "undefined") {
+    var_refresh_available_system = setInterval(refresh_available_system, 300000);
+  }
 
-  /*
   if (typeof var_refresh_consult === "undefined") {
     var_refresh_consult = setInterval(refresh_consultas, 15000);
   }
@@ -36,7 +35,7 @@ document.addEventListener("turbolinks:load", function () {
       15000
     );
   }
-  $.ajaxSetup({ cache: false });*/
+  $.ajaxSetup({ cache: false });
 });
 
 buscador_clientes = function (termino) {
@@ -245,16 +244,6 @@ edit_modal = function () {
     "far fa-times-circle close_modal btn-effect rounded-circle color-" + operator
   );
   $("#title_modal_contact").attr("class", "modal_title color-" + operator);
-
-  //CAMBIAR ATTR POR EL LABEL DEL BUSCADOR
-  $(".label-special").attr("class","label-special label-" + operator);
-  $(".barra").attr("class","barra bg-before-" + operator);
-  //$("#tabla_buscador_contacts tbody tr").attr("class", "bg-" + operator)
-
-  //ADD DE CLASES A ELEMENTOS RENDERIZADOS DEL FORM
-  $(".lbl").addClass("lbl-" + operator);
-  $("#label_switch").addClass("color-" + operator);
-  $("#btn_show_contacts, #btn_recarga").addClass("bg-" + operator);
 };
 
 show_form = function (monto_min, monto_max, multiplos) {
@@ -265,18 +254,11 @@ show_form = function (monto_min, monto_max, multiplos) {
       const element = cod_area[i];
       enlace = document.createElement("a");
       enlace.setAttribute("href", "#");
-      enlace.classList.add("badge", "btn-effect", "btn_standar", "btn-common", "bg-" + input_operadora.value);
-      enlace.style.margin = "5px";
+      enlace.classList.add("badge", "btn-effect", "btn_standar", "btn-common", "ml-2", "mt-1", "bg-" + input_operadora.value);
       enlace.setAttribute("onclick", "push_cod(event,this)");
       enlace.innerHTML = element;
 
       caja_cod_area.appendChild(enlace);
-
-      /*
-      if ((i + 1) % 5 === 0) {
-        br = document.createElement("br");
-        caja_cod_area.appendChild(br);
-      }*/
     }
     $("#input_cod_area").fadeIn(200);
   } else {
@@ -285,7 +267,6 @@ show_form = function (monto_min, monto_max, multiplos) {
 
   if (operation === "recarga") {
     div_montos.innerHTML = "";
-    let i = 1;
     for (let m = monto_min; m <= monto_max; m += multiplos) {
       monto = m;
       enlace = document.createElement("a");
@@ -297,13 +278,6 @@ show_form = function (monto_min, monto_max, multiplos) {
       enlace.innerHTML = format_number_integer_with_separator(monto);
 
       div_montos.appendChild(enlace);
-      
-      /*
-      if (i % 3 === 0) {
-        br = document.createElement("br");
-        div_montos.appendChild(br);
-      }*/
-      i++;
     }
     $("#input_monto").removeClass("d-none");
   } else {
@@ -338,8 +312,13 @@ hidden_loader = function () {
 };
 
 refresh_consultas = function () {
-  //$("#contenedor_consultations").load( window.location.href + " #sub_contenedor_consultation");
+  $("#contenedor_consultations").load( window.location.href + " #sub_contenedor_consultation");
 };
+
+refresh_available_system = function () {
+  $("#section-recharge").load( window.location.href + " #sub-section-recharge");
+};
+
 refresh_recharges_for_process = function () {
   $("#cont_recharges_for_process").load(
     window.location.href + " #sub_cont_recharges_for_process"

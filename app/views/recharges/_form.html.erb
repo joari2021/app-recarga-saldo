@@ -1,25 +1,31 @@
+<%operator = params[:operator].present? ? params[:operator] : @recharge.operator%>
 <%= form_for @recharge, {remote: true}  do |form| %>
   <div class="form">
-    
     <%if @recharge.new_record?%>
-      <div class="grupo"><button class="btn btn_standar btn-effect btn-common" id="btn_show_contacts" onclick="show_modal_contacts(event)"><i class="far fa-address-book"></i></button></div>
+      <div class="grupo"><button class="btn btn_standar btn-effect btn-common bg-<%=operator%>" id="btn_show_contacts" onclick="show_modal_contacts(event)"><i class="far fa-address-book"></i></button></div>
     <%end%>
 
-    <%= form.text_field :operator, type:"hidden" %>
-    <!--- TIPO DE PAGO  ----------------------------------------------------------------->
+    <!-- OPERADORA
+    ====================================================================================-->
+    <%= form.text_field :operator, type:"hidden", value:"#{operator}" %>
+   
+    <!-- TIPO DE PAGO  
+    =====================================================================================-->
     <%if current_user.is_admin? && @recharge.status === "enviada"%>
       <div class="grupo">
-        <%= form.text_field :type_payment, :required => "required", class:"input-special", oninput: "this.value='#{@recharge.type_payment}'" %><span class="barra barra-before-<%=@recharge.operator%>"></span>
-        <%= form.label :type_payment, "Tipo de pago", for:"", class: "label-special color-#{@recharge.operator}" %>
+        <%= form.text_field :type_payment, :required => "required", class:"input-special", oninput: "this.value='#{@recharge.type_payment}'" %><span class="barra bg-before-<%=operator%>"></span>
+        <%= form.label :type_payment, "Tipo de pago", for:"", class: "label-special label-#{operator}" %>
       </div>
     <%else%>
       <%= form.text_field :type_payment, type:"hidden" %>
     <%end%>
 
-    <!--CODIGO DE AREA ----------------------------------------------------------->
+
+    <!--CODIGO DE AREA 
+    =====================================================================================-->
     <div class="grupo" id="input_cod_area">
-      <%= form.text_field :cod_area, :required => "required", class:"input-special", oninput: "input_value_integer(this)", onfocus: "show_cod_area()", onblur: "ocultar_cod_area()", maxlength: "4" %><span class="barra"></span>
-      <%= form.label :cod_area, "Cod. Área", for: "", class: "label-special" %>
+      <%= form.text_field :cod_area, :required => "required", class:"input-special", oninput: "input_value_integer(this)", onfocus: "show_cod_area()", onblur: "ocultar_cod_area()", maxlength: "4" %><span class="barra bg-before-<%=operator%>"></span>
+      <%= form.label :cod_area, "Cod. Área", for: "", class: "label-special label-#{operator}" %>
 
       <!--MENSAJES DE ERRORES-->
       <p class="msj_error mt-2 bg-danger rounded" id="msj_error_cod_area" style="display:none;">El código de área es inválido.</p>
@@ -27,24 +33,28 @@
         <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:cod_area].to_s[/\w([^"]*)/] %></p>
       <% end %>
 
-      <div class="row justify-content-center" id="cont-option-list" style="display:none;max-width:249px;"><!--Los codigos de area se insertan con javascript--></div>
+      <div class="justify-content-center" id="cont-option-list" style="display:none;max-width:250px;"><!--Los codigos de area se insertan con javascript--></div>
     </div>
   
-    <!--- NUMERO DE TELEFONO ----------------------------------------------------------------->
+
+    <!--- NÚMERO DE TELEFONO 
+    ====================================================================================--->
     <div class="grupo">
-      <%= form.text_field :number, :required => "required", class:"input-special", oninput: "input_value_integer(this)" %><span class="barra"></span>
-      <%= form.label :number, "Número", for:"", class: "label-special" %>
+      <%= form.text_field :number, :required => "required", class:"input-special", oninput: "input_value_integer(this)" %><span class="barra bg-before-<%=operator%>"></span>
+      <%= form.label :number, "Número", for:"", class: "label-special label-#{operator}" %>
       <p class="msj_error mt-2 bg-danger rounded"  id="msj_error_number_phone" style="display:none;">El número debe contener <span id="digit_lenght"></span> dígitos</p>
       <%if @recharge.errors[:number].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:number].to_s[/\w([^"]*)/] %></p>
       <% end %>
     </div>
 
-    <!--MONTO-->
+    <!--MONTO
+    ======================================================================================-->
     <div class="grupo" id="input_monto">
-      <%= form.text_field :amount, :required => "required", class:"input-special", oninput:"input_value_integer_with_separator(this)", onfocus: "show_montos()", onblur: "ocultar_montos()" %><span class="barra"></span>
-      <%= form.label :amount, "Monto", for: "", class: "label-special" %>
+      <%= form.text_field :amount, :required => "required", class:"input-special", oninput:"input_value_integer_with_separator(this)", onfocus: "show_montos()", onblur: "ocultar_montos()" %><span class="barra bg-before-<%=operator%>"></span>
+      <%= form.label :amount, "Monto", for: "", class: "label-special label-#{operator}" %>
       <p class="msj_error mt-2 bg-danger rounded"  id="msj_error_monto" style="display:none;">El monto es inválido o es superior a tu balance disponible.</p>
+
       <%if @recharge.errors[:amount].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:amount].to_s[/\w([^"]*)/] %></p>
       <% end %>
@@ -66,14 +76,14 @@
       <div class="grupo" id="contenedor-switch">
         <div class="swtich-container">
           <input type="checkbox" id="switch" name="recharge[save_number]" onchange="show_input_names(this)">
-          <label for="switch" class="lbl" style="margin-bottom:0px;"></label>
-          <label for="switch" class="font-weight-bold align-middle" id="label_switch" style="cursor:pointer;">Guardar número</label>
+          <label for="switch" class="lbl lbl-<%=operator%>" style="margin-bottom:0px;"></label>
+          <label for="switch" class="font-weight-bold align-middle label-<%=operator%>" id="label_switch" style="cursor:pointer;">Guardar número</label>
         </div>
       </div>
 
       <div class="grupo" id="name_contact" style="display:none;">
-        <input class="input-special" maxlength="20" size="20" type="text" name="recharge[names]" id="recharge_names_contact"><span class="barra"></span>
-        <label class="label-special">Nombre o alias</label>
+        <input class="input-special" maxlength="20" size="20" type="text" name="recharge[names]" id="recharge_names_contact"><span class="barra bg-before-<%=operator%>"></span>
+        <label class="label-special label-<%=operator%>">Nombre o alias</label>
         <span class="badge badge-pill badge-danger" id="msj_error_names" style="display:none;">Este campo no puede estar vacío</span>
       </div>
     <%end%>
@@ -82,8 +92,8 @@
       <!--DIAS DISPONIBLES-->
       <%if @recharge.operator === "Simple_TV"%>
         <div class="grupo">
-          <%= form.text_field :available_days, :required => "required", class:"input-special", oninput:"input_value_integer(this)" %><span class="barra"></span>
-          <%= form.label :available_days, "Dias disponibles", for: "", class: "label-special" %>
+          <%= form.text_field :available_days, :required => "required", class:"input-special", oninput:"input_value_integer(this)" %><span class="barra bg-before-<%=operator%>"></span>
+          <%= form.label :available_days, "Dias disponibles", for: "", class: "label-special label-#{operator}" %>
           <%if @recharge.errors[:available_days].any? %>
             <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:available_days].to_s[/\w([^"]*)/] %></p>
           <% end %>
@@ -94,8 +104,8 @@
       <%if @recharge.operator === "Simple_TV" || @recharge.operator === "Inter"%>
         <%if @recharge.type_payment === "Prepago"%>
             <div class="grupo">
-              <%= form.text_field :renta_mensual, :required => "required", class:"input-special", oninput:"input_value_decimal_with_separator(this)" %><span class="barra"></span>
-              <%= form.label :renta_mensual, "Renta mensual", for: "", class: "label-special" %>
+              <%= form.text_field :renta_mensual, :required => "required", class:"input-special", oninput:"input_value_decimal_with_separator(this)" %><span class="barra bg-before-<%=operator%>"></span>
+              <%= form.label :renta_mensual, "Renta mensual", for: "", class: "label-special label-#{operator}" %>
               <%if @recharge.errors[:renta_mensual].any? %>
                 <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:renta_mensual].to_s[/\w([^"]*)/] %></p>
               <% end %>
@@ -106,8 +116,8 @@
       <!--SALDO RESULTANTE-->
       <%if @recharge.operator === "Cantv"%>
         <div class="grupo">
-          <%= form.number_field :saldo_resultante, :required => "required", class:"input-special", step:"0.01" %><span class="barra"></span>
-          <%= form.label :saldo_resultante, "Saldo Actual", for: "", class: "label-special" %>
+          <%= form.number_field :saldo_resultante, :required => "required", class:"input-special", step:"0.01" %><span class="barra bg-before-<%=operator%>"></span>
+          <%= form.label :saldo_resultante, "Saldo Actual", for: "", class: "label-special label-#{operator}" %>
           <%if @recharge.errors[:saldo_resultante].any? %>
             <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:saldo_resultante].to_s[/\w([^"]*)/] %></p>
           <% end %>
@@ -119,14 +129,14 @@
       <div class="grupo" id="contenedor-switch">
         <div class="swtich-container">
           <input type="checkbox" id="switch" name="recharge[number_inexistente]">
-          <label for="switch" class="lbl" style="margin-bottom:0px;"></label>
-          <label for="switch" class="font-weight-bold align-middle" id="label_switch" style="cursor:pointer;">Número inexistente</label>
+          <label for="switch" class="lbl lbl-<%=operator%>" style="margin-bottom:0px;"></label>
+          <label for="switch" class="font-weight-bold align-middle label-<%=operator%>" id="label_switch" style="cursor:pointer;">Número inexistente</label>
         </div>
       </div>
     <%end%>
 
     <div class="actions">
-      <button type="button" class="btn_standar btn-common btn-effect text-uppercase" id="btn_recarga" onclick="validation_submit()">Recargar</button>
+      <button type="button" class="btn_standar btn-common btn-effect text-uppercase bg-<%=operator%>" id="btn_recarga" onclick="validation_submit()">Recargar</button>
 
       <%if current_user.is_admin?%>
         <input type="hidden" name="recharge[status]" data-model="recharge" id="operation_admin" value="anulada">

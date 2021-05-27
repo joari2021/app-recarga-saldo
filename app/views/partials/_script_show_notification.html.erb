@@ -1,6 +1,8 @@
 <script src="/js/notify/perfect-scrollbar.jquery.min.js"></script>
 <script src="/js/notify/bootstrap-notify.js"></script>
 <script>
+    notice_show = false
+    alert_show = false
     md = {
         showNotification: function(message, color) {
             
@@ -19,14 +21,17 @@
     }
     function comprobar_flash_messages(){
         <%if notice%>
-            md.showNotification('<%=notice%>','success')
-            <%notice = ""%>
+            if (!notice_show){
+                md.showNotification('<%=notice%>','success')
+                notice_show = true
+            }
         <%end%>
 
         <%if alert%>
-            md.showNotification('<%=alert%>','danger')
-            <%alert = ""%>
+            if (!alert_show){
+                md.showNotification('<%=alert%>','danger')
+                alert_show = true
+            }
         <%end%>
     }
-    
 </script>

@@ -1,11 +1,23 @@
-<div>  
-  <%= link_to new_deposit_path, {remote: true, class: "btn btn_standar btn-common btn-effect bg-special", id: "anadir-deposit-btn", style:"color:white;"}  do %>
-    <span class="fas fa-plus-square"></span>
-  <% end %>
+<div class="row justify-content-between">
+  <div>  
+    <%= link_to new_deposit_path, {remote: true, class: "btn btn_standar btn-common btn-effect bg-special", id: "anadir-deposit-btn", style:"color:white;"}  do %>
+      <span class="fas fa-plus-square"></span>
+    <% end %>
+  </div>
+  
+  <div class="card bg-special-two shadow h-100">
+      <div class="card-body">
+          <div class="row no-gutters align-items-center">
+              <div class="col mx-3 text-right">
+                  <div class="h6 mb-2 font-weight-bold text-gray-100">Compra Minima</div>
+                  <div class="h6 mb-0 font-weight-bold text-gray-100">Bs 5.000.000</div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
-<br />
 
-<section class="seccion-perfil-usuario">
+<section class="seccion-perfil-usuario mt-3">
     <div class="perfil-usuario-body" style="width:95% !important;max-width:100% !important">
         <div class="perfil-usuario-bio" style="text-align:left;justify-content:left;">
             <p class="texto"><span class="font-weight-bold">Información:</span> <span>Todos los depositos realizados se muestran aqui con su Estatus, los cuales se detallan a continuación:</span></p>

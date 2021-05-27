@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_20_035103) do
+ActiveRecord::Schema.define(version: 2021_05_25_215435) do
 
   create_table "acoounts", force: :cascade do |t|
     t.string "bank"
@@ -126,6 +126,19 @@ ActiveRecord::Schema.define(version: 2021_05_20_035103) do
     t.decimal "renta_mensual", precision: 18, scale: 2
     t.boolean "number_inexistente", default: false
     t.index ["user_id"], name: "index_recharges_on_user_id"
+  end
+
+  create_table "system_configurations", force: :cascade do |t|
+    t.boolean "movistar", default: false
+    t.boolean "digitel", default: false
+    t.boolean "movilnet", default: false
+    t.boolean "cantv", default: false
+    t.boolean "movistar_tv", default: false
+    t.boolean "inter", default: false
+    t.boolean "simple_tv", default: false
+    t.decimal "dolar_bcv", precision: 18, scale: 2
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

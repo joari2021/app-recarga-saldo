@@ -126,6 +126,21 @@
                 </div>
             </div>
         </div>
+
+        <!-- Bar Chart -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold color-special">Recargas realizadas (Últimos 6 meses)</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="myBarChart"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Pie Chart -->
@@ -148,41 +163,24 @@
                     <span class="mr-2">
                         <i class="fas fa-circle color-Digitel"></i> Digitel
                     </span>
-                    <span class="mr-2">
-                        <i class="fas fa-circle color-Movilnet"></i> Movilnet
-                    </span>
                 </div>
 
                 <div class="mt-4 text-center small">
                     <span class="mr-2">
+                        <i class="fas fa-circle color-Movilnet"></i> Movilnet
+                    </span>
+                    <span class="mr-2">
                         <i class="fas fa-circle color-Cantv"></i> Cantv
                     </span>
+                </div>
+
+                <div class="mt-4 text-center small">
                     <span class="mr-2">
                         <i class="fas fa-circle color-Inter"></i> Inter
                     </span>
                     <span class="mr-2">
                         <i class="fas fa-circle color-Simple_TV"></i> Simple TV
                     </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Content Row -->
-<div class="row">
-    <!-- Bar Chart -->
-    <div class="col-xl-8 col-lg-7">
-        <div class="card shadow mb-4">
-            <!-- Card Header - Dropdown -->
-            <div
-                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold color-special">Recargas realizadas (Últimos 6 meses)</h6>
-            </div>
-            <!-- Card Body -->
-            <div class="card-body">
-                <div class="chart-area">
-                    <canvas id="myBarChart"></canvas>
                 </div>
             </div>
         </div>
@@ -272,6 +270,8 @@
 </div>
 
 <script>
+    ventaMonths = <%=@venta_months_2021%>
+
     movistar_p = <%=@movistar_p%>;
     digitel_p = <%=@digitel_p%>;
     movilnet_p = <%=@movilnet_p%>;
@@ -279,19 +279,24 @@
     movistar_tv_p = <%=@movistar_tv_p%>;
     inter_p = <%=@inter_p%>;
     simple_tv_p = <%=@simple_tv_p%>;
-
     registro_recharges = movistar_p + digitel_p + movilnet_p + cantv_p + movistar_tv_p + inter_p + simple_tv_p
     
-    ventaMonths = <%=@venta_months_2021%>
     
     recharges_last_six_months = <%=@recharges_last_six_months%>
     last_months = <%=@last_months%>
-
-    meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-
+    meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
     array_last_months = []
     for (i=0; i<last_months.length; i++){
         array_last_months.push(meses[last_months[i]])
+    }
+    num_med_barra_max = Math.max(...recharges_last_six_months);
+    medidores_nums = [50,100,200,400,600,800,1000]
+    for (i = 0; i < medidores_nums.length; i++) {
+        element = medidores_nums[i];
+        if (num_med_barra_max <= element){
+            max_num_barra = element
+            break
+        }
     }
 </script>
 

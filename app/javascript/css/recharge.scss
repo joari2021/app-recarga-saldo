@@ -24,7 +24,8 @@
   color: var(--simpletv) !important;
 }
 
-.border-left-Movistar {
+.border-left-Movistar,
+.border-left-Movistar_TV {
   border-left: 0.25rem solid var(--movistar) !important;
 }
 
@@ -228,4 +229,15 @@ a.bg-Simple_TV:hover {
   background: -webkit-linear-gradient(to right, var(--color-fuerte), var(--color-debil));
   background: linear-gradient(to right, var(--color-fuerte), var(--color-debil));
   filter: blur(30px);
+}
+
+/* ICONOS DISABLED Y NOT-DISABLED
+=====================================================================================*/
+.icon-disabled{
+  margin-top: 10px;
+  font-size: 30px;
+}
+.icon-not-disabled{
+  margin-top: 10px;
+  font-size: 30px;
 }
