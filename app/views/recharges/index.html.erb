@@ -1,6 +1,12 @@
 <div id="section-recharge">
   <div id="sub-section-recharge">
-    <div class="float-right">
+    <div class="row justify-content-between">
+        <div class="mb-3">
+          <button class="btn-sm btn text-gray-100 btn-effect btn-common bg-special-two" id="btn_show_modal_parametros">
+            <i class="far fa-eye fa-sm"></i> Parametros de las operadoras
+          </button>
+        </div>
+
         <div class="card bg-special shadow h-100">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
@@ -75,6 +81,7 @@
   </div>
 </div>
 
+<%= render "modal_parametros"%>
 <%= render "modal_buscador_contacts"%>
 <%= render "modal_recharge"%>
 

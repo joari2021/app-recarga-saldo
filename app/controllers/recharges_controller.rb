@@ -23,6 +23,7 @@ class RechargesController < ApplicationController
     consultas_vencidas.destroy_all
 
     @configuration = SystemConfiguration.first
+    @recharge_params = RechargeParam.all
   end
 
   def historial

@@ -5,6 +5,16 @@ document.addEventListener("turbolinks:load", function () {
     buscador_clientes(termino);
   });
 
+  $("#btn_show_modal_parametros").click(function () {
+    $("#modal_parametros").addClass("show");
+    $("#modal_parametros_wrap").addClass("show");
+  });
+
+  $("#close_modal_parametros").click(function () {
+    $("#modal_parametros").removeClass("show");
+    $("#modal_parametros_wrap").removeClass("show");
+  });
+
   $("#close_modal_recharge").click(function () {
     $("#modal_recharge").removeClass("show");
     $("#modal_recharge_wrap").removeClass("show");
