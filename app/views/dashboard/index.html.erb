@@ -31,11 +31,11 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-uppercase mb-1">
-                            Saldo vendido</div>
-                        <div class="h6 mb-0 font-weight-bold">Bs <%=number_with_precision(@amount_recharge, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></div>
+                            Referidos</div>
+                        <div class="h6 mb-0 font-weight-bold"><%=@referidos.count%></div>
                     </div>
                     <div class="col-auto">
-                        <i class="fas fa-donate fa-2x"></i>
+                        <i class="fas fa-users fa-2x"></i>
                     </div>
                 </div>
             </div>

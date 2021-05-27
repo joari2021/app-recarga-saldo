@@ -295,7 +295,7 @@
               <div class="col-lg-6 col-md-6 col-xs-12">
                 <div class="counter-box bg-color-1">
                   <div class="fact-count">
-                    <h3><span class="counter"><%=@usuarios%></span></h3>
+                    <h3><span class="counter"><%=@usuarios > 15 ? @usuarios : 15%></span></h3>
                     <p>Usuarios</p>
                   </div>
                   <div class="icon-o"><i class="lni-users"></i></div>
@@ -317,7 +317,7 @@
               <div class="col-lg-6 col-md-6 col-xs-12">
                 <div class="counter-box bg-color-2">
                   <div class="fact-count">
-                    <h3><span class="counter"><%=@recargas_confirmadas%></span></h3>
+                    <h3><span class="counter"><%=@recargas_confirmadas > 32 ? @recargas_confirmadas : 32%></span></h3>
                     <p>Recargas<br>realizadas</p>
                   </div>
                   <div class="icon-o"><i class="lni-thumbs-up"></i></div>

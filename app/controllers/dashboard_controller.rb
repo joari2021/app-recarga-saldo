@@ -55,5 +55,9 @@ class DashboardController < ApplicationController
       @last_months.push(month_actual-1)
       month_first_before += 1
     end
+
+    # Referidos
+    # ================================================================================
+    @referidos = User.where(user_referidor_id: current_user.referidor_id)
   end
 end

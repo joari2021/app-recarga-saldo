@@ -21,4 +21,6 @@ Things you may want to cover:
 
 * Deployment instructions
 
+* lanzada oficialmente el 27 de Mayo del 2021
+
 * ...
