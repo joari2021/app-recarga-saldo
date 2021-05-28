@@ -9,6 +9,7 @@
                         <%=recharge.operator%>
                     </div>
                     <div class="text-sm mb-0">
+                        <span class="font-weight-bold">Usuario: </span><%=recharge.user.profile.name + " " + recharge.user.profile.last_name%><br> 
                         <span class="font-weight-bold">Tipo de pago: </span><%=recharge.type_payment%><br> 
                         
                         <span class="font-weight-bold">Número: </span><%=recharge.cod_area.present? ? "(" + recharge.cod_area + ") " : "" %><%=recharge.number%> <br>

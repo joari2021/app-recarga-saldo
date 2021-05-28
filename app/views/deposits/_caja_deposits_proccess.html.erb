@@ -7,6 +7,7 @@
                         <%=deposit.bank_destinity.gsub("_"," ")%>
                     </div>
                     <div class="text-sm mb-0">
+                        <span class="font-weight-bold">Usuario: </span><%=deposit.user.profile.name + " " + deposit.user.profile.last_name%><br> 
                         <span class="font-weight-bold">Fecha: </span><%=deposit.date_send.strftime("%d/%m/%Y")%><br> 
                         
                         <span class="font-weight-bold">Monto: </span><%=number_with_precision(deposit.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%><br>

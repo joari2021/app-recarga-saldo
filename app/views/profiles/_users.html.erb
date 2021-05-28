@@ -5,7 +5,7 @@
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
                         <div class="text-sm font-weight-bold color-standar-medio text-uppercase mb-1 text-center">
-                            <%=user.profile.name%> <%=user.profile.last_name%>
+                            <%=user.profile.status === "completado" ? user.profile.name + " " + user.profile.last_name : user.email%>
                         </div>
                         <div class="text-sm mb-0">
                             <table class="table" id="">
