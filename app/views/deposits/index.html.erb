@@ -27,18 +27,24 @@
     <table class="table-standar table-deposit" id="table_deposits">
         <thead class="thead-standar bg-special">
             <tr class="tr-standar">
-              <th class="th-standar">Fecha</th>
-              <th class="th-standar">Cuenta Crédito</th>
-              <th class="th-standar">M. Pago</th>
-              <th class="th-standar">Referencia</th>
-              <th class="th-standar">Monto</th>
-              <th class="th-standar">Estatus</th>
+                <th class="th-standar">Fecha</th>
+                <%if current_user.is_admin?%>
+                    <th class="th-standar">Usuario</th>
+                <%end%>
+                <th class="th-standar">Cuenta Crédito</th>
+                <th class="th-standar">M. Pago</th>
+                <th class="th-standar">Referencia</th>
+                <th class="th-standar">Monto</th>
+                <th class="th-standar">Estatus</th>
             </tr>
         </thead>
 
         <%@deposits.each do |deposit|%>
             <tr class="tr-standar" id="deposit_<%=deposit.id%>">
                 <td class="td-standar" data-label="Fecha"><%=deposit.date_send.strftime("%d/%m/%Y")%></td>
+                <%if current_user.is_admin?%>
+                    <td class="td-standar" data-label="Usuario"><%=deposit.user.profile.name + " " + deposit.user.profile.last_name%></td>
+                <%end%>
                 <td class="td-standar" data-label="Cuenta Crédito"><%=deposit.bank_destinity.gsub("_"," ")%></td>
                 <td class="td-standar" data-label="M. Pago"><%=deposit.method_payment.gsub("_"," ")%></td>
                 <td class="td-standar" data-label="Referencia"><%=deposit.ref_payment%></td>
