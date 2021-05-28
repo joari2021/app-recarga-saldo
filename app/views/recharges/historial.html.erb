@@ -1,19 +1,6 @@
-<style>
-
-</style>
-<section class="seccion-perfil-usuario">
-    <div class="perfil-usuario-body" style="width:95% !important;max-width:100% !important">
-        <div class="perfil-usuario-bio" style="text-align:left;justify-content:left;">
-            <p class="texto"><span class="font-weight-bold">Información:</span> <span>Todas las recargas realizadas se muestran aqui con su Estatus, los cuales se detallan a continuación:</span></p>
-
-            <p><span class="badge badge-pill badge-primary">enviada</span><span> : La recarga ha sido enviada con exito y el monto de la misma se ha descontado de tu balance.</span></p>
-
-            <p><span class="badge badge-pill badge-success">confirmada</span><span> : Ha sido confirmado que la recarga se ha acreditado en el saldo del número destinatario.</span></p>
-
-            <p class="align-middle"><span class="badge badge-pill badge-warning align-middle">anulada</span><span> : La recarga se cancelo debido a algún error en los datos enviados al momento de realizarla. El monto de las recargas enviadas que resulten anuladas se reversara a tu balance inmediatamente. Te recomendamos que verifiques bien los datos de las recargas con este estatus antes de volver a realizarlas.</span></p>
-        </div>
-    </div>
-</section>
+<button class="btn btn_standar btn-common btn-effect bg-special-two" id="show_info" style="color:white;">
+    <i class="fas fa-info-circle"></i>
+</button>
 
 <div id="main-container" class="mt-4">
 
@@ -49,10 +36,12 @@
   <%end%>
 </div>
 
-<%=render "modal_recharge"%>
-
+<%= render 'partials/modal-info', modulo: "historial" %>
+<%= render "modal_recharge" %>
 
 <script>
+    new ShowModalInfo();
+
     $(document).ready(function(){
         if ($('.pagination').length) {
             $(window).scroll(function() {
