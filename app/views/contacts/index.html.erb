@@ -1,17 +1,13 @@
 <div>  
-  <%= link_to new_contact_path, {remote: true, class: "btn btn_standar btn-common btn-effect bg-special", id: "anadir-contact-btn", style:"color:white;"}  do %>
-    <span class="fas fa-plus-square" style=""></span>
-  <% end %>
+    <%= link_to new_contact_path, {remote: true, class: "btn btn_standar btn-common btn-effect bg-special", id: "anadir-contact-btn", style:"color:white;"}  do %>
+      <span class="fas fa-plus-square" style=""></span>
+    <% end %>
+
+    <button class="btn btn_standar btn-common btn-effect bg-special-two" id="show_info" style="color:white;">
+        <i class="fas fa-info-circle"></i>
+    </button>
 </div>
 <br />
-
-<section class="seccion-perfil-usuario">
-  <div class="perfil-usuario-body" style="width:95% !important;max-width:100% !important">
-    <div class="perfil-usuario-footer my-3">
-        <p><b>Nota:</b> Ten en cuenta que al momento de editar un cliente frecuente guardado solo podrás cambiar su nombre. Si te has equivocado en el registro de los demas datos deberás borrarlo y registrarlo de nuevo.</p>
-    </div>
-  </div>
-</section>
 
 <div id="main-container">
   <table class="table-standar table-contact" id="table_contacts">
@@ -52,5 +48,9 @@
   <%end%>
 </div>
 
+<%= render 'partials/modal-info', modulo: "contacts"%>
 <%= render 'modal_contacts' %>
 
+<script>
+    new ShowModalInfo();
+</script>
