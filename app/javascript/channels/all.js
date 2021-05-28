@@ -375,3 +375,15 @@ copiarAlPortapapeles = function (content_copy,mensaje) {
 
   md.showNotification(mensaje,'success')
 }
+
+ShowModalInfo = function () {
+  $('#show_info').on('click', function() {
+    $("#modal_info").addClass("show")
+    $("#modal_info_wrap").addClass("show")
+  });
+
+  $('#close_info').on('click', function() {
+    $("#modal_info").removeClass("show")
+    $("#modal_info_wrap").removeClass("show")
+  });
+}

@@ -1,79 +1,74 @@
-<div class="row justify-content-between">
-  <div>  
-    <%= link_to new_deposit_path, {remote: true, class: "btn btn_standar btn-common btn-effect bg-special", id: "anadir-deposit-btn", style:"color:white;"}  do %>
-      <span class="fas fa-plus-square"></span>
-    <% end %>
-  </div>
-  
-  <div class="card bg-special-two shadow h-100">
-      <div class="card-body">
-          <div class="row no-gutters align-items-center">
-              <div class="col mx-3 text-right">
-                  <div class="h6 mb-2 font-weight-bold text-gray-100">Deposito Mínimo</div>
-                  <div class="h6 mb-0 font-weight-bold text-gray-100">Bs 5.000.000</div>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-
-<section class="seccion-perfil-usuario mt-3">
-    <div class="perfil-usuario-body" style="width:95% !important;max-width:100% !important">
-        <div class="perfil-usuario-bio" style="text-align:left;justify-content:left;">
-            <p class="texto"><span class="font-weight-bold">Información:</span> <span>Todos los depositos realizados se muestran aqui con su Estatus, los cuales se detallan a continuación:</span></p>
-
-            <p><span class="badge badge-pill badge-secondary">Diferido</span><span> : El deposito ha sido enviado y esta en espera de confirmación. Esto puede tardar entre 5 y 30 minutos.</span></p>
-
-            <p><span class="badge badge-pill badge-success">confirmado</span><span> : El deposito registrado ha sido confirmado y se ha acreditado el monto del pago en tu balance.</span></p>
-
-            <p><span class="badge badge-pill badge-warning">anulado</span> : El deposito ha sido anulado debido a que no se confirmo en nuestra cuenta bancaria una transacción con los datos registrados en dicho deposito.</p>
+<div class="container">
+    <div class="row justify-content-between">
+        <div class="mb-3">  
+            <%= link_to new_deposit_path, {remote: true, class: "btn btn_standar btn-common btn-effect bg-special", id: "anadir-deposit-btn", style:"color:white;"}  do %>
+                <span class="fas fa-plus-square"></span>
+            <% end %>
+    
+            <button class="btn btn_standar btn-common btn-effect bg-special-two" id="show_info" style="color:white;">
+                <i class="fas fa-info-circle"></i>
+            </button>
+        </div>
+      
+        <div class="card bg-special-two shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mx-3 text-right">
+                        <div class="h6 mb-2 font-weight-bold text-gray-100">Deposito Mínimo</div>
+                        <div class="h6 mb-0 font-weight-bold text-gray-100">Bs 5.000.000</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</section>
+</div>
 
 <div id="main-container">
-  <table class="table-standar table-deposit" id="table_deposits">
-    <thead class="thead-standar bg-special">
-      <tr class="tr-standar">
-        <th class="th-standar">Fecha</th>
-        <th class="th-standar">Cuenta Crédito</th>
-        <th class="th-standar">M. Pago</th>
-        <th class="th-standar">Referencia</th>
-        <th class="th-standar">Monto</th>
-        <th class="th-standar">Estatus</th>
-      </tr>
-    </thead>
+    <table class="table-standar table-deposit" id="table_deposits">
+        <thead class="thead-standar bg-special">
+            <tr class="tr-standar">
+              <th class="th-standar">Fecha</th>
+              <th class="th-standar">Cuenta Crédito</th>
+              <th class="th-standar">M. Pago</th>
+              <th class="th-standar">Referencia</th>
+              <th class="th-standar">Monto</th>
+              <th class="th-standar">Estatus</th>
+            </tr>
+        </thead>
 
-    <%@deposits.each do |deposit|%>
-      <tr class="tr-standar" id="deposit_<%=deposit.id%>">
-        <td class="td-standar" data-label="Fecha"><%=deposit.date_send.strftime("%d/%m/%Y")%></td>
-        <td class="td-standar" data-label="Cuenta Crédito"><%=deposit.bank_destinity.gsub("_"," ")%></td>
-        <td class="td-standar" data-label="M. Pago"><%=deposit.method_payment.gsub("_"," ")%></td>
-        <td class="td-standar" data-label="Referencia"><%=deposit.ref_payment%></td>
-        <td class="td-standar" data-label="Monto"><%=number_with_precision(deposit.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>
-        <td class="td-standar" data-label="Estatus">
-          <%case deposit.status%>
-            <%when "Diferido"%>
-               <%color_badge = "badge-secondary"%>
-            <%when "confirmado"%>
-              <%color_badge = "badge-success"%>
-            <%when "anulado"%>
-               <%color_badge = "badge-warning"%>
-            <%end%>
-          <span class="badge badge-pill <%=color_badge%>"><%=deposit.status%></span>
-        </td>
-      </tr>
-    <%end%>
-  </table>
+        <%@deposits.each do |deposit|%>
+            <tr class="tr-standar" id="deposit_<%=deposit.id%>">
+                <td class="td-standar" data-label="Fecha"><%=deposit.date_send.strftime("%d/%m/%Y")%></td>
+                <td class="td-standar" data-label="Cuenta Crédito"><%=deposit.bank_destinity.gsub("_"," ")%></td>
+                <td class="td-standar" data-label="M. Pago"><%=deposit.method_payment.gsub("_"," ")%></td>
+                <td class="td-standar" data-label="Referencia"><%=deposit.ref_payment%></td>
+                <td class="td-standar" data-label="Monto"><%=number_with_precision(deposit.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>
+                <td class="td-standar" data-label="Estatus">
+                    <%case deposit.status%>
+                    <%when "Diferido"%>
+                        <%color_badge = "badge-secondary"%>
+                    <%when "confirmado"%>
+                        <%color_badge = "badge-success"%>
+                    <%when "anulado"%>
+                        <%color_badge = "badge-warning"%>
+                    <%end%>
+                    <span class="badge badge-pill <%=color_badge%>"><%=deposit.status%></span>
+                </td>
+            </tr>
+        <%end%>
+    </table>
 </div>
 
 <div class="row justify-content-center">
-  <%unless current_user.deposits.any?%>
-    <%=render "partials/registro_vacio"%>
-  <%end%>
+    <%unless current_user.deposits.any?%>
+        <%=render "partials/registro_vacio"%>
+    <%end%>
 </div>
+
+<%= render 'partials/modal-info', modulo: "deposits"%>
 <%= render 'modal_deposits' %>
 <%= render 'modal_accounts' %>
 
-
-
+<script>
+    new ShowModalInfo();
+</script>
