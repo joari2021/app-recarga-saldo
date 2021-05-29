@@ -18,5 +18,5 @@ class Deposit < ApplicationRecord
 
   validates :ref_payment, format: {with: /\A[+-]?\d+\z/, message: "Este campo solo acepta números."},  length: { in: 4..10, message: "Este campo requiere minimo 4 digitos y máximo 10 digitos." }
 
-  validates :amount, numericality: { greater_than_or_equal_to: 2000000, message: "El monto debe ser igual o superior al deposito mínimo (Bs 5.000.000,00)."}
+  validates :amount, numericality: { greater_than_or_equal_to: 5000000, message: "El monto debe ser igual o superior al deposito mínimo (Bs 5.000.000,00)."}
 end
