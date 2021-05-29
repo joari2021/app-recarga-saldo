@@ -1,7 +1,7 @@
 <%= form_for @deposit, {remote: true}  do |form| %>
   <div class="form">
     <%if @deposit.new_record?%>
-      <div class="grupo text-center"><a href="#" class="color-standar-medio font-weight-bold special-link p-2" onclick="show_modal_accounts(event)">Ver Cuentas</a></div>
+      <div class="grupo"><button class="btn btn_standar btn-effect btn-common bg-special" onclick="show_modal_accounts(event)"><i class="fas fa-university" style="color:white"></i></button></div>
     <%end%>
 
     <!--FECHA DEL PAGO  #################################-->

@@ -2,40 +2,9 @@
 
 <h1>System Configurations</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Movistar</th>
-      <th>Digitel</th>
-      <th>Movilnet</th>
-      <th>Cantv</th>
-      <th>Movistar tv</th>
-      <th>Inter</th>
-      <th>Simple tv</th>
-      <th>Dolar bcv</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
     <% @system_configurations.each do |system_configuration| %>
-      <tr>
-        <td><%= system_configuration.movistar %></td>
-        <td><%= system_configuration.digitel %></td>
-        <td><%= system_configuration.movilnet %></td>
-        <td><%= system_configuration.cantv %></td>
-        <td><%= system_configuration.movistar_tv %></td>
-        <td><%= system_configuration.inter %></td>
-        <td><%= system_configuration.simple_tv %></td>
-        <td><%= system_configuration.dolar_bcv %></td>
-        <td><%= link_to 'Show', system_configuration %></td>
-        <td><%= link_to 'Edit', edit_system_configuration_path(system_configuration) %></td>
-        <td><%= link_to 'Destroy', system_configuration, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        Parametros De Recarga
+        <%= link_to 'Show', system_configuration %>
+        <%= link_to 'Edit', edit_system_configuration_path(system_configuration) %>
     <% end %>
-  </tbody>
-</table>
-
 <br>
-
-<%= link_to 'New System Configuration', new_system_configuration_path %>
