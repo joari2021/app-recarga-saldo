@@ -95,8 +95,9 @@
     show_div_cod_area = false
     operation = ""
 
-    console.log("Prueba de Hora Actual: La Hora es <%=Time.now.strftime("%H")%>");
-    <%if Time.now.strftime("%A") === "Sunday" || Time.now.strftime("%H").to_i < 5 || Time.now.strftime("%H").to_i > 21 %>
+    <%time = Time.now.in_time_zone("Caracas")%>
+    console.log("Prueba de Hora Actual: La Hora es <%=time.strftime("%H")%>");
+    <%if time.strftime("%A") === "Sunday" || time.strftime("%H").to_i < 5 || time.strftime("%H").to_i > 21 %>
         new ShowModalInfo();
         $('#show_info').trigger('click')
     <%end%>
