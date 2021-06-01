@@ -5,6 +5,8 @@ document.addEventListener("turbolinks:load", function () {
 
   show_datepicker()
 
+  DetenerIntervaloSolicitudesPend()
+  
   //VARIABLES
 
   //CODIGOS DE AREA
@@ -71,19 +73,6 @@ document.addEventListener("turbolinks:load", function () {
     "0294",
     "0295",
   ];
-  
-  recharges_count = format_integer($("#recharges_cant").text())
-  deposits_count = format_integer($("#deposits_cant").text())
- 
-  
-  if (typeof var_refresh_solicitudes_pend != "undefined"){
-    var_refresh_solicitudes_pend = undefined
-  }
-  
-  if (typeof var_refresh_solicitudes_pend === "undefined"){
-    var_refresh_solicitudes_pend = setInterval(refresh_solicitudes_pend, 15000);
-  }
-  $.ajaxSetup({ cache: false });
 
   href = window.location.href
 
@@ -98,6 +87,7 @@ document.addEventListener("turbolinks:load", function () {
   }else if (href.indexOf("clientes") != -1){
     $("#access_contacts").addClass("active")
   }
+
 });
 
 //FUNCIONES DE FORMATEO DE NUMEROS Y LETRAS PARA VALORES
@@ -334,35 +324,6 @@ disabled_button = function (button){
   }
 }
 
-refresh_solicitudes_pend = function  () {
-  $("#cont_solicitudes_pend").load( window.location.href + " #sub_cont_solicitudes_pend", function(){
-    /* USAR SI ES NECESARIO DESPUES DE CARGAR */
-    new_recharge = false
-    new_deposit = false
-    
-    cant_new_recharges = format_integer($("#recharges_cant").text())
-    if (cant_new_recharges > recharges_count){
-      recharges_count = cant_new_recharges
-      new_recharge = true
-    }
-
-    cant_new_deposits = format_integer($("#deposits_cant").text())
-    if (cant_new_deposits > deposits_count){
-      deposits_count = cant_new_deposits
-      new_deposit = true
-    }
-
-    if (new_deposit || new_recharge){
-      refrescarNotificaciones()
-    }
-  });
-}
-
-refrescarNotificaciones = function () {
-  //$('#sound').trigger('click');
-  $.playSound(getRootUrl() + "/sounds/iphone-notificacion.mp3")
-}
-
 copiarAlPortapapeles = function (content_copy,mensaje) {
   $("#icon-copy").css({"display":"none"})
   var aux = document.createElement("input");
@@ -387,3 +348,33 @@ ShowModalInfo = function () {
     $("#modal_info_wrap").removeClass("show")
   });
 }
+
+DetenerIntervaloSolicitudesPend = function () {
+    if (typeof var_refresh_solicitudes_pend != "undefined"){
+        clearInterval(var_refresh_solicitudes_pend);
+    }
+    RefreshSolicitudesPendientes()
+}
+
+notificar = function () {
+  //$.playSound(getRootUrl() + "/sounds/notification.mp3")
+  document.getElementById("notification").play()
+}
+
+RefreshSolicitudesPendientes = function  () {
+      
+    function refresh_solicitudes_pend(){
+        $("#cont_solicitudes_pend").load( window.location.href + " #sub_cont_solicitudes_pend", function(){
+            new_requests = format_integer($("#new_requests").text())
+            if (new_requests > 0){
+              notificar()
+            }
+        });
+        $.ajaxSetup({ cache: false });
+    }
+    
+    if ($("#cont_solicitudes_pend").length){
+        var_refresh_solicitudes_pend = setInterval(refresh_solicitudes_pend, 10000);
+    }
+}
+

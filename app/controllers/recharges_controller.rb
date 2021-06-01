@@ -12,6 +12,8 @@ class RechargesController < ApplicationController
   before_action :format_update_params_recharge, only: [:update] 
   before_action :rectify_amount, only: [:create, :update]
 
+  after_action :actualizar_requests_vistas, only: [:proccess_recharges]
+
   # GET /recharges or /recharges.json
   def index
     #@recharges = Recharge.all

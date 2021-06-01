@@ -31,7 +31,7 @@ import "@fortawesome/fontawesome-free/css/all"
 /*PLUGINS*/
 import "bootstrap"
 import swal from 'sweetalert'
-
+import Push from 'push.js'
 
 //CODIGOS JS
 import "channels/sb-admin-2"

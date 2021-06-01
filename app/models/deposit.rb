@@ -1,6 +1,17 @@
 class Deposit < ApplicationRecord
   belongs_to :user
 
+  include AASM
+
+  aasm column: "state" do
+    state :ontried, initial: true
+    state :viewed
+
+    event :watch do
+      transitions from: :ontried, to: :viewed
+    end
+  end
+
   def account_type_two?
     bank_destinity === "Banco_de_Venezuela"
   end

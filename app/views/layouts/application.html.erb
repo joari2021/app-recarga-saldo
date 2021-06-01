@@ -262,9 +262,6 @@
     <script src="/js_dashboard/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <%=render "partials/script_show_notification"%>
-    
-    <!--PLUGIN PARA SONIDO DE NOTIFICACIONES-->
-    <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
 
     <script>
         <%unless current_user.profile.status != "incompleto" || current_user.is_admin?%>

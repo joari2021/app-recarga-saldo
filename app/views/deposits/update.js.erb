@@ -17,5 +17,5 @@ $("#deposit_<%=@deposit.id%>").remove()
         button: "Cerrar",
     });
 <%end%>
-deposits_count -= 1 
-$("#deposits_cant").text(deposits_count)
+new_number = format_integer($("#deposits_cant").text())
+$("#deposits_cant").text(new_number-1)

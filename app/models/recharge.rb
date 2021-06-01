@@ -1,4 +1,6 @@
 class Recharge < ApplicationRecord
+  include AASM
+
   belongs_to :user
   include ValidationsMethodsConcern
 
@@ -12,6 +14,15 @@ class Recharge < ApplicationRecord
 
   def self.buscador
     Recharge.where(operator: "Movistar", status:"confirmada")
+  end
+
+  aasm column: "state" do
+    state :ontried, initial: true
+    state :viewed
+
+    event :watch do
+      transitions from: :ontried, to: :viewed
+    end
   end
 
   #METODOS PARA VALIDAR EL MONTO
