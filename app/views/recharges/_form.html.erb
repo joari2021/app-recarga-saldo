@@ -24,7 +24,7 @@
     <!--CODIGO DE AREA 
     =====================================================================================-->
     <div class="grupo" id="input_cod_area">
-      <%= form.text_field :cod_area, :required => "required", class:"input-special", oninput: "input_value_integer(this)", onfocus: "show_cod_area()", onblur: "ocultar_cod_area()", maxlength: "4" %><span class="barra bg-before-<%=operator%>"></span>
+      <%= form.text_field :cod_area, :required => "required", class:"input-special", oninput: "input_value_integer(this)", maxlength: "4", list:"cont-option-list" %><span class="barra bg-before-<%=operator%>"></span>
       <%= form.label :cod_area, "Cod. Área", for: "", class: "label-special label-#{operator}" %>
 
       <!--MENSAJES DE ERRORES-->
@@ -33,7 +33,8 @@
         <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:cod_area].to_s[/\w([^"]*)/] %></p>
       <% end %>
 
-      <div class="justify-content-center" id="cont-option-list" style="display:none;max-width:250px;"><!--Los codigos de area se insertan con javascript--></div>
+      <datalist id="cont-option-list">
+      </datalist> 
     </div>
   
 
@@ -51,14 +52,19 @@
     <!--MONTO
     ======================================================================================-->
     <div class="grupo" id="input_monto">
-      <%= form.text_field :amount, :required => "required", class:"input-special", oninput:"input_value_integer_with_separator(this)", onfocus: "show_montos()", onblur: "ocultar_montos()" %><span class="barra bg-before-<%=operator%>"></span>
+      <%= form.text_field :amount, :required => "required", class:"input-special", oninput:"input_value_integer_with_separator(this)", list:"div_montos"%><span class="barra bg-before-<%=operator%>"></span>
       <%= form.label :amount, "Monto", for: "", class: "label-special label-#{operator}" %>
+      <datalist id="div_montos">
+          <!--Los codigos de area se insertan con javascript-->
+      </datalist> 
+
       <p class="msj_error mt-2 bg-danger rounded"  id="msj_error_monto" style="display:none;">El monto es inválido o es superior a tu balance disponible.</p>
 
       <%if @recharge.errors[:amount].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:amount].to_s[/\w([^"]*)/] %></p>
       <% end %>
-      <div class="row justify-content-center" id="div_montos" style="display:none;max-width:249px;"><!--Los codigos de area se insertan con javascript--></div>
+
+      
 
       <%if current_user.is_admin? && @recharge_type_payment === "Post-pago"%>
         <%if @recharge.operator === "Digitel" || @recharge.operator === "Movistar"%>

@@ -115,6 +115,7 @@ format_decimal = function (number) {
 format_number_integer = function (number) {
   valor = number.toString();
   valor = valor.replace(/\D/g, "");
+  console.log(valor);
   return valor;
 };
 
@@ -135,7 +136,8 @@ format_number_decimal_with_separator = function (number) {
 
 //FUNCIONES DE FORMATEO DE NUMEROS PARA INPUTS
 input_value_integer = function (input) {
-  input.value = format_number_integer(input.value);
+  new_valor = format_number_integer(input.value);
+  input.value = new_valor
 };
 
 input_value_integer_with_separator = function (input) {

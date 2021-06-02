@@ -156,8 +156,6 @@ seleccionarContacto = function (event, contact) {
   event.preventDefault();
   $("#recharge_cod_area").val(contact.getAttribute("data-cod_area"));
   $("#recharge_number").val(contact.getAttribute("data-number"));
-  //input_cod_area.value = contact.getAttribute("data-cod_area")
-  //input_number_phone.value = contact.getAttribute("data-number")
   $("#contenedor-switch").css({ display: "none" });
 
   $("#close_modal_contact").trigger("click");
@@ -254,11 +252,14 @@ show_form = function (monto_min, monto_max, multiplos) {
 
     for (let i = 0; i < cod_area.length; i++) {
       const element = cod_area[i];
+      /*
       enlace = document.createElement("a");
       enlace.setAttribute("href", "#");
       enlace.classList.add("badge", "btn-effect", "btn_standar", "btn-common", "ml-2", "mt-1", "bg-" + input_operadora.value);
       enlace.setAttribute("onclick", "push_cod(event,this)");
-      enlace.innerHTML = element;
+      enlace.innerHTML = element;*/
+      enlace = document.createElement("option");
+      enlace.setAttribute("value", element);
 
       caja_cod_area.appendChild(enlace);
     }
@@ -271,13 +272,17 @@ show_form = function (monto_min, monto_max, multiplos) {
     div_montos.innerHTML = "";
     for (let m = monto_min; m <= monto_max; m += multiplos) {
       monto = m;
+      /*
       enlace = document.createElement("a");
       enlace.setAttribute("href", "#");
       enlace.classList.add("badge", "btn-effect", "btn_standar", "btn-common", "bg-" + input_operadora.value);
       enlace.style.margin = "5px";
-      enlace.setAttribute("onclick", "push_monto(event,this)");
+      enlace.setAttribute("onclick", "push_monto(event,this)");*/
 
-      enlace.innerHTML = format_number_integer_with_separator(monto);
+      monto_format = format_number_integer_with_separator(monto);
+
+      enlace = document.createElement("option");
+      enlace.setAttribute("value", monto_format);
 
       div_montos.appendChild(enlace);
     }
