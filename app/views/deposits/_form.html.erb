@@ -50,7 +50,7 @@
 
     <!--REFERENCIA DEL PAGO #################################-->
     <div class="grupo" id="div_cod_area">
-      <%= form.text_field :ref_payment, :required => "required", class:"input-special input-option", oninput: "input_value_integer(this)", maxlength: "10", minlength: "4" %><span class="barra bg-before-Standar"></span>
+      <%= form.number_field :ref_payment, :required => "required", class:"input-special input-option"%><span class="barra bg-before-Standar"></span>
       <%= form.label :ref_payment, "N° Referencia", for: "", class: "label-special label-Standar" %>
       <%if @deposit.errors[:ref_payment].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @deposit.errors[:ref_payment].to_s[/\w([^"]*)/] %></p>
