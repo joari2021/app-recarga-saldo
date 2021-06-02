@@ -33,14 +33,6 @@ document.addEventListener("turbolinks:load", function () {
   if (typeof var_refresh_consult === "undefined") {
     var_refresh_consult = setInterval(refresh_consultas, 15000);
   }
-
-  if (typeof var_refresh_recharges_for_process === "undefined") {
-    var_refresh_recharges_for_process = setInterval(
-      refresh_recharges_for_process,
-      15000
-    );
-  }
-  $.ajaxSetup({ cache: false });
 });
 
 mostrar_parametros = function () {
@@ -327,10 +319,4 @@ refresh_consultas = function () {
 
 refresh_available_system = function () {
   $("#section-recharge").load( window.location.href + " #sub-section-recharge");
-};
-
-refresh_recharges_for_process = function () {
-  $("#cont_recharges_for_process").load(
-    window.location.href + " #sub_cont_recharges_for_process"
-  );
 };

@@ -364,7 +364,7 @@ notificar = function () {
 RefreshSolicitudesPendientes = function  () {
       
     function refresh_solicitudes_pend(){
-        $("#cont_solicitudes_pend").load( window.location.href + " #sub_cont_solicitudes_pend", function(){
+        $("#solicitudes_pend").load( window.location.href + " #sub_solicitudes_pend", function(){
             new_requests = format_integer($("#new_requests").text())
             if (new_requests > 0){
               notificar()
@@ -373,8 +373,8 @@ RefreshSolicitudesPendientes = function  () {
         $.ajaxSetup({ cache: false });
     }
     
-    if ($("#cont_solicitudes_pend").length){
-        var_refresh_solicitudes_pend = setInterval(refresh_solicitudes_pend, 10000);
+    if ($("#solicitudes_pend").length){
+        var_refresh_solicitudes_pend = setInterval(refresh_solicitudes_pend, 20000);
     }
 }
 
