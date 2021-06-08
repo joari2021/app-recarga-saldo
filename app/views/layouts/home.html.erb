@@ -295,7 +295,7 @@
               <div class="col-lg-6 col-md-6 col-xs-12">
                 <div class="counter-box bg-color-1">
                   <div class="fact-count">
-                    <h3><span class="counter"><%=@usuarios > 16 ? @usuarios : 16%></span></h3>
+                    <h3><span class="counter"><%=@usuarios%></span></h3>
                     <p>Usuarios</p>
                   </div>
                   <div class="icon-o"><i class="lni-users"></i></div>
@@ -317,7 +317,7 @@
               <div class="col-lg-6 col-md-6 col-xs-12">
                 <div class="counter-box bg-color-2">
                   <div class="fact-count">
-                    <h3><span class="counter"><%=@recargas_confirmadas > 33 ? @recargas_confirmadas : 33%></span></h3>
+                    <h3><span class="counter"><%=@recargas_confirmadas%></span></h3>
                     <p>Recargas<br>realizadas</p>
                   </div>
                   <div class="icon-o"><i class="lni-thumbs-up"></i></div>
@@ -776,8 +776,35 @@
           <h2 class="section-title">Noticias Recientes</h2>
         </div>
         <div class="row">
-          
+
           <!-- NOTICIA NRO 1
+          ==================================================-->
+          <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
+            <div class="blog-item-wrapper">
+              <div class="blog-item-img">
+                <a href="https://noticiasaldiayalahora.co/nacionales/digitel-volvio-a-subir-estas-serian-las-nuevas-tarifas/" target="_blank">
+                  <img src="https://i0.wp.com/noticiasaldiayalahora.co/wp-content/uploads/2020/11/Logo-Digitel-scaled.jpg?resize=777%2C437&ssl=1" alt="Digitel" style="width:100%; height:230px;">
+                </a>
+                
+                <div class="author-img">
+                  <%= image_tag("sistema_recargas/digitel.png", style:"width:100px; height:50px") %>
+                </div>
+              </div>
+              <div class="blog-item-text">
+                <h3>
+                  <a href="https://noticiasaldiayalahora.co/nacionales/digitel-volvio-a-subir-estas-serian-las-nuevas-tarifas/" target="_blank"
+                    >Digitel volvió a subir: Estas serían las nuevas tarifas.</a
+                  >
+                </h3>
+                <div class="author">
+                  <!--<span class="name"><a href="#">Noticias al dia y la hora</a></span>-->
+                  <span class="date float-right">07 Junio, 2021</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- NOTICIA NRO 2
           ==================================================-->
           <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
             <div class="blog-item-wrapper">
@@ -804,7 +831,7 @@
             </div>
           </div>
 
-          <!-- NOTICIA NRO 2
+          <!-- NOTICIA NRO 3
           ==================================================-->
           <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
             <div class="blog-item-wrapper">
@@ -831,7 +858,7 @@
             </div>
           </div>
 
-          <!-- NOTICIA NRO 3
+          <!-- NOTICIA NRO 4
           ==================================================-->
           <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
             <div class="blog-item-wrapper">
@@ -858,7 +885,7 @@
             </div>
           </div>
 
-          <!-- NOTICIA NRO 4
+          <!-- NOTICIA NRO 5
           ==================================================-->
           <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
             <div class="blog-item-wrapper">
@@ -885,7 +912,7 @@
             </div>
           </div>
 
-          <!-- NOTICIA NRO 5
+          <!-- NOTICIA NRO 6
           ==================================================-->
           <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
             <div class="blog-item-wrapper">
@@ -907,33 +934,6 @@
                 <div class="author">
                   <!--<span class="name"><a href="#">Noticias al dia y la hora</a></span>-->
                   <span class="date float-right">31 Mayo, 2021</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- NOTICIA NRO 6
-          ==================================================-->
-          <div class="col-lg-4 col-md-6 col-xs-12 blog-item">
-            <div class="blog-item-wrapper">
-              <div class="blog-item-img">
-                <a href="https://noticiasaldiayalahora.co/nacionales/la-primicia-de-movilnet-para-sus-suscriptores/" target="_blank">
-                  <img src="https://i1.wp.com/noticiasaldiayalahora.co/wp-content/uploads/2019/11/Movilnet.jpg?w=679&ssl=1" alt="Movilnet" style="width:100%; height:230px;">
-                </a>
-                
-                <div class="author-img">
-                  <%= image_tag("sistema_recargas/movilnet.png", style:"width:100px; height:50px") %>
-                </div>
-              </div>
-              <div class="blog-item-text">
-                <h3>
-                  <a href="https://noticiasaldiayalahora.co/nacionales/la-primicia-de-movilnet-para-sus-suscriptores/" target="_blank"
-                    >La primicia de Movilnet para sus suscriptores</a
-                  >
-                </h3>
-                <div class="author">
-                  <!--<span class="name"><a href="#">Noticias al dia y la hora</a></span>-->
-                  <span class="date float-right">30 Mayo, 2021</span>
                 </div>
               </div>
             </div>
