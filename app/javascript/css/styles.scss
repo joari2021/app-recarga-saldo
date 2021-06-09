@@ -85,8 +85,8 @@ hr.divider-title {
 /*SCROLL
 =====================================================================================*/
 .container-scroll::-webkit-scrollbar {
-  width: 10px;     /* Tamaño del scroll en vertical */
-  height: 10px;    /* Tamaño del scroll en horizontal */
+  width: 8px;     /* Tamaño del scroll en vertical */
+  height: 8px;    /* Tamaño del scroll en horizontal */
   //display: none;  /* Ocultar scroll */
 }
 
@@ -231,15 +231,15 @@ background: #918e8e;
 }
 
 .bg-special-two {
-  background: #1A2980;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #26D0CE, #1A2980);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #26D0CE, #1A2980); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #1A2980;  
+  background: -webkit-linear-gradient(to left, #26D0CE, #1A2980); 
+  background: linear-gradient(to left, #26D0CE, #1A2980); 
 }
 
 .bg-g-1{
   background: #56ab2f;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #a8e063, #56ab2f);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #a8e063, #56ab2f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: -webkit-linear-gradient(to left, #a8e063, #56ab2f); 
+  background: linear-gradient(to left, #a8e063, #56ab2f); 
 }
 
 .bg-g-2{
@@ -305,6 +305,10 @@ a.special-link:focus {
 .th-standar,
 .td-standar {
   padding: 20px;
+}
+
+.th-standar{
+  font-weight: normal !important;
 }
 
 tr.tr-standar:nth-child(even) {
