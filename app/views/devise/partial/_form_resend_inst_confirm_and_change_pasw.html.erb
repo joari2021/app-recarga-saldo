@@ -12,7 +12,7 @@
             <button id="btn__registrarse">Reenviar instrucciones</button>-->
 
             <h3>¿Olvidaste<br>tu contraseña?</h3>
-            <p style="max-width:300px">Ingresa el correo con el que te registraste y recibiras un correo electrónico con las instrucciones para recuperar la contraseña.</p>
+            <p style="max-width:300px;margin-right: 10px;">Ingresa el correo con el que te registraste y recibiras un correo electrónico con las instrucciones para recuperar la contraseña.</p>
             <button class="d-none" id="btn__iniciar-sesion">Recuperar contraseña</button>
         </div>
     </div>
@@ -41,6 +41,7 @@
             </div>
         <% end %>
 
+        <form class="formulario__register" style="display: none;"></form>
         <!--
         <%# form_for(resource, as: resource_name, url: confirmation_path(resource_name),:html => {method: :post, :class => "formulario__register", :id => "form-register"}) do |f| %>
 

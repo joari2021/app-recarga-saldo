@@ -7,8 +7,7 @@
         </div>
 
         <div class="caja__trasera-register" style="max-width: 300px !important">
-            <h3>Elige una contraseña segura</h3>
-            <p>Te sugerimos usar una combinación de letras mayúsculas y minúsculas, y al menos un número y un simbolo. <strong>Recargas Fast</strong> jamás te solicitara tu contraseña por correo ni por ningún otro medio de comunicación.</p>
+            <p style="margin-right: 10px">Te sugerimos usar una combinación de letras mayúsculas y minúsculas, y al menos un número y un simbolo. <strong>Recargas Fast</strong> jamás te solicitara tu contraseña por correo ni por ningún otro medio de comunicación.</p>
         </div>
     </div>
 
@@ -26,7 +25,7 @@
                     <%= f.password_field :password, autofocus: true, autocomplete: "new-password", required: "required", class:"input-special"%><span class="barra bg-before-Standar"></span>
                     <%= f.label :password, "Nueva contraseña", for: "", class: "label-special label-Standar" %>
                     <% if @minimum_password_length %>
-                        <em>(<%= @minimum_password_length %> caracteres mínimos)</em><br />
+                        <em>(<%= @minimum_password_length %> carácteres mínimos)</em><br />
                     <% end %>
                     <% if resource.errors[:password].any? %>
                         <p class="msj_error mt-2 bg-danger rounded width-error"><%=resource.errors[:password].to_s[/\w([^"]*)/] %></p>
@@ -48,6 +47,8 @@
                 <%= render "devise/shared/links_login_sign_up" %>
             </div>
         <% end %>
+
+        <form class="formulario__register" style="display: none;"></form>
 
     </div>
 </div>
