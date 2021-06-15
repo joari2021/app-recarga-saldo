@@ -6623,6 +6623,12 @@ button.bg-dark:focus {
   display: inline-flex !important;
 }
 
+@media (max-width: 575px) {
+  .d-xs-none {
+    display: none !important;
+  }
+}
+
 @media (min-width: 576px) {
   .d-sm-none {
     display: none !important;

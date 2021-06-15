@@ -1,4 +1,6 @@
-$('#table_historial tbody').append('<%= j render "recharges_from_historial", recharges: @recharges%>')
+<!--$('#table_historial tbody').append('<%= j render "recharges_from_historial", recharges: @recharges%>')-->
+
+$('section.wrapper-table').append('<%= j render "recharges_from_historial", recharges: @recharges%>')
 
 <% if @recharges.next_page%>
     $('.pagination').replaceWith('<%= j will_paginate @recharges, class:"pagination d-none"%>')
