@@ -71,14 +71,14 @@
 
                 <%case @recharge.status%>
                 <%when "enviada"%>
-                <%color_badge = "badge-primary"%>
+                <%color_badge = "badge-nfl-primary"%>
                 <%when "confirmada"%>
-                <%color_badge = "badge-success"%>
+                <%color_badge = "badge-nfl-success"%>
                 <%when "anulada"%>
-                <%color_badge = "badge-warning"%>
+                <%color_badge = "badge-nfl-danger"%>
                 <%end%>
                 <p class="mb-0">Status</p>
-                <p class="text-right"><small class="badge badge-pill <%=color_badge%>"><%=@recharge.status%></small></p>
+                <p class="text-right"><small class="badge badge-pill text-gray-100 <%=color_badge%>"><%=@recharge.status%></small></p>
             </div>  
         </div>
     </div>

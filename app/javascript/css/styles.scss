@@ -442,17 +442,17 @@ $text:rgba(255,255,255,0.9);
 .nfl-primary {border-left:3px solid darken($blue, 30%);}
 .nfl-primary:hover {border-left:3px solid $blue;}
 .nfl-primary .more-content span {color:$blue;}
-.nfl-primary .badge {background-color:$blue;}
+.badge-nfl-primary {background-color:$blue;}
 
 .nfl-success {border-left:3px solid darken($green, 30%);}
 .nfl-success:hover {border-left:3px solid $green;}
 .nfl-success .more-content span {color:$green;}
-.nfl-success .badge {background-color:$green;}
+.badge-nfl-success {background-color:$green;}
 
 .nfl-danger {border-left:3px solid darken($orange, 30%);}
 .nfl-danger:hover {border-left:3px solid $orange;}
 .nfl-danger .more-content span {color:$orange;}
-.nfl-danger .badge {background-color:$orange;}
+.badge-nfl-danger {background-color:$orange;}
 
 
 /* row one - fadeIn */
