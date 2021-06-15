@@ -1,4 +1,5 @@
 class NonexistentNumbersController < ApplicationController
+  before_action :authenticate_admin
   before_action :set_nonexistent_number, only: %i[ show edit update destroy ]
 
   # GET /nonexistent_numbers or /nonexistent_numbers.json

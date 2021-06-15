@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    @news = News.all.order("date_news DESC")
     @usuarios = User.where.not(permission_level:3).count
     @premiados = 0
     @recargas_confirmadas = Recharge.where(type_operation: "direct_recharge", status:"confirmada").count

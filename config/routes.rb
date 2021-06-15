@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :news
   root to: 'home#index'
   devise_for :users, :controllers => { registrations: 'registrations' }, :path_names => { :sign_up => "register_or_login", :sign_in => "login_or_register" }
   get '/dashboard' => "dashboard#index", :as => :user_root
