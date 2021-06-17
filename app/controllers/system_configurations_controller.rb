@@ -7,7 +7,7 @@ class SystemConfigurationsController < ApplicationController
   def index
     @system_configurations = SystemConfiguration.first
     
-    if Time.now.strftime("%d") != @system_configurations.updated_at.strftime("%d")
+    if Time.now.utc.in_time_zone("Caracas").strftime("%d") != @system_configurations.updated_at.strftime("%d")
       new_usuarios_extras = rand(10) + 1
       before_usuarios_extras = @system_configurations.usuarios_extras
       total_usuarios = before_usuarios_extras + new_usuarios_extras
@@ -79,6 +79,6 @@ class SystemConfigurationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def system_configuration_params
-      params.require(:system_configuration).permit(:movistar, :digitel, :movilnet, :cantv, :movistar_tv, :inter, :simple_tv, :usuarios_extras, :recargas_extras, :dolar_bcv)
+      params.require(:system_configuration).permit(:movistar, :digitel, :movilnet, :cantv, :movistar_tv, :inter, :simple_tv, :dolar_bcv)
     end
 end
