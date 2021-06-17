@@ -5,7 +5,20 @@ class SystemConfigurationsController < ApplicationController
 
   # GET /system_configurations or /system_configurations.json
   def index
-    @system_configurations = SystemConfiguration.all
+    @system_configurations = SystemConfiguration.first
+    
+    if Time.now.strftime("%d") != @system_configurations.updated_at.strftime("%d")
+      new_usuarios_extras = rand(10) + 1
+      before_usuarios_extras = @system_configurations.usuarios_extras
+      total_usuarios = before_usuarios_extras + new_usuarios_extras
+
+      new_recargas_extras = rand(50) + 1
+      before_recargas_extras = @system_configurations.recargas_extras
+      total_recargas = before_recargas_extras + new_recargas_extras
+
+      @system_configurations.update(usuarios_extras: total_usuarios, recargas_extras: total_recargas)
+    end
+      
   end
 
   # GET /system_configurations/1 or /system_configurations/1.json
@@ -66,6 +79,6 @@ class SystemConfigurationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def system_configuration_params
-      params.require(:system_configuration).permit(:movistar, :digitel, :movilnet, :cantv, :movistar_tv, :inter, :simple_tv, :dolar_bcv)
+      params.require(:system_configuration).permit(:movistar, :digitel, :movilnet, :cantv, :movistar_tv, :inter, :simple_tv, :usuarios_extras, :recargas_extras, :dolar_bcv)
     end
 end

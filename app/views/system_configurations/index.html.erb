@@ -1,10 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>System Configurations</h1>
-
-    <% @system_configurations.each do |system_configuration| %>
-        Parametros De Recarga
-        <%= link_to 'Show', system_configuration %>
-        <%= link_to 'Edit', edit_system_configuration_path(system_configuration) %>
-    <% end %>
+    
+    Configuracion
+    <%= link_to 'Show', @system_configurations %>
+    <%= link_to 'Edit', edit_system_configuration_path(@system_configurations) %>
+    
 <br>
