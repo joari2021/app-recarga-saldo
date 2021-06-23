@@ -14,4 +14,5 @@ class Profile < ApplicationRecord
     validates :age, :document, :phone, :zip_code, numericality: { only_integer: true, message: "Este campo solo debe contener números." }, on: :update
 
     validates :document, uniqueness: {message: "Este documento ya esta registrado."}, on: :update
+    validates :phone, uniqueness: {message: "Este número ya esta registrado."}, on: :update
 end

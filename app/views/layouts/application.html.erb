@@ -42,13 +42,14 @@
 
             <hr class="sidebar-divider">
 
-            <%unless current_user.is_admin?%>
-                <li class="nav-item" id="access_recharges">
-                    <a class="nav-link show_loader_sup access_link" href="<%=url_for(recharges_path)%>">
-                        <i class="fas fa-fw fa-mobile-alt"></i>
-                        <span>Vender Recargas</span></a>
-                </li>
+            <li class="nav-item" id="access_recharges">
+                <a class="nav-link show_loader_sup access_link" href="<%=url_for(recharges_path)%>">
+                    <i class="fas fa-fw fa-mobile-alt"></i>
+                    <span>Vender Recargas</span></a>
+            </li>
 
+            <%unless current_user.is_admin?%>
+                
                 <li class="nav-item" id="access_deposits">
                     <a class="nav-link show_loader_sup access_link" href="<%=url_for(deposits_path)%>">
                         <i class="fas fa-fw fa-cart-plus"></i>

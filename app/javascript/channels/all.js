@@ -115,7 +115,6 @@ format_decimal = function (number) {
 format_number_integer = function (number) {
   valor = number.toString();
   valor = valor.replace(/\D/g, "");
-  console.log(valor);
   return valor;
 };
 

@@ -57,7 +57,13 @@ class RechargesController < ApplicationController
     # POST /recharges or /recharges.json
     def create
         ActiveRecord::Base.transaction do
-            @recharge = current_user.recharges.create(recharge_params)
+            unless current_user.is_admin?
+                usuario = current_user
+            else
+                usuario = Profile.find_by(phone: recharge_params[:user_phone]).user
+            end
+
+            @recharge = usuario.recharges.create(recharge_params)
 
             #ESTABLECIENDO EL TIPO DE OPERACION
             if @recharge.operator === "Movistar" || @recharge.operator === "Digitel" || @recharge.operator === "Inter"
@@ -74,8 +80,8 @@ class RechargesController < ApplicationController
             if @recharge.save && @recharge.type_operation === "direct_recharge"
               
                 porcentaje = @recharge.amount * 0.02
-                balance_final = current_user.balance.balance - @recharge.amount + porcentaje
-                ActiveRecord::Rollback unless current_user.balance.update(balance: balance_final)
+                balance_final = usuario.balance.balance - @recharge.amount + porcentaje
+                ActiveRecord::Rollback unless usuario.balance.update(balance: balance_final)
 
             elsif @recharge.type_operation != "direct_recharge"
                 @recharge.amount = 0.0
@@ -86,10 +92,10 @@ class RechargesController < ApplicationController
           
             if @recharge.save
                 if recharge_params_special[:save_number]
-                    unless current_user.contacts.where(number: @recharge.number).any?
+                    unless usuario.contacts.where(number: @recharge.number).any?
                         cod_area = @recharge.operator === "Movistar" && @recharge.type_payment === "Prepago" || @recharge.operator === "Digitel" ||@recharge.operator === "Movilnet" || @recharge.operator === "Cantv" ? @recharge.cod_area : nil
                         
-                        @contact = current_user.contacts.create(operator: @recharge.operator, type_payment: @recharge.type_payment, cod_area: cod_area, number: @recharge.number, names: recharge_params_special[:names])
+                        @contact = usuario.contacts.create(operator: @recharge.operator, type_payment: @recharge.type_payment, cod_area: cod_area, number: @recharge.number, names: recharge_params_special[:names])
                     else
                         @contact_registrado = true
                     end
@@ -217,7 +223,11 @@ class RechargesController < ApplicationController
     end
 
     def recharge_params
-      params.require(:recharge).permit(:amount, :operator, :type_payment, :number, :cod_area)
+      unless current_user.is_admin?
+          params.require(:recharge).permit(:amount, :operator, :type_payment, :number, :cod_area)
+      else
+          params.require(:recharge).permit(:amount, :operator, :type_payment, :number, :cod_area, :user_phone)
+      end
     end
 
     def recharge_params_special
@@ -282,7 +292,25 @@ class RechargesController < ApplicationController
     end
 
     def rectify_amount
-      unless recharge_params[:amount].to_f <= current_user.balance.balance || current_user.is_admin?
+      rectify = true
+      if current_user.is_admin?
+          if recharge_params[:user_phone].present?
+              perfil = Profile.find_by(phone: recharge_params[:user_phone])
+              if perfil.present?
+                  usuario = perfil.user
+              else 
+                  respond_to do |format|
+                    format.json {head :no_content}
+                    format.js { render :user_no_exist}
+                  end
+                  rectify = false
+              end
+          else
+              rectify = false
+          end
+      end
+
+      if rectify && recharge_params[:amount].to_f > usuario.balance.balance 
         respond_to do |format|
           format.json {head :no_content}
           format.js { render :balance_insuficiente}

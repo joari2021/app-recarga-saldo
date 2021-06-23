@@ -8,7 +8,7 @@ class SystemConfigurationsController < ApplicationController
     @system_configurations = SystemConfiguration.first
     
     if Time.now.utc.in_time_zone("Caracas").strftime("%d") != @system_configurations.updated_at.strftime("%d")
-      new_usuarios_extras = rand(10) + 1
+      new_usuarios_extras = rand(5) + 1
       before_usuarios_extras = @system_configurations.usuarios_extras
       total_usuarios = before_usuarios_extras + new_usuarios_extras
 
@@ -18,7 +18,6 @@ class SystemConfigurationsController < ApplicationController
 
       @system_configurations.update(usuarios_extras: total_usuarios, recargas_extras: total_recargas)
     end
-      
   end
 
   # GET /system_configurations/1 or /system_configurations/1.json

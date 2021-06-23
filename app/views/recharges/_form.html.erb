@@ -20,7 +20,6 @@
       <%= form.text_field :type_payment, type:"hidden" %>
     <%end%>
 
-
     <!--CODIGO DE AREA 
     =====================================================================================-->
     <div class="grupo" id="input_cod_area">
@@ -37,7 +36,6 @@
       </datalist> 
     </div>
   
-
     <!--- NÚMERO DE TELEFONO 
     ====================================================================================--->
     <div class="grupo">
@@ -57,14 +55,10 @@
       <datalist id="div_montos">
           <!--Los codigos de area se insertan con javascript-->
       </datalist> 
-
       <p class="msj_error mt-2 bg-danger rounded"  id="msj_error_monto" style="display:none;">El monto es inválido o es superior a tu balance disponible.</p>
-
       <%if @recharge.errors[:amount].any? %>
         <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:amount].to_s[/\w([^"]*)/] %></p>
       <% end %>
-
-      
 
       <%if current_user.is_admin? && @recharge_type_payment === "Post-pago"%>
         <%if @recharge.operator === "Digitel" || @recharge.operator === "Movistar"%>

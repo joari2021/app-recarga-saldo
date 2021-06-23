@@ -1,8 +1,14 @@
-$('#caja_form').html('<%= j render("form") %>');
+<%unless current_user.is_admin?%>
+    $('#caja_form').html('<%= j render("form") %>');
+<%else%>
+    $('#caja_form').html('<%= j render("form_recharge_admin") %>');
+<%end%>
 
 <%=render "element_dom_globales"%>
 
-$("#btn_recarga").attr("data-validate","true")
+<%unless current_user.is_admin?%>
+    $("#btn_recarga").attr("data-validate","true")
+<%end%>
 
 <!--VARIABLE PARA LEER DESDE LA FUNCION SET_MAX_LENGHT Y DIFERENCIARLA-->
 input_number = $("#recharge_number")

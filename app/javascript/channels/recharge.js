@@ -210,7 +210,7 @@ validation_submit = function () {
     }
 
     //VALIDACION DEL NOMBRE DEL CONTACTO (OPCIONAL)
-    if (switch_names.checked) {
+    if (switch_names != null && switch_names.checked) {
       if ($("#recharge_names_contact").val().trim().length == 0) {
         validate_form = false;
         $("#msj_error_names").fadeIn(600);
