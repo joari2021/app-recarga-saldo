@@ -14,8 +14,8 @@ Airbrake.configure do |c|
   # project_key navigate to your project's General Settings and copy the values
   # from the right sidebar.
   # https://github.com/airbrake/airbrake-ruby#project_id--project_key
-  c.project_id = 335716
-  c.project_key = '01dfd28ffcf5b73803423671fcc2a993'
+  c.project_id = 342927
+  c.project_key = '1b64caa0bf7ad1bad00919c661f16287'
 
   # Configures the root directory of your project. Expects a String or a
   # Pathname, which represents the path to your project. Providing this option
@@ -42,12 +42,6 @@ Airbrake.configure do |c|
   # NOTE: This option *does not* work if you don't set the 'environment' option.
   # https://github.com/airbrake/airbrake-ruby#ignore_environments
   c.ignore_environments = %w[test]
-
-  Airbrake.add_filter do |notice|
-    if notice[:errors].any? { |error| error[:type] == 'SignalException' }
-      notice.ignore!
-    end
-  end
 
   # A list of parameters that should be filtered out of what is sent to
   # Airbrake. By default, all "password" attributes will have their contents
