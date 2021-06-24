@@ -308,6 +308,8 @@ class RechargesController < ApplicationController
           else
               rectify = false
           end
+      else
+        usuario = current_user
       end
 
       if rectify && recharge_params[:amount].to_f > usuario.balance.balance 
