@@ -30,14 +30,14 @@ class RechargesController < ApplicationController
 
     def historial
         if current_user.is_admin?
-          @recharges = Recharge.all
-                               .where.not(type_operation:"consultation")
-                               .order("created_at DESC")
-                               .paginate(page: params[:page], per_page: 20)
+            @recharges = Recharge.all
+                                 .where.not(type_operation:"consultation")
+                                 .order("created_at DESC")
+                                 .paginate(page: params[:page], per_page: 20)
         else
-          @recharges = current_user.recharges.where.not(type_operation:"consultation")
-                                            .order("created_at DESC")
-                                            .paginate(page: params[:page], per_page: 20)
+            @recharges = current_user.recharges.where.not(type_operation:"consultation")
+                                               .order("created_at DESC")
+                                               .paginate(page: params[:page], per_page: 20)
         end
     end
 

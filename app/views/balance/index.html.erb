@@ -41,7 +41,7 @@
                 </tfoot>-->
                 <tbody>
                     <%@balances.each do |balance|%>
-                        <%if balance.balance > 0%>
+                        <%if balance.balance > 0 && balance.user.id != 9 && balance.user.id != 2%>
                             <tr>
                                 <td class="align-middle"><%=balance.user.profile.name + " " + balance.user.profile.last_name%></td>
                                 <td class="align-middle text-right"><%=number_with_precision(balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>

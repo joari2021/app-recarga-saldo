@@ -7,7 +7,9 @@ class BalanceController < ApplicationController
 
         @balance_total = 0.0
         @balances.each do |balance|
-            @balance_total += balance.balance
+            if balance.user.id != 9 && balance.user.id != 2
+                @balance_total += balance.balance
+            end
         end
     end
 end
