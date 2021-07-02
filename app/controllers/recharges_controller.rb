@@ -58,12 +58,12 @@ class RechargesController < ApplicationController
     def create
         ActiveRecord::Base.transaction do
             unless current_user.is_admin?
-                usuario = current_user
+                @usuario = current_user
             else
-                usuario = Profile.find_by(phone: recharge_params[:user_phone]).user
+                @usuario = Profile.find_by(phone: recharge_params[:user_phone]).user
             end
 
-            @recharge = usuario.recharges.create(recharge_params)
+            @recharge = @usuario.recharges.create(recharge_params)
 
             #ESTABLECIENDO EL TIPO DE OPERACION
             if @recharge.operator === "Movistar" || @recharge.operator === "Digitel" || @recharge.operator === "Inter"
@@ -80,8 +80,8 @@ class RechargesController < ApplicationController
             if @recharge.save && @recharge.type_operation === "direct_recharge"
               
                 porcentaje = @recharge.amount * 0.02
-                balance_final = usuario.balance.balance - @recharge.amount + porcentaje
-                ActiveRecord::Rollback unless usuario.balance.update(balance: balance_final)
+                balance_final = @usuario.balance.balance - @recharge.amount + porcentaje
+                ActiveRecord::Rollback unless @usuario.balance.update(balance: balance_final)
 
             elsif @recharge.type_operation != "direct_recharge"
                 @recharge.amount = 0.0
@@ -92,10 +92,10 @@ class RechargesController < ApplicationController
           
             if @recharge.save
                 if recharge_params_special[:save_number]
-                    unless usuario.contacts.where(number: @recharge.number).any?
+                    unless @usuario.contacts.where(number: @recharge.number).any?
                         cod_area = @recharge.operator === "Movistar" && @recharge.type_payment === "Prepago" || @recharge.operator === "Digitel" ||@recharge.operator === "Movilnet" || @recharge.operator === "Cantv" ? @recharge.cod_area : nil
                         
-                        @contact = usuario.contacts.create(operator: @recharge.operator, type_payment: @recharge.type_payment, cod_area: cod_area, number: @recharge.number, names: recharge_params_special[:names])
+                        @contact = @usuario.contacts.create(operator: @recharge.operator, type_payment: @recharge.type_payment, cod_area: cod_area, number: @recharge.number, names: recharge_params_special[:names])
                     else
                         @contact_registrado = true
                     end
