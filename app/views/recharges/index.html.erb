@@ -96,7 +96,7 @@
     operation = ""
 
     <%time = Time.now.in_time_zone("Caracas")%>
-    <%if time.strftime("%A") === "Sunday" || time.strftime("%H").to_i < 5 || time.strftime("%H").to_i > 21 %>
+    <%if time.strftime("%H").to_i < 5 || time.strftime("%H").to_i > 22 %>
         new ShowModalInfo();
         $('#show_info').trigger('click')
     <%end%>
