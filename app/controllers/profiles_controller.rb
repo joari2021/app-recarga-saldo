@@ -11,7 +11,8 @@ class ProfilesController < ApplicationController
   end
 
   def users_all
-    @users = User.all.paginate(page: params[:page], per_page: 20)
+    @users = User.all
+    #.paginate(page: params[:page], per_page: 20)
   end
 
   # GET /profiles/1 or /profiles/1.json
