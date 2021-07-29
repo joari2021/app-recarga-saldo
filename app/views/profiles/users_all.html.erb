@@ -2,7 +2,7 @@
     <%=render 'users'%>
 </div>
 
-<%= will_paginate @users, class:"pagination d-none"%>
+<%= will_paginate @users, class:"pagination"%>
 
 <%if @users.next_page%>
     <div class="contenedor_loader" >
