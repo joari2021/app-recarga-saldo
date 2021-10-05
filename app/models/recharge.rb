@@ -61,8 +61,8 @@ class Recharge < ApplicationRecord
   validates :number, length: { is: 12, message: "Debe contener 12 dígitos.", if: :number_length_12? }
     
   #CONTINUAR SEGUN LOS PARAMETROS FINALES DEL MONTO PERMITIDOS PARA LAS RECARGAS
-  validates :amount, numericality: { greater_than_or_equal_to: 3, message: "El monto es inválido", if: :recharge_limit_is_800000? }
-  validates :amount, numericality: { greater_than_or_equal_to: 1, message: "El monto es inválido", if: :recharge_limit_is_1000000? }
-  validates :amount, numericality: { greater_than_or_equal_to: 4, message: "El monto es inválido", if: :recharge_limit_is_1500000? }
-  validates :amount, numericality: { greater_than_or_equal_to: 5, message: "El monto es inválido", if: :recharge_limit_is_2500000? }
+  validates :amount, numericality: { greater_than_or_equal_to: 3, message: "El monto es inválido", if: :recharge_limit_is_3? }
+  validates :amount, numericality: { greater_than_or_equal_to: 1, message: "El monto es inválido", if: :recharge_limit_is_1? }
+  validates :amount, numericality: { greater_than_or_equal_to: 4, message: "El monto es inválido", if: :recharge_limit_is_4? }
+  validates :amount, numericality: { greater_than_or_equal_to: 5, message: "El monto es inválido", if: :recharge_limit_is_5? }
 end
