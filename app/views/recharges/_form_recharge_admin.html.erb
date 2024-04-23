@@ -1,0 +1,68 @@
+<%operator = params[:operator].present? ? params[:operator] : @recharge.operator%>
+<%= form_for @recharge, {remote: true}  do |form| %>
+  <div class="form">
+    
+    <!-- OPERADORA
+    ====================================================================================-->
+    <%= form.text_field :operator, type:"hidden", value:"#{operator}" %>
+   
+    <!-- TIPO DE PAGO  
+    =====================================================================================-->
+    <%= form.text_field :type_payment, type:"hidden" %>
+
+    <!--- TELEFONO USUARIO EMISOR 
+    ====================================================================================--->
+    <div class="grupo">
+      <%= form.number_field :user_phone, :required => "required", class:"input-special", oninput: "input_value_integer(this)" %><span class="barra bg-before-<%=operator%>"></span>
+      <%= form.label :user_phone, "Número del Usuario", for:"", class: "label-special label-#{operator}" %>
+    
+      <%if @recharge.errors[:user_phone].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:user_phone].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+    </div>
+    
+    <!--CODIGO DE AREA 
+    =====================================================================================-->
+    <div class="grupo" id="input_cod_area">
+      <%= form.number_field :cod_area, :required => "required", class:"input-special", oninput: "input_value_integer(this)", list:"cont-option-list" %><span class="barra bg-before-<%=operator%>"></span>
+      <%= form.label :cod_area, "Cod. Área", for: "", class: "label-special label-#{operator}" %>
+
+      <!--MENSAJES DE ERRORES-->
+      <%if @recharge.errors[:cod_area].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:cod_area].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+
+      <datalist id="cont-option-list">
+      </datalist> 
+    </div>
+  
+    <!--- NÚMERO DE TELEFONO 
+    ====================================================================================--->
+    <div class="grupo">
+      <%= form.number_field :number, :required => "required", class:"input-special", oninput: "input_value_integer(this)" %><span class="barra bg-before-<%=operator%>"></span>
+      <%= form.label :number, "Número", for:"", class: "label-special label-#{operator}" %>
+      <%if @recharge.errors[:number].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:number].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+    </div>
+
+    <!--MONTO
+    ======================================================================================-->
+    <div class="grupo" id="input_monto">
+      <%= form.text_field :amount, :required => "required", class:"input-special", oninput:"input_value_integer_with_separator(this)", list:"div_montos"%><span class="barra bg-before-<%=operator%>"></span>
+      <%= form.label :amount, "Monto", for: "", class: "label-special label-#{operator}" %>
+      <datalist id="div_montos">
+          <!--Los codigos de area se insertan con javascript-->
+      </datalist> 
+      <%if @recharge.errors[:amount].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @recharge.errors[:amount].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn_standar btn-common btn-effect text-uppercase bg-<%=operator%>" id="btn_recarga" onclick="validation_submit()">Recargar</button>
+
+      <%=form.submit "Recargar", class: "d-none", id: "btn_submit", onclick: "disabled_button('#btn_recarga')"%>
+    </div>
+  </div>
+<% end %>

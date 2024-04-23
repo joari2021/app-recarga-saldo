@@ -1,0 +1,28 @@
+$("#close_modal_deposit").trigger("click");
+
+swal({
+  title: "Deposito Registrado!",
+  text: "Tu deposito ha sido registrado con exito. Debes esperar que sea verificado para que sea acreditado el monto enviado en tu balance. Esto suele demorar entre 5 y 30 minutos, aunque por causas ajenas a nuestra voluntad podria demorar hasta 48 horas.",
+  icon: "success",
+});
+
+new_content = `<tr class="tr-standar" id="deposit_<%=@deposit.id%>">
+                    <td class="td-standar" data-label="Fecha"><%=@deposit.date_send.strftime("%d/%m/%Y")%></td>
+                    <td class="td-standar" data-label="Banco Destino"><%=@deposit.bank_destinity.gsub("_"," ")%></td>
+                    <td class="td-standar" data-label="M. Pago"><%=@deposit.method_payment.gsub("_"," ")%></td>
+                    <td class="td-standar" data-label="Referencia"><%=@deposit.ref_payment%></td>
+                    <td class="td-standar" data-label="Monto"><%=number_with_precision(@deposit.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>
+                    <td class="td-standar" data-label="Estatus">
+                      <%if @deposit.status === "Diferido"%>
+                        <%color_badge = "badge-secondary"%>
+                      <%end%>
+                      <span class="badge badge-pill <%=color_badge%>"><%=@deposit.status%></span>
+                    </td>
+                </tr>`
+
+$('#table_deposits').append(new_content)
+
+<%if current_user.deposits.count === 1%>
+  $("#notify_vacio").css({"display":"none"})
+<%end%>
+$('#deposit_<%=@deposit.id%>').fadeTo(1000,1);

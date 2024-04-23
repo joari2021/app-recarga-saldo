@@ -1,0 +1,23 @@
+<%if current_user.is_admin?%>
+    $('#title_modal_profile').html("Editar perfil");
+    $('#modal-body-profile').html('<%= j render("form") %>');
+    $("form.edit_profile").attr("data-remote","true")
+
+    activar_submit_profile_admin()
+<%else%>
+    
+<%end%>
+
+<%if @profile.errors.any?%>
+    <%if current_user.is_admin?%>
+
+    <%else%>
+        $('div.form').html('<%= j render("form") %>');
+        activar_submit_profile()
+    <%end%>
+    
+<%else%>
+    hidden_loader_sup()
+    $("#modal_profile").addClass("show")
+    $("#modal_profile_wrap").addClass("show")
+<%end%>

@@ -1,0 +1,47 @@
+$('#title_modal_contact').html("Editar cliente");
+ 
+$('#modal_body_contacts').html('<%= j render("form") %>');
+
+operator = "<%=@contact.operator%>"
+if (operator === "Movistar" && "<%=@contact.type_payment%>" === "Prepago" || operator === "Digitel" || operator === "Movilnet" || operator === "Cantv"){
+
+} else{
+    $("#div_cod_area").css({"display":"none"});
+}
+
+<%if @contact.errors.any?%>
+    estilizar_errores_validacion()
+<%else%>
+    $("#modal_contact").addClass("show")
+    $("#modal_contact_wrap").addClass("show")
+<%end%>
+
+<%unless @contact.new_record?%>
+    valores = ["<%=@contact.operator%>", "<%=@contact.type_payment%>", "<%=@contact.cod_area%>", "<%=@contact.number%>"]
+
+    cant_forms = document.forms.length - 1
+    elementosEnForm = document.forms[cant_forms].elements;
+
+    for (i = 2; i <= 5; i++){
+        input = elementosEnForm[i]
+        
+        $(input).removeAttr("oninput")
+        $(input).removeAttr("onfocus")
+        $(input).removeClass("input-option")  
+    }
+
+    elementosEnForm[2].addEventListener("input",function(){
+        this.value = valores[0]
+    }) 
+    elementosEnForm[3].addEventListener("input",function(){
+        this.value = valores[1]
+    })
+    elementosEnForm[4].addEventListener("input",function(){
+        this.value = valores[2]
+    })
+    elementosEnForm[5].addEventListener("input",function(){
+        this.value = valores[3]
+    })
+<%else%>
+    toggle_list_options()
+<%end%>

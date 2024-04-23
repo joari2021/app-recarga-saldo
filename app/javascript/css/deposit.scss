@@ -1,0 +1,264 @@
+////////////////////// modal de cuentas /////////////////////////@at-root
+.modal-accounts{
+  width:95% !important;
+}
+
+.img-logo {
+  //bottom: -40px;
+  //right: 30px;
+  background: #fff;
+  border-radius: 50%;
+  padding: 10px;
+  width:80px;
+  height:80px;
+  margin: 20px auto;
+}
+.img-logo img{
+  width:60px;
+  height:60px;
+}
+
+.content-accounts,
+.content-recharge{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container-accounts,
+.container-recharge{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+  flex-wrap: wrap;
+}
+
+.container-accounts .box,
+.container-recharge .box{
+  position: relative;
+  width: 100%;
+  height: 700px;
+  color: #fff;
+  background: #111;
+  //display: flex;
+  //justify-content: center;
+  align-items: center;
+  margin: 20px 5px;
+  transition: 0.5s;
+}
+
+.container-accounts .box-monedero{
+  height: 550px !important;
+}
+
+.container-accounts .box:hover{
+  transform: translateY(-20px);
+}
+
+.container-accounts .box::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #3a6186;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #89253e, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #89253e, #3a6186); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container-accounts .box::after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #3a6186;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #89253e, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #89253e, #3a6186); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  filter: blur(30px);
+}
+
+.bg-venezuela{
+  background: #3a6186;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #89253e, #3a6186);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #89253e, #3a6186); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container-accounts .box-2::before,
+.container-accounts .box-2::after,
+.bg-mercantil{
+  //background: linear-gradient(315deg, #47A3DA, #ff5800);
+  background: #108dc7;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ef8e38, #108dc7);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ef8e38, #108dc7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.container-accounts .box-3::before,
+.container-accounts .box-3::after,
+.bg-bod{
+  //background: linear-gradient(315deg, #4dff03,#00d0ff);
+  background: #FDFC47;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #24FE41, #FDFC47);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #24FE41, #FDFC47); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.container-accounts .box-4::before,
+.container-accounts .box-4::after,
+.bg-bancaribe{
+  background: #00A2B1;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #00427b, #00A2B1);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #00427b, #00A2B1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container-accounts .box-5::before,
+.container-accounts .box-5::after,
+.bg-bicentenario{
+  background: #ED213A;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.container-accounts .box-6::before,
+.container-accounts .box-6::after{
+  background-color: var(--color-fuerte);
+  background: -webkit-linear-gradient(to right, var(--color-fuerte), var(--color-debil));
+  background: linear-gradient(to right, var(--color-fuerte), var(--color-debil));
+}
+
+.container-accounts .box-7::before,
+.container-accounts .box-7::after,
+.bg-ve-monedero{
+  background: #457fca;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #5691c8, #457fca);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #5691c8, #457fca); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container-accounts .box-8::before,
+.container-accounts .box-8::after,
+.bg-mercado-pago{
+  background: #2980B9;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #FFFFFF, #6DD5FA, #2980B9);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #FFFFFF, #6DD5FA, #2980B9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container-accounts .box-9::before,
+.container-accounts .box-9::after,
+.bg-paypal{
+  background: #003087;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #009cde, #003087);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #009cde, #003087); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container-accounts .box-10::before,
+.container-accounts .box-10::after,
+.bg-skrill{
+  background: #872166;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #4f2455, #872166);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #4f2455, #872166); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container-accounts .box span,
+.container-recharge .box span{
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  background: rgba(0,0,0,0.6);
+  z-index: 2;
+  border-radius: 20px !important;
+}
+
+.container-accounts .box span::before,
+.container-recharge .box span::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  border-radius: 20px !important;
+}
+
+.container-accounts .box .content-account,
+.container-recharge .box .div-recharge{
+  position: relative;
+  z-index: 10;
+  padding: 20px 30px;
+}
+
+.container-accounts .box .content-account h2,
+.container-recharge .box .div-recharge h2{
+  font-size: 2em;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.container-accounts .box .content-account p,
+.container-recharge .box .div-recharge p{
+  font-size: 1.1em;
+  color: #ffffff;
+  //margin-bottom: 10px;
+}
+
+@media screen and (max-width: 920px) {
+  .table-deposit {
+    border: 0;
+    background-color: #f8f9fc;
+  }
+
+  .table-deposit tr {
+    margin-bottom: 20px;
+    padding: 10px;
+    display: block;
+    color: #fff;
+    background-color: var(--color-fuerte) !important;
+    background-image: -webkit-linear-gradient(
+      bottom right,
+      var(--color-fuerte),
+      var(--color-debil)
+    );
+    background-image: -o-linear-gradient(
+      bottom right,
+      var(--color-fuerte),
+      var(--color-debil)
+    );
+    background-image: linear-gradient(
+      to top left,
+      var(--color-debil),
+      var(--color-fuerte)
+    );
+    border-radius: 25px;
+  }
+
+  .table-deposit td {
+    display: block;
+    text-align: right;
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .table-deposit td:last-child {
+    border-bottom: 0;
+  }
+
+  .table-deposit td:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .table-deposit thead {
+    display: none;
+  }
+}

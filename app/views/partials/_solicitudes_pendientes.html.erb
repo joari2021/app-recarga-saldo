@@ -1,0 +1,25 @@
+<div class="float-right">
+    <div class="card border-left-success shadow h-100">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1 text-right">
+                        Solicitudes pendientes</div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">Recargas y consultas: <span id="recharges_cant"><%=@recharges.count%></span></div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800 text-right">Depositos: <span id="deposits_cant"><%=@deposits.count%></span></div>
+
+                    <%recargas_ontried = @recharges.where(state: "ontried")%>
+                    <%depositos_ontried = @deposits.where(state: "ontried")%>
+                    <span id="new_requests"><%=recargas_ontried.count + depositos_ontried.count%></span>
+                    <%recargas_ontried.each do |recarga_ontried|
+                        recarga_ontried.watch!
+                    end%>
+                    <%depositos_ontried.each do |deposito_ontried|
+                        deposito_ontried.watch!
+                    end%>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br><br>

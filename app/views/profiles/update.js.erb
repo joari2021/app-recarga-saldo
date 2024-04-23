@@ -1,0 +1,75 @@
+$("#close_modal_profile").trigger("click")
+
+$("body").append("<%=j render("modal_profile")%>")
+activar_close_modal_profile()
+
+new_content = `
+                <div class="col-md-6 mb-4" id="user_<%=@profile.id%>">
+                    <div class="card border-left-standar shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-sm font-weight-bold color-standar-medio text-uppercase mb-1 text-center">
+                                        <%=@profile.name%> <%=@profile.last_name%>
+                                    </div>
+                                    <div class="text-sm mb-0">
+                                        <table class="table" id="">
+    
+                                            <thead class="">
+                                                <tr class="">
+                                                    <th class="p-2">Perfil</th>
+                                                    <th class="p-2">Status</th>
+                                                    <th class="p-2">Balance</th>
+                                                </tr>
+                                            </thead>
+    
+                                            <tbody>
+                                                <tr>
+                                                    <td class="p-2 align-middle">
+                                                        <%case @profile.status%>
+                                                        <%when "completado"%>
+                                                        <%color_badge = "badge-success"%>
+                                                        <%when "incompleto"%>
+                                                        <%color_badge = "badge-secondary"%>
+                                                        <%end%>
+                                                        <span class="badge badge-pill <%=color_badge%>"><%=@profile.status%></span>
+                                                    </td>
+    
+                                                    <td class="p-2 align-middle">
+                                                        <%case @profile.status_usuario%>
+                                                        <%when "activo"%>
+                                                        <%color_badge = "badge-success"%>
+                                                        <%when "bloqueado"%>
+                                                        <%color_badge = "badge-danger"%>
+                                                        <%end%>
+                                                        <span class="badge badge-pill <%=color_badge%>"><%=@profile.status_usuario%></span>
+                                                    </td>
+    
+                                                    <td class="p-2 align-middle">
+                                                        <span><%=number_with_precision(@profile.user.balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                
+                                    <div class="text-center mt-3">   
+                                        <div class="text-center mt-3">            
+                                            <%=link_to "Ver", profile_path(@profile), html_options = {class: "btn_standar btn-common btn-effect bg-special text-uppercase d-inline-block show_loader_sup mr-2", remote: true}%>  
+    
+                                            <%=link_to "Editar", edit_profile_path(@profile), html_options = {class: "btn_standar btn-common btn-effect bg-special text-uppercase d-inline-block show_loader_sup", remote: true}%>  
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+
+$("#user_<%=@profile.id%>").replaceWith(new_content)
+
+swal({
+    title: "Actualización exitosa!!!",
+    text: "El perfil ha sido actualizado con exito.",
+    icon: "success",
+})

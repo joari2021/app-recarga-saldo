@@ -1,0 +1,2 @@
+class RechargeParam < ApplicationRecord
+end

@@ -1,0 +1,139 @@
+<button class="btn btn_standar btn-common btn-effect bg-special-two" id="show_info" style="color:white;">
+    <i class="fas fa-info-circle"></i>
+</button>
+
+<!--
+<div id="main-container" class="mt-4">
+
+    <table class="table-standar table-historial" id="table_historial">
+
+        <thead class="thead-standar bg-special">
+            <tr class="tr-standar">
+                <th class="th-standar">Fecha y hora</th>
+                <th class="th-standar">Sistema</th>-->
+                <!--<th class="th-standar">T. Pago</th>-->
+                <!--<th class="th-standar">Numero</th>
+                <th class="th-standar">Monto</th>
+                <th class="th-standar">Estatus</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody id="tbody_historial"><%render 'recharges_from_historial'%></tbody>
+
+    </table>  
+    <%= will_paginate @recharges, class:"pagination d-none"%>
+</div>
+
+<%if @recharges.next_page%>
+    <div class="contenedor_loader" >
+        <div class="loader"></div>
+    </div>  
+<%end%>
+
+<div class="row justify-content-center">
+  <%unless @recharges.any? %>
+    <%render "partials/registro_vacio"%>
+  <%end%>
+</div>
+-->
+
+<section class="contenedor-table">
+    <section class="wrapper-table">
+        <!-- Row title -->
+        <section class="row-table title-table">
+            <ul>
+                <li class="d-xs-none">Fecha</li>
+                <li>Número</li>
+                <li>Monto</li>
+                <li>Estatus</li>
+                <li style="width:7% !important"></li>
+            </ul>
+        </section>
+        
+        <%=render 'recharges_from_historial'%>
+
+        <%= will_paginate @recharges, class:"pagination d-none"%>
+
+        <div class="row justify-content-center">
+            <%unless @recharges.any? %>
+                <%=render "partials/registro_vacio"%>
+            <%end%>
+        </div>
+        <%#
+        <!-- Row 1 - fadeIn -->
+        <section class="row-table-fadeIn-wrapper">
+          <article class="row-table fadeIn-table nfl">
+            <ul>
+              <li><a href="#">NFL</a><span class="small-table">(fadeIn)</span></li>
+              <li>$50</li>
+              <li>12</li>
+              <li>48</li>
+              <li>2:00ET</li>
+            </ul>
+            <ul class="more-content">
+              <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
+            </ul>
+          </article>
+        </section>
+
+        <!-- Row 2 - fadeOut -->
+        <section class="row-table-fadeOut-wrapper">
+          <article class="row-table nfl">
+            <ul>
+              <li><a href="#">NFL</a><span class="small-table">(fadeOut)</span></li>
+              <li>$5</li>
+              <li>45</li>
+              <li>100</li>
+              <li>3:00ET</li>
+            </ul>
+            <ul class="more-content">
+              <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
+            </ul>
+          </article>
+        </section>
+        
+        <!-- Row 4 -->
+        <article class="row-table mlb update-row">
+          <ul>
+            <li><a href="#">MLB</a><span class="small-table">(update)</span></li>
+            <li>$10</li>
+            <li><span class="update1">1</span><span class="update2">2</span></li>
+            <li>10</li>
+            <li>1:00ET</li>
+          </ul>
+          <ul class="more-content">
+            <li>This 1665-player contest boasts a $300,000.00 prize pool and pays out the top 300 finishing positions. First place wins $100,000.00. Good luck!</li>
+          </ul>
+        </article>
+        %>
+       
+    </section>
+    <%if @recharges.next_page%>
+        <div class="contenedor_loader" >
+            <div class="loader loader-tam color-Movistar"></div>
+        </div>  
+    <%end%>
+</section>
+
+<%= render 'partials/modal-info', modulo: "historial" %>
+<%= render "modal_recharge" %>
+
+<script>
+    new ShowModalInfo();
+
+    $(document).ready(function(){
+        if ($('.pagination').length) {
+            $(window).scroll(function() {
+                url = $('.pagination .next_page').attr('href');
+                if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 120){
+                    console.log("entre");
+                    $.getScript(url)
+                    $('.pagination .next_page').removeAttr('href');
+                }
+            });
+        }
+
+        $("#modal_recharge_wrap .modal-content").addClass("bg-dark-strong")
+    })                  
+</script>

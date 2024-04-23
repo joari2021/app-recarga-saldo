@@ -1,0 +1,78 @@
+<%= form_for @contact, {remote: true}  do |form| %>
+  <div class="form">
+    
+    <!---NOMBRE O ALIAS-->
+    <div class="grupo">
+      <%= form.text_field :names, :required => "required", class:"input-special", maxlength: "20"%><span class="barra bg-before-Standar"></span>
+      <%= form.label :names, "Nombres o alias", for: "", class: "label-special label-Standar" %>
+      <%if @contact.errors[:names].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:names].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+    </div>
+    
+    <!--OPERADORAS #############################-->
+    <div class="grupo">
+      <%= form.text_field :operator, :required => "required", class:"input-special input-option", maxlength: "11", :"data-options" => "#options-operators", oninput:"readonly(this)" %><span class="barra bg-before-Standar"></span>
+      <%= form.label :operator, "Sistema", for: "", class: "label-special label-Standar" %>
+      <%if @contact.errors[:operator].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:operator].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+
+      <div id="options-operators" style="display:none" onchange = "verify_operator()" >
+        
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Movistar" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Movistar</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Digitel" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Digitel</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Movilnet" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Movilnet</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Cantv" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Cantv</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Movistar" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Movistar TV</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Inter" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Inter</a>
+        <a href="#" class="mt-1 btn_standar btn-common btn-effect bg-Simple_TV" data-input ="#contact_operator" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Simple TV</a>
+          
+      </div>
+    </div>
+
+    <!--TIPO DE PAGO #############################-->
+    <div class="grupo">
+      <%= form.text_field :type_payment, :required => "required", class:"input-special input-option", maxlength: "9", :"data-options" => "#options-type-payment", oninput:"readonly(this)" %><span class="barra bg-before-Standar"></span>
+      <%= form.label :type_payment, "Tipo de pago", for: "", class: "label-special label-Standar" %>
+      <%if @contact.errors[:type_payment].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:type_payment].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+     
+      <div id="options-type-payment" style="display:none">
+        <a href="#" class="btn_standar btn-common btn-effect bg-special mt-1" data-input ="#contact_type_payment" id="badge-prepago" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Prepago</a>
+        <a href="#" class="btn_standar btn-common btn-effect bg-special mt-1" data-input ="#contact_type_payment" id="badge-postpago" onclick="push_value_standar(event, this),verify_options_contact(event, this)">Post-pago</a>
+      </div>
+    </div>
+
+    <!--CODIGO DE AREA #################################-->
+    <div class="grupo" id="div_cod_area">
+      <%= form.text_field :cod_area, :required => "required", class:"input-special input-option", :"data-options" => "#options-cod-area", oninput: "input_value_integer(this)", onfocus:"create_cod_area()", maxlength: "4" %><span class="barra bg-before-Standar"></span>
+      <%= form.label :cod_area, "Cod. Área", for: "", class: "label-special label-Standar" %>
+      <%if @contact.errors[:cod_area].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:cod_area].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+
+      <div class="row justify-content-center" id="options-cod-area" style="display:none;max-width:234px;"><!--Los codigos de area se insertan con javascript--></div>
+    </div>
+
+    <!--NUMERO ###########################################-->
+    <div class="grupo">
+      <%= form.text_field :number, :required => "required", class:"input-special", :oninput => "input_value_integer(this)", :onfocus => "set_length(this)" %><span class="barra bg-before-Standar"></span>
+      <%= form.label :number, "Número", for:"", class: "label-special label-Standar" %>
+      <%if @contact.errors[:number].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @contact.errors[:number].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn_standar btn-common btn-effect bg-special text-uppercase" id="btn_contact">Guardar</button>
+      <%=form.submit "Guardar", class: "d-none", id: "btn_submit", onclick: "disabled_button('#btn_contact')"%>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  activar_submit_contact()
+</script>
+

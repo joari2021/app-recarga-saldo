@@ -1,0 +1,168 @@
+<%unless current_user.is_admin?%>
+    $('#caja_form').html('<%= j render("form") %>');
+<%else%>
+    $('#caja_form').html('<%= j render("form_recharge_admin") %>');
+<%end%>
+
+<%=render "element_dom_globales"%>
+
+<%unless current_user.is_admin?%>
+    $("#btn_recarga").attr("data-validate","true")
+<%end%>
+
+<!--VARIABLE PARA LEER DESDE LA FUNCION SET_MAX_LENGHT Y DIFERENCIARLA-->
+input_number = $("#recharge_number")
+
+function mostrar_type_pago(){
+    <% unless @recharge.errors.any? %>
+        $("#caja_type_pago").fadeIn(600)
+    <%end%>
+}
+
+$("#contenedor-switch").fadeIn("fast")
+
+switch ($("#recharge_operator").val()) {
+
+    case "Movistar":
+        title_modal.innerHTML = '<%=image_tag("sistema_recargas/movistar.png", width:"100px", height:"30px")%>'
+        edit_modal()
+        mostrar_type_pago()
+    break;
+
+    case "Digitel":
+        title_modal.innerHTML = '<%=image_tag("sistema_recargas/digitel.png", width:"100px", height:"30px")%>'
+        edit_modal()
+        mostrar_type_pago()
+    break;
+
+    case "Movilnet":
+        title_modal.innerHTML = '<%=image_tag("sistema_recargas/movilnet.png", width:"100px", height:"30px")%>'
+        edit_modal()
+        $("#caja_form").fadeIn(600)
+
+        type_pago = "Prepago"
+        input_type_pago.value = type_pago
+
+        cod_area = cod_area_movilnet
+
+        monto_min = <%=@params_movilnet.amount_min%>
+        <%if current_user.balance.balance >= @params_movilnet.amount_max%>
+            monto_max = <%=@params_movilnet.amount_max%>
+        <%else%>
+            monto_max = <%=current_user.balance.balance%>
+        <%end%>
+
+        multiplos = <%=@params_movilnet.multiplos_amount_permit%>
+
+        show_div_cod_area = true
+        operation = "recarga"
+
+        show_form(monto_min,monto_max,multiplos)
+    break;
+
+    case "Cantv":
+        title_modal.innerHTML = '<%=image_tag("sistema_recargas/cantv.png", width:"100px", height:"30px")%>'
+        edit_modal()
+        $("#caja_form").fadeTo(600,1)
+
+        type_pago = "Post-pago"
+        input_type_pago.value = type_pago
+
+        cod_area = cod_area_tlf_fija
+
+        monto_min = <%=@params_cantv.amount_min%>
+        <%if current_user.balance.balance >= @params_cantv.amount_max%>
+            monto_max = <%=@params_cantv.amount_max%>
+        <%else%>
+            monto_max = <%=current_user.balance.balance%>
+        <%end%>
+
+        multiplos = <%=@params_cantv.multiplos_amount_permit%>
+
+        show_div_cod_area = true
+        operation = "recarga"
+
+        show_form(monto_min,monto_max,multiplos)
+    break;
+
+    case "Movistar_TV":
+        title_modal.innerHTML = '<%=image_tag("sistema_recargas/movistar_tv.png", width:"100px", height:"30px")%>'
+        edit_modal()
+        $("#caja_form").fadeTo(600,1)
+
+        type_pago = "Prepago"
+        input_type_pago.value = type_pago
+
+        cod_area = []
+
+        monto_min = <%=@params_movistar_tv.amount_min%>
+        <%if current_user.balance.balance >= @params_movistar_tv.amount_max%>
+            monto_max = <%=@params_movistar_tv.amount_max%>
+        <%else%>
+            monto_max = <%=current_user.balance.balance%>
+        <%end%>
+
+        multiplos = <%=@params_movistar_tv.multiplos_amount_permit%>
+
+        show_div_cod_area = false
+        operation = "recarga"
+
+        show_form(monto_min,monto_max,multiplos)
+    break;
+
+    case "Inter":
+        title_modal.innerHTML = '<%=image_tag("sistema_recargas/inter.png", width:"100px", height:"30px")%>'
+        edit_modal()
+        mostrar_type_pago()
+    break;
+
+    case "Simple_TV":
+        title_modal.innerHTML = '<%=image_tag("sistema_recargas/simple_tv.png", width:"100px", height:"30px")%>'
+        edit_modal()
+        $("#caja_form").fadeTo(600,1)
+
+        type_pago = "Prepago"
+        input_type_pago.value = type_pago
+
+        cod_area = []
+
+        monto_min = <%=@params_simple_tv.amount_min%>
+        <%if current_user.balance.balance >= @params_simple_tv.amount_max%>
+            monto_max = <%=@params_simple_tv.amount_max%>
+        <%else%>
+            monto_max = <%=current_user.balance.balance%>
+        <%end%>
+
+        multiplos = <%=@params_simple_tv.multiplos_amount_permit%>
+
+        show_div_cod_area = false
+        operation = "recarga"
+        show_form(monto_min,monto_max,multiplos)
+    break;
+
+    default:
+    break;
+}
+
+<% if @recharge.errors.any? %>
+
+    <!--FORMATEANDO EL MONTO-->
+    <%if @recharge.type_operation != "consultation"%>
+
+        <%if @recharge.type_operation === "direct_recharge"%>
+            input_monto.value = "<%=number_with_precision(@recharge.amount, :precision => 0, :delimiter => '.', :scale => 0)%>"
+        <%end%>
+    <%else%>
+        $("#input_monto").css({"display":"none"})
+    <%end%>
+
+    <%if @recharge.operator === "Movistar" || @recharge.operator === "Digitel" || @recharge.operator === "Inter"%>
+        card_options_function()
+    <%end%>
+
+    estilizar_errores_validacion()
+<%else%>
+    $('#modal_recharge').addClass('show');
+    $('#modal_recharge_wrap').addClass('show');
+<% end %>
+

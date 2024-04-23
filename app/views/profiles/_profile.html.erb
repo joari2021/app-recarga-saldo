@@ -1,0 +1,62 @@
+<section class="seccion-perfil-usuario">
+    <div class="perfil-usuario-header">
+        <div class="perfil-usuario-portada">
+            <div class="perfil-usuario-avatar">
+                <%if @profile.gender === "Hombre"%>
+                    <%url_img = "template/undraw_profile.svg"%>
+                <%elsif @profile.gender === "Mujer"%>
+                    <%url_img = "template/avatar_woman.png"%>
+                <%end%>
+                <%= image_tag(url_img, alt:"img-avatar") %>
+                <!--
+                <button type="button" class="boton-avatar">
+                    <i class="far fa-image"></i>
+                </button>-->
+            </div>
+            <!--
+            <button type="button" class="boton-portada">
+                <i class="far fa-image"></i> Cambiar fondo
+            </button>-->
+        </div>
+    </div>
+    <div class="perfil-usuario-body">
+        <div class="perfil-usuario-bio">
+            <h3 class="titulo"><%=@profile.name + " " + @profile.last_name%></h3>
+            <!--
+            <p class="texto">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                tempor incididunt ut labore et dolore magna aliqua.</p>-->
+        </div>
+        <div class="perfil-usuario-footer">
+            <ul class="lista-datos">
+                <li><i class="icono fas fa-address-card"></i> <span class="align-middle"><%=@profile.type_document%>-<%=@profile.document%></span></li>
+                <li><i class="icono fas fa-venus-mars"></i> <span class="align-middle"><%=@profile.gender%></span></li>
+            </ul>
+            <ul class="lista-datos">
+                <li><i class="icono fas fa-phone-alt"></i> <span class="align-middle"><%=@profile.phone%></span></li>
+                <li><i class="icono fas fa-calendar-alt mr-4"></i><span class="align-middle"><%=@profile.date_of_birth.strftime("%d/%m/%Y")%></span></li>
+            </ul>
+            <ul class="" style="list-style:none">
+                <li><i class="icono fas fa-envelope mr-4"></i> <%=@profile.user.email%></li>
+
+                <li class="mt-2"><i class="icono fas fa-map-marker-alt mr-4"></i> <%=@profile.address%>. <%=@profile.city%>, Edo. <%=@profile.state%>. Codigo Postal: <%=@profile.zip_code%>.</li>
+            </ul>
+        </div>
+        <!--
+            <div class="redes-sociales">
+                <a href="" class="boton-redes facebook fab fa-facebook-f"><i class="icon-facebook"></i></a>
+                <a href="" class="boton-redes twitter fab fa-twitter"><i class="icon-twitter"></i></a>
+                <a href="" class="boton-redes instagram fab fa-instagram"><i class="icon-instagram"></i></a>
+            </div>
+        -->
+        <div class="perfil-usuario-footer my-3">
+            <p><b>Importante:</b> Si deseas actualizar tus datos personales debes comunicarte a nuestro correo de soporte enviando la foto del documento de identidad registrado en tu perfil y los detalles de los datos que quieres modificar.</p>
+
+            <ul class="" style="list-style:none">
+                <li><i class="icono fas fa-envelope mr-4"></i> recargasfast21@gmail.com</li>
+
+                <li class="mt-2"><i class="icono fab fa-whatsapp mr-4"></i> <a href="https://wa.me/message/OPTJGH6ZPDYRH1" class="special-link color-standar-fuerte" target="_blank">+584120818954</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!--====  End of html  ====-->

@@ -1,0 +1,56 @@
+<div>  
+    <%= link_to new_contact_path, {remote: true, class: "btn btn_standar btn-common btn-effect bg-special", id: "anadir-contact-btn", style:"color:white;"}  do %>
+      <span class="fas fa-plus-square" style=""></span>
+    <% end %>
+
+    <button class="btn btn_standar btn-common btn-effect bg-special-two" id="show_info" style="color:white;">
+        <i class="fas fa-info-circle"></i>
+    </button>
+</div>
+<br />
+
+<div id="main-container">
+  <table class="table-standar table-contact" id="table_contacts">
+    <thead class="thead-standar bg-special">
+      <tr class="tr-standar">
+        <th class="th-standar">Nombres o alias</th>
+        <th class="th-standar">Sistema</th>
+        <th class="th-standar">T. Pago</th>
+        <th class="th-standar">Número</th>
+        <th class="th-standar">Acciones</th>
+      </tr>
+    </thead>
+
+    <%current_user.contacts.each do |contact|%>
+      <tr class="tr-standar" id="contact_<%=contact.id%>">
+        <td class="td-standar" data-label="Nombres o Alias"><%=contact.names%></td>
+        <td class="td-standar" data-label="Sistema"><%=contact.operator.gsub("_"," ")%></td>
+        <td class="td-standar" data-label="T. Pago"><%=contact.type_payment%></td>
+        <td class="td-standar" data-label="Número">
+          <%=contact.cod_area.present? ? "(" + contact.cod_area + ") " : "" %>
+          <%=contact.number%></td>
+        <td class="td-standar" data-label="Acciones">
+          <%= link_to edit_contact_path(contact), {class: "btn btn-primary btn-sm", remote: true} do%>
+            <i class="fas fa-edit"></i>
+          <% end %>
+
+          <a href="#" class="btn btn-sm btn-danger" id="<%=contact.id%>" onclick="show_modal_delete(event,this)"><i class="fas fa-trash-alt"></i></a>
+          <%= link_to "Borrar", contact, remote: true, method: :delete, class: "d-none", id:"delete_#{contact.id}" %>
+        </td>
+      </tr>
+    <%end%>
+  </table>
+</div>
+
+<div class="row justify-content-center" id="registro_vacio">
+  <%unless current_user.contacts.any?%>
+    <%=render "partials/registro_vacio"%>
+  <%end%>
+</div>
+
+<%= render 'partials/modal-info', modulo: "contacts"%>
+<%= render 'modal_contacts' %>
+
+<script>
+    new ShowModalInfo();
+</script>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recargas Fast</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="/datepicker/css/bootstrap-datepicker3.standalone.css">
+    
+  </head>
+
+  <body class="container-scroll" id="page-top">
+    
+    <div class="contenedor_loader_sup bg-special">
+        <div class="loader loader-sup-tam"></div>
+    </div> 
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-special sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <span class="sidebar-brand d-flex align-items-center justify-content-center my-2">
+                <div class="sidebar-brand-icon">
+                    <%=image_tag("logo/Logo_sidebar.png", width:"50px")%>
+                </div>
+                <div class="sidebar-brand-text ml-1 mr-3"><%=image_tag("logo/name_sidebar.png", width:"100%")%></div>
+            </span>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <li class="nav-item" id="access_dashboard">
+                <a class="nav-link show_loader_sup access_link" href="<%=url_for(user_root_path)%>">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <li class="nav-item" id="access_recharges">
+                <a class="nav-link show_loader_sup access_link" href="<%=url_for(recharges_path)%>">
+                    <i class="fas fa-fw fa-mobile-alt"></i>
+                    <span>Vender Recargas</span></a>
+            </li>
+
+            <%unless current_user.is_admin?%>
+                
+                <li class="nav-item" id="access_deposits">
+                    <a class="nav-link show_loader_sup access_link" href="<%=url_for(deposits_path)%>">
+                        <i class="fas fa-fw fa-cart-plus"></i>
+                        <span>Registrar Deposito</span></a>
+                </li>
+
+                <li class="nav-item" id="access_contacts">
+                    <a class="nav-link show_loader_sup access_link" href="<%=url_for(contacts_path)%>">
+                        <i class="far fa-fw fa-address-book"></i>
+                        <span>Clientes Frecuentes</span></a>
+                </li>
+            <%else%>
+                <li class="nav-item">
+                    <a class="nav-link show_loader_sup" href="<%=url_for(process_recharges_path)%>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Procesar Recargas</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link show_loader_sup" href="<%=url_for(process_deposits_path)%>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Procesar Depositos</span></a>
+                </li>
+
+                <li class="nav-item" id="access_deposits">
+                    <a class="nav-link show_loader_sup access_link" href="<%=url_for(deposits_path)%>">
+                        <i class="fas fa-fw fa-cart-plus"></i>
+                        <span>Ver Depositos</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link show_loader_sup" href="<%=url_for(recharge_params_path)%>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Parametros de recargas</span></a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link show_loader_sup" href="<%=url_for(users_all_path)%>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Usuarios</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link show_loader_sup" href="<%=url_for(balances_path)%>">
+                        <i class="fas fa-fw fa-wallet"></i>
+                        <span>Balances</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link show_loader_sup" href="<%=url_for(news_index_path)%>">
+                        <i class="fas fa-fw fa-chart-area"></i>
+                        <span>Noticias</span></a>
+                </li>
+            <%end%>
+
+            <li class="nav-item" id="access_historial">
+                <a class="nav-link show_loader_sup access_link" href="<%=url_for(historial_path)%>">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Historial de ventas</span></a>
+            </li>
+
+            <!--
+            <li class="nav-item">
+                <a class="nav-link show_loader_sup disabled">
+                    <i class="fas fa-fw fa-award"></i>
+                    <span>Premios del Mes</span></a>
+            </li>-->
+
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle" data-toggle="collapse"></button>
+            </div>
+
+            <!--
+            <div class="sidebar-card">
+                <%= image_tag("template/undraw_rocket.svg", class:"sidebar-card-illustration mb-2") %>
+                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
+            </div>-->
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form> -->
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <!--
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>-->
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    
+                                    <%if current_user.profile.status === "completado"%>
+                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=current_user.profile.name + " " + current_user.profile.last_name%></span>
+
+                                        <%if current_user.profile.gender === "Hombre"%>
+                                            <%url_img = "template/undraw_profile.svg"%>
+                                        <%elsif current_user.profile.gender === "Mujer"%>
+                                            <%url_img = "template/avatar_woman.png"%>
+                                        <%end%>
+                                    <%else%>
+                                        <%url_img = "template/undraw_rocket.svg"%>
+                                    <%end%>
+                                    <%= image_tag(url_img, class:"img-profile rounded-circle") %>
+                                </a>
+                            
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a 
+                                    class="dropdown-item show_loader_sup" 
+                                    href="<%if current_user.profile.status === "incompleto"%>
+                                            <%=url_for(edit_profile_path(current_user.profile))%>
+                                          <%else%>
+                                            <%=url_for(profiles_path)%>
+                                          <%end%>">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Perfil
+                                </a>
+                                
+                                <%if current_user.is_admin?%>
+                                    <%= link_to system_configurations_path, class: "dropdown-item show_loader_sup"  do %>
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" ></i> Settings
+                                    <%end%>
+                                <%end%>
+                                <!--
+                                <a class="dropdown-item show_loader_sup" href="#">
+                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Activity Log
+                                </a>-->
+                                <div class="dropdown-divider"></div>
+                                <%= link_to destroy_user_session_path, html_options = { class: "dropdown-item show_loader_sup", method: :delete}  do %>
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" ></i> Cerrar Sesión
+                                <%end%>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <%= yield %>
+                    
+                    <%if user_signed_in?%>
+                        <!-- Scroll to Top Button-->
+                        <a class="scroll-to-top rounded" href="#page-top">
+                            <i class="fas fa-angle-up"></i>
+                        </a>
+                    <%end%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="/datepicker/locales/bootstrap-datepicker.es.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/js_dashboard/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <%=render "partials/script_show_notification"%>
+
+    <script>
+        <%unless current_user.profile.status != "incompleto" || current_user.is_admin?%>
+            $(".access_link").addClass("disabled")
+        <%end%>
+    </script>
+  </body>
+</html>

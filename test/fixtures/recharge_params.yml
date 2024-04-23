@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  operadora: MyString
+  amount_min: 1
+  amount_max: 1
+  multiplos_amount_permit: MyString
+
+two:
+  operadora: MyString
+  amount_min: 1
+  amount_max: 1
+  multiplos_amount_permit: MyString

@@ -1,0 +1,63 @@
+<div class="float-right">
+    <div class="card bg-special shadow h-100">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col-auto">
+                    <i class="fas fa-wallet fa-2x text-gray-100"></i>
+                </div>
+                <div class="col mx-3">
+                    <div class="h6 mb-0 font-weight-bold text-gray-100">Balance Total</div>
+                    <div class="h6 mb-0 font-weight-bold text-gray-100">Bs <%= number_with_precision(@balance_total, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%> </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br><br>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <!--
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </tfoot>-->
+                <tbody>
+                    <%@balances.each do |balance|%>
+                        <%if balance.balance > 0 && balance.user.id != 9 && balance.user.id != 2%>
+                            <tr>
+                                <td class="align-middle"><%=balance.user.profile.name + " " + balance.user.profile.last_name%></td>
+                                <td class="align-middle text-right"><%=number_with_precision(balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></td>
+                            </tr>
+                        <%end%>
+                    <%end%>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Page level plugins -->
+<script src="/js_dashboard/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/js_dashboard/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="/js_dashboard/js/demo/datatables-demo.js"></script>

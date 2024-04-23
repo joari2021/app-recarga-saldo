@@ -1,0 +1,39 @@
+<div class="modal_original" id="modal_parametros">
+    <div class="modal_original_wrap modal-dialog modal-dialog-centered modal-dialog-scrollable" id="modal_parametros_wrap">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title color-special-two font-weight-bold">Parametros de Recargas</h5>
+                
+                <i class="far fa-times-circle close_modal color-special-two btn-effect rounded-circle" id="close_modal_parametros"></i>
+                
+            </div>
+            <div class="modal-body container-scroll">
+                <div class="row justify-content-center">
+                    <p class="p-3"><b>Nota:</b> Estos parámetros solo aplican para las recargas Pre-Pago.</p>
+                    <%@recharge_params.each do |params_operator| %>
+                        <%oper = params_operator.operadora %>
+                        
+                        <div class="col-md-6 col-sm-8 col-10 mb-5">
+                            
+                            <div class="card border-left-<%=oper === "Movistar_TV" ? "Movistar" : oper%> shadow py-2">
+                                <div class="card-body">
+                                    <%= image_tag("sistema_recargas/#{oper.downcase}.png", width:"100%", height:"70px") %>
+                                </div>
+                            </div>
+                            
+                            <div class="card border-left-<%=oper === "Movistar_TV" ? "Movistar" : oper%> shadow mt-2 py-2">
+                                <div class="card-body">
+                                    <span class="font-weight-bold">Monto mínimo: </span><span id="span_amount_min_<%=oper%>"><%=number_with_precision(params_operator.amount_min, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></span><hr>
+    
+                                    <span class="font-weight-bold">Monto máximo: </span><span id="span_amount_max_<%=oper%>"><%=number_with_precision(params_operator.amount_max, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></span><hr>
+    
+                                    <span class="font-weight-bold">Multiplos permitidos: </span><span id="span_multiplos_amount_permit_<%=oper%>"><%=number_with_precision(params_operator.multiplos_amount_permit, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></span>
+                                </div>
+                            </div>
+                        </div>
+                    <%end%>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

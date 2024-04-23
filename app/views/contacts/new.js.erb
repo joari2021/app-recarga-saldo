@@ -1,0 +1,18 @@
+$('#title_modal_contact').html("Nuevo cliente");
+ 
+$('#modal_body_contacts').html('<%= j render("form") %>');
+
+$("#modal_contact").addClass("show")
+$("#modal_contact_wrap").addClass("show")
+
+<!--VARIABLE PARA LEER DESDE LA FUNCION SET_MAX_LENGHT Y DIFERENCIARLA-->
+input_number = $("#contact_number")
+toggle_list_options()
+
+<%if @contact.errors.any?%>
+
+    <%if @contact.operator === "Movistar" && @contact.type_payment === "Post-pago" || @contact.operator === "Movistar TV" || @contact.operator === "Inter" || @contact.operator === "Simple TV"%>
+        $("#div_cod_area").css({"display":"none"})
+    <%end%>
+    estilizar_errores_validacion()
+<%end%>

@@ -1,0 +1,306 @@
+<!-- Page Heading -->
+
+<div class="align-items-center justify-content-between mb-4">
+    <button class="btn-sm btn text-gray-100 btn-effect btn-common bg-special-two" id="btn_show_modal_prom"><i
+            class="far fa-eye fa-sm"></i> Promoción de referidos</button>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card bg-special shadow h-100 py-2 text-gray-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">
+                            Balance</div>
+                        <div class="h6 mb-0 font-weight-bold">Bs <%=number_with_precision(current_user.balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-wallet fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card bg-g-2 shadow h-100 py-2 text-gray-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">
+                            Referidos</div>
+                        <div class="h6 mb-0 font-weight-bold"><%=@referidos.count%></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card bg-g-1 shadow h-100 py-2 text-gray-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">
+                            Recargas confirmadas
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h6 mb-0 mr-3 font-weight-bold"><%=@recharges.where(status:"confirmada",type_operation:"direct_recharge").count%></div>
+                            </div>
+                            <div class="col">
+                                <%porcentaje = @recharges.where(status:["confirmada","enviada"],type_operation:"direct_recharge").count > 0 ? (@recharges.where(status:"confirmada",type_operation:"direct_recharge").count * 100) / @recharges.where(status:["confirmada","enviada"],type_operation:"direct_recharge").count : 100%>
+                                <div class="progress progress-sm mr-2">
+                                    <div class="progress-bar bg-info" role="progressbar"
+                                        style="width: <%=porcentaje%>%" aria-valuenow="100" aria-valuemin="0"
+                                        aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="far fa-check-circle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card bg-g-4 shadow h-100 py-2 text-gray-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">
+                            Recargas enviadas</div>
+                        <div class="h6 mb-0 font-weight-bold"><%=@recharges.where(status:"enviada",type_operation:"direct_recharge").count%></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-exclamation-circle fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+    <!-- Area Chart -->
+    <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold color-special">Resumen de ventas (Año en curso)</h6>
+                <!--
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Dropdown Header:</div>
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>-->
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="myAreaChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bar Chart -->
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold color-special">Recargas realizadas (Últimos 6 meses)</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-area">
+                    <canvas id="myBarChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pie Chart -->
+    <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold color-special">Recargas realizadas (Año en curso)</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+                <div class="chart-pie pt-4 pb-2">
+                    <canvas id="myPieChart"></canvas>
+                </div>
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fas fa-circle color-Movistar"></i> Movistar
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle color-Digitel"></i> Digitel
+                    </span>
+                </div>
+
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fas fa-circle color-Movilnet"></i> Movilnet
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle color-Cantv"></i> Cantv
+                    </span>
+                </div>
+
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fas fa-circle color-Inter"></i> Inter
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle color-Simple_TV"></i> Simple TV
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Recargas Fast 2021</span>
+        </div>
+    </div>
+</footer>
+<!-- End of Footer -->
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MODAL INFORMATIVO-->
+<div class="modal_original" id="modal_standar" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+    <div class="modal_original_wrap modal-dialog modal-dialog-centered modal-md" id="modal_standar_wrap">
+        <div class="modal-content">
+            <div class="card shadow-sm">
+                <%= image_tag("info/reconversion_monetaria.png", {class:"bd-placeholder-img", width:"100%"}) %>
+                <div class="card-body m-1 p-1">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn_standar btn-common btn-effect btn-secondary text-uppercase" id="btn_modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--MODAL PROMOCION DE REFERIDOS
+========================================================================-->
+<div class="modal_original" id="modal_prom_ref" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true">
+    <div class="modal_original_wrap modal-dialog-centered modal-dialog-scrollable" id="modal_prom_ref_wrap" style="max-width:600px !important">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title color-special-two font-weight-bold" id="title_modal_contact">Promoción de Referidos</h5>
+                <i class="far fa-times-circle close_modal color-special-two btn-effect rounded-circle" id="btn_close_modal_prom"></i>
+            </div>
+            <div class="modal-body">
+                <div class="card shadow-sm">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold color-special-two">Link para referir</h6>
+                    </div>
+                    <div class="card-body">
+                        <%link = "#{url_for(new_user_registration_url)}?ref=#{current_user.referidor_id}"%>
+
+                        <i class="far fa-clone float-right color-special-two icono-copy" id="icon-copy" onclick="copiarAlPortapapeles('<%=link%>','Link copiado con éxito.')" style="font-size:30px"></i>
+                        
+                        <div class="cont-link-referido col-10"><span><%=link%></span></div>
+                    </div>
+                </div>
+
+                <div class="mt-5">
+                    <p class="px-2">Comparte el link de referido que te suministramos con todos tus amigos, familiares y en tus redes sociales para que otras personas conozcan de nuestra página web por medio de tí. Cada vez que un usuario que se ha registrado con tu link alcance vender <b>Bs 100.000.000</b> en saldo, tú recibiras una bonificación de <b>Bs 500.000</b> directo en tu balance al final de mes.</p>
+    
+                    <p class="px-2">Para poder ser beneficiario de esta bonificación deberás tener un mínimo de cinco (05) usuarios registrados con tu link. A partir de ese momento cada vez que dichos usuarios alcancen el monto en ventas requerido recibiras la bonificación mencionada por lo que podrás tener con trabajo y diligencia un ingreso pasivo importante si te lo propones.</p>
+    
+                    <p class="px-2">Esta promoción estará disponible hasta el 23 de agosto del 2022.</p>
+                </div>
+            </div>
+        </div>  
+    </div>
+</div>
+
+<script>
+    ventaMonths = <%=@venta_months_2021%>
+
+    movistar_p = <%=@movistar_p%>;
+    digitel_p = <%=@digitel_p%>;
+    movilnet_p = <%=@movilnet_p%>;
+    cantv_p = <%=@cantv_p%>;
+    movistar_tv_p = <%=@movistar_tv_p%>;
+    inter_p = <%=@inter_p%>;
+    simple_tv_p = <%=@simple_tv_p%>;
+    registro_recharges = movistar_p + digitel_p + movilnet_p + cantv_p + movistar_tv_p + inter_p + simple_tv_p
+    
+    
+    recharges_last_six_months = <%=@recharges_last_six_months%>
+    last_months = <%=@last_months%>
+    meses = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
+    array_last_months = []
+    for (i=0; i<last_months.length; i++){
+        array_last_months.push(meses[last_months[i]])
+    }
+    num_med_barra_max = Math.max(...recharges_last_six_months);
+    medidores_nums = [50,100,200,400,600,800,1000]
+    for (i = 0; i < medidores_nums.length; i++) {
+        element = medidores_nums[i];
+        if (num_med_barra_max <= element){
+            max_num_barra = element
+            break
+        }
+    }
+</script>
+
+<!-- Page level plugins -->
+<script src="/js_dashboard/vendor/chart.js/Chart.js"></script>
+<!-- Page level custom scripts -->
+<script src="/js_dashboard/js/demo/chart-area-demo.js"></script>
+<script src="/js_dashboard/js/demo/chart-bar-demo.js"></script>
+<script src="/js_dashboard/js/demo/chart-pie-demo.js"></script>

@@ -1,0 +1,2 @@
+class NonexistentNumber < ApplicationRecord
+end

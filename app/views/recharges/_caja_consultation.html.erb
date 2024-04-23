@@ -1,0 +1,52 @@
+<%case recharge.operator
+     when "Movistar"
+     border = "border-left-Movistar"
+     text = "color-Movistar"
+
+     when "Digitel"
+     border = "border-left-Digitel"
+     text = "color-Digitel"
+
+     when "Inter"
+     border = "border-left-Inter"
+     text = "color-Inter"
+end
+%>
+
+<div class="col-lg-4 col-sm-6 mb-4" id="consultation_<%=recharge.id%>">
+    <div class="card <%=border%> shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-sm font-weight-bold <%=text%> text-uppercase mb-1">
+                        <%=recharge.operator%>
+                    </div>
+                    <div class="text-sm mb-0">
+                    <span class="font-weight-bold">Número: </span><%=recharge.cod_area.present? ? "(" + recharge.cod_area + ") " : "" %><%=recharge.number%> <br>
+                    
+                    <!--
+                    <span class="font-weight-bold">Dias Disponibles: </span><%=recharge.available_days.nil? ? "?" : recharge.available_days%><br> -->
+                    
+                    <span class="font-weight-bold">Deuda: </span><%=recharge.status != "confirmada" ? "?" : number_with_precision(recharge.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%><br>
+                    </div>
+
+                    <%if recharge.status === "anulada"%>
+                        <span class="badge badge-warning">Número Inválido</span>
+                    <%end%>
+
+                    <div class="float-right mt-1">
+                        <%if recharge.status === "confirmada"%>
+                            <%=link_to "Pagar", edit_recharge_path(recharge), html_options = {class: "btn btn-info btn-sm", remote: true}%>
+                        <%elsif recharge.status === "enviada"%>
+                            <span class="badge badge-secondary">En espera</span>
+                        <%elsif recharge.status === "anulada"%>
+                            <a href="#" class="btn btn-sm btn-danger" id="<%=recharge.id%>" onclick="show_modal_delete(event,this)"><i class="fas fa-trash-alt"></i></a>
+
+                            <%= link_to "Borrar", recharge, remote: true, method: :delete, class: "d-none", id:"delete_#{recharge.id}" %>
+                        <%end%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

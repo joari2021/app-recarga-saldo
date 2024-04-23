@@ -1,0 +1,61 @@
+$("#close_modal_recharge").trigger("click");
+
+<%if @recharge.type_operation === "direct_recharge" && @recharge.status === "enviada"%>
+  $("#card_balance").text("Bs <%= number_with_precision(current_user.balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%>")
+
+  $("#consultation_<%=@recharge.id%>").fadeOut(600,function(){
+    $(this).remove()
+  })
+    
+  swal({
+    title: "Recarga Realizada",
+    text: "puede revizar el estado de esta recarga en la opción Historial",
+    icon: "success",
+    button: "Cerrar",
+  });
+
+<%elsif @recharge.type_operation === "direct_recharge" && @recharge.status === "confirmada"%>
+  $("#recharge_<%=@recharge.id%>").fadeOut(400,function(){
+    $(this).remove()
+    new_number = format_integer($("#recharges_cant").text())
+    $("#recharges_cant").text(new_number-1)
+  })
+
+  swal({
+    title: "Recarga Confirmada.",
+    text: "La recarga ha sido confirmada con exito",
+    icon: "success",
+    button: "Cerrar",
+  });
+
+<%elsif @recharge.type_operation === "consultation" && @recharge.status === "confirmada"%>
+  $("#recharge_<%=@recharge.id%>").fadeOut(400,function(){
+    $(this).remove()
+    new_number = format_integer($("#recharges_cant").text())
+    $("#recharges_cant").text(new_number-1)
+  })
+
+  swal({
+    title: "Confirmación exitosa.",
+    text: "La consulta ha sido confirmada con exito",
+    icon: "success",
+    button: "Cerrar",
+  });
+
+<%elsif @recharge.status === "anulada"%>
+  $("#recharge_<%=@recharge.id%>").fadeOut(400,function(){
+    $(this).remove()
+    new_number = format_integer($("#recharges_cant").text())
+    $("#recharges_cant").text(new_number-1)
+  })
+
+  swal({
+    title: "Anulación exitosa.",
+    text: "La solicitud ha sido anulada con éxito.",
+    icon: "success",
+    button: "Cerrar",
+  });
+<%end%>
+
+
+

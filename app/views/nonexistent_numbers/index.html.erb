@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Nonexistent Numbers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Operator</th>
+      <th>Type payment</th>
+      <th>Number</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nonexistent_numbers.each do |nonexistent_number| %>
+      <tr>
+        <td><%= nonexistent_number.operator %></td>
+        <td><%= nonexistent_number.type_payment %></td>
+        <td><%= nonexistent_number.number %></td>
+        <td><%= link_to 'Show', nonexistent_number %></td>
+        <td><%= link_to 'Edit', edit_nonexistent_number_path(nonexistent_number) %></td>
+        <td><%= link_to 'Destroy', nonexistent_number, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Nonexistent Number', new_nonexistent_number_path %>

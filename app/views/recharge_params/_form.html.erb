@@ -1,0 +1,57 @@
+<%= form_for @recharge_param, {remote: true}  do |form| %>
+  <%oper = @recharge_param.operadora%>
+  <div class="form">
+
+    <!--OPERADORA-->
+    <div class="grupo">
+      <%= form.text_field :operadora, :required => "required", class:"input-special"%><span class="barra bg-before-<%=oper%>"></span>
+      <%= form.label :operadora, "Operadora", for: "", class: "label-special label-#{oper}" %>
+  
+      <%if @recharge_param.errors[:operadora].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @recharge_param.errors[:operadora].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+    </div>
+
+    <!--MONTO MINIMO-->
+    <div class="grupo">
+      <%= form.text_field :amount_min, :required => "required", class:"input-special", oninput:"input_value_decimal_with_separator(this)"%><span class="barra bg-before-<%=oper%>"></span>
+      <%= form.label :amount_min, "Monto mínimo", for: "", class: "label-special label-#{oper}" %>
+  
+      <%if @recharge_param.errors[:amount_min].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @recharge_param.errors[:amount_min].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+    </div>
+
+    <!--MONTO MAXIMO-->
+    <div class="grupo">
+      <%= form.text_field :amount_max, :required => "required", class:"input-special", oninput:"input_value_decimal_with_separator(this)"%><span class="barra bg-before-<%=oper%>"></span>
+      <%= form.label :amount_max, "Monto máximo", for: "", class: "label-special label-#{oper}" %>
+  
+      <%if @recharge_param.errors[:amount_max].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @recharge_param.errors[:amount_max].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+    </div>
+
+    <!--MULTIPLOS PERMITIDOS-->
+    <div class="grupo">
+      <%= form.text_field :multiplos_amount_permit, :required => "required", class:"input-special", oninput:"input_value_decimal_with_separator(this)"%><span class="barra bg-before-<%=oper%>"></span>
+      <%= form.label :multiplos_amount_permit, "Multiplos permitidos", for: "", class: "label-special label-#{oper}" %>
+  
+      <%if @recharge_param.errors[:multiplos_amount_permit].any? %>
+        <p class="msj_error mt-2 bg-danger rounded"><%= @recharge_param.errors[:multiplos_amount_permit].to_s[/\w([^"]*)/] %></p>
+      <% end %>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn_standar btn-common btn-effect text-uppercase bg-<%=oper%>" id="btn_params_recharges">Guardar</button>
+
+      <%=form.submit "Guardar", class: "d-none", id: "btn_submit"%>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  $("#btn_params_recharges").click(function () {
+    $("#btn_submit").trigger("click")
+  })
+</script>

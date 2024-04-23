@@ -1,0 +1,36 @@
+<div id="solicitudes_pend">
+    <div id="sub_solicitudes_pend">
+        <%=render "partials/solicitudes_pendientes"%>
+        
+        <h3 class="color-special pb-3 mt-5 mb-4 text-center border-title font-weight-bold">Recargas</h3>
+        <hr class="divider-title">
+        <br>
+        
+        <div class="row <%unless @recharges.where(type_operation: "direct_recharge").any?%>justify-content-center<%end%>"" id="recargas">
+            <%@recharges.where(type_operation: "direct_recharge").each do |recharge|%>
+                <%=render "caja_recharges_proccess", recharge: recharge%>
+            <%end%>
+        
+            <%unless @recharges.where(type_operation: "direct_recharge").any?%>
+                <%=render "partials/registro_vacio"%>
+            <%end%>
+        </div>
+        
+        <h3 class="color-special pb-3 mt-5 mb-4 text-center border-title font-weight-bold">Consultas</h3>
+        <hr class="divider-title">
+        <br>
+        
+        <div class="row <%unless @recharges.where(type_operation: "consultation").any?%>justify-content-center<%end%>" id="consultas">
+            <%@recharges.where(type_operation: "consultation").each do |recharge|%>
+                <%=render "caja_recharges_proccess", recharge: recharge%>
+            <%end%>
+        
+            <%unless @recharges.where(type_operation: "consultation").any?%>
+                <%=render "partials/registro_vacio"%>
+            <%end%>
+        </div>
+    </div>
+</div>
+
+<%=render "modal_recharge"%>
+<%=render "partials/audio"%>

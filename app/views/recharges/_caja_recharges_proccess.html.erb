@@ -1,0 +1,29 @@
+<%operator = recharge.operator%>
+
+<div class="col-lg-4 col-sm-6 mb-4 div_recharge" id="recharge_<%=recharge.id%>">
+    <div class="card border-left-<%=operator%> shadow h-100 py-2">
+        <div class="card-body">
+            <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                    <div class="text-sm font-weight-bold color-<%=operator%> text-uppercase mb-1">
+                        <%=recharge.operator%>
+                    </div>
+                    <div class="text-sm mb-0">
+                        <span class="font-weight-bold">Usuario: </span><%=recharge.user.profile.name + " " + recharge.user.profile.last_name%><br> 
+                        <span class="font-weight-bold">Tipo de pago: </span><%=recharge.type_payment%><br> 
+                        
+                        <span class="font-weight-bold">Número: </span><%=recharge.cod_area.present? ? "(" + recharge.cod_area + ") " : "" %><%=recharge.number%> <br>
+                        
+                        <%if recharge.type_operation === "direct_recharge"%>
+                            <span class="font-weight-bold">Monto: </span><%=number_with_precision(recharge.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%><br>
+                        <%end%>
+                    </div>
+                    
+                    <div class="text-center mt-3">            
+                        <%=link_to "Procesar", edit_recharge_path(recharge), html_options = {class: "btn_standar btn-common btn-effect bg-#{operator} text-uppercase d-inline-block show_loader_sup", remote: true}%>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

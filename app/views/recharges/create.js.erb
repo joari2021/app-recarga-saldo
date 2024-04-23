@@ -1,0 +1,57 @@
+$("#close_modal_recharge").trigger("click");
+
+<%if @recharge.type_operation === "direct_recharge"%>
+    title = "Recarga Enviada!"
+    text = "Puede verificar el estado de la recarga en la opción Historial ubicada en el menú lateral izquierdo"
+
+    $("#card_balance").text("Bs <%= number_with_precision(current_user.balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%>")
+<%else%>
+    title = "Consulta Enviada!"
+    text = "En unos segundos se mostrara en la sección de abajo el monto de la deuda y podrá hacer el pago si lo desea."
+
+    $("#notify_vacio").remove()
+    $("#sub_contenedor_consultation").append(`<%=render "caja_consultation", recharge: @recharge%>`);
+    $("#consultation<%=@recharge.id%>").css({"display":"none"})
+    $("#consultation<%=@recharge.id%>").fadeIn(600)
+<%end%>
+
+swal({
+  title: title,
+  text: text,
+  icon: "success",
+  button: "Cerrar",
+});
+
+<!--INFORME DE GUARDADO DE CONTACTOS-->
+<%if @contact.present?%>
+  $(".swal-button").click(function(){
+    
+    swal({
+      <% unless @contact.errors.any? %>
+        title: "Contacto Guardado",
+        text: "El contacto fue registrado con exito.",
+        icon: "success",
+      <%else%>
+        title: "Contacto No Guardado",
+        text: "El contacto no se guardo debido a los siguientes errores:\n\n<%if @contact.errors[:names].any? %>* Nombres o alias: <%= @contact.errors[:names].to_s[/\w([^"]*)/] %><% end %>",
+        icon: "warning",
+      <%end%>
+      button: "Cerrar",
+    });
+  })
+<%end%>
+
+<%if @contact_registrado.present?%>
+  $(".swal-button").click(function(){
+    swal({
+      title: "Contacto No Guardado",
+      text: "El número ya ha sido registrado entre tus contactos",
+      icon: "warning",
+      button: "Cerrar",
+    });
+  })
+<%end%>
+    
+    
+
+

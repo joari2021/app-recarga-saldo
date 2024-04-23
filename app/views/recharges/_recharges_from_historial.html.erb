@@ -1,0 +1,37 @@
+<%@recharges.each do |recharge|%>
+    <%case recharge.status%>
+    <%when "enviada"%>
+      <%color = "primary"%>
+      <%descripcion = "La recarga ha sido enviada con exito."%>
+    <%when "confirmada"%>
+      <%color = "success"%>
+      <%descripcion = "La recarga ha sido confirmada como recibida en el número destino."%>
+    <%when "anulada"%>
+      <%color = "danger"%>
+      <%descripcion = "La recarga ha sido anulada y el monto ha sido reintegrado a tu balance."%>
+    <%end%>
+
+    <article class="row-table nfl-<%=color%>">
+        <ul>
+            <li class="d-xs-none align-middle"><%=recharge.created_at.strftime("%d/%m/%Y %02H:%02M")%></li>
+            <li class="align-middle">
+                <%=recharge.cod_area.present? ? "(" + recharge.cod_area + ") " : "" %>
+                <%=recharge.number%>
+            </li>
+            <li class="align-middle"><%=number_with_precision(recharge.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></li>
+
+            <li class="align-middle">
+                <span class="badge badge-pill text-gray-300 badge-nfl-<%=color%>"><%=recharge.status%></span> 
+            </li>
+
+            <li class="align-middle" style="width:7% !important">
+                <%= link_to recharge_path(recharge), {remote: true, class:"btn btn_standar btn-common btn-effect bg-special-two"}  do %>
+                    <i class="far fa-eye text-gray-100"></i>
+                <% end %>
+            </li>
+        </ul>
+        <ul class="more-content">
+            <li><span><%=descripcion%></span></li>
+        </ul>
+    </article>
+<%end%>

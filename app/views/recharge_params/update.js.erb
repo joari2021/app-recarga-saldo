@@ -1,0 +1,13 @@
+$("#close_modal_recharge_param").trigger("click")
+
+swal({
+    title: "Guardado con éxito!!!",
+    text: "Los parametros han sido guardados con éxito",
+    icon: "success"
+})
+
+$("#span_amount_min_<%=@recharge_param.operadora%>").text("<%=number_with_precision(@recharge_param.amount_min, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%>")
+
+$("#span_amount_max_<%=@recharge_param.operadora%>").text("<%=number_with_precision(@recharge_param.amount_max, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%>")
+
+$("#span_multiplos_amount_permit_<%=@recharge_param.operadora%>").text("<%=number_with_precision(@recharge_param.multiplos_amount_permit, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%>")

@@ -1,0 +1,21 @@
+$("#close_modal_deposit").trigger("click");
+
+$("#deposit_<%=@deposit.id%>").remove()
+
+<%if @deposit.status === "confirmado"%>    
+    swal({
+        title: "Confirmación enviada",
+        text: "El deposito ha sido confirmado con exito",
+        icon: "success",
+        button: "Cerrar",
+    });
+<%elsif @deposit.status === "anulado"%>
+    swal({
+        title: "Anulación completada",
+        text: "El deposito ha sido anulado con exito",
+        icon: "success",
+        button: "Cerrar",
+    });
+<%end%>
+new_number = format_integer($("#deposits_cant").text())
+$("#deposits_cant").text(new_number-1)

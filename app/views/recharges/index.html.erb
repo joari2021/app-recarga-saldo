@@ -1,0 +1,191 @@
+<div id="section-recharge">
+  <div id="sub-section-recharge">
+    <div class="row justify-content-between">
+        <div class="mb-3">
+          <button class="btn-sm btn text-gray-100 btn-effect btn-common bg-special-two" onclick="mostrar_parametros()">
+            <i class="far fa-eye fa-sm"></i> Parámetros de las operadoras
+          </button>
+        </div>
+
+        <div class="card bg-special shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col-auto">
+                        <i class="fas fa-wallet fa-2x text-gray-100"></i>
+                    </div>
+                    <div class="col mx-3">
+                        <div class="h6 mb-0 font-weight-bold text-gray-100" id="card_balance">Bs <%= number_with_precision(current_user.balance.balance, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+    
+    <div class="w-100 text-center"><span class="h3 font-weight-bold color-special d-inline-block">Telefonía Móvil y Fija</span></div>
+    <hr class="divider-title">
+    <br>
+    
+    <div class="row justify-content-center">
+      <!--MOVISTAR
+      ===========================================================================================-->
+      <%=render "system_to_recharge", operator: "Movistar", available: @configuration.movistar%>
+      
+      <!--DIGITEL
+      ===========================================================================================-->
+      <%=render "system_to_recharge", operator: "Digitel", available: @configuration.digitel%>
+    
+      <!--MOVILNET
+      ===========================================================================================-->
+      <%=render "system_to_recharge", operator: "Movilnet", available: @configuration.movilnet%>
+     
+      <!--CANTV
+      ===========================================================================================-->
+      <%=render "system_to_recharge", operator: "Cantv", available: @configuration.cantv%>
+    </div>
+    
+    <div class="w-100 text-center"><span class="h3 mt-5 font-weight-bold color-special d-inline-block">Servicios TV Satelital</span></div>
+    <hr class="divider-title">
+    <br>
+    
+    <div class="row justify-content-center">
+    
+      <!-- MOVISTAR TV
+      ====================================================================================== -->
+      <%=render "system_to_recharge", operator: "Movistar_TV", available: @configuration.movistar_tv%>
+      
+      <!-- INTER
+      ====================================================================================== -->
+      <%=render "system_to_recharge", operator: "Inter", available: @configuration.inter%>
+    
+      <!-- SIMPLE TV
+      ====================================================================================== -->
+      <%=render "system_to_recharge", operator: "Simple_TV", available: @configuration.simple_tv%>
+    </div>
+  </div>
+</div>
+
+<div class="w-100 text-center"><span class="h3 mt-5 font-weight-bold color-special d-inline-block">Consultas y pagos Post-Pago</span></div>
+<hr class="divider-title">
+<br>
+
+<div id="contenedor_consultations">
+  <div class="row justify-content-center" id="sub_contenedor_consultation">
+    <%current_user.recharges.where(type_operation: "consultation").each do |recharge|%>
+      <%=render "caja_consultation", recharge: recharge%>
+    <%end%>
+  
+    <%unless current_user.recharges.where(type_operation: "consultation").any?%>
+      <%=render "partials/registro_vacio"%>
+    <%end%>
+  </div>
+</div>
+
+<button class="d-none" id="show_info">Mostrar Info</button>
+
+<%= render 'partials/modal-info', modulo: "recharges"%>
+<%= render "modal_parametros"%>
+<%= render "modal_buscador_contacts"%>
+<%= render "modal_recharge"%>
+
+<script>
+    <%= render "element_dom_globales"%>
+    
+    //Variables globales
+    show_div_cod_area = false
+    operation = ""
+
+    <%time = Time.now.in_time_zone("Caracas")%>
+    <%if time.strftime("%H").to_i < 5 || time.strftime("%H").to_i > 22 %>
+        new ShowModalInfo();
+        $('#show_info').trigger('click')
+    <%end%>
+
+    function card_options_function(event) {
+
+      if ($("#recharge_operator") != null){
+        if($("#recharge_type_payment").val().length === 0 ){
+          $("#recharge_type_payment").val($(this).data("pago"))
+        }
+        
+        switch ($("#recharge_operator").val()) {
+          case "Movistar":
+            
+            monto_min = <%=@params_movistar.amount_min%>
+            <%if current_user.balance.balance >= @params_movistar.amount_max%>
+              monto_max = <%=@params_movistar.amount_max%>
+            <%else%>
+              monto_max = <%=current_user.balance.balance%>
+            <%end%>
+
+            multiplos = <%=@params_movistar.multiplos_amount_permit%>
+            if($("#recharge_type_payment").val() === "Prepago"){
+              show_div_cod_area = true
+              operation = "recarga"
+              cod_area = [...cod_area_movistar,...cod_area_tlf_fija]
+            }else{
+              show_div_cod_area = false
+              operation = "consulta"
+              cod_area = []
+              $("#btn_recarga").text("consultar")
+            }
+            show_form(monto_min,monto_max,multiplos)
+            break;
+
+          case "Digitel":
+
+            cod_area = [...cod_area_digitel,...cod_area_tlf_fija]
+
+            monto_min = <%=@params_digitel.amount_min%>
+            <%if current_user.balance.balance >= @params_digitel.amount_max%>
+              monto_max = <%=@params_digitel.amount_max%>
+            <%else%>
+              monto_max = <%=current_user.balance.balance%>
+            <%end%>
+
+            multiplos = <%=@params_digitel.multiplos_amount_permit%>
+            show_div_cod_area = true
+
+            if($("#recharge_type_payment").val() === "Prepago"){
+              operation = "recarga"
+            }else{
+              operation = "consulta"
+              $("#btn_recarga").text("consultar")
+            }
+
+            show_form(monto_min,monto_max,multiplos)
+            break;
+
+          case "Inter":
+
+            cod_area = []
+
+            monto_min = <%=@params_inter.amount_min%>
+            <%if current_user.balance.balance >= @params_inter.amount_max%>
+              monto_max = <%=@params_inter.amount_max%>
+            <%else%>
+              monto_max = <%=current_user.balance.balance%>
+            <%end%>
+
+            multiplos = <%=@params_inter.multiplos_amount_permit%>
+            show_div_cod_area = false
+
+            if($("#recharge_type_payment").val() === "Prepago"){
+              operation = "recarga"
+            }else{
+              operation = "consulta"
+              $("#btn_recarga").text("consultar")
+            }
+            show_form(monto_min,monto_max,multiplos)
+            break;
+
+          default:
+            break;
+        }
+      }
+    }
+
+    for (let i = 0; i < card_options.length; i++) {
+        card_options[i].addEventListener("click",card_options_function)
+    }
+</script>

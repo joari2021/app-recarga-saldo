@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  movistar: false
+  digitel: false
+  movilnet: false
+  cantv: false
+  movistar_tv: false
+  inter: false
+  simple_tv: false
+  dolar_bcv: 9.99
+
+two:
+  movistar: false
+  digitel: false
+  movilnet: false
+  cantv: false
+  movistar_tv: false
+  inter: false
+  simple_tv: false
+  dolar_bcv: 9.99

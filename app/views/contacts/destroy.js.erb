@@ -1,0 +1,5 @@
+$('#contact_<%= @contact.id %>').remove();
+<%if current_user.contacts.count === 0%>
+  $('#registro_vacio').append('<%= j render("partials/registro_vacio") %>');
+<%end%>
+$("button.swal-button").fadeIn()

@@ -1,0 +1,85 @@
+<div class="content-recharge" style="min-height:0vh !important">
+    <div class="container-recharge py-0 px-2">
+        <div class="box" style="max-width:400px; height: 100% !important">
+            <span class="span-card-special"></span>
+            <div class="div-recharge">
+                <div class="card shadow h-100 mt-2 mb-3" style="border-radius:70px">
+                    <%operator = @recharge.operator%>
+
+                    <div class="card-body">
+                        <%= image_tag("sistema_recargas/#{@recharge.operator.downcase}.png", class:"img-operadora", width:"100%", height:"70px") %>
+                    </div>
+                </div>
+
+                <%if current_user.is_admin?%>
+                    <p class="mb-0">ID Recarga</p>
+                    <p class="text-right"><%=@recharge.id%></p>
+                    <hr>
+
+                    <p class="mb-0">ID Usuario</p>
+                    <p class="text-right"><%=@recharge.user.id%></p>
+                    <hr>
+                <%end%>
+
+                <p class="mb-0">Fecha y hora</p>
+                <p class="text-right"><%=@recharge.created_at.strftime("%d/%m/%Y %02H:%02M")%></p>
+                <hr>
+
+                <p class="mb-0">Tipo de pago</p>
+                <p class="text-right"><%=@recharge.type_payment%></p>
+                <hr>
+
+                <p class="mb-0">Número</p>
+                <p class="text-right"><%=@recharge.cod_area.present? ? "(" + @recharge.cod_area + ") " : "" %><%=@recharge.number%></p>
+                <hr>
+
+                <p class="mb-0">Monto</p>
+                <p class="text-right"><%=number_with_precision(@recharge.amount, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></p>
+                <hr>
+
+                <%if @recharge.status === "confirmada"%>
+                    <%if @recharge.operator === "Cantv"%>
+                        <%if @recharge.saldo_resultante < 0%>
+                            <%color_saldo = "danger"%>
+                        <%else%>
+                            <%color_saldo = "success"%>
+                        <%end%>
+                        <p class="mb-0">Saldo después<br>de la recarga</p>
+                        <p class="font-weight-bold text-right text-<%=color_saldo%>"><%=number_with_precision(@recharge.saldo_resultante, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></p>
+                        <hr>
+                    <%elsif @recharge.operator === "Simple_TV"%>
+                        <p class="mb-0">Dias de<br>programación<br>disponibles</p>
+                        <p class="text-right"><%=@recharge.available_days%></p>
+                        <hr>
+
+                        <p class="mb-0">Renta mensual</p>
+                        <p class="text-right"><%=number_with_precision(@recharge.renta_mensual, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></p>
+                        <hr>
+                    <%elsif @recharge.operator === "Inter" && @recharge.type_payment === "Prepago"%>
+                        <%if @recharge.renta_mensual > 0%>
+                            <%color_deuda = "danger"%>
+                            <%deuda = @recharge.renta_mensual%>
+                        <%else%>
+                            <%color_deuda = "success"%>
+                            <%deuda = 0.0%>
+                        <%end%>
+                        <p class="mb-0">Deuda</p>
+                        <p class="text-right font-weight-bold text-<%=color_deuda%>"><%=number_with_precision(deuda, :precision => 2, :delimiter => '.', :separator => ',', :scale => 2)%></p>
+                        <hr>
+                    <%end%>
+                <%end%>
+
+                <%case @recharge.status%>
+                <%when "enviada"%>
+                <%color_badge = "badge-nfl-primary"%>
+                <%when "confirmada"%>
+                <%color_badge = "badge-nfl-success"%>
+                <%when "anulada"%>
+                <%color_badge = "badge-nfl-danger"%>
+                <%end%>
+                <p class="mb-0">Status</p>
+                <p class="text-right"><small class="badge badge-pill text-gray-100 <%=color_badge%>"><%=@recharge.status%></small></p>
+            </div>  
+        </div>
+    </div>
+</div>

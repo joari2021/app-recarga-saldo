@@ -1,0 +1,60 @@
+<div class="contenedor__todo">
+    <div class="caja__trasera">
+        <div class="caja__trasera-login">
+                <h3>¿Ya tienes cuenta?</h3><!--######## RELLENO ##########-->
+                <p>Inicia sesión para entrar en la página</p><!--######## RELLENO ##########-->
+                <button id="btn__iniciar-sesion">Iniciar Sesión</button><!--#### RELLENO ##########-->
+        </div>
+
+        <div class="caja__trasera-register" style="max-width: 300px !important">
+            <p style="margin-right: 10px">Te sugerimos usar una combinación de letras mayúsculas y minúsculas, y al menos un número y un simbolo. <strong>Recargas Fast</strong> jamás te solicitara tu contraseña por correo ni por ningún otro medio de comunicación.</p>
+        </div>
+    </div>
+
+    <div class="contenedor__login-register">
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name),:html => {method: :put, :class => "formulario__login"}) do |f| %>
+          
+            <%= f.hidden_field :reset_password_token %>
+            
+            <div class="form">
+
+                <h2 class="color-special pb-3 text-center font-weight-bold">Cambiar contraseña</h2>
+
+                <div class="grupo">
+                    
+                    <%= f.password_field :password, autofocus: true, autocomplete: "new-password", required: "required", class:"input-special"%><span class="barra bg-before-Standar"></span>
+                    <%= f.label :password, "Nueva contraseña", for: "", class: "label-special label-Standar" %>
+                    <% if @minimum_password_length %>
+                        <em>(<%= @minimum_password_length %> carácteres mínimos)</em><br />
+                    <% end %>
+                    <% if resource.errors[:password].any? %>
+                        <p class="msj_error mt-2 bg-danger rounded width-error"><%=resource.errors[:password].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                </div>
+
+                <div class="grupo">
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password", required: "required", class:"input-special"%><span class="barra bg-before-Standar"></span>
+                    <%= f.label :password, "Confirmar nueva contraseña", for: "", class: "label-special label-Standar" %>
+                    <% if resource.errors[:password_confirmation].any? %>
+                        <p class="msj_error mt-2 bg-danger rounded width-error"><%=resource.errors[:password_confirmation].to_s[/\w([^"]*)/] %></p>
+                    <% end %>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn_standar btn-common btn-effect bg-special text-uppercase show_loader_sup" data-disable-with="Continuar" name="commit">Continuar</button>
+                </div>
+
+                <%= render "devise/shared/links_login_sign_up" %>
+            </div>
+        <% end %>
+
+        <form class="formulario__register" style="display: none;"></form>
+
+    </div>
+</div>
+
+<script>
+    <%if resource.errors.any?%>
+        estilizar_errores_validacion()
+    <%end%>
+</script>
