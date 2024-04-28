@@ -107,6 +107,7 @@ GEM
       activerecord (>= 4.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    htmlbeautifier (1.4.3)
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.5)
@@ -268,6 +269,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   friendly_id (~> 5.4.0)
+  htmlbeautifier
   jbuilder (~> 2.7)
   letter_opener
   mimemagic!

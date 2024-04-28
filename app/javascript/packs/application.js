@@ -3,46 +3,45 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
-import * as ActiveStorage from "@rails/activestorage"
-import "channels"
-require("jquery")
+import Rails from "@rails/ujs";
+import Turbolinks from "turbolinks";
+import * as ActiveStorage from "@rails/activestorage";
+import "channels";
+require("jquery");
 
-Rails.start()
-Turbolinks.start()
-ActiveStorage.start()
+Rails.start();
+Turbolinks.start();
+ActiveStorage.start();
 
 // ESTILOS CSS
-import "css/styles.scss"
-import "css/dashboard.scss"
-import "css/recharge.scss"
-import "css/deposit.scss"
-import "css/contact.scss"
-import "css/historial.scss"
-import "css/profile.scss"
-import "css/login_and_register"
+import "css/styles.scss";
+import "css/dashboard.scss";
+import "css/recharge.scss";
+import "css/deposit.scss";
+import "css/contact.scss";
+import "css/historial.scss";
+import "css/profile.scss";
+import "css/login_and_register";
 
-import "css/sb-admin-2"
-import "@fortawesome/fontawesome-free/css/all"
+import "css/sb-admin-2";
+import "@fortawesome/fontawesome-free/css/all";
 
 //////////////   JAVASCRIPT  //////////////////////
 
 /*PLUGINS*/
-import "bootstrap"
-import swal from 'sweetalert'
-import Push from 'push.js'
+import "bootstrap";
+import swal from "sweetalert";
+import Push from "push.js";
 
 //CODIGOS JS
-import "channels/sb-admin-2"
-import "channels/all"
-import "channels/script_login_and_register"
-import "channels/dashboard"
-import "channels/recharge"
-import "channels/deposit"
-import "channels/contact"
-import "channels/profile"
-import "channels/recharge_params"
+import "channels/sb-admin-2";
+import "channels/all";
+import "channels/script_login_and_register";
+import "channels/dashboard";
+import "channels/recharge";
+import "channels/deposit";
+import "channels/contact";
+import "channels/profile";
+import "channels/recharge_params";
 
-import "channels/hidden_loader"
-
+import "channels/hidden_loader";

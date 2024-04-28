@@ -1,19 +1,18 @@
 <!-- Preloader -->
 <div class="contenedor_loader_sup bg-special">
-    <div class="loader loader-sup-tam"></div>
-</div> 
+  <div class="loader loader-sup-tam"></div>
+</div>
 <!-- End Preloader -->
-
 <!-- Header Section Start -->
 <header id="home" class="hero-area">
-    <div class="overlay"></div>
-    <nav
+  <div class="overlay"></div>
+  <nav
     class="navbar navbar-expand-md bg-inverse fixed-top scrolling-navbar"
     >
     <div class="container">
-        <a href="#" class="navbar-brand"
+      <a href="#" class="navbar-brand"
         ><%= image_tag("logo/Marca_blank_2.png", width:"130px", height:"40px") %></a>
-        <button
+      <button
         class="navbar-toggler"
         type="button"
         data-toggle="collapse"
@@ -23,26 +22,24 @@
         aria-label="Toggle navigation"
         >
         <i class="lni-menu"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto w-100 justify-content-end">
-            <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link page-scroll" href="#home">Inicio</a>
-            </li>
-            <li class="nav-item">
+          </li>
+          <li class="nav-item">
             <a class="nav-link page-scroll" href="#features">Características</a>
-            </li>
-
-            <li class="nav-item">
+          </li>
+          <li class="nav-item">
             <a class="nav-link page-scroll" href="#features-two">Beneficios</a>
-            </li>
-
-            <li class="nav-item">
+          </li>
+          <li class="nav-item">
             <a class="nav-link page-scroll" href="#screenshots"
                 >Socios</a
             >
-            </li>
-            <!--
+          </li>
+          <!--
             <li class="nav-item">
             <a class="nav-link page-scroll" href="#team">Equipo</a>
             </li>
@@ -51,49 +48,46 @@
                 >Testimonios</a
             >
             </li>-->
-
-            <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link page-scroll" href="#blog">Noticias</a>
-            </li>
-
-            <li class="nav-item">
+          </li>
+          <li class="nav-item">
             <a class="btn btn-trial" href="<%=url_for(new_user_session_url)%>">Entrar ó Registrarse</a>
-            </li>
+          </li>
         </ul>
-        </div>
+      </div>
     </div>
-    </nav>
-    <div class="container">
+  </nav>
+  <div class="container">
     <div class="row space-100">
-        <div class="col-lg-7 col-md-12 col-xs-12">
+      <div class="col-lg-7 col-md-12 col-xs-12">
         <div class="contents">
-            <h2 class="head-title">
+          <h2 class="head-title">
             Gana el 2% por todas las recargas que realices en nuestra plataforma. (2da prueba)
-            </h2>
-            <p>
+          </h2>
+          <p>
             Recarga a todas las operadoras y servicios de TV satelital del pais prepago y post-pago de forma ágil y rapida.
-            </p>
-            <div class="header-button">
+          </p>
+          <div class="header-button">
             <a href="/users/login_or_register" class="btn btn-border-filled">Iniciar Sesión</a>
             <a href="/users/register_or_login" class="btn btn-border">Registrarse</a>
-            </div>
+          </div>
         </div>
-        </div>
-        <div class="col-lg-5 col-md-12 col-xs-12">
+      </div>
+      <div class="col-lg-5 col-md-12 col-xs-12">
         <div class="intro-img">
-            <%= image_tag("logo/Logo_landing.png") %>
+          <%= image_tag("logo/Logo_landing.png") %>
         </div>
-        </div>
+      </div>
     </div>
-    </div>
+  </div>
 </header>
 <!-- Header Section End -->
-
 <!-- features Section Start -->
 <div id="features" class="section">
-    <div class="container">
+  <div class="container">
     <div class="section-header">
-        <p
+      <p
         class="btn btn-subtitle wow fadeInDown animated"
         data-wow-delay="0.2s"
         style="
@@ -104,8 +98,8 @@
         "
         >
         Por qué
-        </p>
-        <h2
+      </p>
+      <h2
         class="section-title wow fadeIn animated"
         data-wow-delay="0.2s"
         style="
@@ -116,10 +110,10 @@
         "
         >
         Interfaz rápida e impresionante
-        </h2>
+      </h2>
     </div>
     <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-12 col-xs-12">
+      <div class="col-lg-8 col-md-12 col-xs-12">
         <div
             class="feature-thumb wow fadeInDown animated"
             data-wow-delay="0.3s"
@@ -130,12 +124,12 @@
             animation-delay: 0.3s;
             "
         >
-            <%= image_tag("macbook.png", {class:"img-fluid"}) %>
+          <%= image_tag("macbook.png", {class:"img-fluid"}) %>
         </div>
         <div class="feature-content">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-                <a
+              <a
                 class="nav-link"
                 id="free-tab"
                 data-toggle="tab"
@@ -148,7 +142,7 @@
                 >
             </li>
             <li class="nav-item">
-                <a
+              <a
                 class="nav-link active show"
                 id="massaging-tab"
                 data-toggle="tab"
@@ -161,7 +155,7 @@
                 >
             </li>
             <li class="nav-item">
-                <a
+              <a
                 class="nav-link"
                 id="safely-tab"
                 data-toggle="tab"
@@ -174,7 +168,7 @@
                 >
             </li>
             <li class="nav-item">
-                <a
+              <a
                 class="nav-link"
                 id="support-tab"
                 data-toggle="tab"
@@ -186,15 +180,15 @@
                 Soporte 24/7</a
                 >
             </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
+          </ul>
+          <div class="tab-content" id="myTabContent">
             <div
                 class="tab-pane fade"
                 id="free"
                 role="tabpanel"
                 aria-labelledby="free-tab"
             >
-                Con un diseño intuitivo nuestra plataforma te permite disfrutar de sus beneficios de manera fácil, con opciones sencillas. Nuestra plataforma esta diseñada para que puedas entender todo el proceso de recargas de manera fácil sin complicaciones al mismo tiempo que nos aseguramos que el proceso de las mismas sean lo mas eficientes y rápidas posibles.
+              Con un diseño intuitivo nuestra plataforma te permite disfrutar de sus beneficios de manera fácil, con opciones sencillas. Nuestra plataforma esta diseñada para que puedas entender todo el proceso de recargas de manera fácil sin complicaciones al mismo tiempo que nos aseguramos que el proceso de las mismas sean lo mas eficientes y rápidas posibles.
             </div>
             <div
                 class="tab-pane fade active show"
@@ -202,7 +196,7 @@
                 role="tabpanel"
                 aria-labelledby="massaging-tab"
             >
-                En tu Dashboard podrás monitorear en todo momento el historial de tus ventas por año reflejadas en gráficos que te permitiran analizar de una manera más práctica aspectos clave de la evolución de tu negocio como el incremento o decremento de tus ventas, cuales servicios son los más solicitados, etc.
+              En tu Dashboard podrás monitorear en todo momento el historial de tus ventas por año reflejadas en gráficos que te permitiran analizar de una manera más práctica aspectos clave de la evolución de tu negocio como el incremento o decremento de tus ventas, cuales servicios son los más solicitados, etc.
             </div>
             <div
                 class="tab-pane fade"
@@ -210,7 +204,7 @@
                 role="tabpanel"
                 aria-labelledby="safely-tab"
             >
-                Nuestra plataforma cuenta con una seguridad robusta en terminos informáticos con la que garantizamos la integridad de tu información. Siempre y cuando cumplas con tu parte de responsabilidad en la seguridad de tus datos de usuario y demás tu experiencia aqui sera tranquila y segura. 
+              Nuestra plataforma cuenta con una seguridad robusta en terminos informáticos con la que garantizamos la integridad de tu información. Siempre y cuando cumplas con tu parte de responsabilidad en la seguridad de tus datos de usuario y demás tu experiencia aqui sera tranquila y segura. 
             </div>
             <div
                 class="tab-pane fade"
@@ -218,257 +212,254 @@
                 role="tabpanel"
                 aria-labelledby="support-tab"
             >
-                Tenemos un excelente equipo de atención dispuestos tanto a procesar tus compras de saldo como ayudarte a solucionar cualquier inconveniente en el menor tiempo posible.<br><br><br>
+              Tenemos un excelente equipo de atención dispuestos tanto a procesar tus compras de saldo como ayudarte a solucionar cualquier inconveniente en el menor tiempo posible.<br>
+              <br>
+              <br>
             </div>
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
     </div>
-    </div>
+  </div>
 </div>
 <!-- features Section End -->
-
 <!-- Datos estadisticos-->
 <section id="counter" class="section">
-    <div class="container">
+  <div class="container">
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-xs-12">
+      <div class="col-lg-6 col-md-6 col-xs-12">
         <div class="counter-text">
-            <div>
+          <div>
             <p class="btn btn-subtitle">Datos estadísticos</p>
             <h3>Números que hablan por si mísmos</h3>
             <div class="desc-text">
-                <p>
+              <p>
                 Mostramos con transparencia los datos claves de nuestros resultados obtenidos gracias al trabajo responsable y profesional asi como nuestra dedicación en ofrecer el mejor servicio posible innovando recurrentemente para que esta plataforma sea la más completa del pais en lo relacionado al servicio que ofrecemos y que la experiencia de todos nuestros usuarios sea la mejor posible.
-                </p>
+              </p>
             </div>
-            </div>
+          </div>
         </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-xs-12">
+      </div>
+      <div class="col-lg-6 col-md-6 col-xs-12">
         <div class="row">
-            <!-- Start counter -->
-            <div class="col-lg-6 col-md-6 col-xs-12">
+          <!-- Start counter -->
+          <div class="col-lg-6 col-md-6 col-xs-12">
             <div class="counter-box bg-color-1">
-                <div class="fact-count">
+              <div class="fact-count">
                 <h3><span class="counter"><%=@usuarios%></span></h3>
                 <p>Usuarios</p>
-                </div>
-                <div class="icon-o"><i class="lni-users"></i></div>
+              </div>
+              <div class="icon-o"><i class="lni-users"></i></div>
             </div>
-            </div>
-            <!-- End counter -->
-            <!-- Start counter -->
-            <div class="col-lg-6 col-md-6 col-xs-12">
+          </div>
+          <!-- End counter -->
+          <!-- Start counter -->
+          <div class="col-lg-6 col-md-6 col-xs-12">
             <div class="counter-box bg-color-4">
-                <div class="fact-count">
+              <div class="fact-count">
                 <h3><span class="counter"><%=@premiados%></span></h3>
                 <p>Premiados</p>
-                </div>
-                <div class="icon-o"><i class="lni-emoji-smile"></i></div>
+              </div>
+              <div class="icon-o"><i class="lni-emoji-smile"></i></div>
             </div>
-            </div>
-            <!-- End counter -->
-            <!-- Start counter -->
-            <div class="col-lg-6 col-md-6 col-xs-12">
+          </div>
+          <!-- End counter -->
+          <!-- Start counter -->
+          <div class="col-lg-6 col-md-6 col-xs-12">
             <div class="counter-box bg-color-2">
-                <div class="fact-count">
+              <div class="fact-count">
                 <h3><span class="counter"><%=@recargas_confirmadas%></span></h3>
-                <p>Recargas<br>realizadas</p>
-                </div>
-                <div class="icon-o"><i class="lni-thumbs-up"></i></div>
+                <p>Recargas<br>
+                  realizadas</p>
+              </div>
+              <div class="icon-o"><i class="lni-thumbs-up"></i></div>
             </div>
-            </div>
-            <!-- End counter -->
-            <!-- Start counter -->
-            <div class="col-lg-6 col-md-6 col-xs-12">
+          </div>
+          <!-- End counter -->
+          <!-- Start counter -->
+          <div class="col-lg-6 col-md-6 col-xs-12">
             <div class="counter-box bg-color-3">
-                <div class="fact-count">
+              <div class="fact-count">
                 <h3><span class="counter"><%=@Solicitudes_pendientes%></span></h3>
-                <p>Solicitudes<br>pendientes</p>
-                </div>
-                <div class="icon-o"><i class="lni-timer"></i></div>
+                <p>Solicitudes<br>
+                  pendientes</p>
+              </div>
+              <div class="icon-o"><i class="lni-timer"></i></div>
             </div>
-            </div>
-            <!-- End counter -->
+          </div>
+          <!-- End counter -->
         </div>
-        </div>
+      </div>
     </div>
-    </div>
+  </div>
 </section>
-
 <!-- INFORMACION DE LOS SERVICIOS DE LA PAGINA CON MARKETING-->
 <div id="features-two" class="section">
-    <div class="container">
+  <div class="container">
     <div class="row">
-        <!--PRIMERO-->
-        <div class="col-lg-6 col-md-12 col-sm-12 order-1">
+      <!--PRIMERO-->
+      <div class="col-lg-6 col-md-12 col-sm-12 order-1">
         <div class="img-thumb wow fadeInLeft" data-wow-delay="0.3s">
-            <%= image_tag("servicios/ganancias.png", {class:"img-fluid w-75 w-lg-100 h-auto m-auto", style:"display:inherit;"}) %>
+          <%= image_tag("servicios/ganancias.png", {class:"img-fluid w-75 w-lg-100 h-auto m-auto", style:"display:inherit;"}) %>
         </div>
-        </div>
-        <div class="col-lg-6 col-md-12 col-sm-12 order-2">
+      </div>
+      <div class="col-lg-6 col-md-12 col-sm-12 order-2">
         <div class="text-wrapper text-center text-lg-left wow fadeInRight" data-wow-delay="0.6s">
-            <div>
+          <div>
             <p class="btn btn-subtitle">Cómo funciona?</p>
             <h3>Comienza tu negocio</h3>
             <p>
-                Fondea tu cuenta por medio de transferencias bancarias, pago movil interbancario y/o monederos electrónicos y recarga a todas las operadoras y servicios de TV de Venezuela con los que trabajamos y gana el 2% del monto que recargues, pudiendo tú mismo(a) elegir el porcentaje con el que desees trabajar y cobrar a tus clientes.
+              Fondea tu cuenta por medio de transferencias bancarias, pago movil interbancario y/o monederos electrónicos y recarga a todas las operadoras y servicios de TV de Venezuela con los que trabajamos y gana el 2% del monto que recargues, pudiendo tú mismo(a) elegir el porcentaje con el que desees trabajar y cobrar a tus clientes.
             </p>
             <!--
             <a class="btn btn-rm" href="#"
                 >Leer Más <i class="lni-arrow-right"></i
             ></a>-->
-            </div>
+          </div>
         </div>
-        </div>
-
-        <!--SEGUNDO-->
-        <div class="col-lg-6 col-md-12 col-sm-12 order-4 order-lg-3">
+      </div>
+      <!--SEGUNDO-->
+      <div class="col-lg-6 col-md-12 col-sm-12 order-4 order-lg-3">
         <div class="text-wrapper text-center text-lg-left wow fadeInRight" data-wow-delay="0.9s">
-            <div>
+          <div>
             <p class="btn btn-subtitle">Dashboard</p>
             <h3>Seguimiento de tu negocio</h3>
             <p>
-                Monitorea en todo momento el estado de tus ventas por medio de los graficos que reflejaran datos claves para medir el progreso de tu negocio, guarda los números de tus clientes frecuentes y accede a ellos de manera agil y rapida, conoce el saldo restante y las deudas de los sistemas para los cuales este disponible esa información y mucho más.
+              Monitorea en todo momento el estado de tus ventas por medio de los graficos que reflejaran datos claves para medir el progreso de tu negocio, guarda los números de tus clientes frecuentes y accede a ellos de manera agil y rapida, conoce el saldo restante y las deudas de los sistemas para los cuales este disponible esa información y mucho más.
             </p>
             <!--
             <a class="btn btn-rm" href="#"
                 >Leer Más <i class="lni-arrow-right"></i
             ></a>-->
-            </div>
+          </div>
         </div>
-        </div>
-        <div class="col-lg-6 col-md-12 col-sm-12 order-3 order-lg-4">
+      </div>
+      <div class="col-lg-6 col-md-12 col-sm-12 order-3 order-lg-4">
         <div class="img-thumb wow fadeInLeft" data-wow-delay="1.2s">
-            <%= image_tag("servicios/graficos.png", {class:"img-fluid w-75 w-lg-100 h-auto m-auto", style:"display:inherit;"}) %>
+          <%= image_tag("servicios/graficos.png", {class:"img-fluid w-75 w-lg-100 h-auto m-auto", style:"display:inherit;"}) %>
         </div>
-        </div>
-
-        <!--TERCERO-->
-        <div class="col-lg-6 col-md-12 col-sm-12 order-5">
+      </div>
+      <!--TERCERO-->
+      <div class="col-lg-6 col-md-12 col-sm-12 order-5">
         <div class="img-thumb wow fadeInLeft" data-wow-delay="0.3s">
-            <%= image_tag("servicios/premios.png", {class:"img-fluid w-75 w-lg-100 h-auto m-auto", style:"display:inherit;"}) %>
+          <%= image_tag("servicios/premios.png", {class:"img-fluid w-75 w-lg-100 h-auto m-auto", style:"display:inherit;"}) %>
         </div>
-        </div>
-        <div class="col-lg-6 col-md-12 col-sm-12 order-6">
+      </div>
+      <div class="col-lg-6 col-md-12 col-sm-12 order-6">
         <div class="text-wrapper text-center text-lg-left wow fadeInRight" data-wow-delay="0.6s">
-            <div>
+          <div>
             <p class="btn btn-subtitle">Premios 2x2</p>
             <h3>Premiamos tu constancia</h3>
             <p>
-                Todos los meses seleccionamos una cantidad de usuarios de acuerdo a sus ventas para repartir bonificaciones directamente a su balance en base al saldo que hayan vendido.
+              Todos los meses seleccionamos una cantidad de usuarios de acuerdo a sus ventas para repartir bonificaciones directamente a su balance en base al saldo que hayan vendido.
             </p>
             <div id="content-complet-premios" style="display:none">
-                <br><p>
+              <br>
+              <p>
                 Cada final de mes seleccionaremos de la lista de usuarios registrados en ese momento al 2% de los usuarios que tengan mas ventas de saldo en Bs registradas y le enviaremos directamente a su balance el 2% del monto total que hayan vendido en ese mes.
-                </p>
-                <br><p>
+              </p>
+              <br>
+              <p>
                 La lista de los premiados la podras ver en la sección << Premios del Mes >> dentro de tu cuenta a la que podrás acceder a partir del 01 de Julio del año 2021.
                 </p>
-            </div>
-            <a class="btn btn-rm" href="#" onclick="read_more(this,event,'#content-complet-premios')"
+              </div>
+              <a class="btn btn-rm" href="#" onclick="read_more(this,event,'#content-complet-premios')"
                 >Leer Más <i class="lni-arrow-right"></i
             ></a>
             </div>
+          </div>
         </div>
-        </div>
-
         <!--CUARTO-->
         <div class="col-lg-6 col-md-12 col-sm-12 order-8 order-lg-7">
-        <div class="text-wrapper text-center text-lg-left wow fadeInRight" data-wow-delay="0.9s">
+          <div class="text-wrapper text-center text-lg-left wow fadeInRight" data-wow-delay="0.9s">
             <div>
-            <p class="btn btn-subtitle">Unete a nosotros</p>
-            <h3>Gana ayudándonos a crecer</h3>
-            <p>
+              <p class="btn btn-subtitle">Unete a nosotros</p>
+              <h3>Gana ayudándonos a crecer</h3>
+              <p>
                 Ayudanos a darnos a conocer aun más y recibe bonificaciones por las ventas de los usuarios que esten registrados con tu link.
-            </p>
-            <div style="display:none;" id="content-complet-sociedad">
-                <br><p>
-                Comparte el link de referido que te suministramos en tu cuenta con todos tus amigos, familiares y en tus redes sociales para que otras personas conozcan de nuestra página web por medio de tí. Cada vez que un usuario que se ha registrado con tu link alcance vender <b>Bs 100.000.000</b> en saldo, tú recibiras una bonificación de <b>Bs 500.000</b> directo en tu balance al final de mes.
+              </p>
+              <div style="display:none;" id="content-complet-sociedad">
+                <br>
+                <p>
+                  Comparte el link de referido que te suministramos en tu cuenta con todos tus amigos, familiares y en tus redes sociales para que otras personas conozcan de nuestra página web por medio de tí. Cada vez que un usuario que se ha registrado con tu link alcance vender <b>Bs 100.000.000</b> en saldo, tú recibiras una bonificación de <b>Bs 500.000</b> directo en tu balance al final de mes.
                 </p>
-
-                <br><p>
-                Para poder ser beneficiario de esta bonificación deberás tener un mínimo de cinco (05) usuarios registrados con tu link. A partir de ese momento cada vez que dichos usuarios alcancen el monto en ventas requerido recibiras la bonificación mencionada por lo que podrás tener con trabajo y diligencia un ingreso pasivo importante si te lo propones.
+                <br>
+                <p>
+                  Para poder ser beneficiario de esta bonificación deberás tener un mínimo de cinco (05) usuarios registrados con tu link. A partir de ese momento cada vez que dichos usuarios alcancen el monto en ventas requerido recibiras la bonificación mencionada por lo que podrás tener con trabajo y diligencia un ingreso pasivo importante si te lo propones.
                 </p>
-
-                <br><p>
-                Esta promoción estará disponible hasta el 23 de agosto del 2022.
+                <br>
+                <p>
+                  Esta promoción estará disponible hasta el 23 de agosto del 2022.
                 </p>
-                
-            </div>
-            <a class="btn btn-rm" href="#" onclick="read_more(this,event,'#content-complet-sociedad')"
+              </div>
+              <a class="btn btn-rm" href="#" onclick="read_more(this,event,'#content-complet-sociedad')"
                 >Leer Más <i class="lni-arrow-right"></i
             ></a>
             </div>
-        </div>
+          </div>
         </div>
         <div class="col-lg-6 col-md-12 col-sm-12 order-7 order-lg-8">
-        <div class="img-thumb wow fadeInLeft" data-wow-delay="1.2s">
+          <div class="img-thumb wow fadeInLeft" data-wow-delay="1.2s">
             <%= image_tag("servicios/sociedad.png", {class:"img-fluid w-75 w-lg-100 h-auto m-auto", style:"display:inherit;"}) %>
+          </div>
         </div>
-        </div>
+      </div>
     </div>
-    </div>
-</div>
-
-
-<!-- SOCIOS -->
-<section id="screenshots" class="screens-shot section">
+  </div>
+  <!-- SOCIOS -->
+  <section id="screenshots" class="screens-shot section">
     <div class="container">
-    <div class="section-header">
+      <div class="section-header">
         <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">
-        Socios
+          Socios
         </p>
         <h2 class="section-title">Nuestros servicios asociados</h2>
-    </div>
-    <div class="row justify-content-center">
+      </div>
+      <div class="row justify-content-center">
         <div class="col-lg-12 col-md-12 col-xs-12">
-        <div class="screens-slider owl-carousel">
+          <div class="screens-slider owl-carousel">
             <div class="item">
-            <div class="screenshot-thumb">
+              <div class="screenshot-thumb">
                 <%= image_tag("sistema_recargas/movistar.png", style:"width:340px !important;height:140px !important") %>
-            </div>
+              </div>
             </div>
             <div class="item">
-            <div class="screenshot-thumb">
+              <div class="screenshot-thumb">
                 <%= image_tag("sistema_recargas/digitel.png", style:"width:340px !important;height:140px !important") %>
-            </div>
+              </div>
             </div>
             <div class="item">
-            <div class="screenshot-thumb">
+              <div class="screenshot-thumb">
                 <%= image_tag("sistema_recargas/movilnet.png", style:"width:340px !important;height:140px !important") %>
-            </div>
+              </div>
             </div>
             <div class="item">
-            <div class="screenshot-thumb">
+              <div class="screenshot-thumb">
                 <%= image_tag("sistema_recargas/cantv.png", style:"width:340px !important;height:140px !important") %>
-            </div>
+              </div>
             </div>
             <div class="item">
-            <div class="screenshot-thumb">
+              <div class="screenshot-thumb">
                 <%= image_tag("sistema_recargas/movistar_tv.png", style:"width:340px !important;height:140px !important") %>
-            </div>
+              </div>
             </div>
             <div class="item">
-            <div class="screenshot-thumb">
+              <div class="screenshot-thumb">
                 <%= image_tag("sistema_recargas/inter.png", style:"width:340px !important;height:140px !important") %>
-            </div>
+              </div>
             </div>
             <div class="item">
-            <div class="screenshot-thumb">
+              <div class="screenshot-thumb">
                 <%= image_tag("sistema_recargas/simple_tv.png", style:"width:340px !important;height:140px !important") %>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
     </div>
-    </div>
-</section>
-<!-- Awesome Screens Section End -->
-
-
-<!-- Team section Start 
+  </section>
+  <!-- Awesome Screens Section End -->
+  <!-- Team section Start 
 <section id="team" class="section">
     <div class="container">
     <div class="section-header">
@@ -590,8 +581,7 @@
     </div>
 </section>
     -->
-
-<!-- Testimonial Section Start 
+  <!-- Testimonial Section Start 
 <section id="testimonial" class="section">
     <div class="container">
     <div class="section-header">
@@ -719,64 +709,61 @@
     </div>
 </section>
 -->
-
-<!-- Blog Section -->
-<section id="blog" class="section">
+  <!-- Blog Section -->
+  <section id="blog" class="section">
     <!-- Container Starts -->
     <div class="container">
-        <div class="section-header">
-            <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">
-            Blog
-            </p>
-            <h2 class="section-title">Noticias Recientes</h2>
-        </div>
-        <div class="row">
-            <%=render "partials/news"%>
-        </div>
+      <div class="section-header">
+        <p class="btn btn-subtitle wow fadeInDown" data-wow-delay="0.2s">
+          Blog
+        </p>
+        <h2 class="section-title">Noticias Recientes</h2>
+      </div>
+      <div class="row">
+        <%=render "partials/news"%>
+      </div>
     </div>
-</section>
-
-<!-- download Section Start -->
-<section id="download">
+  </section>
+  <!-- download Section Start -->
+  <section id="download">
     <div class="container">
-    <div class="row">
+      <div class="row">
         <div class="col-lg-6 col-md-6 col-xs-12">
-        <div class="download-thumb wow fadeInLeft" data-wow-delay="0.2s">
+          <div class="download-thumb wow fadeInLeft" data-wow-delay="0.2s">
             <%= image_tag("mac.png", {class:"img-fluid"}) %>
-        </div>
+          </div>
         </div>
         <div class="col-lg-6 col-md-6 col-xs-12">
-        <div class="download-wrapper wow fadeInRight" data-wow-delay="0.2s">
+          <div class="download-wrapper wow fadeInRight" data-wow-delay="0.2s">
             <div class="mb-2">
-            <div class="download-text">
+              <div class="download-text">
                 <h4>Descarga nuestra aplicación desde la tienda</h4>
                 <p>
-                Pronto estara disponible nuestra app para que puedas disfrutar de nuestros servicios con más facilidad de uso desde tu dispositivo inteligente.
+                  Pronto estara disponible nuestra app para que puedas disfrutar de nuestros servicios con más facilidad de uso desde tu dispositivo inteligente.
                 </p>
-            </div>
-            <div class="header-button">
+              </div>
+              <div class="header-button">
                 <a href="#" class="btn btn-border"
                 ><i class="lni-apple"></i> AppStore</a
                 >
                 <a href="#" class="btn btn-common btn-effect"
                 ><i class="lni-android"></i> PlayStore</a
                 >
+              </div>
             </div>
-            </div>
+          </div>
         </div>
-        </div>
+      </div>
     </div>
-    </div>
-</section>
-<!-- download Section Start -->
-
-<!-- Footer Section Start -->
-<footer>
+  </section>
+  <!-- download Section Start -->
+  <!-- Footer Section Start -->
+  <footer>
     <!-- Footer Area Start -->
     <section class="footer-Content">
-    <div class="container">
+      <div class="container">
         <div class="row justify-content-center">
-        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
+          <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
             <%= image_tag("logo/Marca_blank_2.png", width:"100%") %>
             <!--
             <div class="textwidget">
@@ -786,8 +773,8 @@
                 architect adaptive.
             </p>
             </div>-->
-        </div>
-        <!--
+          </div>
+          <!--
         <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 col-mb-12">
             <div class="widget">
             <h3 class="block-title">Create a Free Account</h3>
@@ -822,26 +809,26 @@
             </div>
         </div>-->
         </div>
-    </div>
-    <!-- Copyright Start  -->
-    <div class="copyright">
+      </div>
+      <!-- Copyright Start  -->
+      <div class="copyright">
         <div class="container">
-        <div class="row">
+          <div class="row">
             <div class="col-md-12">
-            <div class="site-info float-left">
+              <div class="site-info float-left">
                 <p>
-                Elaborado por Recargas Fast
-                <!--<a href="http://uideck.com" rel="nofollow" ></a>-->
+                  Elaborado por Recargas Fast
+                  <!--<a href="http://uideck.com" rel="nofollow" ></a>-->
                 </p>
-            </div>
-            <div class="float-right">
+              </div>
+              <div class="float-right">
                 <ul class="footer-social">
-                <li>
+                  <li>
                     <a class="facebook" href="https://www.facebook.com/Recargas-Fast-108041258134695" target="_blank"
                     ><i class="lni-facebook-filled" style="font-size:30px"></i
                     ></a>
-                </li>
-                <!--
+                  </li>
+                  <!--
                 <li>
                     <a class="twitter" href="#"
                     ><i class="lni-twitter-filled"></i
@@ -852,23 +839,22 @@
                     ><i class="lni-linkedin-fill"></i
                     ></a>
                 </li>-->
-                <li>
+                  <li>
                     <a class="whatsapp" href="https://wa.me/message/OPTJGH6ZPDYRH1" target="_blank">
-                    <i class="fab fa-whatsapp" style="font-size:35px"></i></a>
-                </li>
+                      <i class="fab fa-whatsapp" style="font-size:35px"></i></a>
+                  </li>
                 </ul>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
-        </div>
-    </div>
-    <!-- Copyright End -->
+      </div>
+      <!-- Copyright End -->
     </section>
     <!-- Footer area End -->
-</footer>
-<!-- Footer Section End -->
-
-<!-- Go To Top Link -->
-<a href="#home" class="scroll-to-top rounded">
+  </footer>
+  <!-- Footer Section End -->
+  <!-- Go To Top Link -->
+  <a href="#home" class="scroll-to-top rounded">
     <i class="lni-chevron-up"></i>
-</a>
+  </a>
