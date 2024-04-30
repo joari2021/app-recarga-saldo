@@ -12,29 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2021_06_23_185822) do
 
-  create_table "acoounts", force: :cascade do |t|
-    t.string "bank"
-    t.integer "document"
-    t.string "type_document"
-    t.string "number_account"
-    t.string "phone"
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_acoounts_on_user_id"
-  end
-
-  create_table "balace_inquiries", force: :cascade do |t|
-    t.decimal "debt", precision: 18, scale: 2
-    t.string "avalaible_days"
-    t.string "operator"
-    t.string "cod_area"
-    t.string "phone"
-    t.string "status", default: "en proceso"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "balances", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -175,7 +152,6 @@ ActiveRecord::Schema.define(version: 2021_06_23_185822) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "acoounts", "users"
   add_foreign_key "balances", "users"
   add_foreign_key "contacts", "users"
   add_foreign_key "deposits", "users"
