@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
-
 <h1>System Configurations</h1>
-    
-    Configuracion
-    <%= link_to 'Show', @system_configurations %>
-    <%= link_to 'Edit', edit_system_configuration_path(@system_configurations) %>
-    
+Configuracion
+<%= link_to 'Show', @system_configurations %>
+<%if @system_configurations.present?%>
+  <%= link_to 'Edit', edit_system_configuration_path(@system_configurations) %>
+<%end%>
 <br>

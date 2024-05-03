@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client: one
+  vehicle: one
+  insurance_plan: one
+  usage: 1
+  ramo: 1
+  coverage1: 1
+  coverage2: 1
+  coverage3: 1
+  year: 1
+  placa: MyString
+  tipo: MyString
+  serial_carroceria: MyString
+  serial_motor: MyString
+  color: MyString
+  puestos: 1
+
+two:
+  client: two
+  vehicle: two
+  insurance_plan: two
+  usage: 1
+  ramo: 1
+  coverage1: 1
+  coverage2: 1
+  coverage3: 1
+  year: 1
+  placa: MyString
+  tipo: MyString
+  serial_carroceria: MyString
+  serial_motor: MyString
+  color: MyString
+  puestos: 1

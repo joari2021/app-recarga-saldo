@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
   
+  get 'contracts/index'
+  get 'contracts/show'
+  get 'contracts/new'
+  get 'contracts/create'
+  get 'contracts/edit'
+  get 'contracts/update'
+  get 'contracts/destroy'
   resources :news
   root to: 'home#index'
   devise_for :users, :controllers => { registrations: 'registrations' }, :path_names => { :sign_up => "register_or_login", :sign_in => "login_or_register" }

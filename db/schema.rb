@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_23_185822) do
+ActiveRecord::Schema.define(version: 2024_05_03_021022) do
 
   create_table "balances", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -18,6 +18,19 @@ ActiveRecord::Schema.define(version: 2021_06_23_185822) do
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "balance", precision: 18, scale: 2, default: "0.0"
     t.index ["user_id"], name: "index_balances_on_user_id"
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "nombres"
+    t.string "apellidos"
+    t.string "rif_o_cedula"
+    t.string "direccion"
+    t.string "telefono"
+    t.string "estado_civil"
+    t.string "email"
+    t.string "ocupacion"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -30,6 +43,29 @@ ActiveRecord::Schema.define(version: 2021_06_23_185822) do
     t.string "operator"
     t.string "type_payment"
     t.index ["user_id"], name: "index_contacts_on_user_id"
+  end
+
+  create_table "contracts", force: :cascade do |t|
+    t.integer "client_id", null: false
+    t.integer "vehicle_id", null: false
+    t.integer "insurance_plan_id", null: false
+    t.integer "usage"
+    t.integer "ramo"
+    t.integer "coverage1"
+    t.integer "coverage2"
+    t.integer "coverage3"
+    t.integer "year"
+    t.string "placa"
+    t.string "tipo"
+    t.string "serial_carroceria"
+    t.string "serial_motor"
+    t.string "color"
+    t.integer "puestos"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_contracts_on_client_id"
+    t.index ["insurance_plan_id"], name: "index_contracts_on_insurance_plan_id"
+    t.index ["vehicle_id"], name: "index_contracts_on_vehicle_id"
   end
 
   create_table "deposits", force: :cascade do |t|
@@ -48,6 +84,14 @@ ActiveRecord::Schema.define(version: 2021_06_23_185822) do
     t.datetime "date_send"
     t.string "state", default: "ontried"
     t.index ["user_id"], name: "index_deposits_on_user_id"
+  end
+
+  create_table "insurance_plans", force: :cascade do |t|
+    t.string "name"
+    t.decimal "price"
+    t.string "class"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "news", force: :cascade do |t|
@@ -152,8 +196,19 @@ ActiveRecord::Schema.define(version: 2021_06_23_185822) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "vehicles", force: :cascade do |t|
+    t.string "nombres"
+    t.string "apellidos"
+    t.string "rif_o_cedula"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "balances", "users"
   add_foreign_key "contacts", "users"
+  add_foreign_key "contracts", "clients"
+  add_foreign_key "contracts", "insurance_plans"
+  add_foreign_key "contracts", "vehicles"
   add_foreign_key "deposits", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "recharges", "users"
